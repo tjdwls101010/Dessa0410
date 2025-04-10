@@ -97,3 +97,298 @@
 
 -   설문 중간 저장 기능.
 -   A/B 테스트를 통한 UI/UX 개선.
+
+## 9. 데이터베이스 구조 (Supabase)
+
+### 주요 테이블 구조
+
+#### 1. survey_responses
+설문 응답 데이터와 분석 결과를 저장하는 테이블입니다.
+
+```sql
+CREATE TABLE survey_responses (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  user_id UUID, -- 향후 사용자 인증 기능 추가시 활용
+  responses JSONB NOT NULL, -- 설문 응답 데이터
+  analysis_result JSONB, -- 분석 결과
+  report_access_key TEXT UNIQUE, -- 결과 페이지 접근용 고유 키
+  is_test_data BOOLEAN DEFAULT FALSE,
+  session_id TEXT -- 브라우저 세션 ID
+);
+
+-- 인덱스 생성
+CREATE INDEX idx_survey_responses_report_access_key ON survey_responses(report_access_key);
+CREATE INDEX idx_survey_responses_created_at ON survey_responses(created_at);
+```
+
+#### 2. survey_sections
+설문 섹션 정보를 관리하는 테이블입니다. 설문 섹션 구조를 데이터베이스에서 관리할 경우에 사용합니다.
+
+```sql
+CREATE TABLE survey_sections (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  section_key TEXT UNIQUE NOT NULL, -- 시스템 내부 식별자 (예: 'basic_info')
+  section_name TEXT NOT NULL, -- 화면 표시용 이름 (예: '기본 정보')
+  section_order INTEGER NOT NULL, -- 섹션 순서
+  section_description TEXT, -- 섹션 설명
+  is_active BOOLEAN DEFAULT TRUE -- 섹션 활성화 여부
+);
+```
+
+#### 3. survey_questions
+개별 설문 문항 정보를 관리하는 테이블입니다. 설문 문항 자체를 데이터베이스에서 관리할 경우에 사용합니다.
+
+```sql
+CREATE TABLE survey_questions (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  section_id UUID REFERENCES survey_sections(id) ON DELETE CASCADE,
+  question_key TEXT NOT NULL, -- 시스템 내부 식별자 (예: 'age')
+  question_text TEXT NOT NULL, -- 질문 텍스트
+  question_type TEXT NOT NULL, -- 질문 유형 (radio, checkbox, number, text, body-part 등)
+  question_order INTEGER NOT NULL, -- 질문 순서
+  is_required BOOLEAN DEFAULT TRUE, -- 필수 응답 여부
+  options JSONB, -- 선택지 정보 (단일/다중 선택 문항용)
+  config JSONB, -- 추가 설정 (min/max 등)
+  is_active BOOLEAN DEFAULT TRUE -- 문항 활성화 여부
+);
+
+-- 인덱스 생성
+CREATE INDEX idx_survey_questions_section_id ON survey_questions(section_id);
+```
+
+### responses 필드 JSON 구조
+
+Survey.md 문서에 정의된 설문 문항을 기준으로 설계된 JSON 구조입니다.
+
+```json
+{
+  "basic_info": {
+    "age": "30대",
+    "gender": "남성",
+    "occupation": "사무직/학생"
+  },
+  "pain_location": {
+    "primary_location": "허리",
+    "secondary_locations": ["목", "어깨"]
+  },
+  "pain_characteristics": {
+    "duration": "1개월~3개월",
+    "symptoms": ["욱신거림 / 쑤심", "뻐근함 / 결림 / 뻣뻣함"],
+    "radiation": "예",
+    "touch_sensitivity": "아니오",
+    "sensory_changes": "예"
+  },
+  "pain_intensity": {
+    "worst_pain": 7,
+    "average_pain": 4,
+    "aggravating_factors": ["오래 앉아있기", "물건 들기"],
+    "relieving_factors": ["휴식", "스트레칭"]
+  },
+  "functional_limitations": {
+    "personal_hygiene": 2,
+    "dressing": 1,
+    "lifting": 3,
+    "walking": 2,
+    "sitting": 3,
+    "standing": 3,
+    "sleeping": 3,
+    "concentration": 2,
+    "work_study": 3,
+    "transportation": 2,
+    "leisure": 3,
+    "emotional": 2
+  },
+  "lifestyle_history": {
+    "regular_exercise": "아니오",
+    "exercise_type": "", // 운동을 한다면 어떤 종류인지
+    "sitting_hours": "8-12시간",
+    "posture_perception": "좋지 않다",
+    "stress_level": "그렇다"
+  },
+  "treatment_history": {
+    "previous_treatment": "예",
+    "treatment_details": "물리치료 받았으나 효과 제한적",
+    "medical_conditions": "없음"
+  },
+  "red_flags": {
+    "flags": ["해당 사항 없음"]
+  },
+  "hospital_intention": {
+    "consultation_need": "그렇다",
+    "treatment_interest": ["운동 치료(슈로스 등)", "도수 치료"]
+  }
+}
+```
+
+### analysis_result 필드 JSON 구조
+
+Calculation.md 문서에 기반한 분석 결과의 JSON 구조입니다.
+
+```json
+{
+  "summary": {
+    "severity_level": "중등도",
+    "chronicity": "아급성",
+    "functional_score": 27,
+    "functional_impact": "중등도~심한 기능 제한",
+    "red_flags": false
+  },
+  "pain_analysis": {
+    "primary_location": "허리",
+    "duration": "1개월~3개월",
+    "intensity": {
+      "worst": 7,
+      "average": 4,
+      "description": "중등도에서 심한 통증"
+    },
+    "pattern": {
+      "main_symptoms": ["욱신거림/쑤심", "뻐근함/결림"],
+      "neuropathic_features": true,
+      "radiation": true
+    }
+  },
+  "functional_impact": {
+    "most_affected": ["물건 들기", "앉아 있기", "서 있기", "수면"],
+    "least_affected": ["옷 입기", "개인 위생"],
+    "overall_score": 27,
+    "category": "중등도~심한 기능 제한"
+  },
+  "potential_causes": {
+    "posture_related": true,
+    "activity_related": true,
+    "possible_factors": [
+      "장시간 앉은 자세", 
+      "좋지 않은 자세 습관",
+      "높은 스트레스 수준",
+      "물건 들 때 부적절한 자세"
+    ]
+  },
+  "recommendations": {
+    "treatment_options": [
+      {
+        "name": "슈로스 운동 치료",
+        "description": "자세 교정과 근력 강화에 효과적인 운동 기법",
+        "priority": "높음"
+      },
+      {
+        "name": "도수 치료",
+        "description": "관절과 근육의 움직임 회복을 위한 전문가의 손 기술",
+        "priority": "높음"
+      }
+    ],
+    "lifestyle_changes": [
+      "앉아있는 시간 줄이기와 규칙적인 휴식",
+      "올바른 자세 유지하기",
+      "스트레스 관리 기법 적용"
+    ],
+    "consultation_urgency": "일반적"
+  },
+  "ai_insights": {
+    "additional_observations": "통증이 다리로 방사되는 증상과 감각 이상은 신경 압박 가능성을 시사합니다.",
+    "personalized_advice": "사무직 특성상 장시간 앉아있는 동안 허리의 중립 자세를 유지하는 것이 중요합니다. 1시간마다 가벼운 스트레칭을 권장합니다."
+  }
+}
+```
+
+### RLS(Row Level Security) 설정
+
+데이터 보안을 위한 RLS 정책입니다.
+
+```sql
+-- survey_responses 테이블에 RLS 활성화
+ALTER TABLE survey_responses ENABLE ROW LEVEL SECURITY;
+
+-- 익명 사용자도 응답을 생성할 수 있도록 정책 설정
+CREATE POLICY "누구나 응답 생성 가능" ON survey_responses FOR INSERT WITH CHECK (true);
+
+-- 자신의 응답만 읽고 수정할 수 있는 정책 (report_access_key 기반)
+CREATE POLICY "report_access_key로 응답 조회" ON survey_responses 
+  FOR SELECT USING (auth.uid() IS NOT NULL OR report_access_key = current_setting('request.headers')::json->'x-report-access-key');
+
+-- survey_sections 및 survey_questions 테이블에 RLS 활성화
+ALTER TABLE survey_sections ENABLE ROW LEVEL SECURITY;
+ALTER TABLE survey_questions ENABLE ROW LEVEL SECURITY;
+
+-- 누구나 섹션 및 질문 정보를 읽을 수 있음
+CREATE POLICY "누구나 섹션 정보 조회 가능" ON survey_sections FOR SELECT USING (true);
+CREATE POLICY "누구나 질문 정보 조회 가능" ON survey_questions FOR SELECT USING (true);
+
+-- 관리자만 섹션 및 질문 정보를 수정할 수 있음
+CREATE POLICY "관리자만 섹션 정보 수정 가능" ON survey_sections 
+  FOR ALL USING (auth.uid() IN (SELECT user_id FROM admin_users));
+CREATE POLICY "관리자만 질문 정보 수정 가능" ON survey_questions 
+  FOR ALL USING (auth.uid() IN (SELECT user_id FROM admin_users));
+```
+
+### 데이터베이스 연동 구현 가이드
+
+프론트엔드에서 Supabase 데이터베이스를 연동하는 방법입니다.
+
+```typescript
+// lib/supabase/client.ts
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+// lib/supabase/survey.ts
+import { supabase } from './client';
+import { v4 as uuidv4 } from 'uuid';
+
+export async function submitSurveyResponse(responses: any) {
+  // 고유 접근 키 생성
+  const reportAccessKey = uuidv4();
+  
+  const { data, error } = await supabase
+    .from('survey_responses')
+    .insert({
+      responses,
+      report_access_key: reportAccessKey,
+      session_id: getSessionId() // 세션 ID 생성 함수 구현 필요
+    })
+    .select('id');
+    
+  if (error) {
+    throw new Error(`Survey submission error: ${error.message}`);
+  }
+  
+  return {
+    response_id: data[0].id,
+    report_access_key: reportAccessKey
+  };
+}
+
+export async function getSurveyResponseById(responseId: string, accessKey: string) {
+  const { data, error } = await supabase
+    .from('survey_responses')
+    .select('*')
+    .eq('id', responseId)
+    .eq('report_access_key', accessKey)
+    .single();
+    
+  if (error) {
+    throw new Error(`Failed to fetch survey response: ${error.message}`);
+  }
+  
+  return data;
+}
+
+// 세션 ID 생성 함수 (예시)
+function getSessionId() {
+  // 클라이언트 측에서 세션 ID가 없으면 생성하고 저장
+  let sessionId = localStorage.getItem('survey_session_id');
+  if (!sessionId) {
+    sessionId = uuidv4();
+    localStorage.setItem('survey_session_id', sessionId);
+  }
+  return sessionId;
+}
+```

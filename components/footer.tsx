@@ -22,9 +22,9 @@ export default function Footer() {
           <div>
             <h3 className="font-bold mb-4">연락처</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>전화: 02-123-4567</li>
+              <li>전화: 051-714-1831</li>
               <li>이메일: info@onnuripain.com</li>
-              <li>주소: 서울시 강남구 테헤란로 123</li>
+              <li>주소:부산광역시 동래구 동래로 25, 701호</li>
             </ul>
           </div>
           <div>
@@ -49,7 +49,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-6 border-t text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} 온누리마취통증의학과. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} 안성진 김도훈 김두현 김재훈 김정연 정현준. All rights reserved.</p>
           <p className="mt-2">
             본 서비스는 의학적 진단을 대체하지 않으며, 정확한 진단과 치료를 위해서는 전문의 상담이 필요합니다.
           </p>

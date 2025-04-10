@@ -5,9 +5,10 @@ import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Send, Bot, User, Loader2 } from "lucide-react"
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Send, Bot, User, Loader2 } from "lucide-react";
+import ReactMarkdown from 'react-markdown'; // react-markdown import 추가
 
 interface ChatbotDialogProps {
   open: boolean
@@ -46,58 +47,97 @@ export default function ChatbotDialog({ open, onOpenChange, reportData }: Chatbo
     const userMessage = input.trim()
     setInput("")
     setMessages((prev) => [...prev, { role: "user", content: userMessage }])
-    setIsLoading(true)
+    setIsLoading(true);
 
-    try {
-      // In a real implementation, this would send the message to the backend
-      // For demo purposes, we'll simulate a response
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+    // Log the received reportData prop structure right before using it
+    console.log("ChatbotDialog handleSend received reportData:", JSON.stringify(reportData, null, 2));
 
-      // Generate a mock response based on the user's message
-      let response = ""
-      const lowerCaseMessage = userMessage.toLowerCase()
+    // Add check for reportData and surveyData itself before accessing id
+    if (!reportData || !reportData.surveyData) {
+        console.error("Report data or survey data is not available yet. reportData:", reportData); // Log the problematic data
+        setMessages((prev) => [
+            ...prev,
+            {
+                role: "assistant",
+                content: "죄송합니다. 리포트 데이터를 아직 불러오지 못했습니다. 잠시 후 다시 시도해주세요.", // More specific error
+            },
+        ]);
+        setIsLoading(false);
+        return;
+    }
 
-      if (lowerCaseMessage.includes("통증") && lowerCaseMessage.includes("원인")) {
-        response = `설문 응답을 분석한 결과, 귀하의 통증은 주로 ${reportData.aiAnalysis.potentialCauses.join(", ")} 등이 원인일 가능성이 있습니다. 정확한 원인 파악을 위해서는 전문의 상담이 필요합니다.`
-      } else if (lowerCaseMessage.includes("치료") || lowerCaseMessage.includes("치료법")) {
-        response = `귀하의 상태에 적합한 치료법으로는 ${reportData.recommendedTreatments.map((t: any) => t.name).join(", ")} 등이 있습니다. 특히 ${reportData.recommendedTreatments[0].name}은(는) 귀하의 상태에 높은 적합성을 보입니다.`
-      } else if (lowerCaseMessage.includes("예약") || lowerCaseMessage.includes("진료")) {
-        response =
-          "온누리마취통증의학과 진료 예약은 전화(02-123-4567) 또는 홈페이지를 통해 가능합니다. 평일 09:00-18:00, 토요일 09:00-13:00에 진료를 제공하고 있습니다."
-      } else if (lowerCaseMessage.includes("위치") || lowerCaseMessage.includes("어디")) {
-        response =
-          "온누리마취통증의학과는 서울시 강남구 테헤란로 123에 위치하고 있습니다. 강남역 3번 출구에서 도보 5분 거리입니다."
-      } else if (lowerCaseMessage.includes("슈로스")) {
-        response =
-          "슈로스 운동치료는 척추 측만증 및 자세 교정을 위한 특화된 운동 프로그램입니다. 온누리마취통증의학과에서는 환자 개개인의 상태에 맞춘 슈로스 운동치료를 제공하고 있습니다."
-      } else if (lowerCaseMessage.includes("도수치료")) {
-        response =
-          "도수치료는 전문가의 손을 이용하여 관절과 근육의 기능을 회복시키는 치료법입니다. 온누리마취통증의학과에서는 숙련된 전문가들이 환자의 상태에 맞는 맞춤형 도수치료를 제공합니다."
-      } else if (lowerCaseMessage.includes("물리치료")) {
-        response =
-          "물리치료는 열, 전기, 초음파 등 다양한 물리적 요소를 이용하여 통증을 완화하고 기능을 회복시키는 치료법입니다. 온누리마취통증의학과에서는 최신 장비를 활용한 효과적인 물리치료를 제공합니다."
-      } else if (lowerCaseMessage.includes("비용") || lowerCaseMessage.includes("가격")) {
-        response =
-          "치료 비용은 환자의 상태와 필요한 치료에 따라 다릅니다. 정확한 비용은 진료 후 안내해 드리며, 대부분의 치료는 건강보험이 적용됩니다. 자세한 내용은 병원에 문의해 주세요."
-      } else {
-        response =
-          "죄송합니다. 질문에 대한 정확한 답변을 드리기 어렵습니다. 더 구체적인 질문을 해주시거나, 자세한 상담은 병원에 직접 문의해 주시기 바랍니다."
-      }
+    // reportId 가져오기 (이제 reportData와 surveyData가 있음을 확신)
+    const reportId = reportData.surveyData.id;
 
-      setMessages((prev) => [...prev, { role: "assistant", content: response }])
-    } catch (error) {
-      console.error("Error sending message:", error)
+    if (!reportId) { // This check might be redundant now, but keep for safety
+      console.error("Report ID not found in reportData.surveyData");
       setMessages((prev) => [
         ...prev,
+        {
+          role: "assistant",
+          content: "죄송합니다. 현재 설문 정보를 찾을 수 없어 답변할 수 없습니다.",
+        },
+      ]);
+      setIsLoading(false);
+      return;
+    }
+
+
+    try {
+      // --- 실제 API 호출 로직 ---
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          reportId: reportId, // reportData에서 가져온 ID 사용
+        }),
+      });
+
+      if (!response.ok) {
+        // 수정: errorData 변수 중복 선언 제거
+        const errorText = await response.text(); // 먼저 텍스트로 읽기
+        console.error("API request failed. Status:", response.status, "Response text:", errorText);
+        let parsedErrorData = { error: `API request failed with status ${response.status}` }; // 기본 에러 객체
+        try {
+          parsedErrorData = JSON.parse(errorText); // JSON 파싱 시도
+        } catch (parseError) {
+          console.error("Failed to parse error response text as JSON:", parseError);
+          // 파싱 실패 시 errorText 자체를 에러 메시지로 사용하거나 기본 메시지 유지
+          parsedErrorData = { error: errorText || `API request failed with status ${response.status}` };
+        }
+        throw new Error(parsedErrorData.error || `API request failed with status ${response.status}`);
+      }
+
+      console.log("API response received, attempting to parse JSON..."); // 로그 추가
+      const responseText = await response.text(); // 먼저 텍스트로 읽어보기
+      console.log("API response text:", responseText); // 텍스트 내용 로깅
+      const data = JSON.parse(responseText); // 텍스트를 JSON으로 파싱
+      console.log("JSON parsed successfully:", data); // 로그 추가
+
+      setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
+      console.log("State updated with new message."); // 로그 추가
+      // --- API 호출 로직 끝 ---
+
+    } catch (error) {
+      // 수정: 에러 객체 전체와 에러 메시지를 더 자세히 로깅
+      console.error("Detailed error sending message:", error);
+      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred during message sending.";
+      console.error("Error message extracted:", errorMessage);
+      setMessages((prev) => [
+        ...prev,
+        // 복원: 에러 메시지 표시 부분
         {
           role: "assistant",
           content: "죄송합니다. 메시지 처리 중 오류가 발생했습니다. 다시 시도해 주세요.",
         },
       ])
-    } finally {
+    } finally { // 복원: finally 블록
       setIsLoading(false)
     }
-  }
+  } // 복원: handleSend 함수 닫는 괄호
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !isLoading) {
@@ -107,7 +147,8 @@ export default function ChatbotDialog({ open, onOpenChange, reportData }: Chatbo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] h-[600px] flex flex-col p-0">
+      {/* 수정: 채팅창 너비/높이/최대너비를 70vw/70vh로 설정 (w-[70vw], h-[70vh], max-w-[70vw]) */}
+      <DialogContent className="w-[70vw] h-[70vh] max-w-[70vw] flex flex-col p-0">
         <DialogHeader className="p-4 border-b">
           <DialogTitle className="flex items-center gap-2">
             <Bot className="h-5 w-5" />
@@ -128,7 +169,16 @@ export default function ChatbotDialog({ open, onOpenChange, reportData }: Chatbo
                     {message.role === "user" ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
                     <span className="text-xs font-medium">{message.role === "user" ? "사용자" : "AI 챗봇"}</span>
                   </div>
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  {/* 수정: AI 챗봇 메시지에 ReactMarkdown 적용 (div로 감싸서 스타일 적용) */}
+                  {message.role === 'assistant' ? (
+                    <div className="prose prose-sm max-w-none"> {/* div로 감싸고 className 이동 */}
+                      <ReactMarkdown>
+                        {message.content}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -168,4 +218,3 @@ export default function ChatbotDialog({ open, onOpenChange, reportData }: Chatbo
     </Dialog>
   )
 }
-

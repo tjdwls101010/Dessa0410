@@ -1,112 +1,253 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Download, AlertTriangle, MessageSquare, Printer, ArrowLeft } from "lucide-react"
-import Link from "next/link"
-import ChatbotDialog from "@/components/chatbot/chatbot-dialog"
+import { useState, useEffect, use } from "react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Download, AlertTriangle, MessageSquare, Printer, ArrowLeft, Info } from "lucide-react";
+import Link from "next/link";
+import ChatbotDialog from "@/components/chatbot/chatbot-dialog";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Card 컴포넌트 추가
 
-export default function ReportPage({ params }: { params: { id: string } }) {
-  const [reportData, setReportData] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
-  const [chatbotOpen, setChatbotOpen] = useState(false)
+// API 응답 타입 정의 (필요에 따라 더 상세하게 정의 가능)
+interface SurveyData {
+  id: string;
+  created_at: string;
+  // ... surveys 테이블의 모든 컬럼들
+  a1_age?: string;
+  a2_gender?: string;
+  a3_job?: string;
+  b4_main_pain_area?: string;
+  b5_other_pain_areas?: string[];
+  b6_pain_onset?: string;
+  b7_pain_pattern?: string[];
+  c11_max_pain_vas?: number;
+  c12_avg_pain_vas?: number;
+  c13_aggravating_factors?: string[];
+  c14_relieving_factors?: string[];
+  d15_personal_hygiene?: number;
+  d16_dressing?: number;
+  d17_lifting?: number;
+  d18_walking?: number;
+  d19_sitting?: number;
+  d20_standing?: number;
+  d21_sleep?: number;
+  d22_concentration?: number;
+  d23_work_study?: number;
+  d24_driving_transport?: number;
+  d25_leisure?: number;
+  d26_mood?: number;
+  e27_exercise?: boolean;
+  e28_sitting_hours?: string;
+  e29_posture_awareness?: string;
+  e30_recent_stress?: string;
+  f33_red_flags?: string[];
+  // ... 기타 필요한 컬럼들
+}
+
+interface AiAnalysis {
+  painSeverity?: string;
+  potentialCauses?: string[];
+  functionalImpact?: string;
+  chronicityRisk?: string;
+  redFlagSummary?: string;
+  lifestyleRecommendations?: string[];
+  suggestedTreatments?: { treatment: string; justification: string }[]; // API 응답에 맞춰 추가 (이전 단계에서 추가됨)
+  nextStepGeneral?: string[]; // API 응답에 맞춰 추가 (이전 단계에서 추가됨)
+  error?: string; // AI 분석 실패 시 에러 메시지
+  rawResponse?: string; // AI 분석 실패 시 원본 응답
+}
+
+interface ReportApiResponse {
+  surveyData: SurveyData;
+  aiAnalysis: AiAnalysis;
+}
+
+// 온누리마취통증의학과 치료법 정보 (여기 또는 별도 파일로 관리)
+const treatmentInfo = {
+  prolotherapy: {
+    name: "프롤로테라피 (인대강화주사)",
+    description: "고농도 포도당 주사로 인대/힘줄 재생 촉진. 만성 통증, 관절염, 인대 손상에 적용.",
+    keywords: ["만성", "인대", "힘줄", "관절염", "재생", "어깨", "무릎", "팔꿈치", "발목"],
+  },
+  manualTherapy: {
+    name: "도수치료 (카이로프랙틱, 롤핑)",
+    description: "손으로 척추/관절 정렬 교정 및 근막 이완. 목/허리 통증, 자세 불균형, 가동성 제한에 적용.",
+    keywords: ["척추", "관절", "정렬", "자세", "근막", "가동성", "목", "허리", "골반"],
+  },
+  schroth: {
+    name: "슈로스 운동",
+    description: "3차원 척추 교정 운동. 특발성 척추측만증(주로 청소년)에 특화.",
+    keywords: ["척추측만증", "청소년", "교정운동", "호흡"],
+  },
+  sling: {
+    name: "슬링 운동",
+    description: "불안정한 줄 이용. 코어 근육 강화, 기능적 움직임 개선, 재활에 효과적.",
+    keywords: ["코어", "근력", "재활", "기능개선", "허리통증"],
+  },
+  hilt: {
+    name: "HILT (고강도 레이저)",
+    description: "심부 조직 레이저 치료. 염증 감소, 통증 완화, 조직 재생 촉진. 급/만성 통증, 관절염, 힘줄염에 적용.",
+    keywords: ["레이저", "염증", "통증완화", "조직재생", "관절염", "힘줄염", "급성"],
+  },
+  eswt: {
+    name: "ESWT (체외충격파)",
+    description: "충격파로 석회화 분해 및 혈류/재생 촉진. 만성 힘줄 문제, 석회화 건염, 족저근막염에 효과적.",
+    keywords: ["충격파", "석회", "힘줄", "건염", "족저근막염", "오십견", "테니스엘보"],
+  },
+};
+
+// 구체적인 치료 추천 생성 로직 (개선 필요)
+function generateDetailedTreatmentSuggestions(
+  surveyData: SurveyData | null,
+  aiAnalysis: AiAnalysis | null
+): { treatment: string; justification: string }[] {
+  const suggestions: { treatment: string; justification: string }[] = [];
+  if (!surveyData || !aiAnalysis) return suggestions;
+
+  const {
+    b4_main_pain_area,
+    b6_pain_onset,
+    b7_pain_pattern,
+    c12_avg_pain_vas,
+    d19_sitting, // 예시: 앉아있기 어려움
+    e27_exercise, // 예시: 운동 여부
+    e29_posture_awareness, // 예시: 자세 인지
+  } = surveyData;
+  const { potentialCauses, chronicityRisk, redFlagSummary } = aiAnalysis; // redFlagSummary 추가
+
+  // --- 데이터 분석 및 조건 설정 ---
+  const painArea = b4_main_pain_area || "";
+  const isChronic = b6_pain_onset?.includes('개월') || b6_pain_onset?.includes('년') || chronicityRisk === '높음';
+  const hasPostureIssue = e29_posture_awareness === '나쁨' || potentialCauses?.some(cause => cause.includes('자세'));
+  const needsCoreStrength = potentialCauses?.some(cause => cause.includes('근력 부족') || cause.includes('코어'));
+  const hasInflammationSigns = b7_pain_pattern?.some(p => p.includes('burning') || p.includes('throbbing')); // 염증 관련 패턴 체크
+  const highPainIntensity = c12_avg_pain_vas && c12_avg_pain_vas >= 6;
+  const isAdolescent = surveyData.a1_age?.includes('10대'); // 슈로스 대상 확인용 (임시) - surveyData에서 접근하도록 수정
+  const hasRedFlags = surveyData.f33_red_flags && surveyData.f33_red_flags.length > 0;
+
+  // --- 추천 로직 ---
+
+  // 1. 프롤로테라피 추천 (만성 + 특정 부위 인대/힘줄 문제)
+  if (isChronic && treatmentInfo.prolotherapy.keywords.some(k => painArea.includes(k))) {
+     suggestions.push({
+       treatment: treatmentInfo.prolotherapy.name,
+       justification: `만성적인 ${painArea} 통증은 인대/힘줄 약화와 관련될 수 있습니다. ${treatmentInfo.prolotherapy.name}는 조직 재생을 유도하여 근본적인 회복을 도울 수 있습니다.`
+     });
+  }
+
+  // 2. 도수치료 추천 (자세 문제 또는 척추/관절 관련 통증) - Red Flag 없을 때
+  if (!hasRedFlags && hasPostureIssue && treatmentInfo.manualTherapy.keywords.some(k => painArea.includes(k) || k === '자세')) {
+     // 카이로/롤핑 구분은 어려우므로 통합 추천
+     suggestions.push({
+       treatment: treatmentInfo.manualTherapy.name,
+       justification: `${painArea} 통증과 함께 자세 불균형이 관찰됩니다. ${treatmentInfo.manualTherapy.name}를 통해 척추/관절 정렬을 바로잡고 근막 긴장을 완화하는 것이 도움될 수 있습니다.`
+     });
+  }
+
+  // 3. 슬링 운동 추천 (코어 약화 또는 허리 통증 + 운동 부족)
+  if (needsCoreStrength || (painArea.includes('허리') && !e27_exercise)) {
+     suggestions.push({
+       treatment: treatmentInfo.sling.name,
+       justification: `코어 근력 약화는 ${painArea || '만성'} 통증의 주요 원인 중 하나입니다. ${treatmentInfo.sling.name} 운동으로 심부 근육을 강화하고 척추 안정성을 높이는 것이 중요합니다.`
+     });
+   }
+
+  // 4. HILT 추천 (높은 통증 강도 + 염증 징후 또는 특정 부위)
+  if (highPainIntensity && (hasInflammationSigns || treatmentInfo.hilt.keywords.some(k => painArea.includes(k)))) {
+      suggestions.push({
+        treatment: treatmentInfo.hilt.name,
+        justification: `통증 강도가 높고 염증 소견이 의심되는 ${painArea} 부위에 ${treatmentInfo.hilt.name} 치료는 심부 조직까지 에너지를 전달하여 빠른 통증 감소 및 염증 완화 효과를 기대할 수 있습니다.`
+      });
+   }
+
+  // 5. ESWT 추천 (만성 힘줄 문제 또는 특정 부위 통증)
+  if (isChronic && treatmentInfo.eswt.keywords.some(k => painArea.includes(k) || potentialCauses?.some(cause => cause.includes(k)))) {
+     suggestions.push({
+       treatment: treatmentInfo.eswt.name,
+       justification: `만성적인 ${painArea} 통증, 특히 힘줄 문제(건염 등)나 석회화가 의심될 경우 ${treatmentInfo.eswt.name} 치료가 효과적일 수 있습니다. 충격파가 조직 재생과 혈류 개선을 촉진합니다.`
+     });
+  }
+
+  // 6. 슈로스 운동 추천 (청소년 + 척추측만증 의심 - AI 분석 결과 활용 시도)
+  // 주의: 설문에 척추측만증 항목이 없으므로, AI가 'potentialCauses' 등에서 언급할 경우에만 추천 (정확도 한계 있음)
+  if (isAdolescent && potentialCauses?.some(cause => cause.includes('척추측만증'))) {
+     suggestions.push({
+       treatment: treatmentInfo.schroth.name,
+       justification: `청소년기의 척추측만증이 의심되는 경우, 3차원 교정 운동인 ${treatmentInfo.schroth.name}이 척추 만곡 진행을 막고 자세 개선에 도움이 될 수 있습니다. 정확한 진단이 우선 필요합니다.`
+     });
+   }
+
+  // --- 추천 필터링 및 정리 ---
+  // 1. 중복 제거 (같은 이름의 치료법이 여러 조건에 해당될 수 있으므로)
+  const uniqueSuggestions = suggestions.filter((suggestion, index, self) =>
+    index === self.findIndex((s) => s.treatment === suggestion.treatment)
+  );
+
+  // 2. 추천 개수가 3개 미만일 경우, 일반적인 치료법 추가 (중복 제외) - 항상 3개를 채우도록 보장
+  const fallbackTreatments = [
+    // 우선순위를 고려하여 배열 순서 조정 가능
+    { treatment: treatmentInfo.manualTherapy.name, justification: "통증 완화 및 기능 개선을 위해 고려해볼 수 있는 일반적인 치료법입니다. 정확한 적용은 진단 후 결정됩니다." },
+    { treatment: treatmentInfo.sling.name, justification: "코어 근력 강화 및 자세 개선은 많은 통증 관리에 도움이 될 수 있습니다." },
+    { treatment: treatmentInfo.hilt.name, justification: "염증 및 통증 감소에 효과적인 비수술적 치료 옵션 중 하나입니다." },
+    { treatment: treatmentInfo.prolotherapy.name, justification: "만성적인 인대/힘줄 문제 해결에 도움이 될 수 있는 재생 치료 옵션입니다." },
+    { treatment: treatmentInfo.eswt.name, justification: "만성 힘줄 문제나 석회화 관련 통증에 적용될 수 있는 치료법입니다." },
+  ];
+
+  let finalSuggestions = [...uniqueSuggestions];
+  const existingTreatmentNames = new Set(finalSuggestions.map(s => s.treatment)); // Set으로 변경하여 효율적인 중복 체크
+
+  // 추천 개수가 3개 미만이 될 때까지 fallback 추가
+  for (const fallback of fallbackTreatments) {
+    if (finalSuggestions.length >= 3) break; // 3개 채워지면 중단
+    if (!existingTreatmentNames.has(fallback.treatment)) { // Set.has() 사용
+      finalSuggestions.push(fallback);
+      existingTreatmentNames.add(fallback.treatment); // Set에 추가
+    }
+  }
+
+  // 최종적으로 최대 3개 반환 (이미 위 로직에서 3개로 맞춰짐)
+  return finalSuggestions;
+}
+
+
+// Update the params prop type to reflect it's a Promise
+export default function ReportPage({ params }: { params: Promise<{ id: string }> }) {
+  const [reportData, setReportData] = useState<ReportApiResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null); // 에러 상태 추가
+  const [chatbotOpen, setChatbotOpen] = useState(false);
+
+  // Unwrap the params promise using React.use() and explicitly type the result
+  const resolvedParams = use(params) as { id: string };
 
   useEffect(() => {
-    // In a real implementation, this would fetch the report data from the backend
-    // For demo purposes, we'll use mock data
     const fetchReportData = async () => {
+      setLoading(true);
+      setError(null); // 이전 에러 초기화
       try {
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-
-        // Mock data
-        const mockReportData = {
-          patientInfo: {
-            age: 45,
-            gender: "female",
-            occupation: "사무직",
-            activityLevel: "light",
-          },
-          painAssessment: {
-            primaryLocation: "lowerBack",
-            locations: ["lowerBack", "hip"],
-            intensity: 7,
-            duration: "3-6months",
-            frequency: "daily",
-            characteristics: ["dull", "sharp", "stiffness"],
-            triggers: ["sitting", "bending", "standing"],
-          },
-          functionalLimitations: {
-            dailyActivities: {
-              walking: "mild",
-              standing: "moderate",
-              sitting: "severe",
-              climbing: "moderate",
-              bending: "severe",
-              lifting: "severe",
-              dressing: "mild",
-              bathing: "mild",
-              sleeping: "moderate",
-              working: "moderate",
-            },
-            sleepQuality: "moderatelyAffected",
-            moodImpact: "moderatelyAffected",
-          },
-          redFlags: [
-            {
-              severity: "medium",
-              description: "지속적인 통증이 3개월 이상 이어지고 있습니다.",
-              recommendation: "전문의 상담을 통한 정확한 진단이 필요합니다.",
-            },
-          ],
-          aiAnalysis: {
-            painSeverity: "중증도의 만성 통증",
-            potentialCauses: [
-              "장시간 앉아있는 자세로 인한 요추 부담",
-              "근육 불균형 및 약화",
-              "자세 불량",
-              "디스크 관련 문제 가능성",
-            ],
-            functionalImpact: "일상생활에 상당한 영향을 미치는 중등도의 기능 제한",
-            chronicity: "만성화 위험이 높음",
-          },
-          recommendedTreatments: [
-            {
-              name: "도수치료",
-              description: "척추 정렬 및 관절 가동성 개선을 위한 도수치료",
-              suitability: "high",
-            },
-            {
-              name: "특화 운동치료 (슬링)",
-              description: "코어 근육 강화 및 기능적 움직임 개선을 위한 맞춤 운동",
-              suitability: "high",
-            },
-            {
-              name: "프롤로테라피",
-              description: "손상된 인대나 힘줄을 강화하여 만성 통증의 근본 원인 해결",
-              suitability: "medium",
-            },
-            {
-              name: "첨단 장비 치료",
-              description: "고강도 레이저, 체외충격파 등을 이용한 통증 감소와 조직 재생 촉진",
-              suitability: "medium",
-            },
-          ],
-          recommendedExaminations: ["요추부 X-ray 검사", "필요시 MRI 검사", "근력 및 유연성 평가"],
+        const response = await fetch(`/api/report/${resolvedParams.id}`);
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
-
-        setReportData(mockReportData)
+        const data: ReportApiResponse = await response.json();
+        setReportData(data);
       } catch (error) {
-        console.error("Error fetching report data:", error)
+        console.error("Error fetching report data:", error);
+        setError((error as Error).message || "리포트 데이터를 불러오는 중 오류가 발생했습니다.");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchReportData()
-  }, [params.id])
+    if (resolvedParams.id) {
+      fetchReportData();
+    } else {
+      setError("잘못된 접근입니다. 설문 ID가 필요합니다.");
+      setLoading(false);
+    }
+  }, [resolvedParams.id]); // Use the resolved id in the dependency array
 
   if (loading) {
     return (
@@ -116,93 +257,175 @@ export default function ReportPage({ params }: { params: { id: string } }) {
           <p className="text-lg">리포트를 불러오는 중입니다...</p>
         </div>
       </div>
-    )
+    );
   }
 
-  if (!reportData) {
+  if (error) {
     return (
-      <div className="container mx-auto px-4 py-12">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-bold mb-4">리포트를 찾을 수 없습니다</h2>
-          <p className="mb-6">요청하신 리포트를 찾을 수 없거나 접근 권한이 없습니다.</p>
-          <Button asChild>
-            <Link href="/survey">새로운 설문 시작하기</Link>
+      <div className="container mx-auto px-4 py-12 flex items-center justify-center min-h-[60vh]">
+        <div className="bg-white rounded-lg shadow-md p-8 text-center">
+          <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" />
+          <h2 className="text-xl font-bold mb-4 text-red-700">오류 발생</h2>
+          <p className="mb-6 text-gray-600">{error}</p>
+          <Button asChild variant="outline">
+            <Link href="/">홈으로 돌아가기</Link>
           </Button>
         </div>
       </div>
-    )
+    );
   }
 
-  // 통증 강도에 따른 색상 클래스 반환 함수
-  const getPainColorClass = (intensity: number) => {
-    if (intensity <= 3) return "bg-green-500"
-    if (intensity <= 6) return "bg-yellow-500"
-    return "bg-red-500"
+  if (!reportData) {
+    // 로딩이 끝났지만 데이터가 없는 경우 (이론상 발생하기 어려움, fetchReportData에서 처리됨)
+    return (
+      <div className="container mx-auto px-4 py-12 flex items-center justify-center min-h-[60vh]">
+        <div className="bg-white rounded-lg shadow-md p-8 text-center">
+          <Info className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+          <h2 className="text-xl font-bold mb-4">리포트 정보 없음</h2>
+          <p className="mb-6 text-gray-600">리포트 데이터를 찾을 수 없습니다.</p>
+          <Button asChild variant="outline">
+            <Link href="/">홈으로 돌아가기</Link>
+          </Button>
+        </div>
+      </div>
+    );
   }
 
-  // 적합성에 따른 배지 스타일 반환 함수
-  const getSuitabilityBadge = (suitability: string) => {
+  // surveyData와 aiAnalysis 추출
+  const { surveyData, aiAnalysis } = reportData;
+
+  // 상세 치료 추천 생성
+  const detailedSuggestions = generateDetailedTreatmentSuggestions(surveyData, aiAnalysis);
+
+  // 위험 신호 관련 변수를 컴포넌트 스코프에서 정의
+  const hasRedFlags = surveyData?.f33_red_flags && surveyData.f33_red_flags.length > 0;
+  const redFlagSummary = aiAnalysis?.redFlagSummary; // AI 분석 결과에서 가져옴
+
+  // --- Helper Functions ---
+
+  // 통증 강도 (0-10)에 따른 색상 클래스 반환 함수
+  const getPainColorClass = (intensity: number | undefined | null) => {
+    if (intensity === null || intensity === undefined) return "bg-gray-300"; // 데이터 없을 경우 회색
+    if (intensity <= 3) return "bg-green-500";
+    if (intensity <= 6) return "bg-yellow-500";
+    return "bg-red-500";
+  };
+
+  // 적합성에 따른 배지 스타일 반환 함수 (임시 - AI 분석 결과에 따라 변경 필요)
+  const getSuitabilityBadge = (suitability: string | undefined) => {
+    // TODO: AI 분석 결과나 다른 로직으로 대체 필요
     switch (suitability) {
       case "high":
-        return <Badge className="bg-green-100 text-green-800 border-green-300">높은 적합성</Badge>
+        return <Badge className="bg-green-100 text-green-800 border-green-300">높은 적합성</Badge>;
       case "medium":
-        return <Badge className="bg-yellow-100 text-yellow-800 border-yellow-300">중간 적합성</Badge>
+        return <Badge className="bg-yellow-100 text-yellow-800 border-yellow-300">중간 적합성</Badge>;
       case "low":
-        return <Badge className="bg-gray-100 text-gray-800 border-gray-300">낮은 적합성</Badge>
+        return <Badge className="bg-gray-100 text-gray-800 border-gray-300">낮은 적합성</Badge>;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
-  // 기능 제한 정도에 따른 너비 및 색상 반환 함수
-  const getLimitationStyle = (limitation: string) => {
+  // 기능 제한 정도 (1-5)에 따른 너비 및 색상 반환 함수
+  const getLimitationStyle = (limitation: number | undefined | null) => {
+    if (limitation === null || limitation === undefined) return { width: "0%", color: "bg-gray-200", text: "응답 없음" };
     switch (limitation) {
-      case "none":
-        return { width: "0%", color: "bg-gray-200" }
-      case "mild":
-        return { width: "25%", color: "bg-green-500" }
-      case "moderate":
-        return { width: "50%", color: "bg-yellow-500" }
-      case "severe":
-        return { width: "75%", color: "bg-orange-500" }
-      case "impossible":
-        return { width: "100%", color: "bg-red-500" }
+      case 1: // 어려움 없음 (Calculation.md 기준 0점이지만, 설문은 1부터 시작 가정)
+        return { width: "0%", color: "bg-gray-200", text: "어려움 없음" };
+      case 2: // 약간 어려움
+        return { width: "25%", color: "bg-green-500", text: "약간 어려움" };
+      case 3: // 상당히 어려움
+        return { width: "50%", color: "bg-yellow-500", text: "상당히 어려움" };
+      case 4: // 매우 심한 어려움
+        return { width: "75%", color: "bg-orange-500", text: "매우 심한 어려움" };
+      case 5: // 도움 없이는 불가능
+        return { width: "100%", color: "bg-red-500", text: "거의 불가능" };
       default:
-        return { width: "0%", color: "bg-gray-200" }
+        return { width: "0%", color: "bg-gray-200", text: "알 수 없음" };
     }
-  }
+  };
 
-  // 통증 특성 한글 변환 함수
-  const getPainCharacteristicText = (char: string) => {
+  // 통증 양상 (b7_pain_pattern) 한글 변환 함수
+  const getPainPatternText = (pattern: string) => {
+    // Calculation.md 또는 Survey.md 참고하여 매핑 필요
     const mapping: Record<string, string> = {
-      dull: "둔한 통증",
-      sharp: "날카로운 통증",
-      throbbing: "욱신거리는 통증",
-      burning: "화끈거리는 통증",
-      tingling: "저림/따끔거림",
-      stiffness: "뻣뻣함/경직",
-      other: "기타",
-    }
-    return mapping[char] || char
-  }
+      "dull_ache": "둔하고 쑤시는 통증",
+      "sharp_stabbing": "날카롭고 찌르는 통증",
+      "throbbing_pulsating": "욱신거리고 박동치는 통증",
+      "burning_sensation": "화끈거리는 느낌",
+      "tingling_pins_needles": "저리거나 따끔거림",
+      "numbness": "감각 없음/둔함",
+      "stiffness_tightness": "뻣뻣함/경직",
+      "electric_shock": "전기 충격 같은 느낌",
+      // ... 기타 설문 옵션들
+      "other": "기타",
+    };
+    return mapping[pattern] || pattern;
+  };
 
-  // 통증 유발 요인 한글 변환 함수
-  const getPainTriggerText = (trigger: string) => {
+  // 통증 악화/완화 요인 (c13, c14) 한글 변환 함수
+  const getPainFactorText = (factor: string) => {
+    // Calculation.md 또는 Survey.md 참고하여 매핑 필요
     const mapping: Record<string, string> = {
-      movement: "특정 동작",
-      sitting: "오래 앉아있을 때",
-      standing: "오래 서있을 때",
-      walking: "걸을 때",
-      bending: "몸 구부릴 때",
-      lifting: "물건 들 때",
-      sleeping: "잘 때",
-      stress: "스트레스 받을 때",
-      weather: "날씨 변화",
-      other: "기타",
-    }
-    return mapping[trigger] || trigger
-  }
+      "rest": "휴식",
+      "movement": "움직임",
+      "specific_posture": "특정 자세",
+      "sitting": "앉아있기",
+      "standing": "서있기",
+      "walking": "걷기",
+      "bending": "구부리기",
+      "lifting": "물건 들기",
+      "medication": "약물 복용",
+      "heat_cold_therapy": "온찜질/냉찜질",
+      "stretching_exercise": "스트레칭/운동",
+      "stress": "스트레스",
+      "weather_change": "날씨 변화",
+      // ... 기타 설문 옵션들
+      "other": "기타",
+    };
+    return mapping[factor] || factor;
+  };
 
+  // 성별 변환
+  const getGenderText = (gender: string | undefined) => {
+    if (!gender) return "정보 없음";
+    return gender === "male" ? "남성" : gender === "female" ? "여성" : "기타";
+  };
+
+  // 직업/활동 변환
+  const getActivityLevelText = (activity: string | undefined) => {
+    // 설문 옵션에 맞춰 수정 필요
+    if (!activity) return "정보 없음";
+    const mapping: Record<string, string> = {
+      "sedentary": "주로 앉아서 생활",
+      "light_activity": "가벼운 활동 위주",
+      "moderate_activity": "중등도 활동",
+      "heavy_activity": "육체 노동/격렬한 활동",
+      "student": "학생",
+      "housewife": "주부",
+      "office_worker": "사무직",
+      // ... 기타 설문 옵션들
+      "other": "기타",
+    };
+    return mapping[activity] || activity;
+  };
+
+  // 통증 시작 시기 변환
+  const getPainOnsetText = (onset: string | undefined) => {
+    if (!onset) return "정보 없음";
+    const mapping: Record<string, string> = {
+      "less_than_1w": "1주일 미만",
+      "1w_to_1m": "1주 ~ 1개월",
+      "1m_to_3m": "1개월 ~ 3개월",
+      "3m_to_6m": "3개월 ~ 6개월",
+      "6m_to_1y": "6개월 ~ 1년",
+      "more_than_1y": "1년 이상",
+      // ... 기타 설문 옵션들
+    };
+    return mapping[onset] || onset;
+  };
+
+  // --- JSX Rendering ---
   return (
     <div className="bg-gray-50 min-h-screen pb-12">
       {/* 상단 고정 헤더 */}
@@ -213,7 +436,7 @@ export default function ReportPage({ params }: { params: { id: string } }) {
               <h1 className="text-2xl font-bold">온누리마취통증의학과</h1>
               <p className="text-sm opacity-90">통증 자가 점검 분석 리포트</p>
             </div>
-            <div className="text-sm">생성일: {new Date().toLocaleDateString("ko-KR")}</div>
+            <div className="text-sm">생성일: {new Date(surveyData.created_at).toLocaleDateString("ko-KR")}</div>
           </div>
         </div>
       </div>
@@ -272,74 +495,96 @@ export default function ReportPage({ params }: { params: { id: string } }) {
                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
               />
             </svg>
-            분석 요약
+            분석 요약 (AI 기반)
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* AI 분석 결과 표시 */}
+          {aiAnalysis && !aiAnalysis.error ? (
+            <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-md space-y-3">
+              <h3 className="font-semibold text-blue-800 mb-2">AI 분석 결과</h3>
+              <p><strong>통증 심각도:</strong> {aiAnalysis.painSeverity || "분석 중..."}</p>
+              <p><strong>잠재적 원인:</strong> {aiAnalysis.potentialCauses?.join(", ") || "분석 중..."}</p>
+              <p><strong>기능적 영향:</strong> {aiAnalysis.functionalImpact || "분석 중..."}</p>
+              <p><strong>만성화 위험:</strong> {aiAnalysis.chronicityRisk || "분석 중..."}</p>
+              {aiAnalysis.redFlagSummary && (
+                <p className="text-red-600 font-semibold"><strong>위험 신호:</strong> {aiAnalysis.redFlagSummary}</p>
+              )}
+              <div>
+                <strong>생활 습관 권장:</strong>
+                <ul className="list-disc list-inside ml-4">
+                  {aiAnalysis.lifestyleRecommendations?.map((rec, i) => <li key={i}>{rec}</li>) ?? <li>분석 중...</li>}
+                </ul>
+              </div>
+              <div>
+                <strong>다음 단계 권장:</strong>
+                <ul className="list-disc list-inside ml-4">
+                  {/* 타입 오류 해결 및 fallback 메시지 개선 */}
+                  {aiAnalysis.nextStepGeneral && aiAnalysis.nextStepGeneral.length > 0
+                    ? aiAnalysis.nextStepGeneral.map((rec: string, i: number) => <li key={i}>{rec}</li>) // 타입 명시
+                    : <li>다음 단계 권장 사항을 생성하지 못했습니다.</li>}
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
+              <h3 className="font-semibold text-yellow-800 mb-2">AI 분석 정보</h3>
+              <p className="text-yellow-700">
+                {aiAnalysis?.error ? `AI 분석 중 오류 발생: ${aiAnalysis.error}` : "AI 분석 결과를 불러오는 중입니다..."}
+                {aiAnalysis?.rawResponse && <pre className="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto">{aiAnalysis.rawResponse}</pre>}
+              </p>
+            </div>
+          )}
+
+          {/* 환자 정보 및 통증 요약 (기존 데이터 활용) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <div>
-              <h3 className="font-semibold mb-2">환자 정보</h3>
+              <h3 className="font-semibold mb-2">환자 정보 (설문 기반)</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-gray-500">연령대</p>
-                  <p className="font-medium">{reportData.patientInfo.age}세</p>
+                  <p className="font-medium">{surveyData.a1_age || "정보 없음"}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">성별</p>
-                  <p className="font-medium">{reportData.patientInfo.gender === "male" ? "남성" : "여성"}</p>
+                  <p className="font-medium">{getGenderText(surveyData.a2_gender)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">직업</p>
-                  <p className="font-medium">{reportData.patientInfo.occupation}</p>
+                  <p className="text-sm text-gray-500">직업/활동</p>
+                  <p className="font-medium">{getActivityLevelText(surveyData.a3_job)}</p>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-500">활동량</p>
-                  <p className="font-medium">
-                    {reportData.patientInfo.activityLevel === "sedentary" && "거의 활동하지 않음"}
-                    {reportData.patientInfo.activityLevel === "light" && "가벼운 활동"}
-                    {reportData.patientInfo.activityLevel === "moderate" && "중간 활동"}
-                    {reportData.patientInfo.activityLevel === "active" && "활발한 활동"}
-                    {reportData.patientInfo.activityLevel === "veryActive" && "매우 활발한 활동"}
-                  </p>
-                </div>
+                {/* 필요시 다른 기본 정보 추가 */}
               </div>
             </div>
 
             <div>
-              <h3 className="font-semibold mb-2">통증 요약</h3>
+              <h3 className="font-semibold mb-2">통증 요약 (설문 기반)</h3>
               <ul className="space-y-1">
                 <li className="flex items-center">
                   <span className="w-32 text-sm text-gray-500">주요 통증 부위:</span>
-                  <span className="font-medium">허리(요추부)</span>
+                  <span className="font-medium">{surveyData.b4_main_pain_area || "정보 없음"}</span>
                 </li>
                 <li className="flex items-center">
                   <span className="w-32 text-sm text-gray-500">통증 지속 기간:</span>
-                  <span className="font-medium">3개월~6개월</span>
+                  <span className="font-medium">{getPainOnsetText(surveyData.b6_pain_onset)}</span>
                 </li>
                 <li className="flex items-center">
-                  <span className="w-32 text-sm text-gray-500">통증 강도:</span>
-                  <span className="font-medium">7/10 (심한 통증)</span>
+                  <span className="w-32 text-sm text-gray-500">평균 통증 강도:</span>
+                  <span className="font-medium">{surveyData.c12_avg_pain_vas ?? "정보 없음"}/10</span>
                 </li>
                 <li className="flex items-center">
-                  <span className="w-32 text-sm text-gray-500">기능 제한:</span>
-                  <span className="font-medium">중등도</span>
+                  <span className="w-32 text-sm text-gray-500">최대 통증 강도:</span>
+                  <span className="font-medium">{surveyData.c11_max_pain_vas ?? "정보 없음"}/10</span>
                 </li>
-                <li className="flex items-center">
-                  <span className="w-32 text-sm text-gray-500">위험 신호:</span>
-                  <span className="font-medium">없음</span>
+                 <li className="flex items-center">
+                  <span className="w-32 text-sm text-gray-500">위험 신호(자가):</span>
+                  <span className={`font-medium ${surveyData.f33_red_flags && surveyData.f33_red_flags.length > 0 ? 'text-red-600' : ''}`}>
+                    {surveyData.f33_red_flags && surveyData.f33_red_flags.length > 0 ? surveyData.f33_red_flags.join(', ') : "없음"}
+                  </span>
                 </li>
               </ul>
             </div>
           </div>
-
-          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
-            <h3 className="font-semibold text-blue-800 mb-2">AI 분석 결과 요약</h3>
-            <p className="text-blue-700">
-              장시간 앉아있는 사무직 환경과 불량한 자세로 인한 만성 요통 및 경추통이 의심됩니다. 통증이 3개월 이상
-              지속되어 만성화 단계에 접어들었으며, 일상생활에 상당한 지장을 주고 있습니다. 비수술적 통합 치료 접근이
-              권장됩니다.
-            </p>
-          </div>
-        </div>
+       </div>
 
         {/* 통증 분석 섹션 */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -373,51 +618,61 @@ export default function ReportPage({ params }: { params: { id: string } }) {
               <div className="mb-4">
                 <p className="text-sm text-gray-500 mb-2">통증 양상</p>
                 <div className="flex flex-wrap gap-2">
-                  {reportData.painAssessment.characteristics.map((char: string, index: number) => (
+                  {surveyData.b7_pain_pattern?.map((pattern: string, index: number) => (
                     <Badge key={index} variant="outline">
-                      {getPainCharacteristicText(char)}
+                      {getPainPatternText(pattern)}
                     </Badge>
-                  ))}
+                  )) ?? <span className="text-sm text-gray-500">정보 없음</span>}
                 </div>
               </div>
 
               <div className="mb-4">
-                <p className="text-sm text-gray-500 mb-2">통증 강도 (최대)</p>
+                <p className="text-sm text-gray-500 mb-2">평균 통증 강도</p>
                 <div className="w-full bg-gray-200 rounded-full h-2.5 mb-1">
                   <div
-                    className={`h-2.5 rounded-full ${getPainColorClass(reportData.painAssessment.intensity)}`}
-                    style={{ width: `${reportData.painAssessment.intensity * 10}%` }}
+                    className={`h-2.5 rounded-full ${getPainColorClass(surveyData.c12_avg_pain_vas)}`}
+                    style={{ width: `${(surveyData.c12_avg_pain_vas ?? 0) * 10}%` }}
                   ></div>
                 </div>
-                <div className="flex justify-between text-xs text-gray-500">
-                  <span>경미함</span>
-                  <span>중간</span>
-                  <span>심함</span>
+                 <p className="text-xs text-gray-500 text-right">{surveyData.c12_avg_pain_vas ?? "N/A"}/10</p>
+              </div>
+               <div className="mb-4">
+                <p className="text-sm text-gray-500 mb-2">최대 통증 강도</p>
+                <div className="w-full bg-gray-200 rounded-full h-2.5 mb-1">
+                  <div
+                    className={`h-2.5 rounded-full ${getPainColorClass(surveyData.c11_max_pain_vas)}`}
+                    style={{ width: `${(surveyData.c11_max_pain_vas ?? 0) * 10}%` }}
+                  ></div>
                 </div>
+                 <p className="text-xs text-gray-500 text-right">{surveyData.c11_max_pain_vas ?? "N/A"}/10</p>
               </div>
 
               <div className="mb-4">
-                <p className="text-sm text-gray-500 mb-2">통증 유발 요인</p>
+                <p className="text-sm text-gray-500 mb-2">통증 악화 요인</p>
                 <ul className="list-disc list-inside space-y-1">
-                  {reportData.painAssessment.triggers.map((trigger: string, index: number) => (
-                    <li key={index}>{getPainTriggerText(trigger)}</li>
-                  ))}
+                  {surveyData.c13_aggravating_factors?.map((factor: string, index: number) => (
+                    <li key={index}>{getPainFactorText(factor)}</li>
+                  )) ?? <li className="text-sm text-gray-500">정보 없음</li>}
+                </ul>
+              </div>
+               <div className="mb-4">
+                <p className="text-sm text-gray-500 mb-2">통증 완화 요인</p>
+                <ul className="list-disc list-inside space-y-1">
+                  {surveyData.c14_relieving_factors?.map((factor: string, index: number) => (
+                    <li key={index}>{getPainFactorText(factor)}</li>
+                  )) ?? <li className="text-sm text-gray-500">정보 없음</li>}
                 </ul>
               </div>
             </div>
           </div>
 
+          {/* AI 분석 결과의 상세 내용 (예: 잠재 원인, 권장 사항)을 여기에 추가할 수 있음 */}
+          {/* 예시:
           <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
-            <h3 className="font-semibold mb-2">통증 패턴 분석</h3>
-            <p className="mb-4">
-              귀하의 통증은 주로 허리(요추부)에 집중되어 있으며, 오래 앉아있거나 몸을 구부릴 때 악화되는 양상을
-              보입니다. 통증이 다리 쪽으로 뻗치는 방사통이 동반되어 있어 신경 압박 가능성이 있습니다.
-            </p>
-            <p>
-              뻐근함, 결림과 함께 다리로 뻗치는 저림 증상은 요추 디스크 문제나 척추관 협착증과 연관될 수 있습니다. 3개월
-              이상 지속된 만성 통증으로, 적절한 치료 없이는 증상이 장기화될 가능성이 있습니다.
-            </p>
-          </div>
+             <h3 className="font-semibold mb-2">AI 기반 통증 패턴 분석</h3>
+             <p>{aiAnalysis?.potentialCauses?.join(', ') ?? "분석 중..."}</p>
+           </div>
+           */}
         </div>
 
         {/* 기능 제한 분석 섹션 */}
@@ -440,111 +695,73 @@ export default function ReportPage({ params }: { params: { id: string } }) {
             기능 제한 분석
           </h2>
 
-          <h3 className="font-semibold mb-4">일상생활 기능 제한 평가</h3>
+          <h3 className="font-semibold mb-4">일상생활 기능 제한 평가 (설문 기반)</h3>
           <div className="space-y-4 mb-6">
-            {Object.entries(reportData.functionalLimitations.dailyActivities).map(
-              ([activity, limitation]: [string, any]) => {
-                const style = getLimitationStyle(limitation)
-                return (
-                  <div key={activity} className="flex items-center">
-                    <span className="w-24 text-sm">
-                      {activity === "walking"
-                        ? "걷기"
-                        : activity === "standing"
-                          ? "서있기"
-                          : activity === "sitting"
-                            ? "앉아있기"
-                            : activity === "climbing"
-                              ? "계단 오르기"
-                              : activity === "bending"
-                                ? "몸 구부리기"
-                                : activity === "lifting"
-                                  ? "물건 들기"
-                                  : activity === "dressing"
-                                    ? "옷 입기"
-                                    : activity === "bathing"
-                                      ? "목욕하기"
-                                      : activity === "sleeping"
-                                        ? "수면"
-                                        : activity === "working"
-                                          ? "일하기"
-                                          : activity}
-                    </span>
-                    <div className="flex-1 mx-2">
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
-                        <div className={`h-2.5 rounded-full ${style.color}`} style={{ width: style.width }}></div>
-                      </div>
+            {[
+              { key: 'd15_personal_hygiene', label: '개인 위생' },
+              { key: 'd16_dressing', label: '옷 입기' },
+              { key: 'd17_lifting', label: '물건 들기' },
+              { key: 'd18_walking', label: '걷기' },
+              { key: 'd19_sitting', label: '앉아있기' },
+              { key: 'd20_standing', label: '서있기' },
+              { key: 'd21_sleep', label: '수면' },
+              { key: 'd22_concentration', label: '집중력' },
+              { key: 'd23_work_study', label: '업무/학업' },
+              { key: 'd24_driving_transport', label: '운전/이동' },
+              { key: 'd25_leisure', label: '여가 활동' },
+              // d26_mood는 별도 처리
+            ].map(({ key, label }) => {
+              // surveyData에서 해당 키의 값을 가져옴 (타입 단언 사용)
+              const limitationValue = surveyData[key as keyof SurveyData] as number | undefined | null;
+              const style = getLimitationStyle(limitationValue);
+              return (
+                <div key={key} className="flex items-center">
+                  <span className="w-24 text-sm">{label}</span>
+                  <div className="flex-1 mx-2">
+                    <div className="w-full bg-gray-200 rounded-full h-2.5">
+                      <div className={`h-2.5 rounded-full ${style.color}`} style={{ width: style.width }}></div>
                     </div>
-                    <span className="w-24 text-sm text-right">
-                      {limitation === "none"
-                        ? "어려움 없음"
-                        : limitation === "mild"
-                          ? "약간 어려움"
-                          : limitation === "moderate"
-                            ? "중간 어려움"
-                            : limitation === "severe"
-                              ? "심한 어려움"
-                              : limitation === "impossible"
-                                ? "불가능"
-                                : limitation}
-                    </span>
                   </div>
-                )
-              },
-            )}
+                  <span className="w-24 text-sm text-right">{style.text}</span>
+                </div>
+              );
+            })}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div>
-              <h3 className="font-semibold mb-2">수면 영향</h3>
+             <div>
+              <h3 className="font-semibold mb-2">정서적 영향 (설문 기반)</h3>
+              {/* d26_mood 값에 따라 Badge 또는 텍스트 표시 */}
               <Badge variant="outline" className="mb-2">
-                {reportData.functionalLimitations.sleepQuality === "notAffected" && "영향 없음"}
-                {reportData.functionalLimitations.sleepQuality === "slightlyAffected" && "약간 영향 있음"}
-                {reportData.functionalLimitations.sleepQuality === "moderatelyAffected" && "중간 정도 영향 있음"}
-                {reportData.functionalLimitations.sleepQuality === "severelyAffected" && "심각하게 영향 있음"}
+                { surveyData.d26_mood === 1 ? "영향 없음" :
+                  surveyData.d26_mood === 2 ? "약간 영향 있음" :
+                  surveyData.d26_mood === 3 ? "중간 정도 영향 있음" :
+                  surveyData.d26_mood === 4 ? "심각하게 영향 있음" : "정보 없음" }
               </Badge>
-              <p className="text-sm">
-                통증으로 인해 수면의 질이 저하되고 있으며, 이는 전반적인 건강과 회복에 영향을 미칠 수 있습니다.
-              </p>
+              {/* AI 분석 결과의 정서적 영향 코멘트 추가 가능 */}
+              {/* <p className="text-sm">{aiAnalysis?.functionalImpact}</p> */}
             </div>
-
-            <div>
-              <h3 className="font-semibold mb-2">정서적 영향</h3>
-              <Badge variant="outline" className="mb-2">
-                {reportData.functionalLimitations.moodImpact === "notAffected" && "영향 없음"}
-                {reportData.functionalLimitations.moodImpact === "slightlyAffected" && "약간 영향 있음"}
-                {reportData.functionalLimitations.moodImpact === "moderatelyAffected" && "중간 정도 영향 있음"}
-                {reportData.functionalLimitations.moodImpact === "severelyAffected" && "심각하게 영향 있음"}
-              </Badge>
-              <p className="text-sm">
-                통증이 기분과 정서 상태에 영향을 미치고 있으며, 이는 일상생활의 질과 대인관계에도 영향을 줄 수 있습니다.
-              </p>
+            {/* 수면 영향은 d21_sleep으로 이미 표시됨. 필요시 별도 코멘트 추가 */}
+             <div>
+              <h3 className="font-semibold mb-2">생활 습관 (설문 기반)</h3>
+               <ul className="list-disc list-inside space-y-1 text-sm">
+                 <li>규칙적 운동: {surveyData.e27_exercise ? '예' : '아니오'}</li>
+                 <li>앉아있는 시간: {surveyData.e28_sitting_hours || '정보 없음'}</li>
+                 <li>자세 인지: {surveyData.e29_posture_awareness || '정보 없음'}</li>
+                 <li>최근 스트레스: {surveyData.e30_recent_stress || '정보 없음'}</li>
+               </ul>
             </div>
           </div>
 
-          <div className="p-4 bg-gray-50 border border-gray-200 rounded-md">
-            <h3 className="font-semibold mb-2">생활 습관 및 환경 요인 분석</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="text-sm font-medium mb-2">위험 요인</h4>
-                <ul className="list-disc list-inside space-y-1 text-sm">
-                  <li>장시간 앉아있는 업무 환경 (하루 8-12시간)</li>
-                  <li>좋지 않은 자세 습관</li>
-                  <li>규칙적인 운동 부족</li>
-                  <li>높은 스트레스 수준</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-sm font-medium mb-2">개선 가능 영역</h4>
-                <ul className="list-disc list-inside space-y-1 text-sm">
-                  <li>인체공학적 작업 환경 조성</li>
-                  <li>정기적인 스트레칭 및 자세 교정</li>
-                  <li>코어 근육 강화 운동 시작</li>
-                  <li>스트레스 관리 기법 도입</li>
-                </ul>
-              </div>
+          {/* AI 분석 결과의 생활 습관 및 환경 요인 분석 결과 표시 */}
+          {aiAnalysis?.lifestyleRecommendations && (
+            <div className="p-4 bg-gray-50 border border-gray-200 rounded-md">
+              <h3 className="font-semibold mb-2">AI 기반 생활 습관 권장 사항</h3>
+              <ul className="list-disc list-inside space-y-1 text-sm">
+                {aiAnalysis.lifestyleRecommendations.map((rec, i) => <li key={i}>{rec}</li>)}
+              </ul>
             </div>
-          </div>
+          )}
         </div>
 
         {/* 맞춤 치료 추천 섹션 */}
@@ -565,70 +782,57 @@ export default function ReportPage({ params }: { params: { id: string } }) {
               />
               <polyline points="22 4 12 14.01 9 11.01" />
             </svg>
-            맞춤형 치료 추천
+            AI 기반 맞춤형 추천
           </h2>
 
+          {/* AI가 생성한 일반적인 다음 단계 추천 카드 제거 (중복 표시 방지) */}
+
+          {/* 상세 치료법 제안 */}
+          <h3 className="text-lg font-semibold mb-4">구체적인 치료법 제안 (분석 기반)</h3>
+          {/* 위험 신호가 있을 경우 경고 메시지 추가 */}
+          {hasRedFlags && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertTriangle className="h-4 w-4" />
+              <AlertTitle>주의: 위험 신호 발견됨</AlertTitle>
+              <AlertDescription>
+                자가 점검 결과 위험 신호(Red Flags: {surveyData.f33_red_flags?.join(', ') || '내용 확인 필요'})가 발견되었습니다. 아래 추천되는 치료법은 일반적인 정보이며 참고용으로만 활용하시고, 반드시 전문의와 상담하여 정확한 진단과 치료 계획을 세우시기 바랍니다. {redFlagSummary?.includes('즉시') ? '즉시 병원 방문이 필요할 수 있습니다.' : ''}
+              </AlertDescription>
+            </Alert>
+          )}
+          {detailedSuggestions.length > 0 ? (
+            <div className="space-y-4">
+              {detailedSuggestions.map((suggestion, index) => (
+                <Card key={index} className="border-primary/30">
+                  <CardHeader>
+                    <CardTitle className="text-md font-semibold text-primary">{suggestion.treatment}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-700">{suggestion.justification}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-gray-500">환자분의 상태에 맞는 구체적인 치료법을 추천하기 위해 추가 정보가 필요하거나, 현재 정보로는 명확한 추천이 어렵습니다. 전문의와 상담하여 정확한 진단 및 치료 계획을 세우시는 것이 중요합니다.</p>
+          )}
+
+
+          {/* 기존의 정적 추천 내용은 제거하거나 AI 결과로 대체 */}
+          {/*
           <div className="space-y-4 mb-6">
-            {reportData.recommendedTreatments.map((treatment: any, index: number) => (
-              <div key={index} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="font-semibold">{treatment.name}</h3>
-                  {getSuitabilityBadge(treatment.suitability)}
-                </div>
-                <p className="text-sm mb-2">{treatment.description}</p>
-                <p className="text-sm text-gray-600">
-                  <span className="font-medium">적합 이유: </span>
-                  {treatment.suitability === "high"
-                    ? "귀하의 증상과 높은 연관성을 보이며, 효과적인 개선이 기대됩니다."
-                    : "귀하의 증상과 중간 정도의 연관성을 보이며, 보조적 치료로 권장됩니다."}
-                </p>
-              </div>
-            ))}
-          </div>
+             ... 기존 치료 추천 내용 ...
+           </div>
+           <h3 className="font-semibold mb-4">추가 검사 및 평가 추천</h3>
+           <ul className="list-disc list-inside space-y-2 mb-6">
+             ... 기존 검사 추천 내용 ...
+           </ul>
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+             ... 기존 관리/운동 권장 사항 ...
+           </div>
+           */}
 
-          <h3 className="font-semibold mb-4">추가 검사 및 평가 추천</h3>
-          <ul className="list-disc list-inside space-y-2 mb-6">
-            {reportData.recommendedExaminations.map((exam: string, index: number) => (
-              <li key={index} className="text-sm">
-                {exam}
-              </li>
-            ))}
-          </ul>
+           {/* 필요시 AI가 생성한 특정 치료법이나 검사 추천을 여기에 표시할 수 있음 */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border rounded-lg p-4 bg-gray-50">
-              <h3 className="font-semibold mb-3">일상생활 관리 권장사항</h3>
-              <ul className="list-disc list-inside space-y-2 text-sm">
-                <li>
-                  <span className="font-medium">작업 환경 개선:</span> 인체공학적 의자와 책상 높이 조정, 모니터 위치
-                  최적화
-                </li>
-                <li>
-                  <span className="font-medium">휴식 습관:</span> 50분 작업 후 10분 휴식, 간단한 스트레칭 실시
-                </li>
-                <li>
-                  <span className="font-medium">수면 자세:</span> 옆으로 누워 무릎 사이에 베개 사용, 바로 누울 때는 무릎
-                  아래 베개 사용
-                </li>
-              </ul>
-            </div>
-
-            <div className="border rounded-lg p-4 bg-gray-50">
-              <h3 className="font-semibold mb-3">운동 권장사항</h3>
-              <ul className="list-disc list-inside space-y-2 text-sm">
-                <li>
-                  <span className="font-medium">코어 강화:</span> 플랭크, 브릿지 등 코어 안정화 운동 (주 3-4회, 점진적
-                  강도 증가)
-                </li>
-                <li>
-                  <span className="font-medium">유연성 향상:</span> 허리, 엉덩이, 햄스트링 스트레칭 (매일 10-15분)
-                </li>
-                <li>
-                  <span className="font-medium">유산소 운동:</span> 걷기, 수영 등 저충격 유산소 운동 (주 3회, 30분 이상)
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
 
         {/* 병원 정보 섹션 */}
@@ -681,8 +885,8 @@ export default function ReportPage({ params }: { params: { id: string } }) {
         </div>
       </div>
 
+      {/* ChatbotDialog에 reportData 전달 */}
       <ChatbotDialog open={chatbotOpen} onOpenChange={setChatbotOpen} reportData={reportData} />
     </div>
-  )
+  );
 }
-
