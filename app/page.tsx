@@ -52,11 +52,11 @@ export default function Home() {
                 </li>
                 <li className="flex items-center mt-2">
                   <MapPin className="h-4 w-4 text-muted-foreground mr-2" />
-                  서울시 강남구 테헤란로 123
+                  
                 </li>
                 <li className="flex items-center">
                   <Phone className="h-4 w-4 text-muted-foreground mr-2" />
-                  02-123-4567
+                  051-714-1831
                 </li>
               </ul>
             </div>
