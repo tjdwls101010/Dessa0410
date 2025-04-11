@@ -19,6 +19,9 @@ export default function Header() {
           <Link href="/about" className="text-sm font-medium hover:text-primary">
             서비스 소개
           </Link>
+          <Link href="/ppt" className="text-sm font-medium hover:text-primary">
+            발표 자료
+          </Link>
         </nav>
         <Button variant="outline" size="sm" className="gap-2">
           <Phone className="h-4 w-4" />
@@ -28,4 +31,3 @@ export default function Header() {
     </header>
   )
 }
-

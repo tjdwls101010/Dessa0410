@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온누리마취통증의학과 예비 환자 자가 점검 및 안내 시스템 - AI 분석 리포트</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border-radius: 8px;
+        }
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(0, 102, 204, 0.05) 0%, rgba(0, 102, 204, 0) 50%),
+                radial-gradient(circle at 20% 80%, rgba(84, 199, 236, 0.05) 0%, rgba(84, 199, 236, 0) 50%);
+            z-index: 1;
+        }
+        .pattern {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/JamieCorkhill/tailwind-background-patterns@1.1.1/patterns/hexagons.svg');
+            background-size: 200px 200px;
+            background-repeat: repeat;
+            opacity: 0.04;
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-area {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            font-size: 2rem;
+            color: #0066cc;
+            margin-right: 0.5rem;
+        }
+        .blue-accent {
+            width: 60px;
+            height: 6px;
+            background-color: #0066cc;
+            margin-bottom: 1rem;
+            border-radius: 3px;
+        }
+        .process-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .process-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            margin: 0 0.5rem;
+        }
+        .process-arrow {
+            color: #0066cc;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+        }
+        .process-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+        .report-preview {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            position: relative;
+        }
+        .report-header {
+            background-color: #0066cc;
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .report-body {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .report-section {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .report-chart {
+            height: 120px;
+            background-color: white;
+            border-radius: 8px;
+            margin-top: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .chart-bar {
+            height: 18px;
+            border-radius: 9px;
+            margin-bottom: 0.5rem;
+        }
+        .pain-level {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(90deg, #22c55e 0%, #eab308 50%, #ef4444 100%);
+            border-radius: 10px;
+            margin-top: 0.5rem;
+            position: relative;
+        }
+        .pain-indicator {
+            position: absolute;
+            top: -10px;
+            width: 12px;
+            height: 30px;
+            background-color: white;
+            border: 2px solid #0066cc;
+            border-radius: 4px;
+            transform: translateX(-50%);
+        }
+        .body-map {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .human-outline {
+            font-size: 4rem;
+            color: #94a3b8;
+        }
+        .pain-spot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(239, 68, 68, 0.7);
+            filter: blur(2px);
+        }
+        .digital-element {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 1px solid rgba(0, 102, 204, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container bg-white">
+        <div class="slide-bg"></div>
+        <div class="pattern"></div>
+        
+        <!-- Digital elements -->
+        <div class="digital-element" style="top: -40px; right: 100px;"></div>
+        <div class="digital-element" style="bottom: -60px; left: 80px;"></div>
+        
+        <!-- Logo area -->
+        <div class="logo-area">
+            <i class="fas fa-laptop-medical logo-icon"></i>
+            <div class="text-lg font-medium text-gray-600">온누리마취통증의학과</div>
+        </div>
+        
+        <div class="content">
+            <div class="mt-6 mb-2">
+                <div class="blue-accent"></div>
+                <h2 class="text-3xl font-bold text-gray-800">AI 분석 리포트: 개인 맞춤 정보 제공</h2>
+            </div>
+            
+            <!-- Process Flow -->
+            <div class="process-flow">
+                <div class="process-item">
+                    <div class="process-icon bg-blue-100">
+                        <i class="fas fa-clipboard-list text-blue-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-700">설문 결과</p>
+                    </div>
+                </div>
+                <div class="process-item">
+                    <div class="process-icon bg-blue-100">
+                        <i class="fas fa-book-medical text-blue-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-700">해석 가이드라인</p>
+                    </div>
+                </div>
+                <div class="process-item">
+                    <div class="process-icon bg-blue-100">
+                        <i class="fas fa-hospital text-blue-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-700">치료법 정보</p>
+                    </div>
+                </div>
+                <div class="process-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="process-item bg-blue-50">
+                    <div class="process-icon bg-blue-100">
+                        <i class="fas fa-brain text-blue-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-blue-700">AI 모델 분석</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Report Preview -->
+            <div class="report-preview">
+                <div class="report-header">
+                    <div class="flex items-center">
+                        <i class="fas fa-file-medical text-2xl mr-3"></i>
+                        <h3 class="text-lg font-medium">온누리 통증 분석 리포트</h3>
+                    </div>
+                    <div class="text-sm opacity-80">환자 ID: ONR-2025-0411 | 생성일: 2025.04.11</div>
+                </div>
+                
+                <div class="report-body">
+                    <!-- AI Analysis Summary -->
+                    <div class="report-section col-span-2 bg-blue-50">
+                        <h4 class="text-lg font-semibold text-blue-700 mb-2">
+                            <i class="fas fa-chart-line mr-2"></i> AI 분석 요약
+                        </h4>
+                        <p class="text-gray-700 text-sm mb-1"><span class="font-medium">통증 심각도:</span> 중등도 (VAS 6/10)</p>
+                        <p class="text-gray-700 text-sm mb-1"><span class="font-medium">잠재 원인:</span> 요추 디스크 관련 문제 가능성, 신경병증성 요소 동반</p>
+                        <p class="text-gray-700 text-sm mb-1"><span class="font-medium">기능 영향:</span> 앉기 및 서 있기 시 심화, 중등도 일상생활 제한</p>
+                        <p class="text-gray-700 text-sm mb-1"><span class="font-medium">만성화 위험:</span> 중간 수준 (통증 기간 3개월 이상)</p>
+                        <p class="text-red-600 text-sm font-medium"><i class="fas fa-exclamation-circle mr-1"></i> <span class="font-medium">위험 신호:</span> 체중 감소, 하지 근력 약화 - 전문의 상담 필요</p>
+                    </div>
+                    
+                    <!-- Pain Analysis -->
+                    <div class="report-section">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-fire-alt mr-2 text-orange-500"></i> 통증 분석
+                        </h4>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-sm text-gray-600">통증 강도:</span>
+                            <span class="text-sm font-medium text-gray-700">6/10 (중등도)</span>
+                        </div>
+                        <div class="pain-level">
+                            <div class="pain-indicator" style="left: 60%;"></div>
+                        </div>
+                        
+                        <div class="mt-3 mb-1">
+                            <span class="text-sm text-gray-600">통증 부위:</span>
+                        </div>
+                        <div class="body-map">
+                            <i class="fas fa-male human-outline"></i>
+                            <div class="pain-spot" style="bottom: 55%; right: 46%;"></div>
+                            <div class="pain-spot" style="bottom: 40%; right: 42%;"></div>
+                            <div class="pain-spot" style="bottom: 37%; left: 35%;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Functional Limitation Analysis -->
+                    <div class="report-section">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-chart-bar mr-2 text-blue-500"></i> 기능 제한 분석
+                        </h4>
+                        <div class="chart-bar bg-blue-100" style="width: 80%;">
+                            <div class="flex justify-between items-center px-2">
+                                <span class="text-xs font-medium text-gray-700">앉기</span>
+                                <span class="text-xs font-medium text-gray-700">4/5</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar bg-blue-100" style="width: 90%;">
+                            <div class="flex justify-between items-center px-2">
+                                <span class="text-xs font-medium text-gray-700">서 있기</span>
+                                <span class="text-xs font-medium text-gray-700">4.5/5</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar bg-blue-100" style="width: 60%;">
+                            <div class="flex justify-between items-center px-2">
+                                <span class="text-xs font-medium text-gray-700">걷기</span>
+                                <span class="text-xs font-medium text-gray-700">3/5</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar bg-blue-100" style="width: 40%;">
+                            <div class="flex justify-between items-center px-2">
+                                <span class="text-xs font-medium text-gray-700">수면</span>
+                                <span class="text-xs font-medium text-gray-700">2/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Personalized Suggestions -->
+                    <div class="report-section col-span-2">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-lightbulb mr-2 text-yellow-500"></i> 맞춤형 제안
+                        </h4>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="bg-white p-2 rounded border border-gray-200">
+                                <h5 class="text-sm font-medium text-gray-700">생활 습관 개선</h5>
+                                <p class="text-xs text-gray-600">올바른 자세 유지, 앉아있는 시간 제한, 주기적 스트레칭</p>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-blue-200">
+                                <h5 class="text-sm font-medium text-blue-700">추천 비수술 치료법</h5>
+                                <p class="text-xs text-gray-600">도수치료, 프롤로테라피, 맞춤형 운동치료</p>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-red-200">
+                                <h5 class="text-sm font-medium text-red-700">다음 단계</h5>
+                                <p class="text-xs text-red-600 font-medium">위험 신호 감지로 전문의 상담 필수</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Non-diagnostic disclaimer -->
+                <div class="bg-gray-100 p-2 text-center">
+                    <p class="text-xs text-gray-600">
+                        <i class="fas fa-info-circle mr-1 text-gray-500"></i>
+                        본 정보는 진단 목적이 아닌 참고용 분석 자료입니다. 정확한 진단과 치료를 위해 반드시 전문의 상담을 받으세요.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Key features -->
+            <div class="flex justify-center mt-auto mb-2">
+                <div class="flex space-x-8">
+                    <div class="flex items-center">
+                        <i class="fas fa-eye text-blue-600 mr-2"></i>
+                        <span class="text-sm text-gray-700">시각적</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-user-check text-blue-600 mr-2"></i>
+                        <span class="text-sm text-gray-700">개인화</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                        <span class="text-sm text-gray-700">이해 용이</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-circle text-red-600 mr-2"></i>
+                        <span class="text-sm text-gray-700">비진단적 정보</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

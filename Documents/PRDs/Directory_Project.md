@@ -12,6 +12,11 @@
 ├── components/                 # React 컴포넌트
 │   └── ui/                     # Shadcn UI 컴포넌트
 │   └── survey/                 # 설문조사 관련 컴포넌트
+│   └── ppt/                    # 프레젠테이션 슬라이드 HTML 파일
+│       ├── Slide_1.html        # 슬라이드 1
+│       ├── Slide_2.html        # 슬라이드 2
+│       ├── ...                 # 중간 슬라이드들
+│       └── Slide_11.html       # 슬라이드 11
 ├── hooks/                      # 커스텀 React Hooks
 ├── lib/                        # 유틸리티 함수, API 클라이언트 등
 │   └── supabase/               # Supabase 클라이언트 및 관련 기능

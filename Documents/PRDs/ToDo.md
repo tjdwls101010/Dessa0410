@@ -2,7 +2,7 @@
 
 **버전:** 1.1
 **기준 문서:** Documents/PRDs/ (전체 PRD 문서)
-**최종 업데이트:** 2024-04-30
+**최종 업데이트:** 2024-05-11
 
 ## 0. 프로젝트 설정 및 환경 구성
 
@@ -11,6 +11,7 @@
 -   [x] **Frontend:** 필요한 기본 라이브러리 설치 (React, Next.js, TypeScript).
 -   [x] **Frontend:** Tailwind CSS 및 UI 라이브러리(예: Shadcn/ui) 설정.
 -   [x] **Frontend:** 상태 관리 라이브러리(예: Zustand/Jotai) 설치 및 설정.
+-   [x] **프레젠테이션:** HTML 슬라이드 기본 파일 생성 (`components/ppt/Slide_1.html` ~ `Slide_11.html`).
 -   [ ] ~~**Backend:** Python 가상 환경 설정 및 FastAPI 프로젝트 생성 (`backend` 디렉토리).~~
 -   [ ] ~~**Backend:** 필요한 Python 라이브러리 설치 (`requirements.txt` 생성: fastapi, uvicorn, pydantic, supabase-py, google-generativeai, python-dotenv 등).~~
 -   [ ] ~~**Backend:** FastAPI 기본 설정 (`main.py`, `core/config.py`).~~

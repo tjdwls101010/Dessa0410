@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온누리마취통증의학과 예비 환자 자가 점검 및 안내 시스템 - 배경 및 동기</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border-radius: 8px;
+        }
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(0, 102, 204, 0.05) 0%, rgba(0, 102, 204, 0) 50%),
+                radial-gradient(circle at 20% 80%, rgba(84, 199, 236, 0.05) 0%, rgba(84, 199, 236, 0) 50%);
+            z-index: 1;
+        }
+        .pattern {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/JamieCorkhill/tailwind-background-patterns@1.1.1/patterns/hexagons.svg');
+            background-size: 200px 200px;
+            background-repeat: repeat;
+            opacity: 0.04;
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-area {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            font-size: 2rem;
+            color: #0066cc;
+            margin-right: 0.5rem;
+        }
+        .blue-accent {
+            width: 60px;
+            height: 6px;
+            background-color: #0066cc;
+            margin-bottom: 1rem;
+            border-radius: 3px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #0066cc;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .icon-container {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(0, 102, 204, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+        }
+        .digital-line {
+            position: absolute;
+            border-top: 2px dashed rgba(0, 102, 204, 0.2);
+            width: 150px;
+            z-index: 1;
+        }
+        .line-1 {
+            top: 150px;
+            right: 100px;
+            transform: rotate(45deg);
+        }
+        .line-2 {
+            bottom: 180px;
+            left: 100px;
+            transform: rotate(-30deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container bg-white">
+        <div class="slide-bg"></div>
+        <div class="pattern"></div>
+        
+        <!-- Digital elements -->
+        <div class="digital-line line-1"></div>
+        <div class="digital-line line-2"></div>
+        
+        <!-- Logo area -->
+        <div class="logo-area">
+            <i class="fas fa-laptop-medical logo-icon"></i>
+            <div class="text-lg font-medium text-gray-600">온누리마취통증의학과</div>
+        </div>
+        
+        <div class="content">
+            <div class="mt-8 mb-6">
+                <div class="blue-accent"></div>
+                <h2 class="text-3xl font-bold text-gray-800">프로젝트 배경 및 동기</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-6">
+                <div class="card">
+                    <div class="flex items-start">
+                        <div class="icon-container">
+                            <i class="fas fa-lightbulb text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">온누리마취통증의학과의 비전</h3>
+                            <p class="text-gray-600">AI 및 소프트웨어 기술 발전을 통한 병원 시스템(진료, 원무, 환자 관리 등) 첨단화 및 효율성 증대</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-start">
+                        <div class="icon-container">
+                            <i class="fas fa-database text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">선행 노력</h3>
+                            <p class="text-gray-600">다양한 비수술 치료(도수, 운동 등) 및 검사(인바디, 보행분석 등) 데이터를 통합 관리하기 위한 자체 EMR 시스템 구축 진행 중</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card col-span-2">
+                    <div class="flex items-start">
+                        <div class="icon-container">
+                            <i class="fas fa-chart-line text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">프로젝트 필요성</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                <li>디지털화된 데이터를 활용하여 환자 치료 및 관리를 첨단화할 새로운 시스템 요구 증대</li>
+                                <li>환자 경험 개선 및 맞춤형 정보 제공을 통한 병원 경쟁력 강화 필요</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card col-span-2 bg-blue-50">
+                    <div class="flex items-start">
+                        <div class="icon-container bg-blue-100">
+                            <i class="fas fa-rocket text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">본 프로젝트의 역할</h3>
+                            <p class="text-gray-700">병원 첨단화 비전의 일환으로, <span class="font-medium">AI 기술을 활용한 환자 자가 점검 및 정보 제공 시스템 프로토타입 개발</span> (데이터 과학자 역할 수행)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom illustration -->
+            <div class="absolute bottom-4 right-6 text-blue-200">
+                <i class="fas fa-microchip text-5xl"></i>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
