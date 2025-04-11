@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Download } from 'lucide-react'
 // Removed Header and Footer imports as they are handled by layout.tsx
 
 // Define slide file names directly for now
@@ -112,6 +112,15 @@ export default function PresentationPage() {
           </Button>
         </div>
       </main>
+      {/* Floating Download Button */}
+      <a
+        href="/ppt/PPT_Mid.pdf"
+        download="PPT_Mid.pdf"
+        className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50 flex items-center justify-center"
+        aria-label="Download Presentation PDF"
+      >
+        <Download className="h-6 w-6" />
+      </a>
       {/* Removed Footer component */}
     </div>
   )
