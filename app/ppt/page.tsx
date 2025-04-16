@@ -70,7 +70,8 @@ export default function PresentationPage() {
               src={currentSlideSrc}
               title={`Slide ${currentSlideIndex + 1}`}
               className="absolute top-0 left-0 w-full h-full border-0 rounded" // Keep absolute positioning
-              // sandbox="allow-scripts allow-same-origin" // Consider security implications
+              sandbox="allow-scripts allow-same-origin"
+              loading="lazy"
             />
             {/* Navigation Arrows removed */}
           </div>

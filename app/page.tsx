@@ -52,7 +52,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center mt-2">
                   <MapPin className="h-4 w-4 text-muted-foreground mr-2" />
-                  
+                  부산광역시 동래구 동래로 25, 701호
                 </li>
                 <li className="flex items-center">
                   <Phone className="h-4 w-4 text-muted-foreground mr-2" />

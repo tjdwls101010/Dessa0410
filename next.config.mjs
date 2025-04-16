@@ -21,6 +21,38 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.notion.so',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.notion.so',
+      },
+    ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/notion',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-src https://www.notion.so https://*.notion.so https://1c30ffd9516c801087baf57dd51e5cca.notion.site;",
+          },
+        ],
+      },
+      {
+        source: '/ppt',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-src 'self';",
+          },
+        ],
+      },
+    ]
   },
   experimental: {
     webpackBuildWorker: true,

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Phone } from "lucide-react"
+import Image from "next/image"
 
 export default function Header() {
   return (
@@ -23,10 +23,17 @@ export default function Header() {
             발표 자료
           </Link>
         </nav>
-        <Button variant="outline" size="sm" className="gap-2">
-          <Phone className="h-4 w-4" />
-          <span>예약 문의</span>
-        </Button>
+        <Link href="https://www.notion.so/1c30ffd9516c801087baf57dd51e5cca" target="_blank" rel="noopener noreferrer">
+          <Button variant="outline" size="sm" className="gap-2 bg-white text-black border border-gray-200 hover:bg-gray-50">
+            <Image 
+              src="/Notion Logo.png" 
+              alt="Notion" 
+              width={16} 
+              height={16} 
+            />
+            <span>노션 바로가기</span>
+          </Button>
+        </Link>
       </div>
     </header>
   )
