@@ -4,10 +4,11 @@ import { useState, useEffect, use } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Download, AlertTriangle, MessageSquare, Printer, ArrowLeft, Info } from "lucide-react";
+import { Download, AlertTriangle, MessageSquare, Printer, ArrowLeft, Info, FileText } from "lucide-react";
 import Link from "next/link";
 import ChatbotDialog from "@/components/chatbot/chatbot-dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Card 컴포넌트 추가
+import SurveyModal from "@/components/survey/survey-modal"; // SurveyModal 컴포넌트 추가
 
 // API 응답 타입 정의 (필요에 따라 더 상세하게 정의 가능)
 interface SurveyData {
@@ -217,6 +218,7 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); // 에러 상태 추가
   const [chatbotOpen, setChatbotOpen] = useState(false);
+  const [surveyModalOpen, setSurveyModalOpen] = useState(false); // 설문지 모달 상태 추가
 
   // Unwrap the params promise using React.use() and explicitly type the result
   const resolvedParams = use(params) as { id: string };
@@ -446,7 +448,7 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
               <h1 className="text-2xl font-bold">온누리마취통증의학과</h1>
               <p className="text-sm opacity-90">통증 자가 점검 분석 리포트</p>
             </div>
-            <div className="text-sm">생성일: {new Date(surveyData.created_at).toLocaleDateString("ko-KR")}</div>
+            <div className="text-sm">생성일: {reportData && new Date(reportData.surveyData.created_at).toLocaleDateString("ko-KR")}</div>
           </div>
         </div>
       </div>
@@ -461,6 +463,10 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
             </Link>
           </Button>
           <div className="flex gap-2">
+            <Button variant="outline" className="gap-2" onClick={() => setSurveyModalOpen(true)}>
+              <FileText className="h-4 w-4" />
+              설문지
+            </Button>
             <Button variant="outline" className="gap-2" onClick={() => window.print()}>
               <Printer className="h-4 w-4" />
               인쇄
@@ -897,6 +903,13 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
 
       {/* ChatbotDialog에 reportData 전달 */}
       <ChatbotDialog open={chatbotOpen} onOpenChange={setChatbotOpen} reportData={reportData} />
+      {reportData && (
+        <SurveyModal 
+          open={surveyModalOpen} 
+          onOpenChange={setSurveyModalOpen} 
+          surveyData={reportData.surveyData} 
+        />
+      )}
     </div>
   );
 }
