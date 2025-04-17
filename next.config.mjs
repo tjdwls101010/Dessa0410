@@ -52,6 +52,15 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: '/ppt_final',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-src 'self';",
+          },
+        ],
+      },
     ]
   },
   experimental: {

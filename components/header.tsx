@@ -19,8 +19,8 @@ export default function Header() {
           <Link href="/about" className="text-sm font-medium hover:text-primary">
             서비스 소개
           </Link>
-          <Link href="/ppt" className="text-sm font-medium hover:text-primary">
-            발표 자료
+          <Link href="/ppt_final" className="text-sm font-medium hover:text-primary">
+            최종 발표 자료
           </Link>
         </nav>
         <Link href="https://www.notion.so/1c30ffd9516c801087baf57dd51e5cca" target="_blank" rel="noopener noreferrer">

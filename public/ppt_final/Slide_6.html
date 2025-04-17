@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온누리마취통증의학과 예비 환자 자가 점검 및 안내 시스템 - 데이터 해석</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border-radius: 8px;
+        }
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(0, 102, 204, 0.05) 0%, rgba(0, 102, 204, 0) 50%),
+                radial-gradient(circle at 20% 80%, rgba(84, 199, 236, 0.05) 0%, rgba(84, 199, 236, 0) 50%);
+            z-index: 1;
+        }
+        .pattern {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/JamieCorkhill/tailwind-background-patterns@1.1.1/patterns/hexagons.svg');
+            background-size: 200px 200px;
+            background-repeat: repeat;
+            opacity: 0.04;
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-area {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            font-size: 2rem;
+            color: #0066cc;
+            margin-right: 0.5rem;
+        }
+        .blue-accent {
+            width: 60px;
+            height: 6px;
+            background-color: #0066cc;
+            margin-bottom: 1rem;
+            border-radius: 3px;
+        }
+        .data-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.25rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .flow-arrow {
+            position: absolute;
+            top: 50%;
+            right: -25px;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #0066cc;
+            z-index: 3;
+        }
+        .indicator-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .data-flow-container {
+            position: relative;
+            margin: 2rem 0;
+        }
+        .data-flow-line {
+            position: absolute;
+            top: 50%;
+            left: 150px;
+            right: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, #0066cc, #54c7ec);
+            z-index: 1;
+        }
+        .data-flow-step {
+            width: 180px;
+            height: 140px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+        .data-flow-step:hover {
+            transform: translateY(-5px);
+        }
+        .data-flow-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .digital-circuit {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 1px solid rgba(0, 102, 204, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container bg-white">
+        <div class="slide-bg"></div>
+        <div class="pattern"></div>
+        
+        <!-- Digital elements -->
+        <div class="digital-circuit" style="top: -60px; right: 10%;"></div>
+        <div class="digital-circuit" style="bottom: -70px; left: 15%;"></div>
+        
+        <!-- Logo area -->
+        <div class="logo-area">
+            <i class="fas fa-laptop-medical logo-icon"></i>
+            <div class="text-lg font-medium text-gray-600">온누리마취통증의학과</div>
+        </div>
+        
+        <div class="content">
+            <div class="mt-6 mb-2">
+                <div class="blue-accent"></div>
+                <h2 class="text-3xl font-bold text-gray-800">데이터 해석: 설문에서 정보로</h2>
+            </div>
+            
+            <div class="mb-4 bg-blue-50 p-3 rounded-lg inline-block">
+                <p class="text-blue-700 font-medium">
+                    <i class="fas fa-lightbulb mr-2"></i> 
+                    접근 방식: 단순 총점 X ➜ <span class="text-blue-800">섹션별 다면적 분석</span> 및 표준 도구 기반 지표화
+                </p>
+            </div>
+            
+            <!-- Data transformation flow illustration -->
+            <div class="data-flow-container flex justify-center items-center space-x-6 mb-6">
+                <div class="data-flow-line"></div>
+                
+                <!-- Step 1: Survey Data -->
+                <div class="data-flow-step">
+                    <div class="data-flow-icon bg-blue-100">
+                        <i class="fas fa-clipboard-list text-blue-600 text-xl"></i>
+                    </div>
+                    <div class="font-medium text-gray-700">설문 응답</div>
+                    <div class="text-xs text-gray-500 mt-1">원본 데이터</div>
+                </div>
+                
+                <!-- Step 2: Analysis -->
+                <div class="data-flow-step">
+                    <div class="data-flow-icon bg-blue-100">
+                        <i class="fas fa-cogs text-blue-600 text-xl"></i>
+                    </div>
+                    <div class="font-medium text-gray-700">다면적 분석</div>
+                    <div class="text-xs text-gray-500 mt-1">섹션별 해석</div>
+                </div>
+                
+                <!-- Step 3: Indicators -->
+                <div class="data-flow-step">
+                    <div class="data-flow-icon bg-blue-100">
+                        <i class="fas fa-chart-bar text-blue-600 text-xl"></i>
+                    </div>
+                    <div class="font-medium text-gray-700">지표 도출</div>
+                    <div class="text-xs text-gray-500 mt-1">범주화 및 분류</div>
+                </div>
+                
+                <!-- Step 4: AI Input -->
+                <div class="data-flow-step">
+                    <div class="data-flow-icon bg-blue-100">
+                        <i class="fas fa-brain text-blue-600 text-xl"></i>
+                    </div>
+                    <div class="font-medium text-gray-700">AI 분석 입력</div>
+                    <div class="text-xs text-gray-500 mt-1">정보 활용</div>
+                </div>
+            </div>
+            
+            <!-- Key indicators -->
+            <h3 class="text-lg font-semibold text-gray-700 mb-3">
+                <i class="fas fa-chart-pie text-blue-600 mr-2"></i> 주요 지표 도출 및 해석 예시
+            </h3>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Pain Intensity -->
+                <div class="data-card">
+                    <div class="flex items-start">
+                        <div class="indicator-icon bg-blue-100">
+                            <i class="fas fa-fire-alt text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-700 mb-1">통증 강도</h4>
+                            <p class="text-gray-600 text-sm mb-2">설문 점수(0-10) → '심한 통증'(7점 이상) 등 분류</p>
+                            <div class="bg-gray-100 p-2 rounded-md text-sm">
+                                <span class="font-medium text-gray-700">해석 예:</span>
+                                <div class="flex items-center mt-1">
+                                    <div class="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-gray-600">0-3: 경미한 통증</span>
+                                </div>
+                                <div class="flex items-center mt-1">
+                                    <div class="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-gray-600">4-6: 중등도 통증</span>
+                                </div>
+                                <div class="flex items-center mt-1">
+                                    <div class="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
+                                    <span class="text-gray-600">7-10: 심한 통증</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Functional Limitation -->
+                <div class="data-card">
+                    <div class="flex items-start">
+                        <div class="indicator-icon bg-blue-100">
+                            <i class="fas fa-running text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-700 mb-1">기능 제한 수준</h4>
+                            <p class="text-gray-600 text-sm mb-2">설문 점수 합산 → '매우 심한 기능 제한'(31점 이상) 등 범주화</p>
+                            <div class="bg-gray-100 p-2 rounded-md text-sm">
+                                <span class="font-medium text-gray-700">해석 예:</span>
+                                <div class="flex items-center mt-1">
+                                    <div class="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-gray-600">0-10: 경미한 기능 제한</span>
+                                </div>
+                                <div class="flex items-center mt-1">
+                                    <div class="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-gray-600">11-30: 중등도 기능 제한</span>
+                                </div>
+                                <div class="flex items-center mt-1">
+                                    <div class="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
+                                    <span class="text-gray-600">31-50: 심한 기능 제한</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Neuropathic Pain -->
+                <div class="data-card">
+                    <div class="flex items-start">
+                        <div class="indicator-icon bg-blue-100">
+                            <i class="fas fa-bolt text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-700 mb-1">신경병증성 통증 가능성</h4>
+                            <p class="text-gray-600 text-sm mb-2">관련 문항 체크 여부 → '가능성 높음/낮음' 판단</p>
+                            <div class="bg-gray-100 p-2 rounded-md text-sm">
+                                <span class="font-medium text-gray-700">해석 예:</span>
+                                <div class="flex items-center mt-1">
+                                    <div class="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-gray-600">0-3: 가능성 낮음</span>
+                                </div>
+                                <div class="flex items-center mt-1">
+                                    <div class="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
+                                    <span class="text-gray-600">4점 이상: 가능성 높음</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Red Flags -->
+                <div class="data-card border-red-200">
+                    <div class="flex items-start">
+                        <div class="indicator-icon bg-red-100">
+                            <i class="fas fa-exclamation-triangle text-red-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-red-700 mb-1">위험 신호</h4>
+                            <p class="text-gray-600 text-sm mb-2">해당 여부 → <span class="font-medium text-red-600">'즉시 진료 필요'</span> 여부 판단 (가장 중요!)</p>
+                            <div class="bg-red-50 p-2 rounded-md text-sm">
+                                <span class="font-medium text-gray-700">해석 예:</span>
+                                <div class="flex items-center mt-1">
+                                    <div class="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-gray-600">해당 사항 없음: 일반 상담</span>
+                                </div>
+                                <div class="flex items-center mt-1">
+                                    <div class="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
+                                    <span class="text-red-600 font-medium">1개 이상 해당: 즉시 진료 권고</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-auto mb-3 text-center">
+                <p class="text-blue-700 font-medium">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    해석된 지표는 AI 분석의 핵심 입력값으로 사용되어 리포트의 정확성과 설득력 강화
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
