@@ -4,7 +4,7 @@ import { useState, useEffect, use } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Download, AlertTriangle, MessageSquare, Printer, ArrowLeft, Info, FileText } from "lucide-react";
+import { Download, AlertTriangle, MessageSquare, Printer, ArrowLeft, Info, FileText, CalendarCheck } from "lucide-react"; // CalendarCheck 추가
 import Link from "next/link";
 import ChatbotDialog from "@/components/chatbot/chatbot-dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Card 컴포넌트 추가
@@ -463,17 +463,10 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
             </Link>
           </Button>
           <div className="flex gap-2">
-            <Button variant="outline" className="gap-2" onClick={() => setSurveyModalOpen(true)}>
-              <FileText className="h-4 w-4" />
-              설문지
-            </Button>
-            <Button variant="outline" className="gap-2" onClick={() => window.print()}>
-              <Printer className="h-4 w-4" />
-              인쇄
-            </Button>
-            <Button variant="outline" className="gap-2">
-              <Download className="h-4 w-4" />
-              PDF 저장
+            {/* 설문지, 인쇄, PDF 저장 버튼 제거 */}
+            <Button className="gap-2"> {/* 예약하기 버튼 추가 */}
+              <CalendarCheck className="h-4 w-4" />
+              예약하기
             </Button>
             <Button className="gap-2" onClick={() => setChatbotOpen(true)}>
               <MessageSquare className="h-4 w-4" />
