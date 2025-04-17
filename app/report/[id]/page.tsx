@@ -9,7 +9,7 @@ import Link from "next/link";
 import ChatbotDialog from "@/components/chatbot/chatbot-dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SurveyModal from "@/components/survey/survey-modal";
-import ReservationModal from "@/components/report/reservation-modal"; // ReservationModal 컴포넌트 추가
+import { ReservationModal } from "@/components/ui/reservation-modal"; // 변경된 ReservationModal 컴포넌트 경로
 // Dialog 관련 import는 ReservationModal에서 처리하므로 제거
 // AlertDialog 관련 import도 ReservationModal에서 처리하므로 제거
 // Input, Label 등 폼 관련 요소 import 제거 (ReservationModal에서 사용)
@@ -175,7 +175,7 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
   const [error, setError] = useState<string | null>(null);
   const [chatbotOpen, setChatbotOpen] = useState(false);
   const [surveyModalOpen, setSurveyModalOpen] = useState(false);
-  const [reservationModalOpen, setReservationModalOpen] = useState(false); // 예약 모달 상태만 유지
+  const [reservationModalOpen, setReservationModalOpen] = useState(false);
 
   const resolvedParams = use(params) as { id: string };
 
@@ -344,16 +344,14 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
             </p>
           </div>
           <div className="flex gap-2">
-            {/* 예약하기 버튼과 ReservationModal 컴포넌트 호출 */}
-            <ReservationModal
-              open={reservationModalOpen}
-              onOpenChange={setReservationModalOpen}
-              triggerButton={
-                <Button variant="outline" className="gap-2">
-                  <CalendarCheck className="h-4 w-4" /> 예약하기
-                </Button>
-              }
-            />
+            {/* 상단 예약하기 버튼 */}
+            <Button 
+              variant="outline" 
+              className="gap-2" 
+              onClick={() => setReservationModalOpen(true)}
+            >
+              <CalendarCheck className="h-4 w-4" /> 진료 예약하기
+            </Button>
             <Button className="gap-2" onClick={() => setChatbotOpen(true)}>
               <MessageSquare className="h-4 w-4" /> 챗봇 문의하기
             </Button>
@@ -644,16 +642,10 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
           <Button className="gap-2" onClick={() => setChatbotOpen(true)}>
             <MessageSquare className="h-4 w-4" /> 챗봇 문의하기
           </Button>
-          {/* 두 번째 예약하기 버튼 영역도 ReservationModal 사용 */}
-          <ReservationModal
-            open={reservationModalOpen}
-            onOpenChange={setReservationModalOpen}
-            triggerButton={
-              <Button variant="outline" className="gap-2">
-                <CalendarCheck className="h-4 w-4" /> 예약하기
-              </Button>
-            }
-          />
+          {/* 예약하기 버튼 */}
+          <Button variant="outline" className="gap-2" onClick={() => setReservationModalOpen(true)}>
+            <CalendarCheck className="h-4 w-4" /> 진료 예약하기
+          </Button>
         </div>
       </div>
 
@@ -673,8 +665,11 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
          reportId={resolvedParams.id}
        />
      )}
-      {/* ReservationModal은 이미 위에서 호출하고 있음 */}
-      {/* AlertDialog (확인 팝업)는 ReservationModal 내부로 이동 */}
+      {/* 새로운 ReservationModal 사용 */}
+      <ReservationModal 
+        open={reservationModalOpen}
+        onOpenChange={setReservationModalOpen}
+      />
     </div>
   );
 }

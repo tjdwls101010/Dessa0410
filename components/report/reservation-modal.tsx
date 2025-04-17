@@ -29,6 +29,7 @@ import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea"; // Textarea import 추가
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
@@ -62,6 +63,7 @@ export default function ReservationModal({ open, onOpenChange, triggerButton }: 
   const [pref2Time, setPref2Time] = useState<string | undefined>(undefined);
   const [pref3Date, setPref3Date] = useState<Date | undefined>(undefined);
   const [pref3Time, setPref3Time] = useState<string | undefined>(undefined);
+  const [memo, setMemo] = useState(""); // 메모 상태 추가 (올바른 위치로 이동)
 
   // 예약 폼 제출 핸들러
   const handleReservationSubmit = (e: React.FormEvent) => {
@@ -74,6 +76,7 @@ export default function ReservationModal({ open, onOpenChange, triggerButton }: 
       preference1: { date: pref1Date ? format(pref1Date, "yyyy-MM-dd") : undefined, time: pref1Time },
       preference2: { date: pref2Date ? format(pref2Date, "yyyy-MM-dd") : undefined, time: pref2Time },
       preference3: { date: pref3Date ? format(pref3Date, "yyyy-MM-dd") : undefined, time: pref3Time },
+      memo, // 메모 데이터 추가
     });
     // 예약 데이터 처리 후 확인 팝업 열기
     onOpenChange(false); // 예약 모달 닫기
@@ -93,6 +96,7 @@ export default function ReservationModal({ open, onOpenChange, triggerButton }: 
     setPref2Time(undefined);
     setPref3Date(undefined);
     setPref3Time(undefined);
+    setMemo(""); // 메모 초기화 추가 (올바른 위치로 이동)
   };
 
   return (
@@ -163,6 +167,19 @@ export default function ReservationModal({ open, onOpenChange, triggerButton }: 
                     />
                   </PopoverContent>
                 </Popover>
+              </div>
+              {/* 메모 입력 필드 추가 */}
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="memo" className="text-right">
+                  메모
+                </Label>
+                <Textarea
+                  id="memo"
+                  value={memo}
+                  onChange={(e) => setMemo(e.target.value)}
+                  className="col-span-3"
+                  placeholder="의사 선생님께 전달할 내용을 입력해주세요. (선택 사항)"
+                />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label className="text-right col-span-4 font-medium mb-2">예약 선호 시간</Label>
