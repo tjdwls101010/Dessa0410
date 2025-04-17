@@ -25,29 +25,30 @@ export function WeekCalendar({
   onDateSelect, // 콜백 함수 받기
   className
 }: WeekCalendarProps) {
-  // 가상의 예약 데이터 (실제로는 API에서 가져와야 함)
+  // 가상의 예약 데이터 (실제로는 API에서 가져와야 함) - 데이터 양 증가
   const [appointments, setAppointments] = React.useState<Appointment[]>([
-    {
-      id: "1",
-      date: new Date(2025, 3, 15), // 2025년 4월 15일
-      startTime: "07:00",
-      endTime: "08:00",
-      title: "예약 완료"
-    },
-    {
-      id: "2",
-      date: new Date(2025, 3, 16), // 2025년 4월 16일
-      startTime: "08:00",
-      endTime: "09:00",
-      title: "예약 완료"
-    },
-    {
-      id: "3",
-      date: new Date(2025, 3, 17), // 2025년 4월 17일
-      startTime: "19:00",
-      endTime: "20:00",
-      title: "예약 완료"
-    }
+    // 4월
+    { id: "1", date: new Date(2025, 3, 15), startTime: "07:00", endTime: "08:00", title: "예약 완료" },
+    { id: "2", date: new Date(2025, 3, 16), startTime: "08:00", endTime: "09:00", title: "예약 완료" },
+    { id: "3", date: new Date(2025, 3, 17), startTime: "19:00", endTime: "20:00", title: "예약 완료" },
+    { id: "4", date: new Date(2025, 3, 18), startTime: "10:00", endTime: "11:00", title: "예약 완료" },
+    { id: "5", date: new Date(2025, 3, 18), startTime: "14:00", endTime: "15:00", title: "예약 완료" },
+    { id: "6", date: new Date(2025, 3, 21), startTime: "09:00", endTime: "10:00", title: "예약 완료" },
+    { id: "7", date: new Date(2025, 3, 22), startTime: "11:00", endTime: "12:00", title: "예약 완료" },
+    { id: "8", date: new Date(2025, 3, 23), startTime: "15:00", endTime: "16:00", title: "예약 완료" },
+    { id: "9", date: new Date(2025, 3, 24), startTime: "17:00", endTime: "18:00", title: "예약 완료" },
+    { id: "10", date: new Date(2025, 3, 25), startTime: "07:00", endTime: "08:00", title: "예약 완료" },
+    { id: "11", date: new Date(2025, 3, 28), startTime: "16:00", endTime: "17:00", title: "예약 완료" },
+    { id: "12", date: new Date(2025, 3, 29), startTime: "18:00", endTime: "19:00", title: "예약 완료" },
+    { id: "13", date: new Date(2025, 3, 30), startTime: "08:00", endTime: "09:00", title: "예약 완료" },
+    // 5월
+    { id: "14", date: new Date(2025, 4, 1), startTime: "10:00", endTime: "11:00", title: "예약 완료" },
+    { id: "15", date: new Date(2025, 4, 2), startTime: "13:00", endTime: "14:00", title: "예약 완료" },
+    { id: "16", date: new Date(2025, 4, 5), startTime: "09:00", endTime: "10:00", title: "예약 완료" },
+    { id: "17", date: new Date(2025, 4, 6), startTime: "11:00", endTime: "12:00", title: "예약 완료" },
+    { id: "18", date: new Date(2025, 4, 7), startTime: "15:00", endTime: "16:00", title: "예약 완료" },
+    { id: "19", date: new Date(2025, 4, 8), startTime: "17:00", endTime: "18:00", title: "예약 완료" },
+    { id: "20", date: new Date(2025, 4, 9), startTime: "07:00", endTime: "08:00", title: "예약 완료" },
   ])
 
   // 선택된 날짜를 기준으로 7일 표시 (선택된 날짜 - 3일 부터 시작)
@@ -83,12 +84,12 @@ export function WeekCalendar({
     )
   }
   
-  // 시간 슬롯 계산
+  // 시간 슬롯 계산 (09:00 ~ 18:00)
   const timeSlots = [
-    { label: "오전", slots: ["07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00"] },
-    { label: "오후", slots: ["13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00", "18:00-19:00", "19:00-20:00", "20:00-21:00"] }
+    { label: "오전", slots: ["09:00-10:00", "10:00-11:00", "11:00-12:00"] },
+    { label: "오후", slots: ["13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00"] }
   ]
-  
+
   // 특정 날짜와 시간 슬롯에 예약이 있는지 확인
   const hasAppointment = (date: Date, timeSlot: string) => {
     const [start] = timeSlot.split("-")

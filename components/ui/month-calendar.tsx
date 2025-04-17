@@ -26,10 +26,11 @@ export function MonthCalendar({
   // selectedDate prop이 변경될 때 currentMonth를 업데이트하는 useEffect 추가
   React.useEffect(() => {
     const newMonthStart = startOfMonth(selectedDate);
-    if (!isSameMonth(newMonthStart, currentMonth)) {
-      setCurrentMonth(newMonthStart);
-    }
-  }, [selectedDate, currentMonth]); // selectedDate와 currentMonth를 의존성 배열에 추가
+    // 함수형 업데이트 사용: 이전 상태(prevMonth)를 받아와서 비교 후 업데이트
+    setCurrentMonth(prevMonth =>
+      isSameMonth(newMonthStart, prevMonth) ? prevMonth : newMonthStart
+    );
+  }, [selectedDate]); // 의존성 배열은 selectedDate만 유지
 
   const changeMonth = (amount: number) => {
     if (amount > 0) {
