@@ -21,8 +21,16 @@ export function MonthCalendar({
   onDateSelect,
   className
 }: MonthCalendarProps) {
-  const [currentMonth, setCurrentMonth] = React.useState(new Date(2025, 3, 1)) // 2025년 4월로 고정
-  
+  const [currentMonth, setCurrentMonth] = React.useState(startOfMonth(selectedDate)) // 초기값을 selectedDate의 월로 설정
+
+  // selectedDate prop이 변경될 때 currentMonth를 업데이트하는 useEffect 추가
+  React.useEffect(() => {
+    const newMonthStart = startOfMonth(selectedDate);
+    if (!isSameMonth(newMonthStart, currentMonth)) {
+      setCurrentMonth(newMonthStart);
+    }
+  }, [selectedDate, currentMonth]); // selectedDate와 currentMonth를 의존성 배열에 추가
+
   const changeMonth = (amount: number) => {
     if (amount > 0) {
       setCurrentMonth(addMonths(currentMonth, 1))

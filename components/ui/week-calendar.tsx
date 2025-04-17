@@ -50,13 +50,13 @@ export function WeekCalendar({
     }
   ])
 
-  // 선택된 날짜가 포함된 주의 시작일 계산 (일요일부터 시작)
-  const weekStart = startOfWeek(selectedDate, { weekStartsOn: 0 })
-  
+  // 선택된 날짜를 기준으로 7일 표시 (선택된 날짜 - 3일 부터 시작)
+  const displayStartDate = addDays(selectedDate, -3)
+
   // 요일별 header 렌더링
   const renderWeekHeader = () => {
-    const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i))
-    
+    const days = Array.from({ length: 7 }, (_, i) => addDays(displayStartDate, i)) // displayStartDate 기준으로 7일 생성
+
     return (
       <div className="grid grid-cols-7 border-b">
         {days.map((day, index) => {
@@ -107,11 +107,11 @@ export function WeekCalendar({
             <div className="grid grid-cols-7 gap-1 p-1">
               {/* 요일별 시간 슬롯 */}
               {Array.from({ length: 7 }, (_, dayIndex) => {
-                const currentDate = addDays(weekStart, dayIndex)
+                const currentDate = addDays(displayStartDate, dayIndex) // displayStartDate 기준으로 날짜 계산
                 const isSelectedDay = isSameDay(currentDate, selectedDate)
-                
+
                 return (
-                  <div 
+                  <div
                     key={dayIndex} 
                     className={cn(
                       "min-h-[100px] flex flex-col gap-1",
