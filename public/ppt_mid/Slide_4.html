@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>온누리마취통증의학과 예비 환자 자가 점검 및 안내 시스템 - 설문 설계 근거</title>
+    <title>온누리마취통증의학과: 데이터 기반 예비 환자 이해 증진 시스템 구축 - 데이터 수집 전략</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -77,39 +77,110 @@
             margin-bottom: 1rem;
             border-radius: 3px;
         }
-        .tool-card {
+        .data-card {
             background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
             overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .tool-card:hover {
+        .data-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
-        .tool-header {
-            padding: 0.75rem 1.25rem;
+        .data-header {
+            padding: 1rem 1.5rem;
             border-bottom: 1px solid rgba(0, 102, 204, 0.1);
             display: flex;
             align-items: center;
         }
-        .tool-body {
+        .data-body {
             padding: 1.25rem;
         }
-        .tool-icon {
+        .data-icon {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 0.75rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
         }
-        .digital-circuit {
+        .approach-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #0066cc;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .approach-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .icon-container {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(0, 102, 204, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .data-quality-item {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+        .data-quality-item:hover {
+            background-color: #f0f7ff;
+        }
+        .quality-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .data-flow {
+            position: relative;
+            margin: 0.5rem 0 1.5rem;
+        }
+        .data-flow-line {
             position: absolute;
-            width: 180px;
-            height: 180px;
+            top: 2.5rem;
+            left: 3rem;
+            right: 3rem;
+            height: 3px;
+            background: linear-gradient(to right, #0066cc, #54c7ec);
+            z-index: 1;
+        }
+        .data-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            background-color: #e6f0ff;
+            color: #0066cc;
+            border: 1px solid #c2d8ff;
+        }
+        .digital-element {
+            position: absolute;
             border: 1px solid rgba(0, 102, 204, 0.1);
             border-radius: 50%;
             z-index: 1;
@@ -122,8 +193,8 @@
         <div class="pattern"></div>
         
         <!-- Digital elements -->
-        <div class="digital-circuit" style="top: -50px; right: 20%;"></div>
-        <div class="digital-circuit" style="bottom: -80px; left: 10%;"></div>
+        <div class="digital-element" style="width: 150px; height: 150px; top: -50px; right: 100px;"></div>
+        <div class="digital-element" style="width: 120px; height: 120px; bottom: -40px; left: 80px;"></div>
         
         <!-- Logo area -->
         <div class="logo-area">
@@ -132,107 +203,153 @@
         </div>
         
         <div class="content">
-            <div class="mt-8 mb-5">
+            <div class="mt-8 mb-4">
                 <div class="blue-accent"></div>
-                <h2 class="text-3xl font-bold text-gray-800">설문 설계 근거: 표준 평가 도구 활용</h2>
+                <h2 class="text-3xl font-bold text-gray-800">데이터 수집 전략: 핵심은 '설문'</h2>
             </div>
             
-            <div class="mb-4">
-                <div class="bg-blue-50 p-3 rounded-lg inline-block">
-                    <p class="text-blue-700 font-medium">
-                        <i class="fas fa-bullseye mr-2"></i> 
-                        목표: 신뢰도 높은 데이터 수집을 위해 임상에서 검증된 평가 도구 개념 적극 차용
-                    </p>
+            <!-- Approach -->
+            <div class="approach-card">
+                <div class="flex items-start">
+                    <div class="icon-container">
+                        <i class="fas fa-clipboard-check text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">접근 방식</h3>
+                        <p class="text-gray-600">
+                            임상적으로 검증된 설문 도구들의 <span class="font-medium text-blue-700">개념을 차용</span>하여, 분석에 유의미하고 신뢰성 있는 데이터 확보 목표
+                        </p>
+                    </div>
                 </div>
             </div>
             
-            <div class="grid grid-cols-2 gap-5">
-                <!-- VAS Tool -->
-                <div class="tool-card">
-                    <div class="tool-header bg-blue-50">
-                        <div class="tool-icon bg-blue-100">
-                            <i class="fas fa-ruler-horizontal text-blue-600"></i>
+            <!-- Data Dimensions -->
+            <div class="grid grid-cols-2 gap-5 mb-5">
+                <!-- Pain Intensity -->
+                <div class="data-card">
+                    <div class="data-header bg-blue-50">
+                        <div class="data-icon bg-blue-100">
+                            <i class="fas fa-fire-alt text-blue-600"></i>
                         </div>
-                        <h3 class="text-lg font-semibold text-blue-700">VAS (Visual Analog Scale)</h3>
+                        <h3 class="text-lg font-semibold text-blue-700">통증 강도 (VAS 개념)</h3>
                     </div>
-                    <div class="tool-body">
-                        <div class="mb-2">
-                            <span class="text-sm font-medium text-gray-500">측정:</span>
-                            <p class="text-gray-700">주관적 통증 수준을 0(없음)~10(최악) 척도로 표현</p>
+                    <div class="data-body">
+                        <div class="flex items-center mb-2">
+                            <span class="text-sm font-medium text-gray-500 w-20">데이터 유형:</span>
+                            <span class="data-tag">정량적</span>
                         </div>
-                        <div>
-                            <span class="text-sm font-medium text-gray-500">의미:</span>
-                            <p class="text-gray-700">통증 변화 추적 및 치료 효과 평가의 기본 지표. 간단하고 널리 사용됨.</p>
-                        </div>
+                        <p class="text-gray-600 text-sm">
+                            환자가 느끼는 주관적 통증 수준을 0점(통증 없음)부터 10점(상상할 수 있는 가장 심한 통증) 사이의 숫자로 객관화
+                        </p>
                     </div>
                 </div>
                 
-                <!-- DN4 Tool -->
-                <div class="tool-card">
-                    <div class="tool-header bg-blue-50">
-                        <div class="tool-icon bg-blue-100">
+                <!-- Pain Characteristics -->
+                <div class="data-card">
+                    <div class="data-header bg-blue-50">
+                        <div class="data-icon bg-blue-100">
                             <i class="fas fa-bolt text-blue-600"></i>
                         </div>
-                        <h3 class="text-lg font-semibold text-blue-700">DN4 Questionnaire</h3>
+                        <h3 class="text-lg font-semibold text-blue-700">통증 특성 (DN4 개념)</h3>
                     </div>
-                    <div class="tool-body">
-                        <div class="mb-2">
-                            <span class="text-sm font-medium text-gray-500">측정:</span>
-                            <p class="text-gray-700">'타는 듯함', '찌릿함', '감각 저하' 등 신경 손상 관련 증상 유무 확인</p>
+                    <div class="data-body">
+                        <div class="flex items-center mb-2">
+                            <span class="text-sm font-medium text-gray-500 w-20">데이터 유형:</span>
+                            <span class="data-tag">범주형</span>
                         </div>
-                        <div>
-                            <span class="text-sm font-medium text-gray-500">의미:</span>
-                            <p class="text-gray-700">일반적인 근골격계 통증과 다른 치료 접근이 필요한 신경병증성 통증 가능성 감별. (점수 4점 이상 시 가능성 높음)</p>
-                        </div>
+                        <p class="text-gray-600 text-sm">
+                            신경병증성 통증과 관련된 특징적 패턴(타는 듯한 느낌, 전기가 오는 듯한 통증 등)의 유무 확인을 통한 통증 특성 파악
+                        </p>
                     </div>
                 </div>
                 
-                <!-- ODI/NDI Tool -->
-                <div class="tool-card">
-                    <div class="tool-header bg-blue-50">
-                        <div class="tool-icon bg-blue-100">
+                <!-- Functional Limitation -->
+                <div class="data-card">
+                    <div class="data-header bg-blue-50">
+                        <div class="data-icon bg-blue-100">
                             <i class="fas fa-walking text-blue-600"></i>
                         </div>
-                        <h3 class="text-lg font-semibold text-blue-700">ODI/NDI (Oswestry/Neck Disability Index)</h3>
+                        <h3 class="text-lg font-semibold text-blue-700">기능 제한 (ODI/NDI 개념)</h3>
                     </div>
-                    <div class="tool-body">
-                        <div class="mb-2">
-                            <span class="text-sm font-medium text-gray-500">측정:</span>
-                            <p class="text-gray-700">통증이 일상 활동(걷기, 앉기, 옷 입기 등)에 미치는 영향 평가 개념 차용</p>
+                    <div class="data-body">
+                        <div class="flex items-center mb-2">
+                            <span class="text-sm font-medium text-gray-500 w-20">데이터 유형:</span>
+                            <span class="data-tag">순서형</span>
                         </div>
-                        <div>
-                            <span class="text-sm font-medium text-gray-500">의미:</span>
-                            <p class="text-gray-700">통증의 심각도를 넘어, 실제 환자의 삶의 질 저하 정도를 객관화하고 치료 경과에 따른 기능 회복 추적.</p>
-                        </div>
+                        <p class="text-gray-600 text-sm">
+                            통증으로 인한 일상생활 기능(앉기, 서기, 걷기 등) 제한 정도를 단계별로 평가하여 생활 영향도 측정
+                        </p>
                     </div>
                 </div>
                 
-                <!-- Red Flag Signs Tool -->
-                <div class="tool-card border-red-200">
-                    <div class="tool-header bg-red-50">
-                        <div class="tool-icon bg-red-100">
+                <!-- Red Flags -->
+                <div class="data-card">
+                    <div class="data-header bg-red-50">
+                        <div class="data-icon bg-red-100">
                             <i class="fas fa-exclamation-triangle text-red-600"></i>
                         </div>
-                        <h3 class="text-lg font-semibold text-red-700">Red Flag Signs</h3>
+                        <h3 class="text-lg font-semibold text-red-700">위험 신호 (Red Flags)</h3>
                     </div>
-                    <div class="tool-body">
-                        <div class="mb-2">
-                            <span class="text-sm font-medium text-gray-500">측정:</span>
-                            <p class="text-gray-700">설명 불가 체중 감소, 마비, 대소변 문제 등 위험 신호 확인</p>
+                    <div class="data-body">
+                        <div class="flex items-center mb-2">
+                            <span class="text-sm font-medium text-gray-500 w-20">데이터 유형:</span>
+                            <span class="data-tag bg-red-50 text-red-600 border-red-200">이진형</span>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            심각한 기저 질환 가능성을 시사하는 신호(급격한 체중 감소, 밤 통증 악화 등)의 유무 확인으로 위험 요소 선별
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Quality -->
+            <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                <h3 class="text-lg font-semibold text-blue-700 mb-3">
+                    <i class="fas fa-medal text-blue-600 mr-2"></i>
+                    데이터 품질 확보 노력
+                </h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="data-quality-item">
+                        <div class="quality-icon">
+                            <i class="fas fa-check-double text-green-500"></i>
                         </div>
                         <div>
-                            <span class="text-sm font-medium text-gray-500">의미:</span>
-                            <p class="text-gray-700">단순 통증 이상의 심각한 질환(종양, 감염, 골절 등) 가능성을 시사. <span class="font-medium text-red-600">환자 안전 확보 및 즉각적 조치 필요성 판단</span>에 필수적.</p>
+                            <h4 class="text-sm font-medium text-gray-700">명확하고 이해하기 쉬운 질문 설계</h4>
+                            <p class="text-xs text-gray-500">의학 용어를 일반인이 이해하기 쉬운 표현으로 전환</p>
+                        </div>
+                    </div>
+                    <div class="data-quality-item">
+                        <div class="quality-icon">
+                            <i class="fas fa-laptop-code text-blue-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-700">일관성 있는 데이터 입력을 유도하는 UI 구성</h4>
+                            <p class="text-xs text-gray-500">슬라이더, 체크박스 등 적절한 입력 방식 선택</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="mt-auto mb-4 text-center">
-                <p class="text-blue-700 font-medium">
-                    <i class="fas fa-check-circle mr-2"></i>
-                    다각적이고 표준화된 방식으로 환자 상태 평가 및 AI 분석 위한 신뢰성 있는 기초 데이터 확보
-                </p>
+            <!-- Data Flow Visualization -->
+            <div class="flex justify-center items-center mb-5">
+                <div class="bg-white p-3 rounded-lg inline-flex items-center shadow-sm">
+                    <i class="fas fa-tags text-blue-500 mr-2"></i>
+                    <span class="font-medium text-blue-700 mr-2">핵심 키워드:</span>
+                    <span class="data-tag bg-blue-100 border-blue-200">데이터 품질</span>
+                    <span class="data-tag bg-blue-100 border-blue-200">체계적 수집</span>
+                    <span class="data-tag bg-blue-100 border-blue-200">다차원 데이터</span>
+                    <span class="data-tag bg-blue-100 border-blue-200">신뢰성</span>
+                </div>
+            </div>
+            
+            <!-- Key Message -->
+            <div class="mt-auto mb-4 bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg">
+                <div class="flex items-center">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-3 text-2xl"></i>
+                    <p class="text-blue-800 font-medium">
+                        <span class="text-blue-600 font-bold">체계적으로 설계된 설문</span>을 통해 다차원적인 예비 환자 데이터를 <span class="text-blue-600 font-bold">신뢰성 있게 수집</span>하는 것을 최우선 목표로 합니다.
+                    </p>
+                </div>
             </div>
         </div>
     </div>

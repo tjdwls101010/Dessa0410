@@ -9,8 +9,7 @@ import { ChevronLeft, ChevronRight, Download, FileText } from 'lucide-react'
 // Define slide file names directly for now
 const slideFiles = [
   'Slide_1.html', 'Slide_2.html', 'Slide_3.html', 'Slide_4.html', 'Slide_5.html',
-  'Slide_6.html', 'Slide_7.html', 'Slide_8.html', 'Slide_9.html', 'Slide_10.html',
-  'Slide_11.html'
+  'Slide_6.html', 'Slide_7.html', 'Slide_8.html'
 ]
 
 export default function PresentationPage() {
@@ -115,7 +114,7 @@ export default function PresentationPage() {
       </main>
       {/* New Document Link Button */}
       <a
-        href="https://docs.google.com/document/d/1WIauCjRwEHpLeGNAPeuftQDwKext_E-2B3TWtG9vqOk/edit?tab=t.0#heading=h.y8ngtyfkpp0h"
+        href="https://docs.google.com/document/d/1RQqoX5PAF3nPEOGWILHafwb8SGGeOQV9aYRdVYi_tXs/edit?usp=sharing"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-24 right-8 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition-colors z-50 flex items-center justify-center"
