@@ -389,7 +389,17 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
   // 성별 변환
   const getGenderText = (gender: string | undefined) => {
     if (!gender) return "정보 없음";
-    return gender === "male" ? "남성" : gender === "female" ? "여성" : "기타";
+    
+    // 소문자로 변환하여 비교
+    const normalizedGender = gender.toLowerCase().trim();
+    
+    if (normalizedGender === "male" || normalizedGender === "m" || normalizedGender === "남성" || normalizedGender === "남자") {
+      return "남성";
+    } else if (normalizedGender === "female" || normalizedGender === "f" || normalizedGender === "여성" || normalizedGender === "여자") {
+      return "여성";
+    } else {
+      return "기타";
+    }
   };
 
   // 직업/활동 변환
