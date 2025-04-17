@@ -49,6 +49,13 @@
   }
 }
 
+/* shadcn/ui Dialog Overlay 투명도 조절 */
+@layer base {
+ /* 이전 시도들 제거 */
+
+ /* Radix UI 오버레이 스타일은 components/ui/dialog.tsx 에서 관리 */
+}
+
 @layer base {
   * {
     @apply border-border;

@@ -14,7 +14,8 @@ import { X } from "lucide-react";
 interface SurveyModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  surveyData: any;
+ surveyData: any; // TODO: surveyData 타입을 더 구체적으로 정의하면 좋음
+ reportId: string; // reportId prop 추가
 }
 
 const SurveyModal: React.FC<SurveyModalProps> = ({
