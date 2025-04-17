@@ -494,7 +494,268 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
           </AlertDescription>
         </Alert>
 
-        {/* 요약 섹션 */}
+        {/* 설문조사 결과 섹션 */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-xl font-bold mb-4 text-primary flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            설문조사 결과
+          </h2>
+
+          <div className="mt-4 space-y-6">
+            {/* 기본 정보 */}
+            <div className="bg-gray-50 p-4 rounded-md">
+              <h3 className="text-md font-semibold mb-3 text-gray-700">기본 정보</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500">연령대</p>
+                  <p className="font-medium">{surveyData.a1_age || "정보 없음"}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">성별</p>
+                  <p className="font-medium">{getGenderText(surveyData.a2_gender)}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">직업/활동</p>
+                  <p className="font-medium">{getActivityLevelText(surveyData.a3_job)}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 통증 특성 */}
+            <div className="bg-gray-50 p-4 rounded-md">
+              <h3 className="text-md font-semibold mb-3 text-gray-700">통증 특성</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500">주요 통증 부위</p>
+                  <p className="font-medium">{surveyData.b4_main_pain_area || "정보 없음"}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">기타 통증 부위</p>
+                  <p className="font-medium">{surveyData.b5_other_pain_areas?.join(", ") || "없음"}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">통증 지속 기간</p>
+                  <p className="font-medium">{getPainOnsetText(surveyData.b6_pain_onset)}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">통증 양상</p>
+                  <div className="flex flex-wrap gap-1">
+                    {surveyData.b7_pain_pattern?.map((pattern, index) => (
+                      <Badge key={index} variant="outline" className="text-xs">
+                        {getPainPatternText(pattern)}
+                      </Badge>
+                    )) || "정보 없음"}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* 통증 강도 및 영향 요인 */}
+            <div className="bg-gray-50 p-4 rounded-md">
+              <h3 className="text-md font-semibold mb-3 text-gray-700">통증 강도 및 영향 요인</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500">최대 통증 강도</p>
+                  <div className="flex items-center">
+                    <span className="font-medium mr-2">{surveyData.c11_max_pain_vas || "?"}/10</span>
+                    <div className="w-32 bg-gray-200 rounded-full h-2.5">
+                      <div
+                        className={`h-2.5 rounded-full ${getPainColorClass(surveyData.c11_max_pain_vas)}`}
+                        style={{ width: `${surveyData.c11_max_pain_vas ? (surveyData.c11_max_pain_vas * 10) : 0}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">평균 통증 강도</p>
+                  <div className="flex items-center">
+                    <span className="font-medium mr-2">{surveyData.c12_avg_pain_vas || "?"}/10</span>
+                    <div className="w-32 bg-gray-200 rounded-full h-2.5">
+                      <div
+                        className={`h-2.5 rounded-full ${getPainColorClass(surveyData.c12_avg_pain_vas)}`}
+                        style={{ width: `${surveyData.c12_avg_pain_vas ? (surveyData.c12_avg_pain_vas * 10) : 0}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">악화 요인</p>
+                  <div className="flex flex-wrap gap-1">
+                    {surveyData.c13_aggravating_factors?.map((factor, index) => (
+                      <Badge key={index} variant="outline" className="text-xs">
+                        {getPainFactorText(factor)}
+                      </Badge>
+                    )) || "정보 없음"}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">완화 요인</p>
+                  <div className="flex flex-wrap gap-1">
+                    {surveyData.c14_relieving_factors?.map((factor, index) => (
+                      <Badge key={index} variant="outline" className="text-xs">
+                        {getPainFactorText(factor)}
+                      </Badge>
+                    )) || "정보 없음"}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 일상생활 영향도 */}
+            <div className="bg-gray-50 p-4 rounded-md">
+              <h3 className="text-md font-semibold mb-3 text-gray-700">일상생활 영향도</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {surveyData.d15_personal_hygiene !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">개인위생</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d15_personal_hygiene)}`}>
+                      {surveyData.d15_personal_hygiene}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d16_dressing !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">옷 입기</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d16_dressing)}`}>
+                      {surveyData.d16_dressing}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d17_lifting !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">물건 들기</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d17_lifting)}`}>
+                      {surveyData.d17_lifting}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d18_walking !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">걷기</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d18_walking)}`}>
+                      {surveyData.d18_walking}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d19_sitting !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">앉아있기</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d19_sitting)}`}>
+                      {surveyData.d19_sitting}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d20_standing !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">서있기</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d20_standing)}`}>
+                      {surveyData.d20_standing}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d21_sleep !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">수면</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d21_sleep)}`}>
+                      {surveyData.d21_sleep}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d22_concentration !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">집중력</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d22_concentration)}`}>
+                      {surveyData.d22_concentration}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d23_work_study !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">일/공부</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d23_work_study)}`}>
+                      {surveyData.d23_work_study}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d24_driving_transport !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">운전/이동</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d24_driving_transport)}`}>
+                      {surveyData.d24_driving_transport}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d25_leisure !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">여가활동</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d25_leisure)}`}>
+                      {surveyData.d25_leisure}/10
+                    </div>
+                  </div>
+                )}
+                {surveyData.d26_mood !== undefined && (
+                  <div>
+                    <p className="text-sm text-gray-500">기분/감정</p>
+                    <div className={`mt-1 text-sm font-medium ${getLimitationStyle(surveyData.d26_mood)}`}>
+                      {surveyData.d26_mood}/10
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* 생활습관 */}
+            <div className="bg-gray-50 p-4 rounded-md">
+              <h3 className="text-md font-semibold mb-3 text-gray-700">생활습관</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500">정기적 운동</p>
+                  <p className="font-medium">{surveyData.e27_exercise ? "예" : "아니오"}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">하루 앉아있는 시간</p>
+                  <p className="font-medium">{surveyData.e28_sitting_hours || "정보 없음"}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">자세 인지</p>
+                  <p className="font-medium">{surveyData.e29_posture_awareness || "정보 없음"}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">최근 스트레스</p>
+                  <p className="font-medium">{surveyData.e30_recent_stress || "정보 없음"}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 위험 신호 */}
+            {surveyData.f33_red_flags && surveyData.f33_red_flags.length > 0 && (
+              <div className="bg-red-50 p-4 rounded-md border border-red-200">
+                <h3 className="text-md font-semibold mb-3 text-red-700">위험 신호</h3>
+                <ul className="list-disc list-inside space-y-1 text-red-600">
+                  {surveyData.f33_red_flags.map((flag, index) => (
+                    <li key={index}>{flag}</li>
+                  ))}
+                </ul>
+                <p className="mt-2 text-sm text-red-700">위 증상이 있는 경우, 가능한 빨리 의료진의 상담을 받으세요.</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* 분석 요약 섹션 */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-xl font-bold mb-4 text-primary flex items-center">
             <svg
