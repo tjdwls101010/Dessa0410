@@ -53,7 +53,7 @@ export default function PresentationPage() {
     }
   }, [goToPrevSlide, goToNextSlide]) // Add dependencies
 
-  const currentSlideSrc = `/ppt/${slideFiles[currentSlideIndex]}` // Updated path
+  const currentSlideSrc = `/ppt_mid/${slideFiles[currentSlideIndex]}` // Updated path
 
   return (
     // Removed bg-gray-100 from the outer div
@@ -61,7 +61,7 @@ export default function PresentationPage() {
       {/* Removed Header component */}
       {/* Removed container mx-auto to allow full width, kept py-8 */}
       <main className="flex-grow px-4 py-8 flex flex-col items-center">
-        <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">발표 자료</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">중간 발표 자료</h1>
         {/* Kept w-full, removed max-width */}
         <div className="w-full bg-white p-4 rounded-lg shadow-md">
           {/* Applying aspect-video for 16:9 ratio */}
@@ -125,7 +125,7 @@ export default function PresentationPage() {
       </a>
       {/* Floating Download Button */}
       <a
-        href="/ppt/PPT_Mid.pdf"
+        href="/ppt_mid/PPT_Mid.pdf"
         download="PPT_Mid.pdf"
         className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50 flex items-center justify-center"
         aria-label="Download Presentation PDF"
