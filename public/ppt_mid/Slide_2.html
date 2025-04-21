@@ -26,6 +26,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
             border-radius: 8px;
+            aspect-ratio: 16/9;
         }
         .slide-bg {
             position: absolute;
@@ -82,7 +83,7 @@
             border-radius: 10px;
             padding: 1.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             border-left: 4px solid #0066cc;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -104,15 +105,15 @@
         .problem-illustration {
             position: relative;
             width: 100%;
-            height: 120px;
-            margin: 2rem 0;
+            height: 180px;
+            margin: 0 0 1rem 0;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .entity-icon {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             background-color: white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -134,8 +135,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 200px;
-            height: 2px;
+            width: 250px;
+            height: 3px;
             background-color: #e2e8f0;
             z-index: 1;
         }
@@ -149,28 +150,28 @@
             color: #856404;
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 1rem;
             white-space: nowrap;
             border: 1px solid #ffeeba;
         }
         .question-mark {
             position: absolute;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: #54c7ec;
             animation: float 3s ease-in-out infinite;
         }
         .question-mark:nth-child(1) {
-            top: -15px;
-            right: 5px;
+            top: -20px;
+            right: 10px;
             animation-delay: 0.2s;
         }
         .question-mark:nth-child(2) {
             top: 0px;
-            right: -15px;
+            right: -20px;
             animation-delay: 0.5s;
         }
         .question-mark:nth-child(3) {
-            top: 15px;
+            top: 20px;
             right: 0px;
             animation-delay: 0.8s;
         }
@@ -233,24 +234,6 @@
                 </div>
             </div>
             
-            <!-- Problem Illustration -->
-            <div class="problem-illustration">
-                <div class="entity-icon patient">
-                    <i class="fas fa-user text-blue-400 text-2xl mb-1"></i>
-                    <span class="text-xs text-gray-600">환자</span>
-                    <i class="fas fa-question question-mark"></i>
-                    <i class="fas fa-question question-mark"></i>
-                    <i class="fas fa-question question-mark"></i>
-                </div>
-                
-                <div class="connection-line"></div>
-                
-                <div class="entity-icon hospital">
-                    <i class="fas fa-hospital text-blue-600 text-2xl mb-1"></i>
-                    <span class="text-xs text-gray-600">병원</span>
-                </div>
-            </div>
-            
             <!-- Problems -->
             <div class="card">
                 <div class="flex items-start">
@@ -260,15 +243,15 @@
                     <div>
                         <h3 class="text-xl font-semibold text-gray-700 mb-2">문제점</h3>
                         <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            <li><span class="font-medium text-blue-700">환자 데이터 확보의 어려움:</span> 병원 외부에서는 실제 환자 데이터 접근이 불가능하여, 서비스 개발을 위한 데이터 기반 마련이 필수적</li>
                             <li><span class="font-medium text-blue-700">정보의 단절:</span> 환자의 주관적 정보와 병원의 객관적 정보 간 연결 부족</li>
+                            <li><span class="font-medium text-blue-700">진료 효율성 저하 가능성:</span> 제한된 시간 내 환자 상태 파악의 어려움</li>
                         </ul>
                     </div>
                 </div>
             </div>
             
             <!-- Project Goals -->
-            <div class="card bg-blue-50 border-blue-300">
+            <div class="card">
                 <div class="flex items-start">
                     <div class="icon-container bg-blue-100">
                         <i class="fas fa-bullseye text-blue-600 text-xl"></i>
@@ -282,14 +265,22 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Key Message -->
-            <div class="mt-auto mb-4 bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg">
-                <div class="flex items-center">
-                    <i class="fas fa-lightbulb text-yellow-500 mr-3 text-2xl"></i>
-                    <p class="text-blue-800 font-medium">
-                        실제 환자 데이터 부재라는 한계를 극복하고, 환자 중심 서비스를 만들기 위해 <span class="text-blue-600 font-bold">선제적인 데이터 확보</span>가 필요합니다.
-                    </p>
+
+            <!-- Problem Illustration -->
+            <div class="problem-illustration mt-4">
+                <div class="entity-icon patient">
+                    <i class="fas fa-user text-blue-400 text-3xl mb-1"></i>
+                    <span class="text-sm text-gray-600">환자</span>
+                    <i class="fas fa-question question-mark"></i>
+                    <i class="fas fa-question question-mark"></i>
+                    <i class="fas fa-question question-mark"></i>
+                </div>
+                
+                <div class="connection-line"></div>
+                
+                <div class="entity-icon hospital">
+                    <i class="fas fa-hospital text-blue-600 text-3xl mb-1"></i>
+                    <span class="text-sm text-gray-600">병원</span>
                 </div>
             </div>
         </div>
