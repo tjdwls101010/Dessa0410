@@ -20,7 +20,7 @@
         }
         .slide-container {
             width: 1280px;
-            min-height: 720px;
+            height: 720px;
             position: relative;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -172,6 +172,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            border: 1px dashed #cbd5e1;
         }
         .human-outline {
             font-size: 4rem;
@@ -295,7 +298,7 @@
                             <span class="text-sm text-gray-600">통증 부위:</span>
                         </div>
                         <div class="body-map">
-                            <i class="fas fa-male human-outline"></i>
+                            <div class="text-xs text-gray-500 absolute top-2 left-2">요추부</div>
                             <div class="pain-spot" style="bottom: 55%; right: 46%;"></div>
                             <div class="pain-spot" style="bottom: 40%; right: 42%;"></div>
                             <div class="pain-spot" style="bottom: 37%; left: 35%;"></div>

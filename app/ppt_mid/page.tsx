@@ -60,7 +60,7 @@ export default function PresentationPage() {
       {/* Removed Header component */}
       {/* Removed container mx-auto to allow full width, kept py-8 */}
       <main className="flex-grow px-4 py-8 flex flex-col items-center">
-        <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">중간 발표 자료</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">중간 발표 자료 V1</h1>
         {/* Kept w-full, removed max-width */}
         <div className="w-full bg-white p-4 rounded-lg shadow-md">
           {/* Applying aspect-video for 16:9 ratio */}

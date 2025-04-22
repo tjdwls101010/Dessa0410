@@ -20,10 +20,10 @@ export default function Header() {
             서비스 소개
           </Link>
           <Link href="/ppt_mid" className="text-sm font-medium hover:text-primary">
-            중간 발표 자료
+            중간 발표 자료 V1
           </Link>
           <Link href="/ppt_final" className="text-sm font-medium hover:text-primary">
-            최종 발표 자료
+            중간 발표 자료 V2
           </Link>
         </nav>
         <Link href="https://www.notion.so/1c30ffd9516c801087baf57dd51e5cca" target="_blank" rel="noopener noreferrer">

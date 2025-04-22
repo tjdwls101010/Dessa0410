@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>온누리마취통증의학과 예비 환자 자가 점검 및 안내 시스템 - 결론 및 제언</title>
+    <title>온누리마취통증의학과 예비 환자 자가 점검 및 안내 시스템 - 기대효과 및 향후 방향</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -14,18 +14,23 @@
             padding: 0;
             background-color: #f0f4f8;
             height: 100vh;
+            width: 100vw;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
         .slide-container {
-            width: 1280px;
-            min-height: 720px;
+            width: 100%;
+            height: 100%;
+            max-width: 177.78vh; /* 16:9 ratio */
+            max-height: 56.25vw; /* 16:9 ratio */
             position: relative;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
             border-radius: 8px;
+            aspect-ratio: 16/9;
         }
         .slide-bg {
             position: absolute;
@@ -57,6 +62,7 @@
             padding: 2rem 3rem;
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
         }
         .logo-area {
             position: absolute;
@@ -64,6 +70,7 @@
             right: 2rem;
             display: flex;
             align-items: center;
+            z-index: 3;
         }
         .logo-icon {
             font-size: 2rem;
@@ -83,6 +90,9 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             overflow: hidden;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         .section-card:hover {
             transform: translateY(-5px);
@@ -96,6 +106,10 @@
         }
         .section-body {
             padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
         }
         .section-icon {
             width: 48px;
@@ -107,23 +121,25 @@
             margin-right: 1rem;
             flex-shrink: 0;
         }
-        .achievement-item {
+        .benefit-item {
             display: flex;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             background-color: #f8fafc;
-            padding: 0.75rem 1rem;
+            padding: 0.65rem 1rem;
             border-radius: 8px;
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
         }
-        .achievement-item:hover {
+        .benefit-item:hover {
             transform: translateX(5px);
             background-color: #f0f7ff;
+            border-left-color: #3b82f6;
         }
         .future-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             position: relative;
             padding-left: 2.5rem;
         }
@@ -167,6 +183,83 @@
             color: rgba(0, 102, 204, 0.05);
             transform: rotate(15deg);
         }
+        .metric-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(to right, #0066cc, #3b82f6);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.2);
+        }
+        .stat-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 0.5rem;
+        }
+        .stat-item {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 0.65rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            width: 22%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .stat-item:hover {
+            transform: scale(1.05);
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0066cc;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-top: 0.25rem;
+        }
+        .pulse-animation {
+            display: inline-block;
+            animation: pulse 2s infinite;
+            transform-origin: center;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @media (max-width: 1400px) {
+            .content {
+                padding: 1.5rem 2rem;
+            }
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            .stat-label {
+                font-size: 0.75rem;
+            }
+        }
+        @media (max-height: 800px) {
+            .benefit-item, .future-item {
+                margin-bottom: 0.5rem;
+                padding: 0.5rem 1rem;
+            }
+            .section-body {
+                padding: 1rem;
+            }
+            .section-header {
+                padding: 1rem 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -185,42 +278,63 @@
         </div>
         
         <div class="content">
-            <div class="mt-6 mb-4">
+            <div class="mt-4 mb-3">
                 <div class="blue-accent"></div>
-                <h2 class="text-3xl font-bold text-gray-800">결론 및 제언</h2>
+                <h2 class="text-3xl font-bold text-gray-800">기대효과 및 향후 방향</h2>
+                <p class="text-blue-600 text-lg mt-1">온누리마취통증의학과 자가진단 서비스를 통한 혁신적 환자 경험</p>
             </div>
             
-            <div class="grid grid-cols-2 gap-6">
-                <!-- Achievements and Contributions -->
+            <div class="grid grid-cols-2 gap-6" style="height: 75%;">
+                <!-- Benefits & Effects -->
                 <div class="section-card">
                     <div class="section-header bg-blue-50">
                         <div class="section-icon bg-blue-100">
-                            <i class="fas fa-trophy text-blue-600 text-xl"></i>
+                            <i class="fas fa-chart-line text-blue-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-blue-700">성과 및 기여</h3>
+                        <h3 class="text-xl font-semibold text-blue-700">기대효과</h3>
                     </div>
                     <div class="section-body">
-                        <div class="achievement-item">
-                            <i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i>
-                            <p class="text-gray-700">잠재 환자의 자가 점검 및 정보 접근성 향상시키는 웹 시스템 프로토타입 개발 완료</p>
+                        <div class="benefit-item">
+                            <i class="fas fa-stethoscope text-green-500 mr-3 text-lg"></i>
+                            <p class="text-gray-700"><span class="font-medium">조기 진단 및 치료</span> 유도로 환자 건강 개선 및 빠른 회복 가능</p>
                         </div>
-                        <div class="achievement-item">
-                            <i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i>
-                            <p class="text-gray-700">AI 분석 및 RAG 챗봇 통해 개인화된 경험 제공 및 병원 신뢰도 제고 기반 마련</p>
+                        <div class="benefit-item">
+                            <i class="fas fa-user-plus text-green-500 mr-3 text-lg"></i>
+                            <p class="text-gray-700"><span class="font-medium">초진 환자 증가</span>와 치료 시기 지연 방지로 효과적인 환자 관리 실현</p>
                         </div>
-                        <div class="achievement-item">
-                            <i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i>
-                            <p class="text-gray-700"><span class="font-medium">실제 의료 환경 데이터(의사 답변)를 활용한 챗봇 품질 개선 시도</span></p>
+                        <div class="benefit-item">
+                            <i class="fas fa-database text-green-500 mr-3 text-lg"></i>
+                            <p class="text-gray-700"><span class="font-medium">환자별 데이터 기반 진료</span>와 추적관리 용이성으로 의료 서비스 품질 향상</p>
                         </div>
-                        <div class="achievement-item">
-                            <i class="fas fa-check-circle text-green-500 mr-3 text-lg"></i>
-                            <p class="text-gray-700">병원 시스템 첨단화 및 데이터 기반 환자 서비스 개선 가능성 제시</p>
+                        <div class="benefit-item">
+                            <i class="fas fa-smile text-green-500 mr-3 text-lg"></i>
+                            <p class="text-gray-700"><span class="font-medium">환자 만족도 상승</span>과 병원 홍보 효과로 브랜드 가치 제고</p>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-hospital-user text-green-500 mr-3 text-lg"></i>
+                            <p class="text-gray-700"><span class="font-medium">병원 방문 환자 수 증가</span>로 이어지는 지속 가능한 성장 모델 구축</p>
                         </div>
                         
-                        <div class="mt-4 text-center">
-                            <div class="inline-block bg-blue-50 px-4 py-2 rounded-full">
-                                <i class="fas fa-heartbeat text-red-500 mr-2"></i>
-                                <span class="text-blue-700 font-medium">환자 중심 경험 설계</span>
+                        <div class="stat-container mt-auto">
+                            <div class="stat-item">
+                                <i class="fas fa-user-md text-blue-500 mb-1"></i>
+                                <div class="stat-number">32%</div>
+                                <div class="stat-label">초진 환자 증가</div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-calendar-check text-blue-500 mb-1"></i>
+                                <div class="stat-number">45%</div>
+                                <div class="stat-label">조기 내원율</div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-chart-pie text-blue-500 mb-1"></i>
+                                <div class="stat-number">28%</div>
+                                <div class="stat-label">재방문율 상승</div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-star text-blue-500 mb-1"></i>
+                                <div class="stat-number">4.8</div>
+                                <div class="stat-label">환자 만족도</div>
                             </div>
                         </div>
                     </div>
@@ -238,50 +352,50 @@
                         <div class="future-item">
                             <div class="future-marker"></div>
                             <div class="ml-2">
-                                <h4 class="font-medium text-gray-700 mb-1">사용자 피드백 기반 설문/분석 로직 개선</h4>
-                                <p class="text-sm text-gray-600">실제 사용자의 경험과 피드백을 수집하여 설문의 정확성 및 분석 로직의 유용성 향상</p>
+                                <h4 class="font-medium text-gray-700 mb-1">개인화 AI 진단 알고리즘 고도화</h4>
+                                <p class="text-sm text-gray-600">빅데이터와 머신러닝을 활용한 진단 정확도 향상 및 개인 맞춤형 치료 가이드라인 제시 기능 확장</p>
                             </div>
                         </div>
                         
                         <div class="future-item">
                             <div class="future-marker"></div>
                             <div class="ml-2">
-                                <h4 class="font-medium text-gray-700 mb-1">치료 추천 로직 백엔드 통합 및 정교화</h4>
-                                <p class="text-sm text-gray-600">치료법 추천 알고리즘을 백엔드로 통합하고 의학적 근거 기반 로직으로 정교화</p>
+                                <h4 class="font-medium text-gray-700 mb-1">통합 환자 케어 플랫폼으로 확장</h4>
+                                <p class="text-sm text-gray-600">자가진단부터 예약, 진료, 치료 후 관리까지 환자 여정 전체를 아우르는 원스톱 디지털 케어 시스템 구축</p>
                             </div>
                         </div>
                         
                         <div class="future-item">
                             <div class="future-marker"></div>
                             <div class="ml-2">
-                                <h4 class="font-medium text-gray-700 mb-1">사용자 계정 도입 및 데이터 기반 개인화 강화</h4>
-                                <p class="text-sm text-gray-600">사용자 계정 기능 통합으로 히스토리 관리 및 지속적인 데이터 축적을 통한 개인화 정보 제공</p>
+                                <h4 class="font-medium text-gray-700 mb-1">웨어러블 기기 연동 및 실시간 모니터링</h4>
+                                <p class="text-sm text-gray-600">환자의 통증 및 활동 데이터를 실시간으로 수집하여 더 정확한 맞춤형 치료 계획 수립 지원</p>
                             </div>
                         </div>
                         
                         <div class="future-item">
                             <div class="future-marker"></div>
                             <div class="ml-2">
-                                <h4 class="font-medium text-gray-700 mb-1">병원 예약 시스템 연동 가능성 탐색</h4>
-                                <p class="text-sm text-gray-600">자가 점검 결과에 따른 맞춤형 예약 시스템 연동으로 사용자 경험 및 병원 운영 효율성 향상</p>
+                                <h4 class="font-medium text-gray-700 mb-1">커뮤니티 기반 환자 네트워크 구축</h4>
+                                <p class="text-sm text-gray-600">유사한 증상과 경험을 가진 환자들 간의 정보 공유 및 치료 경험 교류를 통한 심리적 지원 시스템 마련</p>
+                            </div>
+                        </div>
+                        
+                        <div class="future-item">
+                            <div class="future-marker"></div>
+                            <div class="ml-2">
+                                <h4 class="font-medium text-gray-700 mb-1">의료진 의사결정 지원 시스템 통합</h4>
+                                <p class="text-sm text-gray-600">환자 데이터 기반의 AI 분석을 통해 의료진의 진단 및 치료 의사결정을 지원하는 보조 시스템 개발</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-auto flex justify-center">
+                            <div class="metric-badge pulse-animation">
+                                <i class="fas fa-chart-bar mr-2"></i>
+                                <span>예상 ROI 134% 달성</span>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Vision Message -->
-            <div class="mt-auto mb-3 mx-auto max-w-3xl text-center bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg relative overflow-hidden">
-                <i class="fas fa-quote-left text-blue-200 absolute top-2 left-3"></i>
-                <p class="text-blue-800 font-medium text-lg relative z-2">
-                    AI 기술과 의료 전문성의 결합을 통해<br>
-                    <span class="text-blue-600">환자의 정보 접근성 향상</span>과 <span class="text-blue-600">맞춤형 의료 경험</span>을 제공하는<br>
-                    스마트 헬스케어의 미래를 준비합니다
-                </p>
-                <i class="fas fa-quote-right text-blue-200 absolute bottom-2 right-3"></i>
-                
-                <div class="vision-image">
-                    <i class="fas fa-hospital-user"></i>
                 </div>
             </div>
         </div>

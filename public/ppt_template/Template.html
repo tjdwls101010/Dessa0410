@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온누리마취통증의학과 슬라이드 템플릿</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Prevent scrollbars if content slightly overflows */
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f5faff 0%, #e6f3ff 100%);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 5% 10%, rgba(0, 102, 204, 0.06) 0%, rgba(0, 102, 204, 0) 40%),
+                radial-gradient(circle at 95% 90%, rgba(84, 199, 236, 0.08) 0%, rgba(84, 199, 236, 0) 50%);
+            z-index: 1;
+        }
+        .pattern {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%230066cc' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-size: 80px 80px;
+            opacity: 0.5;
+            z-index: 1;
+            transform: rotate(-15deg);
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            padding: 2rem 3.5rem; /* Adjusted padding */
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 4rem); /* Adjust height considering padding */
+        }
+        .logo-area {
+            position: absolute;
+            top: 2rem; /* Adjusted */
+            right: 3rem; /* Adjusted */
+            display: flex;
+            align-items: center;
+            z-index: 3;
+        }
+        .logo-icon {
+            font-size: 1.8rem; /* Adjusted */
+            color: #0066cc;
+            margin-right: 0.5rem; /* Adjusted */
+        }
+        .blue-accent {
+            width: 70px; /* Adjusted */
+            height: 6px; /* Adjusted */
+            background-color: #0066cc;
+            margin-bottom: 1rem; /* Adjusted */
+            border-radius: 3px;
+        }
+        .goal-card {
+            background-color: white;
+            border-radius: 8px; /* Adjusted */
+            padding: 1.2rem; /* Adjusted padding */
+            box-shadow: 0 4px 10px rgba(0, 102, 204, 0.07); /* Adjusted shadow */
+            border-left: 4px solid #0066cc;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .goal-card:hover {
+            transform: translateY(-4px); /* Adjusted */
+            box-shadow: 0 6px 15px rgba(0, 102, 204, 0.1); /* Adjusted */
+        }
+        .goal-card h3 {
+            display: flex;
+            align-items: center;
+            font-size: 1rem; /* Adjusted title size */
+        }
+        .goal-card h3 i {
+            width: 22px; /* Adjusted */
+            text-align: center;
+        }
+        .goal-card ul {
+            margin-top: 0.5rem; /* Adjusted space */
+            flex-grow: 1;
+        }
+        .goal-card ul li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.4rem; /* Adjusted space */
+            font-size: 0.8rem; /* Slightly smaller list item text */
+            line-height: 1.5; /* Adjust line height */
+        }
+        .goal-card ul li i {
+            margin-top: 0.15rem; /* Adjusted icon alignment */
+            color: #22c55e;
+            margin-right: 0.5rem; /* Adjusted */
+            flex-shrink: 0;
+            font-size: 0.7rem; /* Smaller icon */
+        }
+        .highlight {
+            font-weight: 500; /* Adjusted */
+            color: #005aa0;
+            background-color: rgba(84, 199, 236, 0.12); /* Adjusted */
+            padding: 0.1rem 0.3rem; /* Adjusted */
+            border-radius: 3px;
+            display: inline-block;
+            margin: 0.05rem 0; /* Adjusted */
+        }
+        .scope-card {
+            background-color: #eef7ff;
+            border-left-color: #54c7ec;
+        }
+        .warning-box {
+            background-color: #fff1f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+            font-weight: 500;
+            padding: 0.6rem 0.8rem; /* Adjusted padding */
+            border-radius: 5px; /* Adjusted */
+            display: inline-flex;
+            align-items: center;
+            margin-top: 0.5rem; /* Adjusted space */
+            font-size: 0.8rem; /* Smaller warning text */
+        }
+        .warning-box i {
+            margin-right: 0.5rem; /* Adjusted */
+            font-size: 1rem; /* Adjusted */
+        }
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 1rem; /* Reduced margin-top */
+            margin-bottom: 0.5rem; /* Reduced margin-bottom */
+            padding: 0.8rem 0; /* Adjusted padding */
+            background-color: rgba(255, 255, 255, 0.4); /* Adjusted */
+            border-radius: 8px; /* Adjusted */
+            box-shadow: inset 0 0 10px rgba(0, 102, 204, 0.04); /* Adjusted */
+        }
+        .flow-steps {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            width: 90%; /* Adjusted width */
+            margin: 0 auto;
+            position: relative;
+        }
+        .flow-arrow {
+            font-size: 2rem; /* Adjusted arrows */
+            color: #54c7ec;
+            margin: 0 0.8rem; /* Adjusted space */
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+        .flow-box {
+            background-color: white;
+            border-radius: 8px; /* Adjusted */
+            padding: 1rem; /* Adjusted padding */
+            width: 180px; /* Adjusted width */
+            min-height: 130px; /* Adjusted height */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* Adjusted */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e8f0f5; /* Adjusted */
+            position: relative;
+            z-index: 2;
+        }
+        .flow-box:hover {
+            transform: translateY(-5px) scale(1.02); /* Adjusted */
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.12); /* Adjusted */
+            border-color: #0066cc;
+        }
+        .flow-icon-container {
+            width: 50px; /* Adjusted icon container */
+            height: 50px;
+            background: linear-gradient(135deg, #eaf4ff, #dcefff); /* Adjusted */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.75rem; /* Adjusted space */
+            box-shadow: 0 2px 3px rgba(0, 102, 204, 0.08); /* Adjusted */
+        }
+        .flow-icon {
+            color: #0066cc;
+            font-size: 1.5rem; /* Adjusted icon */
+        }
+        .flow-box .title {
+            font-weight: 600;
+            color: #1e3a8a;
+            font-size: 0.85rem; /* Adjusted font size */
+            margin-bottom: 0.2rem; /* Adjusted */
+        }
+        .flow-box .description {
+            font-size: 0.7rem; /* Adjusted description size */
+            color: #4b5563;
+            line-height: 1.3; /* Adjusted */
+        }
+        .bottom-icon {
+            position: absolute;
+            bottom: 1.5rem; /* Adjusted */
+            left: 2.5rem; /* Adjusted */
+            font-size: 2.5rem; /* Adjusted icon */
+            color: rgba(84, 199, 236, 0.12); /* Adjusted */
+            z-index: 1;
+            transform: rotate(-10deg);
+        }
+
+        /* 새로 추가된 차트와 이미지 관련 스타일 */
+        .chart-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 102, 204, 0.07);
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .chart-container:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0, 102, 204, 0.1);
+        }
+        
+        .chart-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .chart-content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .chart-image {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .data-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 102, 204, 0.07);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .data-card .data-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .data-card .data-title i {
+            margin-right: 0.4rem;
+            color: #0066cc;
+        }
+        
+        .data-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0066cc;
+        }
+        
+        .trend-up {
+            color: #22c55e;
+        }
+        
+        .trend-down {
+            color: #dc2626;
+        }
+        
+        .list-with-checkmark {
+            margin-top: 0.5rem;
+        }
+        
+        .list-with-checkmark li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+        
+        .list-with-checkmark li i {
+            margin-top: 0.15rem;
+            margin-right: 0.5rem;
+            color: #22c55e;
+            flex-shrink: 0;
+        }
+        
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .content-section {
+            margin-bottom: 1rem;
+        }
+        
+        .ai-message-box {
+            background-color: #f0f9ff;
+            border-radius: 12px;
+            padding: 1rem;
+            border-left: 4px solid #0ea5e9;
+            margin-top: 1rem;
+            position: relative;
+        }
+        
+        .ai-message-box .ai-icon {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background-color: #0ea5e9;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .ai-message-content {
+            padding-top: 0.5rem;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        
+        .image-box {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        .image-box img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 102, 204, 0.1);
+        }
+        
+        .age-group-legend {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.7rem;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-bg"></div>
+        <div class="pattern"></div>
+
+        <!-- Logo area -->
+        <div class="logo-area">
+            <i class="fas fa-hospital-user logo-icon"></i>
+            <div class="text-lg font-semibold text-gray-700">온누리마취통증의학과</div> <!-- Adjusted size -->
+        </div>
+
+        <div class="content">
+            <div class="mb-4"> <!-- Reduced margin -->
+                <div class="blue-accent"></div>
+                <h2 class="text-3xl font-bold text-gray-800">슬라이드 제목</h2> <!-- Adjusted size -->
+            </div>
+
+            <!-- 슬라이드 내용 영역 -->
+            <div class="slide-content-area">
+                <!-- 여기에 슬라이드 내용을 채워넣으세요 -->
+                <!-- 
+                사용 가능한 요소들:
+                1. 카드(goal-card 클래스) - 좌측 블루 보더 포함
+                2. 하이라이트 텍스트(highlight 클래스)
+                3. 경고 박스(warning-box 클래스)
+                4. 플로우 차트(flow-container, flow-steps, flow-box 클래스들)
+                5. 아이콘(Font Awesome)
+                6. 차트 컨테이너(chart-container 클래스)
+                7. 데이터 그리드(data-grid 클래스)
+                8. 데이터 카드(data-card 클래스)
+                9. 두 열 레이아웃(two-column-layout 클래스)
+                10. AI 메시지 박스(ai-message-box 클래스)
+                11. 이미지 박스(image-box 클래스)
+                12. 체크 리스트(list-with-checkmark 클래스)
+                13. 연령대별 색상 범례(age-group-legend 클래스)
+                -->
+            </div>
+            
+            <!-- 필요한 경우 하단 아이콘 활성화 -->
+            <!-- <i class="fas fa-cogs bottom-icon"></i> -->
+        </div>
+    </div>
+</body>
+</html>
