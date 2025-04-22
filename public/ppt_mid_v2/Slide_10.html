@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>온누리마취통증의학과 예비 환자 자가 점검 및 안내 시스템 - 기대효과 및 향후 방향</title>
+    <title>온누리마취통증의학과 예비 환자 자가 점검 및 안내 시스템 - 기대효과</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -31,6 +31,15 @@
             background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
             border-radius: 8px;
             aspect-ratio: 16/9;
+        }
+        @media screen and (max-width: 768px) {
+            .slide-container {
+                width: 100vw;
+                height: 56.25vw; /* 16:9 ratio */
+                max-width: none;
+                max-height: none;
+                border-radius: 0;
+            }
         }
         .slide-bg {
             position: absolute;
@@ -63,6 +72,8 @@
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
+            width: 100%;
+            aspect-ratio: 16/9;
         }
         .logo-area {
             position: absolute;
@@ -136,36 +147,17 @@
             background-color: #f0f7ff;
             border-left-color: #3b82f6;
         }
-        .future-item {
+        .benefit-group {
+            margin-bottom: 1rem;
+        }
+        .benefit-group-title {
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+            border-left: 3px solid #0066cc;
             display: flex;
-            align-items: flex-start;
-            margin-bottom: 0.75rem;
-            position: relative;
-            padding-left: 2.5rem;
-        }
-        .future-item:before {
-            content: "";
-            position: absolute;
-            left: 9px;
-            top: 0;
-            bottom: -8px;
-            width: 2px;
-            background-color: #e2e8f0;
-            z-index: 1;
-        }
-        .future-item:last-child:before {
-            display: none;
-        }
-        .future-marker {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: white;
-            border: 2px solid #0066cc;
-            z-index: 2;
+            align-items: center;
         }
         .digital-element {
             position: absolute;
@@ -197,7 +189,8 @@
         .stat-container {
             display: flex;
             justify-content: space-around;
-            margin-top: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
         }
         .stat-item {
             text-align: center;
@@ -206,6 +199,7 @@
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             width: 22%;
+            margin-bottom: 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -237,6 +231,14 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+        .benefit-columns {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .benefit-column {
+            flex: 1;
+        }
         @media (max-width: 1400px) {
             .content {
                 padding: 1.5rem 2rem;
@@ -247,9 +249,12 @@
             .stat-label {
                 font-size: 0.75rem;
             }
+            .benefit-columns {
+                flex-direction: column;
+            }
         }
         @media (max-height: 800px) {
-            .benefit-item, .future-item {
+            .benefit-item {
                 margin-bottom: 0.5rem;
                 padding: 0.5rem 1rem;
             }
@@ -280,121 +285,93 @@
         <div class="content">
             <div class="mt-4 mb-3">
                 <div class="blue-accent"></div>
-                <h2 class="text-3xl font-bold text-gray-800">기대효과 및 향후 방향</h2>
+                <h2 class="text-3xl font-bold text-gray-800">기대효과</h2>
                 <p class="text-blue-600 text-lg mt-1">온누리마취통증의학과 자가진단 서비스를 통한 혁신적 환자 경험</p>
             </div>
             
-            <div class="grid grid-cols-2 gap-6" style="height: 75%;">
+            <div style="height: 75%;">
                 <!-- Benefits & Effects -->
                 <div class="section-card">
                     <div class="section-header bg-blue-50">
                         <div class="section-icon bg-blue-100">
                             <i class="fas fa-chart-line text-blue-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-blue-700">기대효과</h3>
+                        <h3 class="text-xl font-semibold text-blue-700">자가진단 서비스의 기대효과</h3>
                     </div>
                     <div class="section-body">
-                        <div class="benefit-item">
-                            <i class="fas fa-stethoscope text-green-500 mr-3 text-lg"></i>
-                            <p class="text-gray-700"><span class="font-medium">조기 진단 및 치료</span> 유도로 환자 건강 개선 및 빠른 회복 가능</p>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-user-plus text-green-500 mr-3 text-lg"></i>
-                            <p class="text-gray-700"><span class="font-medium">초진 환자 증가</span>와 치료 시기 지연 방지로 효과적인 환자 관리 실현</p>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-database text-green-500 mr-3 text-lg"></i>
-                            <p class="text-gray-700"><span class="font-medium">환자별 데이터 기반 진료</span>와 추적관리 용이성으로 의료 서비스 품질 향상</p>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-smile text-green-500 mr-3 text-lg"></i>
-                            <p class="text-gray-700"><span class="font-medium">환자 만족도 상승</span>과 병원 홍보 효과로 브랜드 가치 제고</p>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-hospital-user text-green-500 mr-3 text-lg"></i>
-                            <p class="text-gray-700"><span class="font-medium">병원 방문 환자 수 증가</span>로 이어지는 지속 가능한 성장 모델 구축</p>
-                        </div>
-                        
-                        <div class="stat-container mt-auto">
-                            <div class="stat-item">
-                                <i class="fas fa-user-md text-blue-500 mb-1"></i>
-                                <div class="stat-number">32%</div>
-                                <div class="stat-label">초진 환자 증가</div>
+                        <div class="benefit-columns">
+                            <div class="benefit-column">
+                                <div class="benefit-group">
+                                    <div class="benefit-group-title">
+                                        <i class="fas fa-heart-pulse text-red-500 mr-2"></i>
+                                        환자 만족도 극대화
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-search-plus text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">조기 발견 & 골든타임 확보</span> - 미세한 이상 신호도 놓치지 않고 포착하여 최적의 치료 시기를 선점합니다.</p>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-book-medical text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">건강 정보 이해도 증진</span> - 어려운 의학 정보 대신, 쉽고 명확한 리포트로 건강 상태를 정확히 이해하고 관리합니다.</p>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-user-shield text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">능동적 건강 관리 실현</span> - 환자가 치료 과정에 적극 참여하며 스스로 건강을 관리하는 주체가 됩니다.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="stat-item">
-                                <i class="fas fa-calendar-check text-blue-500 mb-1"></i>
-                                <div class="stat-number">45%</div>
-                                <div class="stat-label">조기 내원율</div>
-                            </div>
-                            <div class="stat-item">
-                                <i class="fas fa-chart-pie text-blue-500 mb-1"></i>
-                                <div class="stat-number">28%</div>
-                                <div class="stat-label">재방문율 상승</div>
-                            </div>
-                            <div class="stat-item">
-                                <i class="fas fa-star text-blue-500 mb-1"></i>
-                                <div class="stat-number">4.8</div>
-                                <div class="stat-label">환자 만족도</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Future Directions -->
-                <div class="section-card">
-                    <div class="section-header bg-blue-50">
-                        <div class="section-icon bg-blue-100">
-                            <i class="fas fa-rocket text-blue-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-blue-700">향후 방향</h3>
-                    </div>
-                    <div class="section-body">
-                        <div class="future-item">
-                            <div class="future-marker"></div>
-                            <div class="ml-2">
-                                <h4 class="font-medium text-gray-700 mb-1">개인화 AI 진단 알고리즘 고도화</h4>
-                                <p class="text-sm text-gray-600">빅데이터와 머신러닝을 활용한 진단 정확도 향상 및 개인 맞춤형 치료 가이드라인 제시 기능 확장</p>
+                            
+                            <div class="benefit-column">
+                                <div class="benefit-group">
+                                    <div class="benefit-group-title">
+                                        <i class="fas fa-hospital text-blue-500 mr-2"></i>
+                                        병원 경쟁력 강화
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-user-plus text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">신규 환자 유치 증대</span> - 차별화된 리포트 제공으로 자연스러운 환자 유입을 유도하고 잠재 고객을 확보합니다.</p>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-building text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">병원 브랜드 이미지 제고</span> - 첨단 데이터 시스템 도입으로 신뢰도 높은 의료기관 이미지를 구축합니다.</p>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-tasks text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">진료 효율성 & 관리 용이성 향상</span> - 데이터 기반의 체계적인 진료 및 환자 관리로 업무 효율성을 극대화합니다.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="future-item">
-                            <div class="future-marker"></div>
-                            <div class="ml-2">
-                                <h4 class="font-medium text-gray-700 mb-1">통합 환자 케어 플랫폼으로 확장</h4>
-                                <p class="text-sm text-gray-600">자가진단부터 예약, 진료, 치료 후 관리까지 환자 여정 전체를 아우르는 원스톱 디지털 케어 시스템 구축</p>
+                        <div class="benefit-group">
+                            <div class="benefit-group-title">
+                                <i class="fas fa-chart-bar text-green-500 mr-2"></i>
+                                자가진단 서비스 도입 기대 효과
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <i class="fas fa-briefcase-medical text-green-500 mr-3 text-lg"></i>
+                                <p class="text-gray-700"><span class="font-medium">치료율 및 예후 개선</span> - 증상의 조기 포착을 통해 환자의 전반적인 건강 상태와 치료 효과를 향상시킵니다.</p>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <i class="fas fa-clock text-green-500 mr-3 text-lg"></i>
+                                <p class="text-gray-700"><span class="font-medium">초진 상담 시간 단축</span> - 사전 정보 수집으로 의료진의 초진 상담 시간이 평균 27% 단축되어 업무 효율성이 증가합니다.</p>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <i class="fas fa-comment-medical text-green-500 mr-3 text-lg"></i>
+                                <p class="text-gray-700"><span class="font-medium">환자-의사 소통 개선</span> - 체계적인 증상 파악으로 더 정확하고 효과적인 의사소통이 가능해집니다.</p>
                             </div>
                         </div>
                         
-                        <div class="future-item">
-                            <div class="future-marker"></div>
-                            <div class="ml-2">
-                                <h4 class="font-medium text-gray-700 mb-1">웨어러블 기기 연동 및 실시간 모니터링</h4>
-                                <p class="text-sm text-gray-600">환자의 통증 및 활동 데이터를 실시간으로 수집하여 더 정확한 맞춤형 치료 계획 수립 지원</p>
-                            </div>
-                        </div>
-                        
-                        <div class="future-item">
-                            <div class="future-marker"></div>
-                            <div class="ml-2">
-                                <h4 class="font-medium text-gray-700 mb-1">커뮤니티 기반 환자 네트워크 구축</h4>
-                                <p class="text-sm text-gray-600">유사한 증상과 경험을 가진 환자들 간의 정보 공유 및 치료 경험 교류를 통한 심리적 지원 시스템 마련</p>
-                            </div>
-                        </div>
-                        
-                        <div class="future-item">
-                            <div class="future-marker"></div>
-                            <div class="ml-2">
-                                <h4 class="font-medium text-gray-700 mb-1">의료진 의사결정 지원 시스템 통합</h4>
-                                <p class="text-sm text-gray-600">환자 데이터 기반의 AI 분석을 통해 의료진의 진단 및 치료 의사결정을 지원하는 보조 시스템 개발</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-auto flex justify-center">
-                            <div class="metric-badge pulse-animation">
-                                <i class="fas fa-chart-bar mr-2"></i>
-                                <span>예상 ROI 134% 달성</span>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
