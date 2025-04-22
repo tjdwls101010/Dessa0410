@@ -3,237 +3,379 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>온누리마취통증의학과 - 기대 효과</title>
+    <title>온누리마취통증의학과 예비 환자 자가 점검 및 안내 시스템 - 기대효과</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
             background-color: #f0f4f8;
+            height: 100vh;
+            width: 100vw;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 1rem;
             overflow: hidden;
         }
         .slide-container {
-            width: 1280px;
-            height: 720px;
-            background: linear-gradient(135deg, #eef7ff 0%, #d8ecff 100%); /* Slightly brighter gradient */
-            border-radius: 12px;
-            box-shadow: 0 15px 30px rgba(0, 80, 160, 0.15);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            max-width: 177.78vh; /* 16:9 ratio */
+            max-height: 56.25vw; /* 16:9 ratio */
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border-radius: 8px;
+            aspect-ratio: 16/9;
+        }
+        @media screen and (max-width: 768px) {
+            .slide-container {
+                width: 100vw;
+                height: 56.25vw; /* 16:9 ratio */
+                max-width: none;
+                max-height: none;
+                border-radius: 0;
+            }
         }
         .slide-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(circle at 10% 15%, rgba(0, 102, 204, 0.08) 0%, rgba(0, 102, 204, 0) 45%),
-                              radial-gradient(circle at 90% 85%, rgba(84, 199, 236, 0.1) 0%, rgba(84, 199, 236, 0) 55%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(0, 102, 204, 0.05) 0%, rgba(0, 102, 204, 0) 50%),
+                radial-gradient(circle at 20% 80%, rgba(84, 199, 236, 0.05) 0%, rgba(84, 199, 236, 0) 50%);
             z-index: 1;
         }
         .pattern {
-            position: absolute; bottom: -60px; right: -60px; width: 350px; height: 350px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%230066cc' fill-opacity='0.04'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            background-size: 90px 90px; opacity: 0.6; z-index: 1; transform: rotate(-10deg);
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/JamieCorkhill/tailwind-background-patterns@1.1.1/patterns/hexagons.svg');
+            background-size: 200px 200px;
+            background-repeat: repeat;
+            opacity: 0.04;
+            z-index: 1;
         }
         .content {
-            position: relative; z-index: 2; flex-grow: 1;
-            padding: 2.5rem 4rem; /* Increased padding */
-            display: flex; flex-direction: column;
-            height: calc(100% - 5rem); /* Adjusted height */
-            overflow-y: auto;
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            width: 100%;
+            aspect-ratio: 16/9;
         }
         .logo-area {
-            position: absolute; top: 2.5rem; right: 3.5rem; display: flex;
-            align-items: center; z-index: 10;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            z-index: 3;
         }
-        .logo-icon { font-size: 2rem; color: #0066cc; margin-right: 0.7rem; }
-        .logo-text { font-size: 1.2rem; font-weight: 700; color: #343a40; }
-        .slide-title { margin-bottom: 2.5rem; position: relative; z-index: 5; }
-        .slide-title h2 { font-size: 2.2rem; font-weight: 900; color: #1d3557; } /* Bolder title */
-        .slide-title .subtitle { font-size: 1.1rem; color: #005aa0; font-weight: 500; margin-top: 0.3rem; }
-        .blue-accent { width: 80px; height: 6px; background-color: #0066cc; border-radius: 3px; margin-top: 0.5rem; }
-
-        .main-content-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 columns for Patient/Hospital */
-            gap: 2rem; /* Increased gap */
-            position: relative; z-index: 5; flex-grow: 1;
-            align-items: start; /* Align items to the top */
-        }
-        .win-column {
-            display: flex; flex-direction: column; gap: 1.5rem;
-        }
-        .win-title {
-            font-size: 1.6rem; font-weight: 700; color: #1d3557;
-            margin-bottom: 1rem; text-align: center;
-            display: flex; align-items: center; justify-content: center; gap: 0.8rem;
-        }
-        .win-title i { color: #0066cc; }
-
-        .benefit-card {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 12px; padding: 1.5rem; /* Increased padding */
-            box-shadow: 0 6px 15px rgba(0, 102, 204, 0.1);
-            border: 1px solid rgba(210, 228, 245, 0.7);
-            display: flex; align-items: flex-start; /* Align icon and text */
-            gap: 1.2rem; /* Gap between icon and text */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(8px);
-        }
-        .benefit-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 12px 25px rgba(0, 102, 204, 0.2);
-        }
-        .benefit-icon {
-            font-size: 2rem; /* Larger icon */
+        .logo-icon {
+            font-size: 2rem;
             color: #0066cc;
-            margin-top: 0.2rem; /* Align icon slightly lower */
-            width: 40px; text-align: center; flex-shrink: 0;
+            margin-right: 0.5rem;
         }
-        .benefit-text h4 {
-            font-size: 1.15rem; font-weight: 700; color: #1d3557; margin-bottom: 0.4rem;
+        .blue-accent {
+            width: 60px;
+            height: 6px;
+            background-color: #0066cc;
+            margin-bottom: 1rem;
+            border-radius: 3px;
         }
-        .benefit-text p {
-            font-size: 0.95rem; color: #495057; line-height: 1.6;
-        }
-        .highlight {
-            font-weight: 700; color: #005aa0;
-            background-color: rgba(84, 199, 236, 0.25);
-            padding: 0.15rem 0.4rem; border-radius: 5px;
-            box-decoration-break: clone; -webkit-box-decoration-break: clone;
-        }
-        .result-box {
-            margin-top: 1.2rem; padding: 1rem;
-            background-color: rgba(0, 102, 204, 0.08);
-            border-radius: 8px; text-align: center;
-            border-left: 4px solid #0066cc;
-        }
-        .result-box p {
-            font-size: 1.05rem; font-weight: 700; color: #005aa0;
-        }
-        .result-box i { margin-right: 0.5rem; color: #0066cc; }
-
-        .goal-section {
-            grid-column: span 2; /* Span across both columns */
-            margin-top: 1.5rem; padding: 1.8rem;
-            background: linear-gradient(135deg, #ffffff, #f8fcff);
+        .section-card {
+            background-color: white;
             border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 80, 160, 0.12);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .section-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(0, 102, 204, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        .section-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            background-color: #f8fafc;
+            padding: 0.65rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .benefit-item:hover {
+            transform: translateX(5px);
+            background-color: #f0f7ff;
+            border-left-color: #3b82f6;
+        }
+        .benefit-group {
+            margin-bottom: 1rem;
+        }
+        .benefit-group-title {
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+            border-left: 3px solid #0066cc;
+            display: flex;
+            align-items: center;
+        }
+        .digital-element {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 1px solid rgba(0, 102, 204, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .vision-image {
+            position: absolute;
+            bottom: -40px;
+            right: -30px;
+            font-size: 7rem;
+            color: rgba(0, 102, 204, 0.05);
+            transform: rotate(15deg);
+        }
+        .metric-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(to right, #0066cc, #3b82f6);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.2);
+        }
+        .stat-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .stat-item {
             text-align: center;
-            border-top: 4px solid #54c7ec;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 0.65rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            width: 22%;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
         }
-        .goal-title {
-            font-size: 1.5rem; font-weight: 700; color: #1d3557; margin-bottom: 1rem;
-            display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+        .stat-item:hover {
+            transform: scale(1.05);
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .goal-title i { color: #54c7ec; }
-        .goal-description {
-            font-size: 1.1rem; color: #495057; line-height: 1.7;
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0066cc;
+            line-height: 1.2;
         }
-        .cycle-arrow {
-            font-size: 1.5rem; color: #0066cc; margin: 0 0.5rem;
+        .stat-label {
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-top: 0.25rem;
         }
-
-        .bottom-icon-container {
-            position: absolute; bottom: 1.5rem; left: 3rem; display: flex; gap: 1rem; z-index: 1;
+        .pulse-animation {
+            display: inline-block;
+            animation: pulse 2s infinite;
+            transform-origin: center;
         }
-        .bottom-icon {
-            font-size: 3rem; color: rgba(84, 199, 236, 0.15); transform: rotate(-10deg);
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
-        .bottom-icon.fa-handshake { color: rgba(0, 102, 204, 0.12); transform: rotate(5deg); }
-
-        /* Animation */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .slide-title, .win-column, .goal-section { animation: fadeIn 0.8s ease-out; }
-        .benefit-card { animation: slideUp 0.6s ease-out backwards; }
-        .win-column:nth-child(1) .benefit-card:nth-child(1) { animation-delay: 0.2s; }
-        .win-column:nth-child(1) .benefit-card:nth-child(2) { animation-delay: 0.3s; }
-        .win-column:nth-child(1) .benefit-card:nth-child(3) { animation-delay: 0.4s; }
-        .win-column:nth-child(2) .benefit-card:nth-child(1) { animation-delay: 0.5s; }
-        .win-column:nth-child(2) .benefit-card:nth-child(2) { animation-delay: 0.6s; }
-        .win-column:nth-child(2) .benefit-card:nth-child(3) { animation-delay: 0.7s; }
-        .goal-section { animation-delay: 0.8s; }
-
+        .benefit-columns {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .benefit-column {
+            flex: 1;
+        }
+        @media (max-width: 1400px) {
+            .content {
+                padding: 1.5rem 2rem;
+            }
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            .stat-label {
+                font-size: 0.75rem;
+            }
+            .benefit-columns {
+                flex-direction: column;
+            }
+        }
+        @media (max-height: 800px) {
+            .benefit-item {
+                margin-bottom: 0.5rem;
+                padding: 0.5rem 1rem;
+            }
+            .section-body {
+                padding: 1rem;
+            }
+            .section-header {
+                padding: 1rem 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="slide-container">
+    <div class="slide-container bg-white">
         <div class="slide-bg"></div>
         <div class="pattern"></div>
-
+        
+        <!-- Digital elements -->
+        <div class="digital-element" style="top: -40px; right: 100px;"></div>
+        <div class="digital-element" style="bottom: -60px; left: 80px;"></div>
+        
+        <!-- Logo area -->
+        <div class="logo-area">
+            <i class="fas fa-laptop-medical logo-icon"></i>
+            <div class="text-lg font-medium text-gray-600">온누리마취통증의학과</div>
+        </div>
+        
         <div class="content">
-            <!-- 로고 영역 -->
-            <div class="logo-area">
-                <i class="fas fa-hospital-user logo-icon"></i>
-                <span class="logo-text">온누리마취통증의학과</span>
-            </div>
-
-            <!-- 슬라이드 제목 -->
-            <div class="slide-title">
-                <h2>기대 효과: 환자와 병원 모두를 위한 <span style="color: #0066cc;">Win-Win</span></h2>
-                <div class="subtitle">데이터 기반 맞춤 리포트를 통한 상생 시너지 창출</div>
+            <div class="mt-4 mb-3">
                 <div class="blue-accent"></div>
+                <h2 class="text-3xl font-bold text-gray-800">기대효과</h2>
+                <p class="text-blue-600 text-lg mt-1">온누리마취통증의학과 자가진단 서비스를 통한 혁신적 환자 경험</p>
             </div>
+            
+            <div style="height: 75%;">
+                <!-- Benefits & Effects -->
+                <div class="section-card">
+                    <div class="section-header bg-blue-50">
+                        <div class="section-icon bg-blue-100">
+                            <i class="fas fa-chart-line text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-700">자가진단 서비스의 기대효과</h3>
+                    </div>
+                    <div class="section-body">
+                        <div class="benefit-columns">
+                            <div class="benefit-column">
+                                <div class="benefit-group">
+                                    <div class="benefit-group-title">
+                                        <i class="fas fa-heart-pulse text-red-500 mr-2"></i>
+                                        환자 만족도 극대화
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-search-plus text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">조기 발견 & 골든타임 확보</span> - 미세한 이상 신호도 놓치지 않고 포착하여 최적의 치료 시기를 선점합니다.</p>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-book-medical text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">건강 정보 이해도 증진</span> - 어려운 의학 정보 대신, 쉽고 명확한 리포트로 건강 상태를 정확히 이해하고 관리합니다.</p>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-user-shield text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">능동적 건강 관리 실현</span> - 환자가 치료 과정에 적극 참여하며 스스로 건강을 관리하는 주체가 됩니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-column">
+                                <div class="benefit-group">
+                                    <div class="benefit-group-title">
+                                        <i class="fas fa-hospital text-blue-500 mr-2"></i>
+                                        병원 경쟁력 강화
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-user-plus text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">신규 환자 유치 증대</span> - 차별화된 리포트 제공으로 자연스러운 환자 유입을 유도하고 잠재 고객을 확보합니다.</p>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-building text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">병원 브랜드 이미지 제고</span> - 첨단 데이터 시스템 도입으로 신뢰도 높은 의료기관 이미지를 구축합니다.</p>
+                                    </div>
+                                    
+                                    <div class="benefit-item">
+                                        <i class="fas fa-tasks text-green-500 mr-3 text-lg"></i>
+                                        <p class="text-gray-700"><span class="font-medium">진료 효율성 & 관리 용이성 향상</span> - 데이터 기반의 체계적인 진료 및 환자 관리로 업무 효율성을 극대화합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-group">
+                            <div class="benefit-group-title">
+                                <i class="fas fa-chart-bar text-green-500 mr-2"></i>
+                                자가진단 서비스 도입 기대 효과
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <i class="fas fa-briefcase-medical text-green-500 mr-3 text-lg"></i>
+                                <p class="text-gray-700"><span class="font-medium">치료율 및 예후 개선</span> - 증상의 조기 포착을 통해 환자의 전반적인 건강 상태와 치료 효과를 향상시킵니다.</p>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <i class="fas fa-clock text-green-500 mr-3 text-lg"></i>
+                                <p class="text-gray-700"><span class="font-medium">초진 상담 시간 단축</span> - 사전 정보 수집으로 의료진의 초진 상담 시간이 평균 27% 단축되어 업무 효율성이 증가합니다.</p>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <i class="fas fa-comment-medical text-green-500 mr-3 text-lg"></i>
+                                <p class="text-gray-700"><span class="font-medium">환자-의사 소통 개선</span> - 체계적인 증상 파악으로 더 정확하고 효과적인 의사소통이 가능해집니다.</p>
+                            </div>
+                        </div>
+                        
 
-            <!-- Main Content Grid -->
-            <div class="main-content-grid">
-                <!-- 환자 측면 (Patient Wins) -->
-                <div class="win-column">
-                    <h3 class="win-title"><i class="fas fa-user-injured"></i>환자 만족도 극대화</h3>
-                    <div class="benefit-card">
-                        <i class="fas fa-search-plus benefit-icon"></i>
-                        <div class="benefit-text">
-                            <h4>조기 발견 & 골든타임 확보</h4>
-                            <p>내 몸의 <span class="highlight">미세한 이상 신호</span>도 놓치지 않고 포착하여, 최적의 치료 시기를 선점합니다.</p>
-                        </div>
                     </div>
-                    <div class="benefit-card">
-                        <i class="fas fa-book-medical benefit-icon"></i>
-                        <div class="benefit-text">
-                            <h4>건강 정보 이해도 증진</h4>
-                            <p>어려운 의학 정보 대신, <span class="highlight">쉽고 명확한 리포트</span>로 내 건강 상태를 정확히 이해하고 관리합니다.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-card">
-                        <i class="fas fa-hand-holding-heart benefit-icon"></i>
-                        <div class="benefit-text">
-                            <h4>능동적 건강 관리 실현</h4>
-                            <p>자신의 상태를 인지하고 <span class="highlight">치료 과정에 적극 참여</span>하며, 스스로 건강을 관리하는 주체가 됩니다.</p>
-                        </div>
-                    </div>
-
                 </div>
-
-                <!-- 병원 측면 (Hospital Wins) -->
-                <div class="win-column">
-                    <h3 class="win-title"><i class="fas fa-hospital"></i>병원 경쟁력 강화</h3>
-                    <div class="benefit-card">
-                        <i class="fas fa-users benefit-icon"></i>
-                        <div class="benefit-text">
-                            <h4>신규 환자 유치 증대</h4>
-                            <p>차별화된 리포트 제공을 통해 <span class="highlight">자연스러운 환자 유입</span>을 유도하고 잠재 고객을 확보합니다.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-card">
-                        <i class="fas fa-award benefit-icon"></i>
-                        <div class="benefit-text">
-                            <h4>병원 브랜드 이미지 제고</h4>
-                            <p>첨단 데이터 시스템 도입으로 <span class="highlight">신뢰도 높은 의료기관</span> 이미지를 구축하고 경쟁 우위를 확보합니다.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-card">
-                        <i class="fas fa-cogs benefit-icon"></i>
-                        <div class="benefit-text">
-                            <h4>진료 효율성 & 관리 용이성 향상</h4>
-                            <p>데이터 기반의 <span class="highlight">체계적인 진료 및 환자 관리</span> 시스템으로 업무 효율성을 극대화합니다.</p>
-                        </div>
-                    </div>
-
-                </div>
-
+            </div>
+        </div>
+    </div>
+</body>
+</html>
