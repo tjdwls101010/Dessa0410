@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로젝트 배경</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            overflow: hidden; /* 스크롤 방지 */
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px; /* Fixed 16:9 aspect ratio */
+            background: linear-gradient(135deg, #f5faff 0%, #e6f3ff 100%);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        /* Background effects */
+        .slide-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 5% 10%, rgba(0, 102, 204, 0.06) 0%, rgba(0, 102, 204, 0) 40%),
+                              radial-gradient(circle at 95% 90%, rgba(84, 199, 236, 0.08) 0%, rgba(84, 199, 236, 0) 50%);
+            z-index: 1;
+        }
+        .pattern {
+            position: absolute; bottom: -50px; right: -50px; width: 300px; height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%230066cc' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-size: 80px 80px; opacity: 0.5; z-index: 1; transform: rotate(-15deg);
+        }
+
+        /* 콘텐츠 영역 */
+        .content {
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            padding: 2rem 3.5rem;
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 4rem);
+        }
+
+        /* 로고 영역 */
+        .logo-area {
+            position: absolute;
+            top: 2rem;
+            right: 3rem;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+        }
+        .logo-icon {
+            font-size: 1.8rem;
+            color: #0066cc;
+            margin-right: 0.6rem;
+        }
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        /* 슬라이드 타이틀 */
+        .slide-title {
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 5;
+        }
+        .slide-title h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #1d3557;
+        }
+        .blue-accent {
+            width: 60px;
+            height: 5px;
+            background-color: #0066cc;
+            border-radius: 3px;
+            margin-top: 0.3rem;
+        }
+
+        /* Main Content Grid */
+        .main-content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            position: relative;
+            z-index: 5;
+            flex-grow: 1;
+        }
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Card Styling */
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.08);
+            border: 1px solid rgba(233, 236, 239, 0.6);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            height: fit-content;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 102, 204, 0.15);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        .card-icon {
+            font-size: 1.3rem;
+            color: #0066cc;
+            margin-right: 0.7rem;
+            width: 30px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1d3557;
+        }
+        .card-content ul { list-style: none; padding-left: 0; margin-left: 0; }
+        .card-content li {
+            font-size: 0.88rem;
+            color: #495057;
+            margin-bottom: 0.6rem;
+            line-height: 1.6;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .card-content li::before {
+            content: "✓"; color: #17a2b8; font-weight: bold;
+            display: inline-block; width: 1em; margin-left: -1.2em;
+            position: absolute; left: 0.5rem; top: 1px;
+        }
+        .highlight {
+            font-weight: 600; color: #005aa0;
+            background-color: rgba(84, 199, 236, 0.2);
+            padding: 0.1rem 0.3rem; border-radius: 4px;
+            box-decoration-break: clone; -webkit-box-decoration-break: clone;
+        }
+
+        /* Chart Card Specific Styling */
+        .chart-card {
+            height: 280px;
+            padding-bottom: 2.5rem;
+            position: relative;
+        }
+        .chart-container {
+            position: relative;
+            height: calc(100% - 30px);
+            width: 100%;
+        }
+        .chart-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #6c757d;
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+        }
+        
+        /* Infographic-specific styling */
+        .infographic-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+        .timeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            position: relative;
+            padding-top: 40px;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            top: 60px;
+            left: 2%;
+            width: 96%;
+            height: 3px;
+            background: linear-gradient(to right, #54C7EC, #0066CC);
+            z-index: 1;
+        }
+        .timeline-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 22%;
+        }
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #0066cc;
+            margin-bottom: 10px;
+            z-index: 2;
+        }
+        .timeline-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #495057;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .timeline-stat {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0066cc;
+            text-align: center;
+        }
+        .timeline-trend {
+            font-size: 0.75rem;
+            color: #495057;
+            text-align: center;
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .trend-up {
+            color: #dc3545;
+        }
+        .trend-down {
+            color: #28a745;
+        }
+        
+        /* Hidden spine image */
+        .hidden-spine {
+            position: relative;
+            height: 200px;
+            margin: 10px auto;
+            text-align: center;
+            filter: blur(3px);
+            opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+        .hidden-spine:hover {
+            filter: blur(0);
+            opacity: 1;
+        }
+        .hidden-spine img {
+            height: 100%;
+            object-fit: contain;
+        }
+        .question-mark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            color: #0066cc;
+            z-index: 2;
+        }
+        
+        /* Golden time visualization */
+        .golden-time {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .hourglass {
+            font-size: 2.5rem;
+            color: #ffc107;
+            margin-right: 20px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .conclusion {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1d3557;
+            text-align: center;
+            flex-grow: 1;
+        }
+        
+        /* Key message box */
+        .key-message {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(84, 199, 236, 0.1) 100%);
+            border-left: 4px solid #0066cc;
+            padding: 12px 15px;
+            margin-top: 10px;
+            border-radius: 0 5px 5px 0;
+        }
+        .key-message-title {
+            font-weight: 700;
+            color: #0066cc;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        .key-message-body {
+            font-size: 0.85rem;
+            color: #495057;
+            line-height: 1.6;
+        }
+        
+        /* Bottom elements */
+        .bottom-icon {
+            position: absolute; bottom: 1.5rem; left: 2.5rem; font-size: 2.5rem;
+            color: rgba(84, 199, 236, 0.12); z-index: 1; transform: rotate(-10deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-bg"></div>
+        <div class="pattern"></div>
+        
+        <!-- 콘텐츠 영역 -->
+        <div class="content">
+            <!-- 로고 영역 -->
+            <div class="logo-area">
+                <i class="fas fa-hospital-user logo-icon"></i>
+                <span class="logo-text">온누리마취통증의학과</span>
+            </div>
+            
+            <!-- 슬라이드 제목 -->
+            <div class="slide-title">
+                <h2>프로젝트 배경</h2>
+                <div class="blue-accent"></div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="main-content-grid">
+                <div class="content-column">
+                    <!-- 척추 질환 증가 추세 차트 -->
+                    <div class="card chart-card">
+                        <div class="chart-container">
+                            <canvas id="ageGroupTrendChart"></canvas>
+                        </div>
+                        <div class="chart-label">척추 질환, 더 이상 남의 일이 아닙니다: 지난 10년간 환자 수 증가 추세</div>
+                    </div>
+                    
+                    <!-- 치료 지연의 대가 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-exclamation-triangle card-icon"></i>
+                            <h3 class="card-title">치료 지연의 대가</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="key-message">
+                                <div class="key-message-title">지금 조치하지 않으면 직면하게 될 현실:</div>
+                                <div class="key-message-body">
+                                    <ul>
+                                        <li>시간이 지날수록 <span class="highlight">증상 악화</span> 및 <span class="highlight">만성 통증</span>으로 발전 가능성 증가</li>
+                                        <li>일상 활동 제약 심화로 인한 <span class="highlight">삶의 질 급격한 저하</span></li>
+                                        <li>치료 복잡성 증가 및 <span class="highlight">신경 손상 위험</span> 상승</li>
+                                        <li>치료 지연 시 <span class="highlight">의료 비용 최대 2.5배 증가</span> 및 <span class="highlight">회복 기간 장기화</span></li>
+                                        <li>장기적인 <span class="highlight">생산성 저하</span> 및 <span class="highlight">사회경제적 손실</span> 초래</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-column">
+                    <!-- 진단과 치료 시기 인포그래픽 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-hourglass-half card-icon"></i>
+                            <h3 class="card-title">진단은 빨라졌지만, 치료는 멀어졌습니다</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="infographic-container">
+                                <div class="timeline">
+                                    <div class="timeline-point">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-label">진단 직후</div>
+                                        <div class="timeline-stat">12%</div>
+                                        <div class="timeline-trend"><i class="fas fa-arrow-down trend-down"></i> 8%p</div>
+                                    </div>
+                                    <div class="timeline-point">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-label">1년 내</div>
+                                        <div class="timeline-stat">24%</div>
+                                        <div class="timeline-trend"><i class="fas fa-arrow-down trend-down"></i> 15%p</div>
+                                    </div>
+                                    <div class="timeline-point">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-label">3년 내</div>
+                                        <div class="timeline-stat">20%</div>
+                                        <div class="timeline-trend"><i class="fas fa-arrow-down trend-down"></i> 35%p</div>
+                                    </div>
+                                    <div class="timeline-point">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-label">5년 초과</div>
+                                        <div class="timeline-stat">44%</div>
+                                        <div class="timeline-trend"><i class="fas fa-arrow-up trend-up"></i> 64%p</div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 0.8rem; text-align: center; color: #6c757d; margin-top: 5px;">
+                                    진단 후 수술까지 소요 시간 (현재 대 5년 전 변화)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 골든타임을 놓치는 흔한 함정들 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-ban card-icon" style="color: #dc3545;"></i>
+                            <h3 class="card-title">골든타임을 놓치는 흔한 함정들</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul>
+                                <li><span class="highlight">"이 정도는 괜찮겠지" (통증 무시):</span> <br>작은 통증도 몸의 중요한 신호! 방치 시 <span class="highlight">비수술 치료 성공률 30% 감소</span>.</li>
+                                <li><span class="highlight">"인터넷 검색이면 충분해" (자가 진단):</span> <br>부정확한 정보는 오히려 독! <span class="highlight">치료 시기를 놓치는 주된 원인</span> 중 하나.</li>
+                                <li><span class="highlight">"병원 갈 시간이 없어" (치료 지연):</span> <br>미룰수록 악화! 초기 대비 <span class="highlight">치료 기간 2배, 비용 2.5배 증가</span> 가능성.</li>
+                                <li><span class="highlight">"수술은 무서워" (수술 공포):</span> <br>최근 <span class="highlight">다양한 비수술 치료법</span> 발전. 조기 상담으로 최적의 방법 선택 가능.</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 결론 -->
+            <div class="golden-time">
+                <i class="fas fa-hourglass-half hourglass"></i>
+                <div class="conclusion">망설이지 마세요. 지금 바로 당신의 척추 건강을 위한 <span class="highlight">첫걸음</span>을 내딛어야 합니다!</div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // Chart Rendering
+        document.addEventListener('DOMContentLoaded', function() {
+            // Age Group Trend Chart
+            const ageGroupTrendCtx = document.getElementById('ageGroupTrendChart').getContext('2d');
+            const ageGroupTrendData = {
+                labels: ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+                datasets: [
+                    {
+                        label: '20-30대',
+                        data: [42, 48, 56, 68, 84, 102, 124, 145, 168, 195],
+                        borderColor: '#0066cc',
+                        backgroundColor: 'rgba(0, 102, 204, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: '40-50대',
+                        data: [85, 90, 96, 103, 108, 115, 123, 130, 136, 142],
+                        borderColor: '#54c7ec',
+                        backgroundColor: 'rgba(84, 199, 236, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: '60대 이상',
+                        data: [110, 113, 116, 118, 120, 123, 126, 128, 130, 133],
+                        borderColor: '#8E8EE5',
+                        backgroundColor: 'rgba(142, 142, 229, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            };
+            
+            new Chart(ageGroupTrendCtx, {
+                type: 'line',
+                data: ageGroupTrendData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { boxWidth: 12, font: { size: 10 } }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                title: function(context) {
+                                    return context[0].label + '년';
+                                },
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + '명 (인구 10만명당)';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: { 
+                                color: 'rgba(0, 0, 0, 0.05)',
+                                drawBorder: false,
+                            },
+                            ticks: { font: { size: 9 } },
+                            title: {
+                                display: true,
+                                text: '환자 수 (10만명당)',
+                                font: { size: 10 }
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 9 } }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

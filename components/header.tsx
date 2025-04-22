@@ -19,10 +19,10 @@ export default function Header() {
           <Link href="/about" className="text-sm font-medium hover:text-primary">
             서비스 소개
           </Link>
-          <Link href="/ppt_mid" className="text-sm font-medium hover:text-primary">
+          <Link href="/ppt_mid_v1" className="text-sm font-medium hover:text-primary">
             중간 발표 자료 V1
           </Link>
-          <Link href="/ppt_final" className="text-sm font-medium hover:text-primary">
+          <Link href="/ppt_mid_v2" className="text-sm font-medium hover:text-primary">
             중간 발표 자료 V2
           </Link>
           <Link href="/ppt_mid_v3" className="text-sm font-medium hover:text-primary">

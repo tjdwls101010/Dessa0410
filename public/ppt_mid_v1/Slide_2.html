@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온누리마취통증의학과: 데이터 기반 예비 환자 이해 증진 시스템 구축 - 프로젝트 배경 및 필요성</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border-radius: 8px;
+            aspect-ratio: 16/9;
+        }
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(0, 102, 204, 0.05) 0%, rgba(0, 102, 204, 0) 50%),
+                radial-gradient(circle at 20% 80%, rgba(84, 199, 236, 0.05) 0%, rgba(84, 199, 236, 0) 50%);
+            z-index: 1;
+        }
+        .pattern {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/JamieCorkhill/tailwind-background-patterns@1.1.1/patterns/hexagons.svg');
+            background-size: 200px 200px;
+            background-repeat: repeat;
+            opacity: 0.04;
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-area {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+        }
+        .logo-icon {
+            font-size: 2rem;
+            color: #0066cc;
+            margin-right: 0.5rem;
+        }
+        .blue-accent {
+            width: 60px;
+            height: 6px;
+            background-color: #0066cc;
+            margin-bottom: 1rem;
+            border-radius: 3px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+            border-left: 4px solid #0066cc;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .icon-container {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(0, 102, 204, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .problem-illustration {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            margin: 0 0 1rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .entity-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        .entity-icon.patient {
+            border: 2px solid #54c7ec;
+        }
+        .entity-icon.hospital {
+            border: 2px solid #0066cc;
+        }
+        .connection-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 3px;
+            background-color: #e2e8f0;
+            z-index: 1;
+        }
+        .connection-line::before {
+            content: "데이터 부재";
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            white-space: nowrap;
+            border: 1px solid #ffeeba;
+        }
+        .question-mark {
+            position: absolute;
+            font-size: 1.5rem;
+            color: #54c7ec;
+            animation: float 3s ease-in-out infinite;
+        }
+        .question-mark:nth-child(1) {
+            top: -20px;
+            right: 10px;
+            animation-delay: 0.2s;
+        }
+        .question-mark:nth-child(2) {
+            top: 0px;
+            right: -20px;
+            animation-delay: 0.5s;
+        }
+        .question-mark:nth-child(3) {
+            top: 20px;
+            right: 0px;
+            animation-delay: 0.8s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .digital-line {
+            position: absolute;
+            border-top: 2px dashed rgba(0, 102, 204, 0.2);
+            width: 150px;
+            z-index: 1;
+        }
+        .line-1 {
+            top: 150px;
+            right: 100px;
+            transform: rotate(45deg);
+        }
+        .line-2 {
+            bottom: 180px;
+            left: 100px;
+            transform: rotate(-30deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container bg-white">
+        <div class="slide-bg"></div>
+        <div class="pattern"></div>
+        
+        <!-- Digital elements -->
+        <div class="digital-line line-1"></div>
+        <div class="digital-line line-2"></div>
+        
+        <!-- Logo area -->
+        <div class="logo-area">
+            <i class="fas fa-laptop-medical logo-icon"></i>
+            <div class="text-lg font-medium text-gray-600">온누리마취통증의학과</div>
+        </div>
+        
+        <div class="content">
+            <div class="mt-8 mb-5">
+                <div class="blue-accent"></div>
+                <h2 class="text-3xl font-bold text-gray-800">프로젝트 배경 및 필요성</h2>
+            </div>
+            
+            <!-- Current Situation -->
+            <div class="card">
+                <div class="flex items-start">
+                    <div class="icon-container">
+                        <i class="fas fa-info-circle text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">현황</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li>환자들은 내원 전 자신의 상태에 대한 정보 탐색에 어려움을 겪음</li>
+                            <li>병원은 내원 전 환자의 상태를 미리 파악하기 어려워 효율적인 초기 대응에 한계</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Problems -->
+            <div class="card">
+                <div class="flex items-start">
+                    <div class="icon-container">
+                        <i class="fas fa-exclamation-triangle text-yellow-500 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">문제점</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li><span class="font-medium text-blue-700">정보의 단절:</span> 환자의 주관적 정보와 병원의 객관적 정보 간 연결 부족</li>
+                            <li><span class="font-medium text-blue-700">진료 효율성 저하 가능성:</span> 제한된 시간 내 환자 상태 파악의 어려움</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Goals -->
+            <div class="card">
+                <div class="flex items-start">
+                    <div class="icon-container bg-blue-100">
+                        <i class="fas fa-bullseye text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2">프로젝트 목표 (초기 단계)</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>체계적인 <span class="font-medium text-blue-800">데이터 수집</span> 방안 마련을 통해 예비 환자에 대한 이해 증진</li>
+                            <li>수집된 데이터를 <span class="font-medium text-blue-800">분석 가능한 형태</span>로 가공하여 향후 서비스 개발의 토대 구축</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem Illustration -->
+            <div class="problem-illustration mt-4">
+                <div class="entity-icon patient">
+                    <i class="fas fa-user text-blue-400 text-3xl mb-1"></i>
+                    <span class="text-sm text-gray-600">환자</span>
+                    <i class="fas fa-question question-mark"></i>
+                    <i class="fas fa-question question-mark"></i>
+                    <i class="fas fa-question question-mark"></i>
+                </div>
+                
+                <div class="connection-line"></div>
+                
+                <div class="entity-icon hospital">
+                    <i class="fas fa-hospital text-blue-600 text-3xl mb-1"></i>
+                    <span class="text-sm text-gray-600">병원</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

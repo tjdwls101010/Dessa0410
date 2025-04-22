@@ -53,7 +53,7 @@ export default function PresentationPage() {
     }
   }, [goToPrevSlide, goToNextSlide]) // Add dependencies
 
-  const currentSlideSrc = `/ppt_final/${slideFiles[currentSlideIndex]}` // Updated path
+  const currentSlideSrc = `/ppt_mid_v3/${slideFiles[currentSlideIndex]}` // Updated path
 
   return (
     // Removed bg-gray-100 from the outer div
@@ -125,7 +125,7 @@ export default function PresentationPage() {
       </a>
       {/* Floating Download Button */}
       <a
-        href="/ppt_final/PPT_Final.pdf"
+        href="/ppt_mid_v3/PPT_Final.pdf"
         download="PPT_Final.pdf"
         className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50 flex items-center justify-center"
         aria-label="Download Presentation PDF"

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>척추 내비게이터 - 서비스 개요 및 구조</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0f4f8; /* 이전 슬라이드 배경과 유사하게 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background: linear-gradient(135deg, #f5faff 0%, #e6f3ff 100%); /* 이전 슬라이드 배경 */
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        .slide-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 5% 10%, rgba(0, 102, 204, 0.06) 0%, rgba(0, 102, 204, 0) 40%),
+                              radial-gradient(circle at 95% 90%, rgba(84, 199, 236, 0.08) 0%, rgba(84, 199, 236, 0) 50%);
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            padding: 2.5rem 4rem; /* 패딩 조정 */
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .logo-area {
+            position: absolute; top: 2rem; right: 3rem; display: flex; align-items: center; z-index: 10;
+        }
+        .logo-icon { font-size: 1.8rem; color: #0066cc; margin-right: 0.6rem; }
+        .logo-text { font-size: 1.1rem; font-weight: 600; color: #495057; }
+
+        .slide-title h2 { font-size: 2rem; font-weight: 700; color: #1d3557; margin-bottom: 0.5rem; }
+        .slide-subtitle { font-size: 1.1rem; color: #4a5568; margin-bottom: 2rem; }
+        .blue-accent { width: 70px; height: 5px; background-color: #0066cc; border-radius: 3px; margin-top: 0.3rem; margin-bottom: 2rem; }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.8fr; /* 비율 조정 */
+            gap: 2.5rem;
+            flex-grow: 1;
+            align-items: start; /* 상단 정렬 */
+        }
+
+        .problem-section .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        .problem-section h3 { font-size: 1.3rem; font-weight: 600; color: #e53e3e; margin-bottom: 1rem; display: flex; align-items: center; }
+        .problem-section h3 i { margin-right: 0.7rem; }
+        .problem-section ul { list-style: none; padding-left: 0; }
+        .problem-section li {
+            font-size: 0.95rem; color: #4a5568; margin-bottom: 0.7rem; line-height: 1.6;
+            padding-left: 1.5rem; position: relative;
+        }
+        .problem-section li::before {
+            content: "✕"; /* X 표시 */
+            color: #e53e3e; font-weight: bold;
+            position: absolute; left: 0; top: 1px;
+            font-size: 0.9rem;
+        }
+
+        .solution-section h3 { font-size: 1.4rem; font-weight: 700; color: #0066cc; margin-bottom: 1.5rem; text-align: center; }
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem; /* 카드 간격 */
+        }
+        .solution-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 15px rgba(0, 102, 204, 0.12);
+            border: 1px solid rgba(0, 102, 204, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%; /* 높이 통일 */
+        }
+        .solution-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0, 102, 204, 0.18);
+        }
+        .solution-icon {
+            font-size: 2.8rem; /* 아이콘 크기 키움 */
+            color: #0066cc;
+            margin-bottom: 1rem;
+            width: 60px; height: 60px;
+            background-color: rgba(0, 102, 204, 0.1);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .solution-title { font-size: 1.1rem; font-weight: 600; color: #1d3557; margin-bottom: 0.6rem; }
+        .solution-desc { font-size: 0.9rem; color: #4a5568; line-height: 1.5; }
+        .solution-keyword { font-weight: 700; color: #005aa0; }
+
+        .result-section {
+            margin-top: 2rem; /* 상단 여백 */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 1rem 0;
+            border-top: 1px solid #e2e8f0; /* 구분선 */
+        }
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .badge-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .badge-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .badge-icon.verified { color: #2f855a; } /* 초록색 */
+        .badge-text.verified { color: #2f855a; }
+        .badge-icon.reliable { color: #3182ce; } /* 파란색 */
+        .badge-text.reliable { color: #3182ce; }
+        .badge-icon.objective { color: #dd6b20; } /* 주황색 */
+        .badge-text.objective { color: #dd6b20; }
+
+        /* 애니메이션 효과 */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+        .delay-5 { animation-delay: 0.5s; opacity: 0; }
+        .delay-6 { animation-delay: 0.6s; opacity: 0; }
+        .delay-7 { animation-delay: 0.7s; opacity: 0; }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-bg"></div>
+        <div class="logo-area">
+            <i class="fas fa-hospital-user logo-icon"></i>
+            <span class="logo-text">온누리마취통증의학과</span>
+        </div>
+
+        <div class="content">
+            <div class="slide-title fade-in">
+                <h2>설문 설계 근거: 표준 평가 도구 활용</h2>
+                <div class="blue-accent"></div>
+                <p class="slide-subtitle">기존 문진의 한계를 넘어, 과학적이고 객관적인 척추 건강 분석 시대를 엽니다.</p>
+            </div>
+
+            <div class="main-grid">
+                <!-- 기존 문진의 문제점 -->
+                <div class="problem-section">
+                    <div class="card fade-in delay-1">
+                        <h3><i class="fas fa-question-circle"></i>기존 문진, 무엇이 문제일까요?</h3>
+                        <ul>
+                            <li><span class="font-semibold text-red-600">기억 의존성:</span> 환자의 주관적 기억에 의존하여 정보 부정확</li>
+                            <li><span class="font-semibold text-red-600">단편적 정보:</span> 통증의 특정 측면만 파악, 전체 그림 놓침</li>
+                            <li><span class="font-semibold text-red-600">모호한 기준:</span> 평가 기준이 명확하지 않아 분석의 일관성 부족</li>
+                        </ul>
+                    </div>
+                     <div class="card fade-in delay-2" style="background-color: rgba(226, 243, 255, 0.7);">
+                        <h3 class="text-blue-700"><i class="fas fa-lightbulb"></i>'척추 내비게이터'의 혁신</h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            단편적이고 주관적인 문진에서 벗어나, <strong class="text-blue-800">임상적으로 검증된 4가지 핵심 지표</strong>를 통합하여 환자 상태를 다각도로, 객관적으로 분석합니다. 이는 정확한 진단과 맞춤 치료 계획 수립의 첫걸음입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 척추 내비게이터 핵심 지표 -->
+                <div class="solution-section">
+                    <h3 class="fade-in delay-3">척추 내비게이터: 4가지 핵심 평가 지표</h3>
+                    <div class="solution-grid">
+                        <div class="solution-card fade-in delay-4">
+                            <div class="solution-icon"><i class="fas fa-ruler-horizontal"></i></div>
+                            <h4 class="solution-title">VAS (통증 강도)</h4>
+                            <p class="solution-desc">얼마나 아프신가요? 통증의 <span class="solution-keyword">객관적인 수준</span>을 0~10 숫자로 명확하게 측정합니다.</p>
+                        </div>
+                        <div class="solution-card fade-in delay-5">
+                            <div class="solution-icon"><i class="fas fa-brain"></i></div>
+                            <h4 class="solution-title">DN4 (통증 양상)</h4>
+                            <p class="solution-desc">찌릿? 욱신? 통증의 성격을 파악하여 <span class="solution-keyword">신경병증성 통증</span> 가능성을 조기에 탐색합니다.</p>
+                        </div>
+                        <div class="solution-card fade-in delay-6">
+                            <div class="solution-icon"><i class="fas fa-person-walking"></i></div>
+                            <h4 class="solution-title">ODI (기능 제한)</h4>
+                            <p class="solution-desc">통증이 <span class="solution-keyword">일상생활</span>(걷기, 앉기, 물건 들기 등)에 미치는 영향을 구체적으로 평가합니다.</p>
+                        </div>
+                        <div class="solution-card fade-in delay-7">
+                            <div class="solution-icon"><i class="fas fa-flag"></i></div>
+                            <h4 class="solution-title">Red Flags (위험 신호)</h4>
+                            <p class="solution-desc">놓치면 안 될 <span class="solution-keyword">심각한 질환</span>(종양, 감염 등)의 가능성을 선별하여 안전을 확보합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 결과 섹션 -->
+            <div class="result-section fade-in delay-7">
+                <div class="badge">
+                    <i class="fas fa-microscope badge-icon verified"></i>
+                    <span class="badge-text verified">다면적 분석</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-shield-alt badge-icon reliable"></i>
+                    <span class="badge-text reliable">신뢰도 UP</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-balance-scale badge-icon objective"></i>
+                    <span class="badge-text objective">객관성 확보</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

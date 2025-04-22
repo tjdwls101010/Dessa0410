@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온누리마취통증의학과 예비 환자 자가 점검 및 안내 시스템 - 목표 및 범위</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Prevent scrollbars if content slightly overflows */
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f5faff 0%, #e6f3ff 100%);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 5% 10%, rgba(0, 102, 204, 0.06) 0%, rgba(0, 102, 204, 0) 40%),
+                radial-gradient(circle at 95% 90%, rgba(84, 199, 236, 0.08) 0%, rgba(84, 199, 236, 0) 50%);
+            z-index: 1;
+        }
+        .pattern {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%230066cc' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-size: 80px 80px;
+            opacity: 0.5;
+            z-index: 1;
+            transform: rotate(-15deg);
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            padding: 2rem 3.5rem; /* Adjusted padding */
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 4rem); /* Adjust height considering padding */
+        }
+        .logo-area {
+            position: absolute;
+            top: 2rem; /* Adjusted */
+            right: 3rem; /* Adjusted */
+            display: flex;
+            align-items: center;
+            z-index: 3;
+        }
+        .logo-icon {
+            font-size: 1.8rem; /* Adjusted */
+            color: #0066cc;
+            margin-right: 0.5rem; /* Adjusted */
+        }
+        .blue-accent {
+            width: 70px; /* Adjusted */
+            height: 6px; /* Adjusted */
+            background-color: #0066cc;
+            margin-bottom: 1rem; /* Adjusted */
+            border-radius: 3px;
+        }
+        .goal-card {
+            background-color: white;
+            border-radius: 8px; /* Adjusted */
+            padding: 1.2rem; /* Adjusted padding */
+            box-shadow: 0 4px 10px rgba(0, 102, 204, 0.07); /* Adjusted shadow */
+            border-left: 4px solid #0066cc;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .goal-card:hover {
+            transform: translateY(-4px); /* Adjusted */
+            box-shadow: 0 6px 15px rgba(0, 102, 204, 0.1); /* Adjusted */
+        }
+        .goal-card h3 {
+            display: flex;
+            align-items: center;
+            font-size: 1rem; /* Adjusted title size */
+        }
+        .goal-card h3 i {
+            width: 22px; /* Adjusted */
+            text-align: center;
+        }
+        .goal-card ul {
+            margin-top: 0.5rem; /* Adjusted space */
+            flex-grow: 1;
+        }
+        .goal-card ul li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.4rem; /* Adjusted space */
+            font-size: 0.8rem; /* Slightly smaller list item text */
+            line-height: 1.5; /* Adjust line height */
+        }
+        .goal-card ul li i {
+            margin-top: 0.15rem; /* Adjusted icon alignment */
+            color: #22c55e;
+            margin-right: 0.5rem; /* Adjusted */
+            flex-shrink: 0;
+            font-size: 0.7rem; /* Smaller icon */
+        }
+        .highlight {
+            font-weight: 500; /* Adjusted */
+            color: #005aa0;
+            background-color: rgba(84, 199, 236, 0.12); /* Adjusted */
+            padding: 0.1rem 0.3rem; /* Adjusted */
+            border-radius: 3px;
+            display: inline-block;
+            margin: 0.05rem 0; /* Adjusted */
+        }
+        .scope-card {
+            background-color: #eef7ff;
+            border-left-color: #54c7ec;
+        }
+        .warning-box {
+            background-color: #fff1f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+            font-weight: 500;
+            padding: 0.6rem 0.8rem; /* Adjusted padding */
+            border-radius: 5px; /* Adjusted */
+            display: inline-flex;
+            align-items: center;
+            margin-top: 0.5rem; /* Adjusted space */
+            font-size: 0.8rem; /* Smaller warning text */
+        }
+        .warning-box i {
+            margin-right: 0.5rem; /* Adjusted */
+            font-size: 1rem; /* Adjusted */
+        }
+        .flow-container {
+            /* flex-grow: 1; */ /* Removed flex-grow to control height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 1rem; /* Reduced margin-top */
+            margin-bottom: 0.5rem; /* Reduced margin-bottom */
+            padding: 0.8rem 0; /* Adjusted padding */
+            background-color: rgba(255, 255, 255, 0.4); /* Adjusted */
+            border-radius: 8px; /* Adjusted */
+            box-shadow: inset 0 0 10px rgba(0, 102, 204, 0.04); /* Adjusted */
+        }
+        .flow-steps {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            width: 90%; /* Adjusted width */
+            margin: 0 auto;
+            position: relative;
+        }
+        .flow-arrow {
+            font-size: 2rem; /* Adjusted arrows */
+            color: #54c7ec;
+            margin: 0 0.8rem; /* Adjusted space */
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+        .flow-box {
+            background-color: white;
+            border-radius: 8px; /* Adjusted */
+            padding: 1rem; /* Adjusted padding */
+            width: 180px; /* Adjusted width */
+            min-height: 130px; /* Adjusted height */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* Adjusted */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e8f0f5; /* Adjusted */
+            position: relative;
+            z-index: 2;
+        }
+        .flow-box:hover {
+            transform: translateY(-5px) scale(1.02); /* Adjusted */
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.12); /* Adjusted */
+            border-color: #0066cc;
+        }
+        .flow-icon-container {
+            width: 50px; /* Adjusted icon container */
+            height: 50px;
+            background: linear-gradient(135deg, #eaf4ff, #dcefff); /* Adjusted */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.75rem; /* Adjusted space */
+            box-shadow: 0 2px 3px rgba(0, 102, 204, 0.08); /* Adjusted */
+        }
+        .flow-icon {
+            color: #0066cc;
+            font-size: 1.5rem; /* Adjusted icon */
+        }
+        .flow-box .title {
+            font-weight: 600;
+            color: #1e3a8a;
+            font-size: 0.85rem; /* Adjusted font size */
+            margin-bottom: 0.2rem; /* Adjusted */
+        }
+        .flow-box .description {
+            font-size: 0.7rem; /* Adjusted description size */
+            color: #4b5563;
+            line-height: 1.3; /* Adjusted */
+        }
+        .bottom-icon {
+            position: absolute;
+            bottom: 1.5rem; /* Adjusted */
+            left: 2.5rem; /* Adjusted */
+            font-size: 2.5rem; /* Adjusted icon */
+            color: rgba(84, 199, 236, 0.12); /* Adjusted */
+            z-index: 1;
+            transform: rotate(-10deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-bg"></div>
+        <div class="pattern"></div>
+
+        <!-- Logo area -->
+        <div class="logo-area">
+            <i class="fas fa-hospital-user logo-icon"></i>
+            <div class="text-lg font-semibold text-gray-700">온누리마취통증의학과</div> <!-- Adjusted size -->
+        </div>
+
+        <div class="content">
+            <div class="mb-4"> <!-- Reduced margin -->
+                <div class="blue-accent"></div>
+                <h2 class="text-3xl font-bold text-gray-800">프로젝트 목표 및 범위</h2> <!-- Adjusted size -->
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mb-4"> <!-- Reduced gap and margin -->
+                <!-- Project Goals Card -->
+                <div class="goal-card col-span-2">
+                    <h3 class="text-blue-800 font-semibold mb-2"> <!-- Reduced margin -->
+                        <i class="fas fa-bullseye mr-2 text-blue-600"></i> 프로젝트 목표 <!-- Adjusted margin -->
+                    </h3>
+                    <ul class="text-sm text-gray-700 space-y-1.5"> <!-- Adjusted spacing -->
+                        <li>
+                            <i class="fas fa-user-check fa-fw text-xs"></i> <!-- Adjusted size -->
+                            <div>
+                                <span class="font-semibold text-blue-700">환자 중심 경험 혁신:</span><br>
+                                웹 설문을 통한 <span class="highlight">자가 점검</span>으로 질환 악화 <span class="highlight">조기 예방</span> 및 건강 관리 능력 향상.<br>
+                                개인화된 리포트/챗봇으로 <span class="highlight">건강 상태 이해도 증진</span>.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-stethoscope fa-fw text-xs"></i> <!-- Adjusted size -->
+                            <div>
+                                <span class="font-semibold text-blue-700">진료 효율성 및 만족도 제고:</span><br>
+                                사전 정보(설문/리포트) 기반, <span class="highlight">짧은 진료 시간 내</span> 더 <span class="highlight">정확하고 깊이 있는 진단</span> 지원.<br>
+                                환자 진료 만족도 및 병원 신뢰도 향상.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-line fa-fw text-xs"></i> <!-- Adjusted size -->
+                            <div>
+                                <span class="font-semibold text-blue-700">병원 경쟁력 강화:</span><br>
+                                차별화된 <span class="highlight">첨단 정보 제공 시스템</span>(리포트, 챗봇) 구축으로 <span class="highlight">홍보 효과</span> 및 신규 환자 유치.<br>
+                                데이터 기반 의사결정 지원 및 병원 시스템 첨단화 (프로토타입).
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Scope Card -->
+                <div class="goal-card scope-card">
+                    <h3 class="text-blue-800 font-semibold mb-2"> <!-- Reduced margin -->
+                        <i class="fas fa-map-marked-alt mr-2 text-blue-600"></i> 프로젝트 범위 <!-- Adjusted margin -->
+                    </h3>
+                    <p class="text-sm text-gray-800 mb-2"> <!-- Reduced margin -->
+                        예비 환자 대상 <span class="highlight">자가 점검</span> 및 <span class="highlight">정보 제공</span> 서비스
+                    </p>
+                    <p class="text-xs text-gray-600 mb-3"> <!-- Adjusted size & margin -->
+                        환자 스스로 건강 상태를 파악하고, 필요한 정보를 얻도록 돕는 데 중점을 둡니다.
+                    </p>
+                    <div class="warning-box">
+                        <i class="fas fa-exclamation-triangle"></i>의료 진단 기능은 포함되지 않습니다.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flow Chart Section -->
+            <div class="flow-container">
+                <h3 class="text-lg font-semibold text-gray-700 mb-3 text-center"> <!-- Adjusted size & margin -->
+                    <i class="fas fa-sitemap text-blue-600 mr-2"></i> 핵심 기능: 시스템 흐름도
+                </h3>
+
+                <div class="flow-steps">
+                    <!-- Step 1: Web Survey -->
+                    <div class="flow-box">
+                        <div class="flow-icon-container">
+                            <i class="fas fa-clipboard-list flow-icon"></i>
+                        </div>
+                        <div class="title">웹 설문</div>
+                        <div class="description">환자의 증상, 통증 정도, 생활 습관 등 기본 건강 정보를 체계적으로 수집합니다.</div>
+                    </div>
+
+                    <!-- Arrow 1 -->
+                    <div class="flow-arrow">
+                        <i class="fas fa-long-arrow-alt-right"></i>
+                    </div>
+
+                    <!-- Step 2: AI Report -->
+                    <div class="flow-box">
+                        <div class="flow-icon-container">
+                            <i class="fas fa-chart-pie flow-icon"></i>
+                        </div>
+                        <div class="title">AI 분석 리포트</div>
+                        <div class="description">수집된 데이터를 AI가 분석하여 개인 맞춤형 건강 상태 리포트를 생성하고 관리 방안을 제안합니다.</div>
+                    </div>
+
+                    <!-- Arrow 2 -->
+                    <div class="flow-arrow">
+                        <i class="fas fa-long-arrow-alt-right"></i>
+                    </div>
+
+                    <!-- Step 3: RAG Chatbot -->
+                    <div class="flow-box">
+                        <div class="flow-icon-container">
+                            <i class="fas fa-robot flow-icon"></i>
+                        </div>
+                        <div class="title">RAG 챗봇</div>
+                        <div class="description">리포트 기반으로 궁금한 점을 질문하고, 신뢰도 높은 건강 정보를 얻을 수 있는 상호작용형 챗봇입니다.</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Icon -->
+            <i class="fas fa-cogs bottom-icon"></i>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온누리마취통증의학과 - 사전 문진 설문</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background: linear-gradient(135deg, #f5faff 0%, #e6f3ff 100%);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        .slide-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 5% 10%, rgba(0, 102, 204, 0.06) 0%, rgba(0, 102, 204, 0) 40%),
+                              radial-gradient(circle at 95% 90%, rgba(84, 199, 236, 0.08) 0%, rgba(84, 199, 236, 0) 50%);
+            z-index: 1;
+        }
+        .pattern {
+            position: absolute; bottom: -50px; right: -50px; width: 300px; height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%230066cc' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5h-1v-5h-9v5H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-size: 80px 80px; opacity: 0.5; z-index: 1; transform: rotate(-15deg);
+        }
+        .content {
+            position: relative; z-index: 2; flex-grow: 1;
+            padding: 2rem 3.5rem; display: flex; flex-direction: column;
+            height: calc(100% - 4rem); overflow-y: auto;
+        }
+        .logo-area {
+            position: absolute; top: 2rem; right: 3rem; display: flex;
+            align-items: center; z-index: 10;
+        }
+        .logo-icon { font-size: 1.8rem; color: #0066cc; margin-right: 0.6rem; }
+        .logo-text { font-size: 1.1rem; font-weight: 600; color: #495057; }
+        .slide-title { margin-bottom: 1.5rem; position: relative; z-index: 5; }
+        .slide-title h2 { font-size: 1.8rem; font-weight: 700; color: #1d3557; }
+        .blue-accent { width: 70px; height: 5px; background-color: #0066cc; border-radius: 3px; margin-top: 0.4rem; }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
+            gap: 1.5rem;
+            flex-grow: 1;
+            position: relative;
+            z-index: 5;
+        }
+        .grid-span-2 { grid-column: span 2 / span 2; }
+        .grid-span-1 { grid-column: span 1 / span 1; }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.9); border-radius: 10px;
+            padding: 1.2rem; box-shadow: 0 4px 12px rgba(0, 102, 204, 0.08);
+            border: 1px solid rgba(233, 236, 239, 0.6); display: flex;
+            flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px); height: fit-content;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0, 102, 204, 0.12); }
+        .card-header { display: flex; align-items: center; margin-bottom: 0.8rem; }
+        .card-icon { font-size: 1.3rem; color: #0066cc; margin-right: 0.7rem; width: 30px; text-align: center; flex-shrink: 0; }
+        .card-title { font-size: 1.1rem; font-weight: 600; color: #1d3557; }
+        .card-content p, .card-content li { font-size: 0.9rem; color: #495057; line-height: 1.6; }
+        .card-content ul { list-style: none; padding-left: 0; margin-top: 0.5rem; }
+        .card-content li { margin-bottom: 0.5rem; padding-left: 1.2rem; position: relative; }
+        .card-content li::before { content: "✓"; color: #17a2b8; font-weight: bold; display: inline-block; width: 1em; margin-left: -1.2em; position: absolute; left: 0.5rem; top: 1px; }
+        .highlight { font-weight: 600; color: #005aa0; background-color: rgba(84, 199, 236, 0.2); padding: 0.1rem 0.3rem; border-radius: 4px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+        .sub-text { font-size: 0.8rem; color: #6c757d; margin-top: 0.3rem; }
+
+        .survey-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .survey-item {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px; padding: 0.8rem;
+            display: flex; align-items: center;
+            border: 1px solid rgba(233, 236, 239, 0.5);
+            transition: background-color 0.3s ease;
+        }
+        .survey-item:hover { background-color: rgba(255, 255, 255, 0.9); }
+        .survey-icon { font-size: 1.5rem; color: #54c7ec; margin-right: 0.8rem; width: 35px; text-align: center; }
+        .survey-text strong { font-weight: 600; color: #1d3557; display: block; font-size: 0.9rem; margin-bottom: 0.1rem; }
+        .survey-text span { font-size: 0.8rem; color: #495057; }
+
+        .integration-section { display: flex; align-items: center; margin-top: 1rem; }
+        .integration-icon { font-size: 1.8rem; color: #0066cc; margin-right: 1rem; }
+        .integration-text strong { font-weight: 700; color: #1d3557; font-size: 1rem; display: block; margin-bottom: 0.2rem; }
+        .integration-text span { font-size: 0.85rem; color: #495057; }
+        .ocr-support { display: flex; align-items: center; margin-top: 0.8rem; }
+        .ocr-icon { font-size: 1rem; color: #17a2b8; margin-right: 0.5rem; }
+        .ocr-text { font-size: 0.8rem; color: #6c757d; }
+
+        .reliability-section { display: flex; align-items: center; margin-top: 1rem; }
+        .reliability-icon { font-size: 1.5rem; color: #17a2b8; margin-right: 1rem; }
+        .reliability-text p { margin-bottom: 0.3rem; }
+        .reliability-result { display: flex; gap: 1rem; margin-top: 0.8rem; }
+        .result-item { display: flex; align-items: center; background-color: rgba(23, 162, 184, 0.1); padding: 0.4rem 0.8rem; border-radius: 20px; }
+        .result-icon { font-size: 1rem; color: #17a2b8; margin-right: 0.5rem; }
+        .result-text { font-size: 0.85rem; font-weight: 500; color: #005aa0; }
+
+        .bottom-icon { position: absolute; bottom: 1.5rem; left: 2.5rem; font-size: 2.5rem; color: rgba(84, 199, 236, 0.12); z-index: 1; transform: rotate(-10deg); }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-bg"></div>
+        <div class="pattern"></div>
+
+        <div class="content">
+            <!-- 로고 영역 -->
+            <div class="logo-area">
+                <i class="fas fa-hospital-user logo-icon"></i>
+                <span class="logo-text">온누리마취통증의학과</span>
+            </div>
+
+            <!-- 슬라이드 제목 -->
+            <div class="slide-title">
+                <h2>설문 설계 예시: 어떻게 정보를 얻는가?</h2>
+                <div class="blue-accent"></div>
+            </div>
+
+            <!-- Main Grid -->
+            <div class="main-grid">
+                <!-- Left Column (Span 2) -->
+                <div class="grid-span-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-tasks card-icon"></i>
+                            <h3 class="card-title">핵심: 과학적 문항 & 직관적 UI/UX</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-lg font-semibold text-blue-700 mb-3">"정확한 진단을 위한 첫걸음, 쉽고 편리하게!"</p>
+                            <p>의학적으로 검증된 설문 문항들을 누구나 쉽게 이해하고 답변할 수 있도록 <span class="highlight">가장 직관적이고 사용자 친화적인 인터페이스</span>로 구현했습니다.</p>
+
+                            <div class="survey-preview-grid">
+                                <div class="survey-item">
+                                    <i class="fas fa-sliders-h survey-icon"></i>
+                                    <div class="survey-text">
+                                        <strong>통증 강도 (VAS)</strong>
+                                        <span>아픈 정도를 슬라이더로 스윽-</span>
+                                    </div>
+                                </div>
+                                <div class="survey-item">
+                                    <i class="fas fa-check-double survey-icon"></i>
+                                    <div class="survey-text">
+                                        <strong>통증 양상 (DN4)</strong>
+                                        <span>해당하는 느낌만 콕콕!</span>
+                                    </div>
+                                </div>
+                                <div class="survey-item">
+                                    <i class="fas fa-clipboard-list survey-icon"></i>
+                                    <div class="survey-text">
+                                        <strong>기능 제한 (ODI)</strong>
+                                        <span>일상생활 불편함, 단계별 선택</span>
+                                    </div>
+                                </div>
+                                <div class="survey-item">
+                                    <i class="fas fa-flag survey-icon"></i>
+                                    <div class="survey-text">
+                                        <strong>위험 신호 (Red Flags)</strong>
+                                        <span>간결한 체크로 위험 신호 감지</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-database card-icon"></i>
+                            <h3 class="card-title">데이터 신뢰도의 비밀</h3>
+                        </div>
+                        <div class="card-content">
+                             <div class="reliability-section">
+                                 <i class="fas fa-user-check reliability-icon"></i>
+                                 <div class="reliability-text">
+                                     <p><span class="highlight">"내 건강, 내가 챙긴다!"</span>는 건강 정보의 중요성에 대한 인식이 높아지면서,</p>
+                                     <p>환자 스스로 <span class="highlight">솔직하고 정확한 답변</span>을 제공하도록 유도합니다.</p>
+                                 </div>
+                             </div>
+                             <div class="reliability-result">
+                                 <div class="result-item">
+                                     <i class="fas fa-arrow-up result-icon"></i>
+                                     <span class="result-text">환자 참여율 UP</span>
+                                 </div>
+                                 <div class="result-item">
+                                     <i class="fas fa-shield-alt result-icon"></i>
+                                     <span class="result-text">데이터 신뢰도 UP</span>
+                                 </div>
+                             </div>
+                             <p class="mt-3">이는 단순 응답을 넘어, <span class="highlight">신뢰성 높은 의료 데이터 확보</span>의 중요한 첫걸음이 됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column (Span 1) -->
+                <div class="grid-span-1 flex flex-col gap-6">
+                     <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-plug card-icon"></i>
+                            <h3 class="card-title">병원 시스템과의 완벽 연동</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="integration-section">
+                                <i class="fas fa-tablet-alt integration-icon"></i>
+                                <div class="integration-text">
+                                    <strong>번거로운 종이 문진표, 이젠 안녕!</strong>
+                                    <span>환자가 모바일/태블릿으로 작성한 문진 결과가 병원 EMR 시스템에 <span class="highlight">자동으로 연동</span>되어 즉시 확인 가능합니다.</span>
+                                </div>
+                            </div>
+                             <div class="ocr-support">
+                                 <i class="fas fa-camera ocr-icon"></i>
+                                 <span class="ocr-text">디지털 기기 사용이 어려운 어르신들을 위해 기존 종이 문진표도 <span class="font-semibold">OCR 스캔</span>을 통해 데이터 통합을 지원합니다.</span>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-images card-icon"></i>
+                            <h3 class="card-title">시각 자료 (예시)</h3>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-sm text-gray-600">실제 설문 UI 스크린샷, 종이 vs 디지털 비교, 아이콘 등이 여기에 배치될 예정입니다.</p>
+                            <!-- Placeholder for images/icons -->
+                            <div class="flex justify-around items-center mt-4 h-24 bg-gray-100 rounded-md border border-gray-200">
+                                <i class="fas fa-mobile-alt text-3xl text-gray-400"></i>
+                                <i class="fas fa-exchange-alt text-2xl text-gray-400"></i>
+                                <i class="far fa-file-alt text-3xl text-gray-400"></i>
+                                <i class="fas fa-check-circle text-3xl text-green-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <i class="fas fa-notes-medical bottom-icon"></i>
+        </div>
+    </div>
+    <!-- Script 부분은 기존 내용 유지 (필요시 수정) -->
+</body>
+</html>
