@@ -125,8 +125,8 @@ export default function PresentationPage() {
       </a>
       {/* Floating Download Button */}
       <a
-        href="/ppt_mid_v3/PPT_Final.pdf"
-        download="PPT_Final.pdf"
+        href="/ppt_mid_v3/PPT_Mid3.pdf"
+        download="PPT_Mid3.pdf"
         className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50 flex items-center justify-center"
         aria-label="Download Presentation PDF"
       >

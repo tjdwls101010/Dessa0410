@@ -111,8 +111,10 @@
             background-color: white;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
+            /* overflow: hidden; 제거 */
             position: relative;
+            flex-grow: 1; /* 남은 공간 채우기 */
+            /* overflow-y: auto; 제거 */
         }
         .report-header {
             background-color: #0066cc;
@@ -219,7 +221,7 @@
                 <h2 class="text-3xl font-bold text-gray-800">AI 분석 리포트: 개인 맞춤 정보 제공</h2>
             </div>
             
-            <!-- Process Flow -->
+            <!-- Process Flow
             <div class="process-flow">
                 <div class="process-item">
                     <div class="process-icon bg-blue-100">
@@ -256,7 +258,7 @@
                         <p class="font-medium text-blue-700">AI 모델 분석</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
             <!-- Report Preview -->
             <div class="report-preview">
@@ -297,12 +299,7 @@
                         <div class="mt-3 mb-1">
                             <span class="text-sm text-gray-600">통증 부위:</span>
                         </div>
-                        <div class="body-map">
-                            <div class="text-xs text-gray-500 absolute top-2 left-2">요추부</div>
-                            <div class="pain-spot" style="bottom: 55%; right: 46%;"></div>
-                            <div class="pain-spot" style="bottom: 40%; right: 42%;"></div>
-                            <div class="pain-spot" style="bottom: 37%; left: 35%;"></div>
-                        </div>
+
                     </div>
                     
                     <!-- Functional Limitation Analysis -->
@@ -336,7 +333,7 @@
                         </div>
                     </div>
                     
-                    <!-- Personalized Suggestions -->
+                    <!-- Personalized Suggestions
                     <div class="report-section col-span-2">
                         <h4 class="text-lg font-semibold text-gray-700 mb-2">
                             <i class="fas fa-lightbulb mr-2 text-yellow-500"></i> 맞춤형 제안
@@ -355,39 +352,33 @@
                                 <p class="text-xs text-red-600 font-medium">위험 신호 감지로 전문의 상담 필수</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-                
-                <!-- Non-diagnostic disclaimer -->
-                <div class="bg-gray-100 p-2 text-center">
-                    <p class="text-xs text-gray-600">
-                        <i class="fas fa-info-circle mr-1 text-gray-500"></i>
-                        본 정보는 진단 목적이 아닌 참고용 분석 자료입니다. 정확한 진단과 치료를 위해 반드시 전문의 상담을 받으세요.
-                    </p>
+
+                <!-- Footer within report preview -->
+                <div class="p-4 border-t border-gray-200 mt-4">
+                    <!-- Non-diagnostic disclaimer -->
+                    <div class="text-center mb-3">
+                        <p class="text-xs text-gray-600">
+                            <i class="fas fa-info-circle mr-1 text-gray-500"></i>
+                            본 정보는 진단 목적이 아닌 참고용 분석 자료입니다. 정확한 진단과 치료를 위해 반드시 전문의 상담을 받으세요.
+                        </p>
+                    </div>
+
+                    <!-- Doctor consultation recommendation -->
+                    <div class="text-center">
+                         <p class="text-sm font-semibold text-blue-700 mb-1">
+                            <i class="fas fa-user-md mr-1"></i>
+                            전문의 상담을 권장합니다
+                        </p>
+                        <p class="text-sm font-medium text-gray-800">
+                            진단과 치료는 온누리통증의학과에서 시작하세요
+                        </p>
+                    </div>
                 </div>
             </div>
             
-            <!-- Key features -->
-            <div class="flex justify-center mt-auto mb-2">
-                <div class="flex space-x-8">
-                    <div class="flex items-center">
-                        <i class="fas fa-eye text-blue-600 mr-2"></i>
-                        <span class="text-sm text-gray-700">시각적</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-user-check text-blue-600 mr-2"></i>
-                        <span class="text-sm text-gray-700">개인화</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-check-circle text-blue-600 mr-2"></i>
-                        <span class="text-sm text-gray-700">이해 용이</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-exclamation-circle text-red-600 mr-2"></i>
-                        <span class="text-sm text-gray-700">비진단적 정보</span>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </body>
