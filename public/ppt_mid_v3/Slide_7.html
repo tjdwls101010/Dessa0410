@@ -47,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 80% 20%, rgba(0, 102, 204, 0.05) 0%, rgba(0, 102, 204, 0) 50%),
                 radial-gradient(circle at 20% 80%, rgba(84, 199, 236, 0.05) 0%, rgba(84, 199, 236, 0) 50%);
             z-index: 1;
@@ -68,7 +68,7 @@
             position: relative;
             z-index: 2;
             height: 100%;
-            padding: 2rem 3rem;
+            padding: 3rem 4rem; /* 패딩 증가 */
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
@@ -77,28 +77,33 @@
         }
         .logo-area {
             position: absolute;
-            top: 2rem;
-            right: 2rem;
+            top: 2.5rem; /* 위치 조정 */
+            right: 3rem; /* 위치 조정 */
             display: flex;
             align-items: center;
             z-index: 3;
         }
         .logo-icon {
-            font-size: 2rem;
+            font-size: 2.5rem; /* 크기 증가 */
             color: #0066cc;
-            margin-right: 0.5rem;
+            margin-right: 0.75rem; /* 간격 조정 */
+        }
+        .logo-text {
+             font-size: 1.25rem; /* 크기 증가 */
+             font-weight: 500;
+             color: #4b5563; /* 색상 조정 */
         }
         .blue-accent {
-            width: 60px;
-            height: 6px;
+            width: 80px; /* 크기 증가 */
+            height: 8px; /* 크기 증가 */
             background-color: #0066cc;
-            margin-bottom: 1rem;
-            border-radius: 3px;
+            margin-bottom: 1.5rem; /* 간격 증가 */
+            border-radius: 4px; /* 라운딩 조정 */
         }
         .section-card {
             background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 16px; /* 라운딩 증가 */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07); /* 그림자 강화 */
             overflow: hidden;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             height: 100%;
@@ -106,272 +111,225 @@
             flex-direction: column;
         }
         .section-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px); /* 호버 효과 강화 */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); /* 호버 그림자 강화 */
         }
         .section-header {
-            padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid rgba(0, 102, 204, 0.1);
+            padding: 1.75rem 2rem; /* 패딩 증가 */
+            border-bottom: 1px solid rgba(0, 102, 204, 0.15); /* 구분선 강화 */
             display: flex;
             align-items: center;
         }
         .section-body {
-            padding: 1.5rem;
+            padding: 2rem; /* 패딩 증가 */
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
         }
         .section-icon {
-            width: 48px;
-            height: 48px;
+            width: 56px; /* 크기 증가 */
+            height: 56px; /* 크기 증가 */
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 1rem;
+            margin-right: 1.25rem; /* 간격 증가 */
             flex-shrink: 0;
         }
         .benefit-item {
             display: flex;
             align-items: center;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.75rem; /* 간격 조정 */
             background-color: #f8fafc;
-            padding: 0.65rem 1rem;
-            border-radius: 8px;
+            padding: 0.8rem 1rem; /* 패딩 조정 */
+            border-radius: 10px; /* 라운딩 증가 */
             transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+            border-left: 5px solid transparent; /* 강조선 두께 증가 */
         }
         .benefit-item:hover {
-            transform: translateX(5px);
-            background-color: #f0f7ff;
-            border-left-color: #3b82f6;
+            transform: translateX(6px); /* 호버 효과 강화 */
+            background-color: #eef6ff; /* 호버 배경색 변경 */
+            border-left-color: #2563eb; /* 호버 강조선 색상 변경 */
         }
         .benefit-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem; /* 간격 조정 */
         }
         .benefit-group-title {
             font-weight: 600;
-            color: #0066cc;
-            margin-bottom: 0.5rem;
-            padding-left: 0.5rem;
-            border-left: 3px solid #0066cc;
+            color: #0052a3; /* 색상 조정 */
+            margin-bottom: 0.75rem; /* 간격 증가 */
+            padding-left: 0.75rem; /* 패딩 증가 */
+            border-left: 4px solid #0066cc; /* 강조선 두께 증가 */
             display: flex;
             align-items: center;
+            font-size: 1.5rem; /* 폰트 크기 증가 */
+        }
+        .benefit-text {
+            font-size: 1.25rem; /* 폰트 크기 증가 */
+            color: #374151; /* 색상 조정 */
+        }
+        .benefit-icon {
+            margin-right: 0.75rem; /* 간격 조정 */
+            font-size: 1.5rem; /* 아이콘 크기 증가 */
         }
         .digital-element {
             position: absolute;
-            width: 120px;
-            height: 120px;
+            width: 150px; /* 크기 증가 */
+            height: 150px; /* 크기 증가 */
             border: 1px solid rgba(0, 102, 204, 0.1);
             border-radius: 50%;
             z-index: 1;
         }
-        .vision-image {
-            position: absolute;
-            bottom: -40px;
-            right: -30px;
-            font-size: 7rem;
-            color: rgba(0, 102, 204, 0.05);
-            transform: rotate(15deg);
-        }
-        .metric-badge {
-            display: inline-flex;
-            align-items: center;
-            background: linear-gradient(to right, #0066cc, #3b82f6);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 500;
-            margin-top: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.2);
-        }
-        .stat-container {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-        .stat-item {
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 0.65rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            width: 22%;
-            margin-bottom: 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        .stat-item:hover {
-            transform: scale(1.05);
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .stat-number {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #0066cc;
-            line-height: 1.2;
-        }
-        .stat-label {
-            font-size: 0.8rem;
-            color: #4b5563;
-            margin-top: 0.25rem;
-        }
-        .pulse-animation {
-            display: inline-block;
-            animation: pulse 2s infinite;
-            transform-origin: center;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
         .benefit-columns {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 2rem; /* 간격 증가 */
+            margin-bottom: 1rem; /* 간격 조정 */
         }
         .benefit-column {
             flex: 1;
         }
+
+        /* 반응형 조정 */
+        @media (max-width: 1600px) {
+            .content { padding: 2.5rem 3rem; }
+            .benefit-group-title { font-size: 1.35rem; }
+            .benefit-text { font-size: 1.15rem; }
+            .benefit-icon { font-size: 1.35rem; }
+        }
         @media (max-width: 1400px) {
-            .content {
-                padding: 1.5rem 2rem;
-            }
-            .stat-number {
-                font-size: 1.5rem;
-            }
-            .stat-label {
-                font-size: 0.75rem;
-            }
-            .benefit-columns {
-                flex-direction: column;
-            }
+            .content { padding: 2rem 2.5rem; }
+            .benefit-group-title { font-size: 1.25rem; }
+            .benefit-text { font-size: 1.1rem; }
+            .benefit-icon { font-size: 1.25rem; }
+            .benefit-columns { flex-direction: column; gap: 1.5rem; }
+        }
+         @media (max-width: 1200px) {
+            .content { padding: 1.5rem 2rem; }
+            .benefit-group-title { font-size: 1.15rem; }
+            .benefit-text { font-size: 1rem; }
+            .benefit-icon { font-size: 1.15rem; }
         }
         @media (max-height: 800px) {
-            .benefit-item {
-                margin-bottom: 0.5rem;
-                padding: 0.5rem 1rem;
-            }
-            .section-body {
-                padding: 1rem;
-            }
-            .section-header {
-                padding: 1rem 1.25rem;
-            }
+             .content { padding: 2rem 3rem; }
+             .benefit-item { margin-bottom: 0.75rem; padding: 0.8rem 1rem; }
+             .section-body { padding: 1.5rem; }
+             .section-header { padding: 1.5rem 1.75rem; }
         }
+         @media (max-height: 700px) {
+             .content { padding: 1.5rem 2.5rem; }
+             .benefit-item { margin-bottom: 0.6rem; padding: 0.7rem 0.9rem; }
+             .section-body { padding: 1.25rem; }
+             .section-header { padding: 1.25rem 1.5rem; }
+             .benefit-group-title { font-size: 1.2rem; }
+             .benefit-text { font-size: 1rem; }
+             .benefit-icon { font-size: 1.2rem; }
+         }
     </style>
 </head>
 <body>
     <div class="slide-container bg-white">
         <div class="slide-bg"></div>
         <div class="pattern"></div>
-        
+
         <!-- Digital elements -->
-        <div class="digital-element" style="top: -40px; right: 100px;"></div>
-        <div class="digital-element" style="bottom: -60px; left: 80px;"></div>
-        
+        <div class="digital-element" style="top: -50px; right: 120px; opacity: 0.7;"></div>
+        <div class="digital-element" style="bottom: -70px; left: 100px; opacity: 0.7;"></div>
+
         <!-- Logo area -->
         <div class="logo-area">
             <i class="fas fa-laptop-medical logo-icon"></i>
-            <div class="text-lg font-medium text-gray-600">온누리마취통증의학과</div>
+            <div class="logo-text">온누리마취통증의학과</div>
         </div>
-        
+
         <div class="content">
-            <div class="mt-4 mb-3">
+            <div class="mt-6 mb-5"> <!-- 마진 조정 -->
                 <div class="blue-accent"></div>
-                <h2 class="text-3xl font-bold text-gray-800">기대효과</h2>
-                <p class="text-blue-600 text-lg mt-1">온누리마취통증의학과 자가진단 서비스를 통한 혁신적 환자 경험</p>
+                <h2 class="text-5xl font-bold text-gray-800">기대효과</h2> <!-- 크기 증가 -->
+                <p class="text-blue-600 text-2xl mt-2">온누리마취통증의학과 자가진단 서비스를 통한 <span class="font-semibold">혁신적 환자 경험</span></p> <!-- 크기 증가 및 강조 -->
             </div>
-            
-            <div style="height: 75%;">
+
+            <div class="flex-grow overflow-hidden"> <!-- 높이 자동 조절 및 오버플로우 처리 -->
                 <!-- Benefits & Effects -->
-                <div class="section-card">
+                <div class="section-card h-full"> <!-- 높이 100% -->
                     <div class="section-header bg-blue-50">
                         <div class="section-icon bg-blue-100">
-                            <i class="fas fa-chart-line text-blue-600 text-xl"></i>
+                            <i class="fas fa-chart-line text-blue-600 text-3xl"></i> <!-- 크기 증가 -->
                         </div>
-                        <h3 class="text-xl font-semibold text-blue-700">자가진단 서비스의 기대효과</h3>
+                        <h3 class="text-3xl font-semibold text-blue-700">자가진단 서비스의 기대효과</h3> <!-- 크기 증가 -->
                     </div>
                     <div class="section-body">
                         <div class="benefit-columns">
                             <div class="benefit-column">
                                 <div class="benefit-group">
                                     <div class="benefit-group-title">
-                                        <i class="fas fa-heart-pulse text-red-500 mr-2"></i>
+                                        <i class="fas fa-heart-pulse text-red-500 mr-3 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
                                         환자 만족도 극대화
                                     </div>
-                                    
+
                                     <div class="benefit-item">
-                                        <i class="fas fa-search-plus text-green-500 mr-3 text-lg"></i>
-                                        <p class="text-gray-700"><span class="font-medium">조기 발견 & 골든타임 확보</span> - 미세한 이상 신호도 놓치지 않고 포착하여 최적의 치료 시기를 선점합니다.</p>
+                                        <i class="fas fa-search-plus text-green-500 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
+                                        <p class="benefit-text"><span class="font-semibold">조기 발견</span> & <span class="font-semibold">골든타임 확보</span></p> <!-- 텍스트 클래스 추가 및 강조 -->
                                     </div>
-                                    
+
                                     <div class="benefit-item">
-                                        <i class="fas fa-book-medical text-green-500 mr-3 text-lg"></i>
-                                        <p class="text-gray-700"><span class="font-medium">건강 정보 이해도 증진</span> - 어려운 의학 정보 대신, 쉽고 명확한 리포트로 건강 상태를 정확히 이해하고 관리합니다.</p>
+                                        <i class="fas fa-book-medical text-green-500 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
+                                        <p class="benefit-text"><span class="font-semibold">건강 정보 이해도</span> 증진</p> <!-- 텍스트 클래스 추가 및 강조 -->
                                     </div>
-                                    
+
                                     <div class="benefit-item">
-                                        <i class="fas fa-user-shield text-green-500 mr-3 text-lg"></i>
-                                        <p class="text-gray-700"><span class="font-medium">능동적 건강 관리 실현</span> - 환자가 치료 과정에 적극 참여하며 스스로 건강을 관리하는 주체가 됩니다.</p>
+                                        <i class="fas fa-user-shield text-green-500 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
+                                        <p class="benefit-text"><span class="font-semibold">능동적 건강 관리</span> 실현</p> <!-- 텍스트 클래스 추가 및 강조 -->
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="benefit-column">
                                 <div class="benefit-group">
                                     <div class="benefit-group-title">
-                                        <i class="fas fa-hospital text-blue-500 mr-2"></i>
+                                        <i class="fas fa-hospital text-blue-500 mr-3 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
                                         병원 경쟁력 강화
                                     </div>
-                                    
+
                                     <div class="benefit-item">
-                                        <i class="fas fa-user-plus text-green-500 mr-3 text-lg"></i>
-                                        <p class="text-gray-700"><span class="font-medium">신규 환자 유치 증대</span> - 차별화된 리포트 제공으로 자연스러운 환자 유입을 유도하고 잠재 고객을 확보합니다.</p>
+                                        <i class="fas fa-user-plus text-green-500 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
+                                        <p class="benefit-text"><span class="font-semibold">신규 환자 유치</span> 증대</p> <!-- 텍스트 클래스 추가 및 강조 -->
                                     </div>
-                                    
+
                                     <div class="benefit-item">
-                                        <i class="fas fa-building text-green-500 mr-3 text-lg"></i>
-                                        <p class="text-gray-700"><span class="font-medium">병원 브랜드 이미지 제고</span> - 첨단 데이터 시스템 도입으로 신뢰도 높은 의료기관 이미지를 구축합니다.</p>
+                                        <i class="fas fa-building text-green-500 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
+                                        <p class="benefit-text"><span class="font-semibold">병원 브랜드 이미지</span> 제고</p> <!-- 텍스트 클래스 추가 및 강조 -->
                                     </div>
-                                    
+
                                     <div class="benefit-item">
-                                        <i class="fas fa-tasks text-green-500 mr-3 text-lg"></i>
-                                        <p class="text-gray-700"><span class="font-medium">진료 효율성 & 관리 용이성 향상</span> - 데이터 기반의 체계적인 진료 및 환자 관리로 업무 효율성을 극대화합니다.</p>
+                                        <i class="fas fa-tasks text-green-500 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
+                                        <p class="benefit-text"><span class="font-semibold">진료 효율성</span> & <span class="font-semibold">관리 용이성</span> 향상</p> <!-- 텍스트 클래스 추가 및 강조 -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="benefit-group">
                             <div class="benefit-group-title">
-                                <i class="fas fa-chart-bar text-green-500 mr-2"></i>
+                                <i class="fas fa-chart-bar text-green-500 mr-3 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
                                 자가진단 서비스 도입 기대 효과
                             </div>
-                            
+
                             <div class="benefit-item">
-                                <i class="fas fa-briefcase-medical text-green-500 mr-3 text-lg"></i>
-                                <p class="text-gray-700"><span class="font-medium">치료율 및 예후 개선</span> - 증상의 조기 포착을 통해 환자의 전반적인 건강 상태와 치료 효과를 향상시킵니다.</p>
+                                <i class="fas fa-briefcase-medical text-green-500 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
+                                <p class="benefit-text"><span class="font-semibold">치료율 및 예후</span> 개선</p> <!-- 텍스트 클래스 추가 및 강조 -->
                             </div>
-                            
+
                             <div class="benefit-item">
-                                <i class="fas fa-clock text-green-500 mr-3 text-lg"></i>
-                                <p class="text-gray-700"><span class="font-medium">초진 상담 시간 단축</span> - 사전 정보 수집으로 의료진의 초진 상담 시간이 평균 27% 단축되어 업무 효율성이 증가합니다.</p>
+                                <i class="fas fa-clock text-green-500 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
+                                <p class="benefit-text"><span class="font-semibold">초진 상담 시간</span> 단축</p> <!-- 텍스트 클래스 추가 및 강조 -->
                             </div>
-                            
+
                             <div class="benefit-item">
-                                <i class="fas fa-comment-medical text-green-500 mr-3 text-lg"></i>
-                                <p class="text-gray-700"><span class="font-medium">환자-의사 소통 개선</span> - 체계적인 증상 파악으로 더 정확하고 효과적인 의사소통이 가능해집니다.</p>
+                                <i class="fas fa-comment-medical text-green-500 benefit-icon"></i> <!-- 아이콘 클래스 추가 -->
+                                <p class="benefit-text"><span class="font-semibold">환자-의사 소통</span> 개선</p> <!-- 텍스트 클래스 추가 및 강조 -->
                             </div>
                         </div>
-                        
-
                     </div>
                 </div>
             </div>
