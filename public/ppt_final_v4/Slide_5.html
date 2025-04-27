@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Medical Questionnaire - Significance & Limitations</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #4860ff 0%, #9f6bff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            overflow: hidden;
+            position: relative;
+            background: #ffffff;
+        }
+        .analysis-card {
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .analysis-card:hover {
+            box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15);
+            border-color: #dbeafe;
+        }
+        .significance-icon {
+            position: relative;
+            z-index: 10;
+        }
+        .significance-icon:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180%;
+            height: 180%;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .limitations-icon {
+            position: relative;
+            z-index: 10;
+        }
+        .limitations-icon:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180%;
+            height: 180%;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .benefit-card {
+            transition: all 0.3s ease;
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        .limitation-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+        .limitation-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ef4444;
+        }
+        .solution-item {
+            background-color: #f9fafb;
+            border-left: 3px solid #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="slide-container mx-auto shadow-xl">
+        <!-- Header & Title -->
+        <div class="w-full bg-white px-14 py-6 border-b border-gray-200">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold">
+                        <span class="gradient-text">프로젝트 의의 및 잠재적 한계점 분석</span>
+                    </h1>
+                    <p class="text-gray-600 mt-2">기대되는 가치와 극복해야 할 과제</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-stethoscope text-blue-500 text-xl mr-2"></i>
+                    <span class="text-gray-700 font-medium">온누리마취통증의학과</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="w-full p-8 bg-gray-50">
+            <div class="grid grid-cols-2 gap-8">
+                <!-- Left Column: Project Significance -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="significance-icon mr-4">
+                            <i class="fas fa-star text-blue-600 text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">기대되는 혁신적 가치 (의의)</h2>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Benefit Card 1 -->
+                        <div class="analysis-card bg-white p-5 benefit-card">
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                    <i class="fas fa-user-shield text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-2">환자 역량 강화 (Patient Empowerment)</h3>
+                                    <p class="text-gray-600 text-sm mb-3">
+                                        환자가 자신의 건강 상태를 명확히 이해하고, 치료 과정에 주도적으로 참여하도록 지원함으로써 
+                                        <span class="font-medium">수동적 환자에서 능동적 건강 관리 주체로의 전환</span> 촉진
+                                    </p>
+                                    <div class="bg-blue-50 p-3 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-blue-800 mb-1">기대 효과</h4>
+                                        <ul class="text-xs text-gray-700 space-y-1">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                                <span>치료 순응도 향상 및 치료 결과 개선</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                                <span>자가 관리 능력 향상으로 증상 재발 방지</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                                <span>환자-의료진 파트너십 강화 및 의사소통 개선</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Benefit Card 2 -->
+                        <div class="analysis-card bg-white p-5 benefit-card">
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                                    <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-2">데이터 기반 정밀 의료 실현</h3>
+                                    <p class="text-gray-600 text-sm mb-3">
+                                        표준화된 데이터의 체계적 축적 및 분석을 통해 
+                                        <span class="font-medium">진단의 정확성을 높이고, 환자별 최적의 치료 전략 수립</span> 지원
+                                    </p>
+                                    <div class="bg-purple-50 p-3 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-purple-800 mb-1">기대 효과</h4>
+                                        <ul class="text-xs text-gray-700 space-y-1">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-purple-600 text-xs mt-0.5 mr-1.5"></i>
+                                                <span>증상 패턴 분석을 통한 초기 진단 정확도 향상</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-purple-600 text-xs mt-0.5 mr-1.5"></i>
+                                                <span>치료 반응 예측 및 맞춤형 치료 계획 수립</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-purple-600 text-xs mt-0.5 mr-1.5"></i>
+                                                <span>장기적으로 예측 모델 개발 및 예방적 개입 기반 마련</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Benefit Card 3 -->
+                        <div class="analysis-card bg-white p-5 benefit-card">
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mr-4">
+                                    <i class="fas fa-hospital text-indigo-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-2">병원 운영 효율성 극대화</h3>
+                                    <p class="text-gray-600 text-sm mb-3">
+                                        문진 프로세스 자동화, 진료 준비 시간 단축, 환자-의료진 간 커뮤니케이션 개선 등을 통해 
+                                        <span class="font-medium">한정된 의료 자원의 효율적 배분</span> 가능
+                                    </p>
+                                    <div class="bg-indigo-50 p-3 rounded-lg">
+                                        <div class="flex space-x-4">
+                                            <div class="w-1/2">
+                                                <h4 class="text-sm font-semibold text-indigo-800 mb-1">의료진 측면</h4>
+                                                <ul class="text-xs text-gray-700 space-y-1">
+                                                    <li class="flex items-start">
+                                                        <i class="fas fa-check-circle text-indigo-600 text-xs mt-0.5 mr-1.5"></i>
+                                                        <span>불필요한 반복 문진 감소</span>
+                                                    </li>
+                                                    <li class="flex items-start">
+                                                        <i class="fas fa-check-circle text-indigo-600 text-xs mt-0.5 mr-1.5"></i>
+                                                        <span>의료진 번아웃 예방</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="w-1/2">
+                                                <h4 class="text-sm font-semibold text-indigo-800 mb-1">경영 측면</h4>
+                                                <ul class="text-xs text-gray-700 space-y-1">
+                                                    <li class="flex items-start">
+                                                        <i class="fas fa-check-circle text-indigo-600 text-xs mt-0.5 mr-1.5"></i>
+                                                        <span>환자 처리량 증가</span>
+                                                    </li>
+                                                    <li class="flex items-start">
+                                                        <i class="fas fa-check-circle text-indigo-600 text-xs mt-0.5 mr-1.5"></i>
+                                                        <span>운영 비용 최적화</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Benefit Card 4 -->
+                        <div class="analysis-card bg-white p-5 benefit-card">
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                    <i class="fas fa-trophy text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-2">디지털 헬스케어 선도 병원 위상 정립</h3>
+                                    <p class="text-gray-600 text-sm">
+                                        본 시스템의 성공적인 도입 및 운영은 온누리마취통증의학과가 
+                                        <span class="font-medium">미래 지향적이고 혁신적인 의료 서비스를 제공하는 선도 기관</span>임을 입증하는 강력한 사례
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Potential Limitations -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="limitations-icon mr-4">
+                            <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">예상되는 한계 및 극복 방안</h2>
+                    </div>
+                    
+                    <div class="analysis-card bg-white p-6">
+                        <!-- Limitation 1 -->
+                        <div class="limitation-item">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">디지털 격차(Digital Divide) 문제</h3>
+                            <p class="text-gray-600 text-sm mb-2">
+                                고령층이나 디지털 기기 사용에 익숙하지 않은 환자들의
+                                <span class="font-medium text-red-600">시스템 접근성 및 활용도 저하 가능성</span>
+                            </p>
+                            <div class="solution-item p-3 pl-4 rounded-lg">
+                                <h4 class="text-sm font-semibold text-blue-800 mb-1">극복 방안</h4>
+                                <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>OCR 기능 적극 활용</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>병원 내 안내 인력 배치</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>보호자 도움 기능 구현</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>직관적 UI/UX 지속 개선</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Limitation 2 -->
+                        <div class="limitation-item">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">AI 분석의 해석적 한계</h3>
+                            <p class="text-gray-600 text-sm mb-2">
+                                AI 리포트는 <span class="font-medium text-red-600">의료적 판단을 보조하는 도구</span>일 뿐, 최종 진단 및 치료 결정은 반드시
+                                <span class="font-medium">의료 전문가의 종합적인 검토와 판단</span> 하에 이루어져야 함
+                            </p>
+                            <div class="solution-item p-3 pl-4 rounded-lg">
+                                <h4 class="text-sm font-semibold text-blue-800 mb-1">극복 방안</h4>
+                                <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>AI 역할과 한계 명확한 고지</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>환자 및 의료진 교육 강화</span>
+                                    </div>
+                                    <div class="flex items-start col-span-2">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>AI 결과와 임상적 판단 불일치 시 가이드라인 마련</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Limitation 3 -->
+                        <div class="limitation-item">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">초기 데이터 부족 및 편향성 문제</h3>
+                            <p class="text-gray-600 text-sm mb-2">
+                                시스템 도입 초기에는 축적된 데이터 양이 적어 
+                                <span class="font-medium text-red-600">AI 분석 모델의 정확도나 일반화 성능에 한계</span>가 있을 수 있음
+                            </p>
+                            <div class="solution-item p-3 pl-4 rounded-lg">
+                                <h4 class="text-sm font-semibold text-blue-800 mb-1">극복 방안</h4>
+                                <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>지속적 데이터 수집 및 모델 갱신</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>다양한 환자군 데이터 확보 노력</span>
+                                    </div>
+                                    <div class="flex items-start col-span-2">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>초기 성능에 대한 현실적 기대치 설정 및 점진적 고도화</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Limitation 4 -->
+                        <div class="limitation-item mb-0">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">개인 의료 정보 보안 및 프라이버시 이슈</h3>
+                            <p class="text-gray-600 text-sm mb-2">
+                                민감한 건강 정보를 다루므로 
+                                <span class="font-medium text-red-600">데이터 유출, 오용 등에 대한 철저한 보안 시스템 구축 및 관리</span>가 필수적
+                            </p>
+                            <div class="solution-item p-3 pl-4 rounded-lg">
+                                <h4 class="text-sm font-semibold text-blue-800 mb-1">극복 방안</h4>
+                                <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>최신 보안 기술 적용</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>정기적인 보안 감사 실시</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>환자 동의 절차 강화</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                        <span>투명한 정보 활용 정책 고지</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Data Visualization Chart -->
+                    <div class="analysis-card bg-white p-4 mt-6">
+                        <h3 class="text-md font-semibold text-gray-800 mb-3">잠재적 위험 요소 분석 및 관리 수준</h3>
+                        <div class="w-full h-[150px]">
+                            <canvas id="riskManagementChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Section -->
+            <div class="mt-6 bg-white p-5 rounded-xl border border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">균형 있는 시스템 확장 계획</h3>
+                <p class="text-sm text-gray-700 mb-4">
+                    본 프로젝트는 환자 중심 의료와 데이터 기반 의사결정이라는 두 축을 중심으로 설계되었습니다. 예상되는 한계점에 대한 
+                    <span class="font-medium">선제적 대응 전략을 수립</span>하고, 단계적 기능 확장을 통해 
+                    <span class="font-medium">지속가능한 혁신을 추구</span>합니다.
+                </p>
+                <div class="flex justify-between">
+                    <div class="w-[23%] bg-blue-50 p-3 rounded-lg">
+                        <h4 class="text-center text-sm font-semibold text-blue-800 mb-2">기술적 측면</h4>
+                        <div class="text-xs text-gray-700 space-y-1.5">
+                            <div class="flex items-start">
+                                <i class="fas fa-angle-right text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                <span>모델 정확도 지속적 개선</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-angle-right text-blue-600 text-xs mt-0.5 mr-1.5"></i>
+                                <span>다양한 디바이스 호환성</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-[23%] bg-purple-50 p-3 rounded-lg">
+                        <h4 class="text-center text-sm font-semibold text-purple-800 mb-2">임상적 측면</h4>
+                        <div class="text-xs text-gray-700 space-y-1.5">
+                            <div class="flex items-start">
+                                <i class="fas fa-angle-right text-purple-600 text-xs mt-0.5 mr-1.5"></i>
+                                <span>근거 기반 표준화 지속 강화</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-angle-right text-purple-600 text-xs mt-0.5 mr-1.5"></i>
+                                <span>치료 효과 측정 고도화</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-[23%] bg-green-50 p-3 rounded-lg">
+                        <h4 class="text-center text-sm font-semibold text-green-800 mb-2">사용자 측면</h4>
+                        <div class="text-xs text-gray-700 space-y-1.5">
+                            <div class="flex items-start">
+                                <i class="fas fa-angle-right text-green-600 text-xs mt-0.5 mr-1.5"></i>
+                                <span>접근성 및 사용 편의성 확대</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-angle-right text-green-600 text-xs mt-0.5 mr-1.5"></i>
+                                <span>환자 피드백 기반 개선</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-[23%] bg-orange-50 p-3 rounded-lg">
+                        <h4 class="text-center text-sm font-semibold text-orange-800 mb-2">비즈니스 측면</h4>
+                        <div class="text-xs text-gray-700 space-y-1.5">
+                            <div class="flex items-start">
+                                <i class="fas fa-angle-right text-orange-600 text-xs mt-0.5 mr-1.5"></i>
+                                <span>타 병원 확장 가능성 검토</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-angle-right text-orange-600 text-xs mt-0.5 mr-1.5"></i>
+                                <span>비용 효율성 지속 모니터링</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Risk Management Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const riskCtx = document.getElementById('riskManagementChart').getContext('2d');
+            
+            const riskChart = new Chart(riskCtx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        '디지털 격차',
+                        'AI 해석 한계',
+                        '데이터 편향',
+                        '정보 보안',
+                        '비용 효율성'
+                    ],
+                    datasets: [
+                        {
+                            label: '위험 수준',
+                            data: [4, 3, 3.5, 4.5, 2],
+                            backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                            borderColor: 'rgba(239, 68, 68, 0.8)',
+                            pointBackgroundColor: 'rgba(239, 68, 68, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '대응 관리 수준',
+                            data: [3.5, 4, 3, 4, 4.5],
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgba(59, 130, 246, 0.8)',
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 5
+                        }
+                    },
+                    maintainAspectRatio: false,
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

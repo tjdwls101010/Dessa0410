@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 14: 향후 발전 및 확장 로드맵</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px;
+            background: linear-gradient(120deg, #f3e8ff 0%, #e0f2fe 100%); /* Light Purple to Light Blue gradient */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #6d28d9, #2563eb); /* Deep Purple to Blue */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #cbd5e1; /* Slate-300 */
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem; /* Increased spacing */
+            width: 50%;
+        }
+        .timeline-item:nth-child(odd) {
+            padding-right: 3rem; /* Space from center line */
+            left: 0;
+            text-align: right;
+        }
+        .timeline-item:nth-child(even) {
+            padding-left: 3rem; /* Space from center line */
+            left: 50%;
+            text-align: left;
+        }
+        .timeline-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            border: 1px solid #e2e8f0; /* Slate-200 */
+        }
+        .timeline-item:nth-child(odd) .timeline-content::after { /* Arrow pointing right */
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -15px; /* Position arrow */
+            border-style: solid;
+            border-width: 15px 0 15px 15px;
+            border-color: transparent transparent transparent white;
+        }
+        .timeline-item:nth-child(even) .timeline-content::after { /* Arrow pointing left */
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -15px; /* Position arrow */
+            border-style: solid;
+            border-width: 15px 15px 15px 0;
+            border-color: transparent white transparent transparent;
+        }
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            top: 15px; /* Align with arrow */
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: #4f46e5; /* Indigo-600 */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            z-index: 10;
+            border: 3px solid white;
+        }
+        .timeline-phase {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: #4338ca; /* Indigo-700 */
+            margin-bottom: 0.5rem;
+        }
+        .timeline-duration {
+            font-size: 0.85rem;
+            color: #64748b; /* Slate-500 */
+            margin-bottom: 1rem;
+        }
+        .timeline-details li {
+            font-size: 0.9rem;
+            color: #334155; /* Slate-700 */
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-10 text-center">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">향후 발전 및 확장 로드맵: <span class="gradient-text">지속 가능한 혁신</span></h1>
+             <p class="text-xl text-gray-600">단계별 고도화를 통한 미래 가치 창출</p>
+        </div>
+
+        <div class="flex-grow timeline">
+            <!-- Phase 1: Short-term -->
+            <div class="timeline-item">
+                <div class="timeline-icon"><i class="fas fa-wrench"></i></div>
+                <div class="timeline-content">
+                    <h2 class="timeline-phase">1단계: 시스템 안정화 및 고도화</h2>
+                    <p class="timeline-duration">(향후 6개월 ~ 1년)</p>
+                    <ul class="list-disc list-inside timeline-details">
+                        <li><span class="font-semibold">사용자 피드백 기반 개선:</span> UI/UX, 문진 항목, AI 알고리즘 튜닝</li>
+                        <li><span class="font-semibold">데이터 시각화 강화:</span> 리포트 디자인 및 시각화 방식 다양화</li>
+                        <li><span class="font-semibold">초기 안정성 확보:</span> 버그 수정 및 성능 최적화 집중</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Phase 2: Mid-term -->
+            <div class="timeline-item">
+                 <div class="timeline-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                 <div class="timeline-content">
+                     <h2 class="timeline-phase">2단계: 서비스 범위 확대</h2>
+                     <p class="timeline-duration">(향후 1년 ~ 2년)</p>
+                     <ul class="list-disc list-inside timeline-details">
+                         <li><span class="font-semibold">다국어 지원:</span> 외국인 환자 유치 및 편의 증진 (영어, 중국어 등)</li>
+                         <li><span class="font-semibold">질환 범위 확장:</span> 타 근골격계 질환(어깨, 무릎 등) 적용 검토</li>
+                         <li><span class="font-semibold">모바일 앱 개발:</span> 네이티브 앱 통한 접근성 및 UX 향상</li>
+                     </ul>
+                 </div>
+            </div>
+
+            <!-- Phase 3: Long-term -->
+            <div class="timeline-item">
+                 <div class="timeline-icon"><i class="fas fa-globe-asia"></i></div>
+                 <div class="timeline-content">
+                     <h2 class="timeline-phase">3단계: 플랫폼 확장 및 생태계 구축</h2>
+                     <p class="timeline-duration">(향후 2년 이상)</p>
+                     <ul class="list-disc list-inside timeline-details">
+                         <li><span class="font-semibold">클라우드 기반 SaaS 모델 전환:</span> 타 병원 대상 구독형 서비스 제공</li>
+                         <li><span class="font-semibold">통합 건강 관리 플랫폼 연계:</span> 웨어러블, 식이, 운동 데이터 연동</li>
+                         <li><span class="font-semibold">임상 연구 지원 플랫폼 활용:</span> 비식별화 데이터 기반 부가가치 창출</li>
+                     </ul>
+                 </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 14
+        </div>
+    </div>
+</body>
+</html>

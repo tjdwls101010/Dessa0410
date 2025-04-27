@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 5: 핵심 기능 및 기대 효과 - 환자 측면</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px;
+            background-color: #f8fafc; /* Consistent background */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6); /* Blue to Purple */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .flow-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            text-align: center;
+            min-height: 180px; /* Ensure cards have similar height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .flow-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem; /* mb-3 */
+            color: #6366f1; /* Indigo */
+        }
+        .arrow-icon {
+            font-size: 2rem;
+            color: #9ca3af; /* Gray-400 */
+            align-self: center; /* Center arrow vertically */
+        }
+        .highlight-box {
+            background-color: #e0f2fe; /* Light blue background */
+            border-left: 4px solid #3b82f6; /* Blue border */
+            padding: 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-top: 1.5rem; /* mt-6 */
+        }
+        .highlight-icon {
+             font-size: 1.8rem;
+             color: #3b82f6; /* Blue */
+             margin-right: 0.75rem; /* mr-3 */
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-10">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">기대 효과 (환자): <span class="gradient-text">정보 접근성 향상 → 조기 진료 결정 촉진</span></h1>
+             <p class="text-xl text-gray-600">환자 스스로 상태를 인지하고, 능동적으로 행동하도록 지원</p>
+        </div>
+
+        <div class="flex-grow flex flex-col justify-center">
+            <!-- Flow 1: 상태 인지 및 확신 전환 -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">자신의 상태 인지부터 진료 확신까지</h2>
+                <div class="grid grid-cols-5 gap-4 items-center">
+                    <div class="flow-card">
+                        <i class="fas fa-file-medical-alt flow-icon"></i>
+                        <p class="font-medium text-gray-700">디지털 문진</p>
+                        <p class="text-sm text-gray-500">체계적 증상 입력</p>
+                    </div>
+                    <i class="fas fa-long-arrow-alt-right arrow-icon"></i>
+                    <div class="flow-card">
+                        <i class="fas fa-chart-bar flow-icon"></i>
+                        <p class="font-medium text-gray-700">AI 분석 & 맞춤 리포트</p>
+                        <p class="text-sm text-gray-500">객관적 데이터 확인 (점수, 위험도)</p>
+                    </div>
+                    <i class="fas fa-long-arrow-alt-right arrow-icon"></i>
+                    <div class="flow-card bg-blue-50 border-blue-200">
+                        <i class="fas fa-lightbulb flow-icon text-blue-600"></i>
+                        <p class="font-semibold text-blue-800">"진료가 필요하다!"</p>
+                        <p class="text-sm text-blue-600">의구심 → 확신 전환</p>
+                    </div>
+                </div>
+                <p class="text-center text-gray-600 mt-4 text-lg">
+                    객관적 데이터로 잠재적 위험성을 인지하고, 병원 방문의 <span class="font-semibold">심리적 장벽 완화</span>
+                </p>
+            </div>
+
+            <!-- Flow 2: 궁금증 해소 및 내원 준비 -->
+             <div class="highlight-box flex items-center">
+                 <i class="fas fa-headset highlight-icon"></i>
+                 <div>
+                     <h3 class="text-xl font-semibold text-blue-800 mb-1">AI 챗봇 '척추 톡톡'의 역할</h3>
+                     <p class="text-gray-700 leading-relaxed">
+                         리포트에 대한 궁금증을 <span class="font-semibold">즉각 해소</span>하고, 병원 방문 절차나 예상 진료 내용 안내를 통해 <span class="font-semibold text-blue-700">내원 결정 및 준비를 용이하게</span> 합니다. 환자의 불안감을 줄이고 편의성을 높입니다.
+                     </p>
+                 </div>
+             </div>
+        </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 5
+        </div>
+    </div>
+</body>
+</html>

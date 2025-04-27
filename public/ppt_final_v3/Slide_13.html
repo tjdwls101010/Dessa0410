@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 13: 프로젝트 의의 및 잠재적 한계점 - 예상 한계 및 극복 방안</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px;
+            background-color: #f8fafc; /* Consistent background */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #f97316, #ef4444); /* Orange to Red */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .limitation-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            border-left: 5px solid #f59e0b; /* Amber-500 border */
+            margin-bottom: 1.5rem; /* mb-6 */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .limitation-title {
+            font-size: 1.1rem; /* Slightly larger */
+            font-weight: 600; /* font-semibold */
+            color: #78350f; /* Amber-900 */
+            margin-bottom: 0.5rem; /* mb-2 */
+            display: flex;
+            align-items: center;
+        }
+        .limitation-icon {
+            margin-right: 0.75rem; /* mr-3 */
+            color: #f59e0b; /* Amber-500 */
+            font-size: 1.2rem;
+        }
+        .limitation-description {
+            font-size: 0.9rem;
+            color: #57534e; /* Stone-600 */
+            margin-bottom: 1rem; /* mb-4 */
+            line-height: 1.6;
+        }
+        .solution-section {
+            border-top: 1px dashed #d6d3d1; /* Stone-300 dashed border */
+            padding-top: 1rem; /* pt-4 */
+        }
+        .solution-title {
+            font-size: 0.9rem;
+            font-weight: 600; /* font-semibold */
+            color: #16a34a; /* Green-600 */
+            margin-bottom: 0.5rem; /* mb-2 */
+            display: flex;
+            align-items: center;
+        }
+        .solution-icon {
+            margin-right: 0.5rem; /* mr-2 */
+            font-size: 1rem;
+        }
+        .solution-description {
+            font-size: 0.85rem;
+            color: #4d7c0f; /* Lime-800 */
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-10">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">잠재적 한계점 및 <span class="gradient-text">극복 방안</span></h1>
+             <p class="text-xl text-gray-600">현실적인 문제 인식과 선제적 대응 전략</p>
+        </div>
+
+        <div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+            <!-- Limitation 1: Digital Divide -->
+            <div class="limitation-card">
+                <div>
+                    <h2 class="limitation-title"><i class="fas fa-universal-access limitation-icon"></i>디지털 격차 (Digital Divide)</h2>
+                    <p class="limitation-description">고령층, 디지털 기기 미숙련자의 시스템 접근성 및 활용도 저하 가능성.</p>
+                </div>
+                <div class="solution-section">
+                    <h3 class="solution-title"><i class="fas fa-check-circle solution-icon"></i>극복 방안</h3>
+                    <p class="solution-description">▲OCR 적극 활용 ▲병원 내 안내/교육 지원 ▲보호자 도움 기능 ▲지속적 UI/UX 개선 (사용 편의성 증대)</p>
+                </div>
+            </div>
+
+            <!-- Limitation 2: AI Interpretation Limit -->
+            <div class="limitation-card border-l-red-500">
+                 <h2 class="limitation-title text-red-900"><i class="fas fa-brain limitation-icon text-red-500"></i>AI 분석의 해석적 한계</h2>
+                 <p class="limitation-description">AI 리포트는 의료 판단 보조 도구일 뿐, 최종 진단/치료는 반드시 의료 전문가의 종합적 판단 필요.</p>
+                 <div class="solution-section border-t-red-300">
+                     <h3 class="solution-title text-green-600"><i class="fas fa-check-circle solution-icon"></i>극복 방안</h3>
+                     <p class="solution-description text-lime-800">▲AI 역할/한계 명확히 고지 (환자/의료진 교육) ▲AI 결과-임상 판단 불일치 시 가이드라인 마련</p>
+                 </div>
+            </div>
+
+            <!-- Limitation 3: Initial Data Issue -->
+            <div class="limitation-card border-l-blue-500">
+                 <h2 class="limitation-title text-blue-900"><i class="fas fa-database limitation-icon text-blue-500"></i>초기 데이터 부족 및 편향성</h2>
+                 <p class="limitation-description">초기 데이터 양 부족으로 AI 모델 정확도/일반화 한계 가능성. 특정 환자군 편중 시 분석 결과 편향성 우려.</p>
+                 <div class="solution-section border-t-blue-300">
+                     <h3 class="solution-title text-green-600"><i class="fas fa-check-circle solution-icon"></i>극복 방안</h3>
+                     <p class="solution-description text-lime-800">▲지속적 데이터 수집 및 모델 학습/개선 ▲다양한 환자군 데이터 확보 노력 ▲점진적 고도화 전략 추진</p>
+                 </div>
+            </div>
+
+            <!-- Limitation 4: Security & Privacy -->
+            <div class="limitation-card border-l-purple-500">
+                 <h2 class="limitation-title text-purple-900"><i class="fas fa-shield-alt limitation-icon text-purple-500"></i>개인 정보 보안 및 프라이버시</h2>
+                 <p class="limitation-description">민감 건강 정보 취급으로 데이터 유출/오용 등에 대한 철저한 보안 시스템 구축 및 관리 필수.</p>
+                 <div class="solution-section border-t-purple-300">
+                     <h3 class="solution-title text-green-600"><i class="fas fa-check-circle solution-icon"></i>극복 방안</h3>
+                     <p class="solution-description text-lime-800">▲최신 보안 기술 적용 (암호화, 접근 통제) ▲규정 준수 및 정기 감사 ▲환자 동의 강화 및 투명한 정보 활용 고지</p>
+                 </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 13
+        </div>
+    </div>
+</body>
+</html>

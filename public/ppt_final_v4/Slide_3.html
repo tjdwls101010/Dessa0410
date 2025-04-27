@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Medical Questionnaire - Core Features & Effects</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #4860ff 0%, #9f6bff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            overflow: hidden;
+            position: relative;
+            background: #ffffff;
+        }
+        .feature-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px -5px rgba(59, 130, 246, 0.2);
+        }
+        .effect-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .effect-card:hover {
+            box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15);
+            border-color: #dbeafe;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="slide-container mx-auto shadow-xl">
+        <!-- Header & Title -->
+        <div class="w-full bg-white px-14 py-6 border-b border-gray-200">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold">
+                        <span class="gradient-text">핵심 기능 및 기대 효과</span>
+                    </h1>
+                    <p class="text-gray-600 mt-2">무엇을 어떻게 구현하여 어떤 가치를 창출하는가?</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-stethoscope text-blue-500 text-xl mr-2"></i>
+                    <span class="text-gray-700 font-medium">온누리마취통증의학과</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="w-full px-12 py-10 bg-gray-50">
+            <!-- Feature Matrix Section -->
+            <div class="mb-8">
+                <h3 class="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                    <i class="fas fa-cubes text-blue-600 mr-2"></i> 핵심 기능 매트릭스
+                </h3>
+                
+                <div class="grid grid-cols-3 gap-5">
+                    <!-- Feature Card 1 -->
+                    <div class="feature-card bg-white shadow-md">
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-3 text-white">
+                            <div class="flex items-center">
+                                <i class="fas fa-clipboard-check text-xl mr-3"></i>
+                                <h4 class="font-bold">디지털 사전 문진</h4>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 text-sm mb-3">환자가 모바일/웹을 통해 통증, 기능 제한, 관련 증상 등을 체계적으로 입력</p>
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="text-blue-700 font-medium text-sm mb-2">주요 기술/특징</h5>
+                                <ul class="text-xs text-gray-700 space-y-1">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>표준화된 척도(VAS, DN4, ODI, Red Flags)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>직관적 UI/UX로 사용자 접근성 향상</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature Card 2 -->
+                    <div class="feature-card bg-white shadow-md">
+                        <div class="bg-gradient-to-r from-purple-500 to-purple-600 p-3 text-white">
+                            <div class="flex items-center">
+                                <i class="fas fa-chart-pie text-xl mr-3"></i>
+                                <h4 class="font-bold">AI 기반 분석 리포트</h4>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 text-sm mb-3">입력된 데이터를 AI 알고리즘으로 분석하여 위험도, 예상 원인 등을 시각화/점수화</p>
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <h5 class="text-purple-700 font-medium text-sm mb-2">주요 기술/특징</h5>
+                                <ul class="text-xs text-gray-700 space-y-1">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-purple-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>머신러닝 기반 패턴 분석</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-purple-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>데이터 시각화 엔진으로 직관적 정보 제공</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature Card 3 -->
+                    <div class="feature-card bg-white shadow-md">
+                        <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 p-3 text-white">
+                            <div class="flex items-center">
+                                <i class="fas fa-user-md text-xl mr-3"></i>
+                                <h4 class="font-bold">환자 맞춤형 리포트</h4>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 text-sm mb-3">분석 결과를 환자가 이해하기 쉬운 그래프, 요약 메시지, 행동 제안 형태로 제공</p>
+                            <div class="bg-indigo-50 p-3 rounded-lg">
+                                <h5 class="text-indigo-700 font-medium text-sm mb-2">주요 기술/특징</h5>
+                                <ul class="text-xs text-gray-700 space-y-1">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-indigo-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>개인화된 콘텐츠 생성</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-indigo-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>이해도 중심 디자인으로 정보 접근성 향상</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature Card 4 -->
+                    <div class="feature-card bg-white shadow-md">
+                        <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-3 text-white">
+                            <div class="flex items-center">
+                                <i class="fas fa-database text-xl mr-3"></i>
+                                <h4 class="font-bold">병원 시스템 연동</h4>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 text-sm mb-3">환자 리포트 결과를 EMR(전자의무기록) 시스템과 안전하게 연동하여 의료진에게 전달</p>
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="text-blue-700 font-medium text-sm mb-2">주요 기술/특징</h5>
+                                <ul class="text-xs text-gray-700 space-y-1">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>표준화된 API 연동(HL7 등)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>데이터 보안 프로토콜 적용</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature Card 5 -->
+                    <div class="feature-card bg-white shadow-md">
+                        <div class="bg-gradient-to-r from-purple-600 to-purple-700 p-3 text-white">
+                            <div class="flex items-center">
+                                <i class="fas fa-robot text-xl mr-3"></i>
+                                <h4 class="font-bold">AI 챗봇 '척추 톡톡'</h4>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 text-sm mb-3">생성된 리포트 내용을 기반으로 환자의 추가 질문에 실시간 답변 및 정보 제공</p>
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <h5 class="text-purple-700 font-medium text-sm mb-2">주요 기술/특징</h5>
+                                <ul class="text-xs text-gray-700 space-y-1">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-purple-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>RAG(Retrieval-Augmented Generation)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-purple-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>자연어 처리(NLP) 기술 활용</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature Card 6 -->
+                    <div class="feature-card bg-white shadow-md">
+                        <div class="bg-gradient-to-r from-gray-600 to-gray-700 p-3 text-white">
+                            <div class="flex items-center">
+                                <i class="fas fa-camera text-xl mr-3"></i>
+                                <h4 class="font-bold">(부가) OCR 연동</h4>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 text-sm mb-3">디지털 기기 사용이 어려운 환자를 위한 종이 문진표 자동 데이터 변환 지원</p>
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <h5 class="text-gray-700 font-medium text-sm mb-2">주요 기술/특징</h5>
+                                <ul class="text-xs text-gray-700 space-y-1">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-gray-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>광학 문자 인식(OCR) 기술</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-gray-500 mt-0.5 mr-1.5 text-xs"></i>
+                                        <span>디지털 취약계층 접근성 향상</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Expected Effects Section -->
+            <div>
+                <h3 class="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                    <i class="fas fa-chart-line text-purple-600 mr-2"></i> 목표 달성을 위한 기능 연계 및 기대 효과
+                </h3>
+                
+                <div class="grid grid-cols-2 gap-8">
+                    <!-- Left Column - Patient Side -->
+                    <div>
+                        <div class="effect-card mb-6">
+                            <div class="bg-gradient-to-r from-blue-100 to-blue-200 p-4">
+                                <h4 class="text-blue-800 font-bold flex items-center">
+                                    <i class="fas fa-user-injured text-blue-700 mr-2"></i>
+                                    <span>환자 측면</span>
+                                </h4>
+                                <p class="text-blue-900 text-sm italic mt-1">정보 접근성 향상 → 조기 진료 결정 촉진</p>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 bg-blue-100 rounded-lg p-2 mr-3">
+                                            <i class="fas fa-file-medical-alt text-blue-600 text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-800 text-sm">디지털 문진 + AI 분석 + 맞춤형 리포트</h5>
+                                            <p class="text-gray-600 text-sm mt-1">자신의 상태를 객관적 데이터로 확인하고, 잠재적 위험성을 인지하여 <span class="font-medium">"혹시 나도?"</span>라는 의구심을 <span class="font-medium">"진료가 필요하다"</span>는 확신으로 전환</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 bg-blue-100 rounded-lg p-2 mr-3">
+                                            <i class="fas fa-comments text-blue-600 text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-800 text-sm">AI 챗봇</h5>
+                                            <p class="text-gray-600 text-sm mt-1">리포트에 대한 궁금증을 즉각 해소하고, 병원 방문 절차나 예상 진료 내용에 대한 안내를 제공하여 <span class="font-medium">내원 결정 및 준비를 용이하게</span> 함</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Expected Results Chart -->
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                            <h5 class="text-sm font-semibold text-gray-800 mb-2">환자 효과 지표: 시스템 도입 후 예상 변화</h5>
+                            <div class="w-full h-[220px]">
+                                <canvas id="patientEffectChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Hospital Side -->
+                    <div>
+                        <div class="effect-card mb-6">
+                            <div class="bg-gradient-to-r from-purple-100 to-purple-200 p-4">
+                                <h4 class="text-purple-800 font-bold flex items-center">
+                                    <i class="fas fa-hospital text-purple-700 mr-2"></i>
+                                    <span>병원 측면</span>
+                                </h4>
+                                <p class="text-purple-900 text-sm italic mt-1">사전 정보 확보 → 진료 효율성 및 질 향상</p>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 bg-purple-100 rounded-lg p-2 mr-3">
+                                            <i class="fas fa-clipboard-list text-purple-600 text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-800 text-sm">디지털 문진 + 병원 시스템 연동</h5>
+                                            <p class="text-gray-600 text-sm mt-1">의료진은 환자 내원 전 EMR을 통해 <span class="font-medium">핵심적인 문진 결과를 미리 파악</span>함으로써 반복적 질문 생략, 맞춤 심층 질문 준비, 진단 및 치료 계획 수립 시간 단축</p>
+                                            <p class="text-sm text-purple-700 mt-1">초진 시간 단축 효과: <span class="font-bold">약 15~20%</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 bg-purple-100 rounded-lg p-2 mr-3">
+                                            <i class="fas fa-chart-bar text-purple-600 text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-800 text-sm">AI 분석 리포트</h5>
+                                            <p class="text-gray-600 text-sm mt-1">표준화된 데이터는 <span class="font-medium">환자 상태 변화 추적, 치료 효과 평가, 임상 연구 데이터 축적</span> 등 장기적인 의료 질 향상에 기여</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hospital Management Effect -->
+                        <div class="effect-card">
+                            <div class="bg-gradient-to-r from-indigo-100 to-indigo-200 p-4">
+                                <h4 class="text-indigo-800 font-bold flex items-center">
+                                    <i class="fas fa-chart-pie text-indigo-700 mr-2"></i>
+                                    <span>병원 경영 측면</span>
+                                </h4>
+                                <p class="text-indigo-900 text-sm italic mt-1">혁신 이미지 구축 → 브랜드 가치 상승 및 경쟁 우위 확보</p>
+                            </div>
+                            <div class="p-5">
+                                <div class="flex">
+                                    <div class="flex-shrink-0 bg-indigo-100 rounded-lg p-2 mr-3">
+                                        <i class="fas fa-rocket text-indigo-600 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-gray-800 text-sm">스마트 문진 시스템 전반</h5>
+                                        <p class="text-gray-600 text-sm mt-1">환자 경험을 혁신하는 디지털 솔루션 도입은 <span class="font-medium">최신 기술을 적극적으로 수용하고 환자 중심 철학을 실천하는 병원</span>임을 강력하게 어필</p>
+                                        <ul class="mt-2 space-y-1 text-sm text-gray-600">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-indigo-600 text-xs mt-1 mr-1"></i>
+                                                <span>신규 환자 유입 증대 (특히 디지털에 익숙한 젊은 층)</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-indigo-600 text-xs mt-1 mr-1"></i>
+                                                <span>기존 환자 만족도 및 재방문율 향상</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-indigo-600 text-xs mt-1 mr-1"></i>
+                                                <span>지역 사회 내 긍정적 구전 효과 확산</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialization script for charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Patient Effect Chart
+            const patientCtx = document.getElementById('patientEffectChart').getContext('2d');
+            
+            new Chart(patientCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['증상 발견 후 진료까지 시간', '치료 순응도', '환자 정보 이해도', '치료 만족도'],
+                    datasets: [
+                        {
+                            label: '시스템 도입 전',
+                            data: [6, 65, 45, 70],
+                            backgroundColor: 'rgba(156, 163, 175, 0.6)',
+                            borderColor: 'rgba(156, 163, 175, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '시스템 도입 후 (예상)',
+                            data: [2, 85, 75, 88],
+                            backgroundColor: 'rgba(79, 70, 229, 0.6)',
+                            borderColor: 'rgba(79, 70, 229, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.x !== null) {
+                                        if (context.dataIndex === 0) {
+                                            label += context.parsed.x + '개월';
+                                        } else {
+                                            label += context.parsed.x + '%';
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: false,
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            stacked: false,
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

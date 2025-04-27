@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 5: 상세 기능 2 - AI 리포트 & 병원 연계</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Spotify Dark Background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px; /* 16:10 ratio */
+            background-color: #1f1f1f; /* Slightly Lighter Dark */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            padding: 48px; /* 3rem */
+            border-radius: 8px;
+        }
+        .content-grid {
+            flex-grow: 1; /* Take remaining space */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px; /* 3rem */
+        }
+        .section-container {
+            background-color: #282828; /* Spotify Card Background */
+            border-radius: 8px;
+            padding: 24px; /* 1.5rem */
+            border: 1px solid #333333; /* Darker Border */
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 1.5rem; /* 24px */
+            font-weight: 600; /* semibold */
+            color: #1DB954; /* Spotify Green */
+            margin-bottom: 8px; /* 0.5rem */
+            text-align: center;
+        }
+         .section-subtitle {
+            font-size: 1rem; /* 16px */
+            font-weight: 500; /* medium */
+            color: #b3b3b3; /* Spotify Light Gray */
+            margin-bottom: 24px; /* 1.5rem */
+            text-align: center;
+        }
+        .list-item {
+            display: flex;
+            align-items: flex-start; /* Align icon top */
+            margin-bottom: 16px; /* 1rem */
+            font-size: 1rem; /* 16px */
+            color: #b3b3b3; /* Spotify Light Gray */
+        }
+        .list-item i {
+            color: #1DB954; /* Spotify Green */
+            margin-right: 12px; /* 0.75rem */
+            width: 24px; /* Fixed width for alignment */
+            text-align: center;
+            margin-top: 3px; /* Adjust icon vertical alignment */
+            font-size: 1.1rem;
+        }
+        .list-item strong {
+            font-weight: 600;
+            color: #FFFFFF; /* White */
+        }
+        .report-placeholder {
+            background-color: #333333; /* Darker Card Background */
+            border-radius: 6px;
+            height: 200px; /* Adjust height as needed */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #a7a7a7; /* Spotify Muted Gray */
+            font-size: 1rem;
+            margin-top: 24px; /* 1.5rem */
+            border: 2px dashed #505050; /* Lighter Border */
+        }
+        .flow-diagram {
+            background-color: #333333; /* Darker Card Background */
+            border: 1px solid #1DB954; /* Spotify Green border */
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 24px; /* 1.5rem */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+        }
+        .flow-item i {
+            font-size: 1.5rem;
+            color: #1DB954; /* Spotify Green */
+        }
+        .flow-item p {
+            font-size: 0.8rem;
+            color: #FFFFFF; /* White */
+            margin-top: 4px;
+        }
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #b3b3b3; /* Spotify Light Gray */
+        }
+        h2 {
+            color: #FFFFFF; /* White */
+        }
+        .text-green-600 {
+            color: #1DB954 !important; /* Spotify Green */
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h2 class="text-3xl font-bold mb-8 text-center">상세 기능 2: AI 분석 리포트 & 병원 시스템 연동</h2>
+        <div class="content-grid">
+            <!-- Left Column: AI Analysis Report -->
+            <div class="section-container">
+                <h3 class="section-title">AI 분석 리포트</h3>
+                <p class="section-subtitle">환자 맞춤형 분석 결과 제공</p>
+                <ul class="space-y-3 flex-grow">
+                    <li class="list-item">
+                        <i class="fas fa-chart-bar fa-fw"></i>
+                        <span><strong>데이터 시각화:</strong> 설문 기반 통증/기능 점수, 위험도 등 직관적 그래프 제공</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="fas fa-bullhorn fa-fw"></i>
+                        <span><strong>행동 유도 메시지:</strong> "전문가 상담이 필요합니다" 등 명확한 안내로 진료 결정 지원</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="fas fa-calendar-check fa-fw"></i>
+                        <span><strong>병원 연결 기능:</strong> 온누리병원 예약 시스템 연동 및 병원 정보 제공</span>
+                    </li>
+                </ul>
+                <div class="report-placeholder">
+                    <i class="fas fa-file-medical-alt mr-2"></i> 샘플 리포트 / 차트 이미지
+                </div>
+            </div>
+
+            <!-- Right Column: Hospital System Integration -->
+            <div class="section-container">
+                <h3 class="section-title">병원 시스템 연동</h3>
+                <p class="section-subtitle">효율적 진료 프로세스 구축</p>
+                <ul class="space-y-3 flex-grow">
+                    <li class="list-item">
+                        <i class="fas fa-database fa-fw text-green-600"></i>
+                        <span><strong>EMR 연동:</strong> 환자 사전 정보(문진 결과) 자동 연동 및 의료진 제공</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="fas fa-clock fa-fw text-green-600"></i>
+                        <span><strong>진료 효율 증대:</strong> 진료 전 준비 시간 단축 및 정보 확인 용이</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="fas fa-user-md fa-fw text-green-600"></i>
+                        <span><strong>맞춤 상담 지원:</strong> 사전 정보 기반 심층적이고 개인화된 상담 가능</span>
+                    </li>
+                     <li class="list-item">
+                        <i class="fas fa-tachometer-alt fa-fw text-green-600"></i>
+                        <span><strong>환자 관리 고도화:</strong> (향후) 진료 이력 통합 대시보드 구축 기반 마련</span>
+                    </li>
+                </ul>
+                 <div class="flow-diagram">
+                    <div class="flow-item"><i class="fas fa-user"></i><p>환자</p></div>
+                    <div class="flow-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+                    <div class="flow-item"><i class="fas fa-laptop-medical"></i><p>스마트문진</p></div>
+                    <div class="flow-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+                     <div class="flow-item"><i class="fas fa-server"></i><p>EMR</p></div>
+                     <div class="flow-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+                    <div class="flow-item"><i class="fas fa-user-md"></i><p>의료진</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

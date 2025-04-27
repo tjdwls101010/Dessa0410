@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 12: 프로젝트 의의 및 잠재적 한계점 - 기대되는 혁신적 가치</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px;
+            background: linear-gradient(to bottom right, #f0f9ff, #ecfdf5); /* Light Blue to Light Green gradient */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #0ea5e9, #22c55e); /* Sky Blue to Green */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .value-card {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            border-radius: 1rem; /* rounded-2xl */
+            padding: 2rem; /* p-8 */
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); /* Subtle shadow */
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%; /* Ensure cards in a row have equal height */
+        }
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px 0 rgba( 31, 38, 135, 0.45 );
+        }
+        .value-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem; /* mb-6 */
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #4ade80); /* Sky Blue to Light Green gradient for icon bg */
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .value-title {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: #1f2937; /* Gray-800 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .value-description {
+            font-size: 0.95rem;
+            color: #4b5563; /* Gray-600 */
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-12 text-center">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">프로젝트 의의: <span class="gradient-text">기대되는 혁신적 가치</span></h1>
+             <p class="text-xl text-gray-600">스마트 문진 시스템이 가져올 긍정적 변화</p>
+        </div>
+
+        <div class="flex-grow grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Value 1: Patient Empowerment -->
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h2 class="value-title">환자 역량 강화<br/>(Patient Empowerment)</h2>
+                <p class="value-description">
+                    자신의 건강 상태를 명확히 이해하고 치료 과정에 주도적으로 참여하도록 지원. <span class="font-semibold">수동적 환자 → 능동적 건강 관리 주체</span>로 전환 촉진. (치료 순응도 향상 및 예후 개선 기대)
+                </p>
+            </div>
+
+            <!-- Value 2: Precision Medicine -->
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h2 class="value-title">데이터 기반<br/>정밀 의료 실현</h2>
+                <p class="value-description">
+                    표준화된 데이터의 체계적 축적/분석으로 진단 정확성 향상 및 <span class="font-semibold">환자별 최적 치료 전략 수립</span> 지원. 장기적으로 예측 모델 개발 및 예방적 개입 기반 마련.
+                </p>
+            </div>
+
+            <!-- Value 3: Operational Efficiency -->
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h2 class="value-title">병원 운영 효율성<br/>극대화</h2>
+                <p class="value-description">
+                    문진 프로세스 자동화, 진료 준비 시간 단축, 커뮤니케이션 개선으로 <span class="font-semibold">한정된 의료 자원의 효율적 배분</span> 가능. (환자 만족도 증대 및 병원 수익성 개선 기여)
+                </p>
+            </div>
+
+            <!-- Value 4: Leading Position -->
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2 class="value-title">디지털 헬스케어<br/>선도 병원 위상 정립</h2>
+                <p class="value-description">
+                    미래 지향적, 혁신적 의료 서비스 제공 기관임을 입증하는 강력한 사례. <span class="font-semibold">타 병원과의 차별화된 경쟁 우위</span> 확보 및 브랜드 가치 제고.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center text-lg text-gray-700 font-medium">
+            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i> 스마트 문진 시스템은 단순한 도구를 넘어, <span class="font-semibold text-green-600">미래 의료 환경의 핵심 경쟁력</span>입니다.
+        </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 12
+        </div>
+    </div>
+</body>
+</html>

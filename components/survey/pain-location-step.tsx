@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import Image from "next/image"
+import { SurveyTooltip } from "./survey-tooltip" // SurveyTooltip 컴포넌트 import 추가
 
 interface PainLocationStepProps {
   data: any
@@ -37,7 +38,7 @@ export function PainLocationStep({ data, onComplete }: PainLocationStepProps) {
   const handleLocationChange = (locationId: string, checked: boolean) => {
     setFormData({
       ...formData,
-      locations: checked ? [...formData.locations, locationId] : formData.locations.filter((id) => id !== locationId),
+      locations: checked ? [...formData.locations, locationId] : formData.locations.filter((id: string) => id !== locationId), // id 타입 명시
     })
   }
 
@@ -64,7 +65,10 @@ export function PainLocationStep({ data, onComplete }: PainLocationStepProps) {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          <h3 className="text-lg font-medium mb-4">통증을 느끼는 부위를 모두 선택해주세요</h3>
+          <div className="flex items-center mb-4"> {/* Flex container 추가 */}
+            <h3 className="text-lg font-medium">통증을 느끼는 부위를 모두 선택해주세요</h3>
+            <SurveyTooltip questionId="5" />
+          </div>
           <div className="grid grid-cols-2 gap-3">
             {painLocations.map((location) => (
               <div key={location.id} className="flex items-center space-x-2">
@@ -90,8 +94,11 @@ export function PainLocationStep({ data, onComplete }: PainLocationStepProps) {
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-lg font-medium">가장 심한 통증을 느끼는 부위는 어디인가요?</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <h3 className="text-lg font-medium">가장 심한 통증을 느끼는 부위는 어디인가요?</h3>
+          <SurveyTooltip questionId="4" />
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mt-4"> {/* 제목과 옵션 간격 추가 */}
           {painLocations.map((location) => (
             <div key={`primary-${location.id}`} className="flex items-center space-x-2">
               <input

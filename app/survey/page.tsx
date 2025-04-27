@@ -17,6 +17,7 @@ import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { supabase } from "@/lib/supabaseClient" // Import Supabase client
+import { TooltipProvider } from "@/components/ui/tooltip" // TooltipProvider import 추가
 import { BasicInfoStep } from "@/components/survey/basic-info-step"
 import { PainCharacteristicsStep } from "@/components/survey/pain-characteristics-step"
 import { PainIntensityStep } from "@/components/survey/pain-intensity-step"
@@ -335,16 +336,18 @@ export default function SurveyPage() {
           <CardContent>
             {/* Removed the static validation error Alert */}
             <h2 className="text-xl font-semibold mb-4">{currentStepConfig.title}</h2>
-            <CurrentStepComponent
-              // Pass necessary props to the step component
-              key={currentStepKey} // Ensure component re-mounts or updates correctly if needed
+            <TooltipProvider> {/* TooltipProvider로 감싸기 */}
+              <CurrentStepComponent
+                // Pass necessary props to the step component
+                key={currentStepKey} // Ensure component re-mounts or updates correctly if needed
               stepKey={currentStepKey}
               data={surveyData[currentStepKey]}
               onValidatedSubmit={handleValidatedSubmit}
               onValidationFail={handleValidationFail}
-              reportStatus={handleReportStatus}
-              validationTrigger={validationTrigger}
-            />
+                reportStatus={handleReportStatus}
+                validationTrigger={validationTrigger}
+              />
+            </TooltipProvider> {/* TooltipProvider 닫기 */}
           </CardContent>
 
           {/* Validation Error Alert Dialog */}

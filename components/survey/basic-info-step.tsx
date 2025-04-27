@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback, useRef } from "react" // Added useRef
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Input } from "@/components/ui/input"
+import { SurveyTooltip } from "./survey-tooltip" // SurveyTooltip 컴포넌트 import 추가
 
 interface StepStatus {
   total: number
@@ -105,7 +106,10 @@ export function BasicInfoStep({
     // Remove the form tag as submission is handled by the parent's button
     <div className="space-y-6">
       <div className="space-y-4">
-        <Label className="text-base font-semibold">1. 귀하의 연령대는 어떻게 되십니까?</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">1. 귀하의 연령대는 어떻게 되십니까?</Label>
+          <SurveyTooltip questionId="1" />
+        </div>
         <RadioGroup
           value={formData.ageGroup}
           onValueChange={(value) => handleChange("ageGroup", value)}
@@ -145,7 +149,10 @@ export function BasicInfoStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">2. 귀하의 성별은 무엇입니까?</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">2. 귀하의 성별은 무엇입니까?</Label>
+          <SurveyTooltip questionId="2" />
+        </div>
         <RadioGroup
           value={formData.gender}
           onValueChange={(value) => handleChange("gender", value)}
@@ -168,7 +175,10 @@ export function BasicInfoStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">3. 주로 하시는 일(직업)이나 활동은 어떤 종류에 가깝습니까?</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">3. 주로 하시는 일(직업)이나 활동은 어떤 종류에 가깝습니까?</Label>
+          <SurveyTooltip questionId="3" />
+        </div>
         <RadioGroup
           value={formData.occupation}
           onValueChange={(value) => handleChange("occupation", value)}

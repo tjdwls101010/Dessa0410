@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { SurveyTooltip } from "./survey-tooltip" // SurveyTooltip 컴포넌트 import 추가
 
 interface StepStatus {
   total: number
@@ -130,7 +131,10 @@ export function LifestyleHistoryStep({
     // Remove form tag
     <div className="space-y-8">
       <div className="space-y-4">
-        <Label className="text-base font-semibold">27. 평소 규칙적인 운동(주 2회 이상, 1회 30분 이상)을 하십니까?</Label>
+        <div className="flex items-center">
+          <Label className="text-base font-semibold">27. 평소 규칙적인 운동(주 2회 이상, 1회 30분 이상)을 하십니까?</Label>
+          <SurveyTooltip questionId="27" />
+        </div>
         <RadioGroup
           value={formData.regularExercise}
           onValueChange={(value) => handleChange("regularExercise", value)}
@@ -163,7 +167,10 @@ export function LifestyleHistoryStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">28. 하루 평균 앉아있는 시간은 어느 정도입니까?</Label>
+        <div className="flex items-center">
+          <Label className="text-base font-semibold">28. 하루 평균 앉아있는 시간은 어느 정도입니까?</Label>
+          <SurveyTooltip questionId="28" />
+        </div>
         <RadioGroup
           value={formData.sittingHours}
           onValueChange={(value) => handleChange("sittingHours", value)}
@@ -191,7 +198,10 @@ export function LifestyleHistoryStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">29. 평소 자신의 자세(앉거나 서 있을 때)에 대해 어떻게 생각하십니까?</Label>
+        <div className="flex items-center">
+          <Label className="text-base font-semibold">29. 평소 자신의 자세(앉거나 서 있을 때)에 대해 어떻게 생각하십니까?</Label>
+          <SurveyTooltip questionId="29" />
+        </div>
         <RadioGroup
           value={formData.posture}
           onValueChange={(value) => handleChange("posture", value)}
@@ -223,7 +233,10 @@ export function LifestyleHistoryStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">30. 최근 3개월 내 스트레스를 많이 받았다고 느끼십니까?</Label>
+        <div className="flex items-center">
+          <Label className="text-base font-semibold">30. 최근 3개월 내 스트레스를 많이 받았다고 느끼십니까?</Label>
+          <SurveyTooltip questionId="30" />
+        </div>
         <RadioGroup
           value={formData.stress}
           onValueChange={(value) => handleChange("stress", value)}
@@ -255,9 +268,12 @@ export function LifestyleHistoryStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          31. 이전에 비슷한 통증으로 진료나 치료(물리치료, 도수치료, 주사치료, 시술, 수술 등)를 받은 경험이 있습니까?
-        </Label>
+        <div className="flex items-center">
+          <Label className="text-base font-semibold">
+            31. 이전에 비슷한 통증으로 진료나 치료(물리치료, 도수치료, 주사치료, 시술, 수술 등)를 받은 경험이 있습니까?
+          </Label>
+          <SurveyTooltip questionId="31" />
+        </div>
         <RadioGroup
           value={formData.previousTreatment}
           onValueChange={(value) => handleChange("previousTreatment", value)}
@@ -291,10 +307,13 @@ export function LifestyleHistoryStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          32. 현재 앓고 있거나 과거에 진단받은 주요 질환이 있습니까? (예: 당뇨, 고혈압, 류마티스 관절염, 골다공증, 암,
-          디스크 질환 등)
-        </Label>
+        <div className="flex items-center">
+          <Label className="text-base font-semibold">
+            32. 현재 앓고 있거나 과거에 진단받은 주요 질환이 있습니까? (예: 당뇨, 고혈압, 류마티스 관절염, 골다공증, 암,
+            디스크 질환 등)
+          </Label>
+          <SurveyTooltip questionId="32" />
+        </div>
         <RadioGroup
           value={formData.medicalConditions}
           onValueChange={(value) => handleChange("medicalConditions", value)}

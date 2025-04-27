@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 6: 병원 시스템 연동 상세</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1280px;
+            height: 800px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1180px;
+            height: 740px;
+            background-color: white;
+            border-radius: 16px;
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px; /* Increased margin */
+            color: #4a5568; /* Gray-700 */
+        }
+        .header i {
+            font-size: 1.8rem;
+            color: #667eea; /* Indigo-500 */
+            margin-right: 12px;
+        }
+        .header h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 600;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr; /* Adjust column ratio */
+            gap: 50px; /* Increased gap */
+            flex-grow: 1;
+            align-items: center;
+        }
+        .section-title {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #1e293b; /* Slate-800 */
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 8px;
+            color: #764ba2; /* Purple from gradient */
+        }
+        .integration-benefit {
+            display: flex;
+            align-items: center;
+            background-color: #f1f5f9; /* Slate-100 */
+            border-radius: 10px;
+            padding: 25px 20px;
+            margin-bottom: 25px; /* Increased margin */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .integration-benefit:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .benefit-icon {
+            font-size: 2.2rem; /* Slightly larger icon */
+            color: #667eea; /* Indigo-500 */
+            margin-right: 20px;
+            width: 45px;
+            text-align: center;
+        }
+        .benefit-info h4 {
+            font-size: 1.1rem; /* 18px */
+            font-weight: 600;
+            color: #334155; /* Slate-700 */
+            margin-bottom: 5px;
+        }
+        .benefit-info p {
+            font-size: 0.9rem; /* 14.4px */
+            color: #475569; /* Slate-600 */
+            line-height: 1.6;
+        }
+        .highlight {
+            font-weight: 600;
+            color: #d946ef; /* Fuchsia-500 */
+        }
+        .workflow-visualization {
+            background: linear-gradient(135deg, #f0f9ff 0%, #eef2ff 100%); /* Light blue/indigo gradient */
+            border-radius: 12px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            border: 1px solid #dbeafe; /* Blue-200 */
+        }
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 350px;
+        }
+        .workflow-icon {
+            font-size: 1.5rem;
+            color: #4f46e5; /* Indigo-600 */
+            background-color: white;
+            border-radius: 50%;
+            padding: 12px;
+            margin-right: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            width: 50px;
+            height: 50px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .workflow-text {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #3730a3; /* Indigo-800 */
+        }
+        .workflow-arrow {
+            font-size: 1.5rem;
+            color: #a5b4fc; /* Indigo-300 */
+            margin: 0 auto 25px auto; /* Center arrow */
+            transform: rotate(90deg);
+        }
+         .dashboard-preview {
+             margin-top: 20px;
+             text-align: center;
+         }
+         .dashboard-preview i {
+             font-size: 3rem;
+             color: #8b5cf6; /* Violet-500 */
+             margin-bottom: 10px;
+         }
+         .dashboard-preview p {
+             font-size: 0.9rem;
+             color: #6d28d9; /* Violet-700 */
+             font-weight: 500;
+         }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <i class="fas fa-network-wired"></i>
+            <h2>기능 상세: 병원 시스템 연동 (EMR Integration)</h2>
+        </div>
+        <div class="content-grid">
+            <div class="section benefits-section">
+                <h3 class="section-title"><i class="fas fa-chart-line"></i>연동을 통한 진료 효율성 극대화</h3>
+                <div class="integration-benefit">
+                    <i class="fas fa-file-medical-alt benefit-icon"></i>
+                    <div class="benefit-info">
+                        <h4>환자 정보 사전 제공</h4>
+                        <p>환자가 입력한 문진 결과를 <span class="highlight">진료 전 EMR 시스템으로 자동 전송</span>하여 의료진이 환자 상태를 미리 파악</p>
+                    </div>
+                </div>
+                <div class="integration-benefit">
+                    <i class="fas fa-clock benefit-icon text-green-500"></i>
+                    <div class="benefit-info">
+                        <h4>진료 준비 시간 단축</h4>
+                        <p>반복적인 문진 과정 생략 및 정보 확인 시간 절약으로 <span class="highlight">의료진의 업무 부담 감소</span> 및 <span class="highlight">진료 집중도 향상</span></p>
+                    </div>
+                </div>
+                <div class="integration-benefit">
+                    <i class="fas fa-user-md benefit-icon text-amber-500"></i>
+                    <div class="benefit-info">
+                        <h4>맞춤 상담 및 치료 계획 지원</h4>
+                        <p>사전 확보된 상세 정보를 바탕으로 <span class="highlight">더욱 정확하고 개인화된 상담</span> 및 <span class="highlight">효율적인 치료 계획 수립</span> 가능</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section visualization-section">
+                 <div class="workflow-visualization">
+                    <div class="workflow-step">
+                        <span class="workflow-icon"><i class="fas fa-user-edit"></i></span>
+                        <span class="workflow-text">환자, 디지털 문진 작성</span>
+                    </div>
+                    <i class="fas fa-arrow-down workflow-arrow"></i>
+                    <div class="workflow-step">
+                        <span class="workflow-icon"><i class="fas fa-cogs"></i></span>
+                        <span class="workflow-text">AI 분석 및 리포트 생성</span>
+                    </div>
+                     <i class="fas fa-arrow-down workflow-arrow"></i>
+                    <div class="workflow-step">
+                        <span class="workflow-icon"><i class="fas fa-database"></i></span>
+                        <span class="workflow-text">EMR 시스템 자동 연동</span>
+                    </div>
+                     <i class="fas fa-arrow-down workflow-arrow"></i>
+                     <div class="workflow-step">
+                        <span class="workflow-icon"><i class="fas fa-stethoscope"></i></span>
+                        <span class="workflow-text">의료진, 진료 전 정보 확인</span>
+                    </div>
+                    <div class="dashboard-preview">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <p>향후 진료 이력 기반 <span class="highlight">환자 관리 대시보드 설계</span> 가능</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

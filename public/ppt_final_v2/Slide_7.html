@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 7: 의의 및 한계점</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Spotify Dark Background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px; /* 16:10 ratio */
+            background-color: #1f1f1f; /* Slightly Lighter Dark */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            padding: 48px; /* 3rem */
+            border-radius: 8px;
+        }
+        .content-grid {
+            flex-grow: 1; /* Take remaining space */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px; /* 3rem */
+            margin-top: 32px; /* Space below title */
+        }
+        .section-container {
+            border-radius: 8px;
+            padding: 24px; /* 1.5rem */
+            display: flex;
+            flex-direction: column;
+        }
+        .significance-container {
+            background-color: #203d3a; /* Dark Green Background */
+            border: 1px solid #1DB954; /* Spotify Green Border */
+        }
+        .limitations-container {
+            background-color: #2d2b23; /* Dark Yellow/Orange Background */
+            border: 1px solid #FC605C; /* Vibrant Red Border */
+        }
+        .section-title {
+            font-size: 1.5rem; /* 24px */
+            font-weight: 600; /* semibold */
+            margin-bottom: 8px; /* 0.5rem */
+            text-align: center;
+            color: #FFFFFF; /* White */
+        }
+        .section-subtitle {
+            font-size: 1rem; /* 16px */
+            font-weight: 500; /* medium */
+            color: #b3b3b3; /* Spotify Light Gray */
+            margin-bottom: 24px; /* 1.5rem */
+            text-align: center;
+        }
+        .list-item {
+            display: flex;
+            align-items: flex-start; /* Align icon top */
+            margin-bottom: 20px; /* 1.25rem */
+            font-size: 1rem; /* 16px */
+            line-height: 1.6;
+        }
+        .list-item i {
+            margin-right: 16px; /* 1rem */
+            width: 24px; /* Fixed width for alignment */
+            text-align: center;
+            margin-top: 5px; /* Adjust icon vertical alignment */
+            font-size: 1.25rem; /* 20px */
+        }
+        .significance-item i { color: #1DB954; } /* Spotify Green */
+        .significance-item strong { color: #1ED760; } /* Lighter Spotify Green */
+        .limitations-item i { color: #FC605C; } /* Vibrant Red */
+        .limitations-item strong { color: #FF7B78; } /* Lighter Red */
+
+        .list-item p {
+            color: #b3b3b3; /* Spotify Light Gray */
+        }
+        h2 {
+            color: #FFFFFF; /* White */
+        }
+        .text-green-700, .text-green-800, .text-green-600 {
+            color: #1DB954 !important; /* Spotify Green */
+        }
+        .text-amber-600, .text-amber-700, .text-amber-800 {
+            color: #FC605C !important; /* Vibrant Red */
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h2 class="text-3xl font-bold mb-8 text-center">프로젝트 의의 및 한계점</h2>
+        <div class="content-grid">
+            <!-- Left Column: Significance -->
+            <div class="section-container significance-container">
+                <h3 class="section-title">프로젝트 의의</h3>
+                <p class="section-subtitle">데이터 기반 의료 혁신의 가치</p>
+                <ul class="space-y-4 mt-4">
+                    <li class="list-item significance-item">
+                        <i class="fas fa-lightbulb fa-fw"></i>
+                        <p><strong>환자 건강 인식 향상:</strong> 자신의 상태를 객관적으로 파악하고, <strong>자발적 의료 참여</strong>를 유도하여 건강 관리 주체성 강화.</p>
+                    </li>
+                    <li class="list-item significance-item">
+                        <i class="fas fa-users-cog fa-fw"></i>
+                        <p><strong>병원 운영 효율 증대:</strong> <strong>신규 환자 유입 채널 확보</strong> 및 데이터 기반 환자 관리로 <strong>재방문율 증가</strong> 기대.</p>
+                    </li>
+                    <li class="list-item significance-item">
+                        <i class="fas fa-database fa-fw"></i>
+                        <p><strong>미래 의료 기반 마련:</strong> 디지털 헬스케어 시대에 발맞춰 <strong>데이터 기반 진료 시스템</strong>의 초석을 다지고 지속 가능한 성장 동력 확보.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right Column: Limitations -->
+            <div class="section-container limitations-container">
+                <h3 class="section-title">한계점 및 고려사항</h3>
+                <p class="section-subtitle">지속적인 개선 및 보완 필요</p>
+                <ul class="space-y-4 mt-4">
+                    <li class="list-item limitations-item">
+                        <i class="fas fa-digital-tachograph fa-fw"></i>
+                        <p><strong>디지털 접근성 제약:</strong> 고령층 등 일부 사용자는 디지털 기기 활용에 어려움을 겪을 수 있어 <strong>OCR 등 보완책 강화</strong> 필요.</p>
+                    </li>
+                    <li class="list-item limitations-item">
+                        <i class="fas fa-info-circle fa-fw"></i>
+                        <p><strong>AI 역할의 명확화:</strong> AI 분석 및 챗봇 답변은 <strong>어디까지나 참고 정보</strong>이며, 최종 진단 및 치료 결정은 <strong>반드시 전문 의료진</strong>의 몫임을 명확히 안내.</p>
+                    </li>
+                    <li class="list-item limitations-item">
+                        <i class="fas fa-chart-area fa-fw"></i>
+                        <p><strong>초기 데이터 정확도:</strong> 시스템 도입 초기에는 축적된 데이터 양이 적어 <strong>분석 정확도에 한계</strong>가 있을 수 있으며, 지속적인 데이터 학습 및 모델 개선 요구.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

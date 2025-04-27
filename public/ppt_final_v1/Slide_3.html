@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 3: 주요 기능 및 목표</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1280px;
+            height: 800px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1180px;
+            height: 740px;
+            background-color: white;
+            border-radius: 16px;
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            color: #4a5568; /* Gray-700 */
+        }
+        .header i {
+            font-size: 1.8rem;
+            color: #667eea; /* Indigo-500 */
+            margin-right: 12px;
+        }
+        .header h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 600;
+        }
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            gap: 30px; /* Add gap between sections */
+        }
+        .section-title {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1e293b; /* Slate-800 */
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 8px;
+            color: #764ba2; /* Purple from gradient */
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 columns for features */
+            gap: 20px;
+        }
+        .feature-card {
+            background-color: #f1f5f9; /* Slate-100 */
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .feature-icon {
+            font-size: 2.5rem; /* 40px */
+            color: #667eea; /* Indigo-500 */
+            margin-bottom: 15px;
+        }
+        .feature-name {
+            font-size: 1rem; /* 16px */
+            font-weight: 600;
+            color: #334155; /* Slate-700 */
+            margin-bottom: 8px;
+            min-height: 40px; /* Ensure consistent height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .feature-desc {
+            font-size: 0.875rem; /* 14px */
+            color: #475569; /* Slate-600 */
+            line-height: 1.5;
+        }
+
+        /* Goals Section */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns for goals */
+            gap: 30px;
+        }
+        .goal-section {
+             background-color: #f1f5f9; /* Slate-100 */
+             border-radius: 12px;
+             padding: 25px;
+        }
+        .goal-title {
+            font-size: 1.1rem; /* 18px */
+            font-weight: 600;
+            color: #334155; /* Slate-700 */
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+         .goal-title i {
+             margin-right: 8px;
+             color: #fbbf24; /* Amber-400 */
+         }
+        .goal-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            font-size: 0.95rem; /* 15px */
+            line-height: 1.6;
+            color: #475569; /* Slate-600 */
+        }
+        .goal-item i {
+            font-size: 1rem;
+            color: #22c55e; /* Green-500 */
+            margin-right: 10px;
+            margin-top: 5px;
+            width: 18px;
+            text-align: center;
+        }
+         .highlight {
+            font-weight: 600;
+            color: #d946ef; /* Fuchsia-500 */
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <i class="fas fa-cogs"></i>
+            <h2>주요 기능 및 목표</h2>
+        </div>
+        <div class="content-wrapper">
+            <!-- 주요 기능 섹션 -->
+            <div>
+                <h3 class="section-title"><i class="fas fa-star"></i>주요 기능</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-tablet-alt feature-icon"></i>
+                        <h4 class="feature-name">디지털 사전 문진</h4>
+                        <p class="feature-desc">환자 스스로 증상 및 건강 상태 입력</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-brain feature-icon"></i>
+                        <h4 class="feature-name">AI 분석 리포트</h4>
+                        <p class="feature-desc">설문 데이터 기반 AI 분석 결과 제공</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-pie feature-icon"></i>
+                        <h4 class="feature-name">환자 맞춤형 리포트</h4>
+                        <p class="feature-desc">그래프/요약으로 환자 이해도 향상</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-network-wired feature-icon"></i>
+                        <h4 class="feature-name">병원 연계 시스템</h4>
+                        <p class="feature-desc">EMR 연동 통한 진료 효율성 향상</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-comments feature-icon"></i>
+                        <h4 class="feature-name">AI 챗봇 ‘척추 톡톡’</h4>
+                        <p class="feature-desc">리포트 기반 실시간 상담 제공</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 목표 섹션 -->
+            <div>
+                <h3 class="section-title"><i class="fas fa-bullseye"></i>기능을 통한 목표</h3>
+                <div class="goals-grid">
+                    <div class="goal-section patient-goals">
+                        <h4 class="goal-title"><i class="fas fa-user-injured"></i>환자 측면 목표</h4>
+                        <div class="goal-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>자신의 상태를 쉽게 이해하고, <span class="highlight">조기 병원 진료 결정 유도</span></span>
+                        </div>
+                         <div class="goal-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>맞춤 정보 통해 <span class="highlight">질병 관리 능력 향상</span> 및 불안감 해소</span>
+                        </div>
+                    </div>
+                    <div class="goal-section hospital-goals">
+                        <h4 class="goal-title"><i class="fas fa-hospital"></i>병원 측면 목표</h4>
+                        <div class="goal-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>사전 데이터 확보로 <span class="highlight">진료 효율성 및 만족도 향상</span></span>
+                        </div>
+                        <div class="goal-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>스마트 시스템을 통한 <span class="highlight">병원 브랜드 신뢰도 및 경쟁력 강화</span></span>
+                        </div>
+                         <div class="goal-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>데이터 기반 <span class="highlight">환자 관리 및 연구 기반 마련</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

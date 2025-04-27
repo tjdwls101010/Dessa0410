@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 2: 프로젝트 배경 및 당위성 - 시대적 배경</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Visual target: 16:10 aspect ratio */
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px; /* Maintain aspect ratio */
+            background-color: #f8fafc; /* Light blue/gray background */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6); /* Blue to Purple */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-highlight {
+            font-size: 1.8rem; /* Larger font for stats */
+            font-weight: 700;
+            color: #3b82f6; /* Blue color for stats */
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #3b82f6; /* Blue icons */
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-10">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">왜 지금 <span class="gradient-text">'스마트 문진'</span>인가?</h1>
+             <p class="text-xl text-gray-600">급변하는 의료 환경과 척추 질환 문제의 심각성</p>
+        </div>
+
+        <div class="flex-grow grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Card 1: 척추 질환 팬데믹 -->
+            <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 flex flex-col">
+                <i class="fas fa-chart-line card-icon"></i>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-3">척추 질환의 팬데믹</h2>
+                <p class="text-gray-600 text-base mb-4 leading-relaxed">
+                    국내 척추 질환 진료 인원은 <span class="font-bold text-blue-600">1,131만 명</span>(2022년)을 넘어서며 꾸준히 증가하고 있습니다. 특히 <span class="font-bold text-purple-600">2030세대 유병률 급증</span>은 심각한 사회 문제로, 미래 만성 통증 환자 증가를 예고합니다.
+                </p>
+                <div class="mt-auto text-center">
+                    <p class="text-sm text-gray-500">건강보험심사평가원 통계</p>
+                </div>
+            </div>
+
+            <!-- Card 2: 놓쳐버린 골든타임 -->
+            <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 flex flex-col">
+                 <i class="fas fa-clock card-icon" style="color: #fbbf24;"></i> {/* Yellow for warning */}
+                <h2 class="text-2xl font-semibold text-gray-800 mb-3">놓쳐버린 골든타임</h2>
+                <p class="text-gray-600 text-base mb-4 leading-relaxed">
+                    영상 진단 기술 발전에도 불구, 초기 증상 모호성, 두려움, 제약 등으로 실제 치료 시작은 평균 <span class="font-bold text-yellow-600">6개월 이상 지연</span>됩니다. 이는 증상 악화, 만성화, 신경 손상 심화로 이어져 <span class="font-bold">삶의 질(QoL) 저하</span> 및 <span class="font-bold">의료비 부담(2~3배↑)</span>을 가중시킵니다.
+                </p>
+                 <div class="mt-auto text-center">
+                     <p class="text-sm text-gray-500">치료 지연의 심각성</p>
+                 </div>
+            </div>
+
+            <!-- Card 3: 디지털 의료 시대의 요구 -->
+            <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 flex flex-col">
+                 <i class="fas fa-laptop-medical card-icon" style="color: #10b981;"></i> {/* Teal for digital */}
+                <h2 class="text-2xl font-semibold text-gray-800 mb-3">디지털 의료 시대의 요구</h2>
+                <p class="text-gray-600 text-base mb-4 leading-relaxed">
+                    환자들은 더 이상 수동적이지 않습니다. <span class="font-bold text-teal-600">개인 맞춤형의 편리하고 효율적인 의료 서비스</span>를 원하며, 자신의 건강 정보에 능동적으로 참여하길 기대합니다. 병원 역시 <span class="font-bold">데이터 기반 정밀 진료</span>와 <span class="font-bold">운영 효율화</span>를 통한 경쟁력 확보가 필수적입니다.
+                </p>
+                 <div class="mt-auto text-center">
+                     <p class="text-sm text-gray-500">환자 경험 중심 서비스</p>
+                 </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 2
+        </div>
+    </div>
+</body>
+</html>

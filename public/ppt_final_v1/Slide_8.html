@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 8: 의의 및 한계</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1280px;
+            height: 800px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1180px;
+            height: 740px;
+            background-color: white;
+            border-radius: 16px;
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            color: #4a5568; /* Gray-700 */
+        }
+        .header i {
+            font-size: 1.8rem;
+            color: #667eea; /* Indigo-500 */
+            margin-right: 12px;
+        }
+        .header h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 600;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            flex-grow: 1;
+        }
+        .section {
+            padding: 30px;
+            border-radius: 12px;
+        }
+        .significance-section {
+             background-color: #f0fdf4; /* Green-50 */
+             border: 1px solid #bbf7d0; /* Green-200 */
+        }
+        .limitations-section {
+             background-color: #fffbeb; /* Amber-50 */
+             border: 1px solid #fde68a; /* Amber-200 */
+        }
+        .section-title {
+            font-size: 1.3rem; /* 21px */
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+        .significance-section .section-title { color: #15803d; } /* Green-700 */
+        .limitations-section .section-title { color: #b45309; } /* Amber-700 */
+
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        .significance-section .section-title i { color: #22c55e; } /* Green-500 */
+        .limitations-section .section-title i { color: #f59e0b; } /* Amber-500 */
+
+        .point-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            font-size: 1rem; /* 16px */
+            line-height: 1.7;
+        }
+        .point-icon {
+            font-size: 1.2rem;
+            margin-right: 12px;
+            margin-top: 5px;
+            width: 22px;
+            text-align: center;
+        }
+        .significance-section .point-icon { color: #16a34a; } /* Green-600 */
+        .limitations-section .point-icon { color: #d97706; } /* Amber-600 */
+
+        .point-text {
+             flex: 1;
+        }
+        .significance-section .point-text { color: #14532d; } /* Green-900 */
+        .limitations-section .point-text { color: #78350f; } /* Amber-900 */
+
+        .highlight {
+            font-weight: 600;
+        }
+        .emphasis {
+            font-weight: bold;
+            color: #dc2626; /* Red-600 */
+            background-color: #fee2e2; /* Red-100 */
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <i class="fas fa-balance-scale-right"></i>
+            <h2>프로젝트 의의 및 한계</h2>
+        </div>
+        <div class="content-grid">
+            <div class="section significance-section">
+                <h3 class="section-title"><i class="fas fa-lightbulb"></i>의의 (Significance)</h3>
+                <div class="point-item">
+                    <i class="fas fa-user-graduate point-icon"></i>
+                    <span class="point-text">환자의 <span class="highlight">건강 정보 이해도 및 인식 수준 향상</span>을 통해 <span class="highlight">자발적 의료 참여</span> 유도</span>
+                </div>
+                <div class="point-item">
+                    <i class="fas fa-hospital-user point-icon"></i>
+                    <span class="point-text">병원 입장에서 <span class="highlight">신규 환자 유입 채널 확보</span> 및 데이터 기반 환자 관리로 <span class="highlight">재방문율 증가</span> 기대</span>
+                </div>
+                <div class="point-item">
+                    <i class="fas fa-database point-icon"></i>
+                    <span class="point-text">디지털 헬스케어 시대에 발맞춰 <span class="highlight">데이터 기반의 선진 진료 시스템</span> 기반 마련 및 병원 경쟁력 강화</span>
+                </div>
+                 <div class="point-item">
+                    <i class="fas fa-notes-medical point-icon"></i>
+                    <span class="point-text"><span class="highlight">진료 프로세스 효율화</span> 및 의료진 업무 부담 경감을 통한 <span class="highlight">의료 서비스 질 향상</span> 기여</span>
+                </div>
+            </div>
+            <div class="section limitations-section">
+                <h3 class="section-title"><i class="fas fa-exclamation-triangle"></i>한계 (Limitations)</h3>
+                <div class="point-item">
+                    <i class="fas fa-universal-access point-icon"></i>
+                    <span class="point-text"><span class="highlight">고령층 및 디지털 취약계층</span>의 시스템 접근성 및 활용 능력에 <span class="highlight">제약</span>이 발생할 가능성 존재 (OCR 등 보완책 필요)</span>
+                </div>
+                <div class="point-item">
+                    <i class="fas fa-user-md point-icon"></i>
+                    <span class="point-text">AI 분석 결과 및 챗봇 답변은 <span class="emphasis">어디까지나 참고용 정보</span>이며, 최종적인 의학적 진단 및 치료 결정은 <span class="emphasis">반드시 전문 의료진</span>의 몫</span>
+                </div>
+                <div class="point-item">
+                    <i class="fas fa-chart-area point-icon"></i>
+                    <span class="point-text">시스템 도입 <span class="highlight">초기 데이터 누적량이 적을 경우</span>, AI 분석 모델의 <span class="highlight">정확도 및 개인화 수준</span>에 한계가 있을 수 있음</span>
+                </div>
+                 <div class="point-item">
+                    <i class="fas fa-shield-alt point-icon"></i>
+                    <span class="point-text">개인 건강 정보 활용에 따른 <span class="highlight">데이터 보안 및 프라이버시 보호</span>에 대한 지속적인 관리 및 기술적 노력 요구</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
+import { SurveyTooltip } from "./survey-tooltip" // SurveyTooltip 컴포넌트 import 추가
 
 interface StepStatus {
   total: number
@@ -228,7 +229,10 @@ export function PainCharacteristicsStep({
     // Remove form tag, use div instead
     <div className="space-y-8">
       <div className="space-y-4">
-        <Label className="text-base font-semibold">4. 현재 가장 불편하거나 통증을 느끼는 주된 부위는 어디입니까?</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">4. 현재 가장 불편하거나 통증을 느끼는 주된 부위는 어디입니까?</Label>
+          <SurveyTooltip questionId="4" />
+        </div>
         <RadioGroup
           value={formData.primaryPainLocation}
           onValueChange={handlePrimaryLocationChange}
@@ -259,7 +263,10 @@ export function PainCharacteristicsStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">5. 다른 불편한 부위가 있다면 모두 선택해 주십시오. (없으면 '없음' 선택)</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">5. 다른 불편한 부위가 있다면 모두 선택해 주십시오. (없으면 '없음' 선택)</Label>
+          <SurveyTooltip questionId="5" />
+        </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {painLocations.map((location) => (
             <div key={location.id} className="flex items-center space-x-2">
@@ -313,7 +320,10 @@ export function PainCharacteristicsStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">6. 통증은 언제부터 시작되었습니까?</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">6. 통증은 언제부터 시작되었습니까?</Label>
+          <SurveyTooltip questionId="6" />
+        </div>
         <RadioGroup
           value={formData.painDuration}
           onValueChange={(value) => handleChange("painDuration", value)}
@@ -345,7 +355,10 @@ export function PainCharacteristicsStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">7. 통증의 양상은 어떻습니까? (중복 선택 가능)</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">7. 통증의 양상은 어떻습니까? (중복 선택 가능)</Label>
+          <SurveyTooltip questionId="7" />
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {painTypes.map((type) => (
             <div key={type.id} className="flex items-center space-x-2">
@@ -377,7 +390,10 @@ export function PainCharacteristicsStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">8. 통증이 팔이나 다리로 뻗치는 느낌(방사통)이 있습니까?</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">8. 통증이 팔이나 다리로 뻗치는 느낌(방사통)이 있습니까?</Label>
+          <SurveyTooltip questionId="8" />
+        </div>
         <RadioGroup
           value={formData.hasRadiatingPain}
           onValueChange={(value) => handleChange("hasRadiatingPain", value)}
@@ -397,7 +413,10 @@ export function PainCharacteristicsStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">9. 통증 부위를 만지거나 스치기만 해도 불쾌하거나 아픈 느낌이 있습니까?</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">9. 통증 부위를 만지거나 스치기만 해도 불쾌하거나 아픈 느낌이 있습니까?</Label>
+          <SurveyTooltip questionId="9" />
+        </div>
         <RadioGroup
           value={formData.hasTouchSensitivity}
           onValueChange={(value) => handleChange("hasTouchSensitivity", value)}
@@ -417,9 +436,12 @@ export function PainCharacteristicsStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          10. 통증 외에 감각 이상(둔하거나 예민해짐)이나 근력 약화가 느껴지는 부위가 있습니까?
-        </Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">
+            10. 통증 외에 감각 이상(둔하거나 예민해짐)이나 근력 약화가 느껴지는 부위가 있습니까?
+          </Label>
+          <SurveyTooltip questionId="10" />
+        </div>
         <RadioGroup
           value={formData.hasSensoryMotorChanges}
           onValueChange={(value) => handleChange("hasSensoryMotorChanges", value)}

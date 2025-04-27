@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 10: 결론</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Same as title slide */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1280px;
+            height: 800px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1100px;
+            height: 700px;
+            background-color: rgba(255, 255, 255, 0.15); /* Slightly more opaque */
+            border-radius: 20px;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.4);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .header i {
+            color: #facc15; /* Yellow */
+            margin-right: 12px;
+        }
+        .main-message {
+            font-size: 2rem; /* 32px */
+            font-weight: 500;
+            margin-bottom: 40px;
+            line-height: 1.4;
+            max-width: 800px; /* Limit width */
+        }
+        .highlight-bold {
+            font-weight: 700;
+            color: #fde047; /* Lighter yellow */
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+            width: 100%;
+            max-width: 900px;
+        }
+        .benefit-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 25px 20px;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+        .benefit-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: #facc15; /* Yellow */
+            margin-bottom: 15px;
+        }
+        .benefit-text {
+            font-size: 1rem; /* 16px */
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .call-to-action {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 700;
+            line-height: 1.5;
+            margin-top: auto; /* Push to bottom */
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            width: 100%;
+            max-width: 800px;
+        }
+        .cta-highlight {
+             color: #fde047; /* Lighter yellow */
+             text-shadow: 0 0 8px rgba(250, 204, 21, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <i class="fas fa-flag-checkered"></i>
+            <span>결론: 미래를 위한 스마트한 선택</span>
+        </div>
+        <p class="main-message">
+            ‘스마트 문진 시스템’은 단순한 설문 도구를 넘어,<br>
+            <span class="highlight-bold">환자와 병원이 함께 성장</span>하는 디지털 헬스케어 솔루션입니다.
+        </p>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <i class="fas fa-lightbulb benefit-icon"></i>
+                <p class="benefit-text">혁신적인<br>의료 경험 제공</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-cogs benefit-icon"></i>
+                <p class="benefit-text">병원 운영<br>효율성 증대</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-chart-line benefit-icon"></i>
+                <p class="benefit-text">지속 가능한<br>병원 성장 기반 마련</p>
+            </div>
+        </div>
+        <p class="call-to-action">
+            <span class="cta-highlight">스마트한 선택</span>이 병원의 미래를 결정짓습니다.<br>
+            <span class="cta-highlight">지금이 바로 변화의 순간입니다.</span>
+        </p>
+    </div>
+</body>
+</html>

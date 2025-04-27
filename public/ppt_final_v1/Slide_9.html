@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 9: 향후 발전 방향</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to right, #e0f2fe, #f0f9ff); /* Light sky gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1280px;
+            height: 800px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1180px;
+            height: 740px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            backdrop-filter: blur(5px);
+            border-radius: 16px;
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            color: #0c4a6e; /* Sky-800 */
+        }
+        .header i {
+            font-size: 1.8rem;
+            color: #0ea5e9; /* Sky-500 */
+            margin-right: 12px;
+        }
+        .header h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 600;
+        }
+        .roadmap-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Align items top */
+            position: relative;
+            padding-top: 30px; /* Space for the line */
+            flex-grow: 1;
+        }
+        /* Dashed line connecting the steps */
+        .roadmap-container::before {
+            content: '';
+            position: absolute;
+            top: 65px; /* Position below icons */
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background-image: linear-gradient(to right, #7dd3fc 50%, transparent 50%); /* Sky-300 dashed */
+            background-size: 20px 4px;
+            z-index: 0;
+        }
+
+        .roadmap-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 22%; /* Adjust width for 4 items */
+            position: relative; /* For z-index */
+            z-index: 1; /* Ensure steps are above the line */
+            background-color: white; /* White background for card */
+            padding: 25px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 100, 150, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 280px; /* Ensure consistent height */
+        }
+        .roadmap-step:hover {
+             transform: translateY(-8px);
+             box-shadow: 0 8px 25px rgba(0, 100, 150, 0.15);
+        }
+
+        .step-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9); /* Sky-400 to Sky-500 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.4);
+        }
+        .step-icon {
+            font-size: 2rem;
+            color: white;
+        }
+        .step-title {
+            font-size: 1.1rem; /* 18px */
+            font-weight: 600;
+            color: #075985; /* Sky-900 */
+            margin-bottom: 10px;
+        }
+        .step-description {
+            font-size: 0.9rem; /* 14.4px */
+            color: #334155; /* Slate-700 */
+            line-height: 1.6;
+            flex-grow: 1; /* Allow description to take space */
+        }
+        .highlight {
+            font-weight: 600;
+            color: #0ea5e9; /* Sky-500 */
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <i class="fas fa-road"></i>
+            <h2>향후 발전 방향 (Future Roadmap)</h2>
+        </div>
+        <div class="roadmap-container">
+            <div class="roadmap-step">
+                <div class="step-icon-wrapper">
+                    <i class="fas fa-comments step-icon"></i>
+                </div>
+                <h4 class="step-title">기능 고도화</h4>
+                <p class="step-description"><span class="highlight">사용자 피드백</span>을 지속적으로 반영하여 UI/UX 개선, 문진 문항 정교화 및 추가 등 <span class="highlight">시스템 완성도 향상</span></p>
+            </div>
+            <div class="roadmap-step">
+                <div class="step-icon-wrapper">
+                    <i class="fas fa-globe-americas step-icon"></i>
+                </div>
+                <h4 class="step-title">다국어 지원 확대</h4>
+                <p class="step-description">국내 거주 외국인 및 해외 환자 유치를 위해 <span class="highlight">영어, 중국어, 일본어 등 주요 언어 지원</span> 추가하여 <span class="highlight">글로벌 경쟁력 확보</span></p>
+            </div>
+            <div class="roadmap-step">
+                <div class="step-icon-wrapper">
+                    <i class="fas fa-cloud-upload-alt step-icon"></i>
+                </div>
+                <h4 class="step-title">클라우드 기반 서비스화 (SaaS)</h4>
+                <p class="step-description">시스템을 <span class="highlight">클라우드 기반 SaaS 모델</span>로 발전시켜 온누리병원 외 <span class="highlight">타 병원/기관에서도 도입</span> 가능하도록 확장성 모색</p>
+            </div>
+            <div class="roadmap-step">
+                <div class="step-icon-wrapper">
+                    <i class="fas fa-puzzle-piece step-icon"></i>
+                </div>
+                <h4 class="step-title">통합 건강 관리 플랫폼 연계</h4>
+                <p class="step-description">운동, 식이, 수면 관리 등 <span class="highlight">다양한 디지털 헬스케어 서비스와 연동</span>하여 <span class="highlight">포괄적인 개인 맞춤 건강 관리</span> 경험 제공</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

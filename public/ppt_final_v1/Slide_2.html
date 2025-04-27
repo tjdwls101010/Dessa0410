@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 2: 프로젝트 배경 및 목적</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1280px;
+            height: 800px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1180px; /* Slightly wider content area */
+            height: 740px;
+            background-color: white;
+            border-radius: 16px;
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            color: #4a5568; /* Gray-700 */
+        }
+        .header i {
+            font-size: 1.8rem;
+            color: #667eea; /* Indigo-500 */
+            margin-right: 12px;
+        }
+        .header h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 600;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            flex-grow: 1;
+        }
+        .section {
+            padding: 25px;
+            border-radius: 12px;
+            background-color: #f1f5f9; /* Slate-100 */
+        }
+        .section-title {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1e293b; /* Slate-800 */
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 8px;
+            color: #764ba2; /* Purple from gradient */
+        }
+        .background-item, .purpose-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 0.95rem; /* 15px */
+            line-height: 1.6;
+            color: #334155; /* Slate-700 */
+        }
+        .background-item i, .purpose-item i {
+            font-size: 1.1rem;
+            color: #fbbf24; /* Amber-400 */
+            margin-right: 10px;
+            margin-top: 4px;
+            width: 20px; /* Fixed width for alignment */
+            text-align: center;
+        }
+        .highlight {
+            font-weight: 600;
+            color: #d946ef; /* Fuchsia-500 */
+        }
+        .chart-container {
+            height: 150px; /* Adjust height as needed */
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <i class="fas fa-chart-line"></i>
+            <h2>프로젝트 배경 및 목적</h2>
+        </div>
+        <div class="content-grid">
+            <div class="section background-section">
+                <h3 class="section-title"><i class="fas fa-magnifying-glass-chart"></i>배경: 증가하는 척추 질환과 치료 지연</h3>
+                <div class="background-item">
+                    <i class="fas fa-users"></i>
+                    <span>지난 10년간 척추 질환 환자 수 <span class="highlight">꾸준히 증가</span>, 특히 <span class="highlight">2030세대 유병률 급증</span></span>
+                </div>
+                 <div class="chart-container">
+                    <canvas id="trendChart"></canvas>
+                </div>
+                <div class="background-item">
+                    <i class="fas fa-hourglass-half"></i>
+                    <span>조기 진단 가능성에도 불구, <span class="highlight">실제 치료 시점 지연</span> → 증상 악화, 삶의 질 저하, 비용 증가</span>
+                </div>
+                <div class="background-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>초기 증상 인지 부족으로 <span class="highlight">치료 골든타임 상실</span> 위험</span>
+                </div>
+            </div>
+            <div class="section purpose-section">
+                <h3 class="section-title"><i class="fas fa-bullseye"></i>목적: 스마트 문진 시스템 개발</h3>
+                <div class="purpose-item">
+                    <i class="fas fa-bell"></i>
+                    <span>조기 이상 신호 포착을 통한 <span class="highlight">질환의 선제적 발견</span></span>
+                </div>
+                <div class="purpose-item">
+                    <i class="fas fa-book-medical"></i>
+                    <span>환자 맞춤형 정보 제공으로 <span class="highlight">이해도 향상 및 자가 관리 지원</span></span>
+                </div>
+                <div class="purpose-item">
+                    <i class="fas fa-handshake"></i>
+                    <span>병원-환자 간 효율적인 <span class="highlight">진료 프로세스 연결</span></span>
+                </div>
+                <div class="purpose-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>척추 질환 <span class="highlight">예방 및 치료 골든타임 확보</span></span>
+                </div>
+                 <div class="purpose-item mt-4">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>궁극적으로 <span class="highlight">데이터 기반 환자 중심 의료 혁신</span> 추구</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        const trendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['5년 전', '4년 전', '3년 전', '2년 전', '1년 전', '현재'],
+                datasets: [{
+                    label: '척추 질환 환자 수 (상대적 증가)',
+                    data: [65, 70, 78, 85, 92, 100], // 예시 데이터 (실제 데이터로 대체 필요)
+                    borderColor: '#764ba2',
+                    backgroundColor: 'rgba(118, 75, 162, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { display: false }, // Y축 레이블 숨김
+                        grid: { display: false } // Y축 그리드 숨김
+                    },
+                    x: {
+                         ticks: { font: { size: 10 } },
+                         grid: { display: false } // X축 그리드 숨김
+                    }
+                },
+                plugins: {
+                    legend: { display: false }, // 범례 숨김
+                    tooltip: {
+                        enabled: true,
+                        mode: 'index',
+                        intersect: false,
+                    }
+                },
+                elements: {
+                    point:{
+                        radius: 0 // 데이터 포인트 숨김
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

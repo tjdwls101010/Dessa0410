@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Medical Questionnaire - Cover Slide</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #4860ff 0%, #9f6bff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            overflow: hidden;
+            position: relative;
+            background: #ffffff;
+        }
+        .medical-icon {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        .small-pill {
+            animation: floatSmall 4s ease-in-out infinite;
+        }
+        @keyframes floatSmall {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+        .gear-icon {
+            animation: rotate 15s linear infinite;
+        }
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="slide-container mx-auto shadow-xl">
+        <!-- Logo & Header -->
+        <div class="absolute top-6 left-8">
+            <div class="flex items-center">
+                <i class="fas fa-stethoscope text-blue-500 text-xl mr-2"></i>
+                <span class="text-gray-700 font-medium tracking-wider">온누리마취통증의학과</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex h-full">
+            <!-- Left Side Content -->
+            <div class="w-1/2 h-full flex items-center justify-center p-12 relative">
+                <!-- Central Medical Icon -->
+                <div class="relative medical-icon">
+                    <div class="w-64 h-64 bg-white rounded-3xl flex items-center justify-center shadow-lg relative">
+                        <div class="w-56 h-56 bg-gradient-to-b from-blue-400 to-blue-600 rounded-3xl flex items-center justify-center">
+                            <div class="w-48 h-48 bg-white rounded-3xl flex items-center justify-center">
+                                <div class="text-blue-500 text-8xl">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Pills -->
+                    <div class="absolute -top-8 -right-10 small-pill">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full"></div>
+                    </div>
+                    <div class="absolute -bottom-10 -left-8 small-pill" style="animation-delay: 1s;">
+                        <div class="w-10 h-10 bg-blue-400 rounded-full"></div>
+                    </div>
+                    
+                    <!-- Gear Icons -->
+                    <div class="absolute bottom-0 right-0 gear-icon">
+                        <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-cog text-purple-400 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="absolute top-5 -left-8 gear-icon" style="animation-delay: 2s;">
+                        <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-cog text-purple-400 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Side Content -->
+            <div class="w-1/2 h-full flex flex-col justify-center p-12">
+                <div class="text-gray-600 font-medium mb-2">
+                    Medical Questionnaire System
+                </div>
+                <h1 class="text-6xl font-bold mb-8">
+                    <span class="gradient-text">스마트 문진</span><br/>
+                    <span class="gradient-text">시스템</span>
+                </h1>
+                <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+                    척추 질환의 효과적인 조기 진단과 치료를 위한<br/>
+                    데이터 기반 스마트 의료 솔루션
+                </p>
+                <div class="bg-gray-100 p-4 rounded-lg border-l-4 border-blue-500 text-sm text-gray-600 italic">
+                    "척추 질환, 더 이상 특정 연령의 문제가 아닙니다.<br/>
+                    예방과 조기 치료로 당신의 삶의 질을 지키세요."
+                </div>
+                <div class="mt-8 text-sm text-gray-500">
+                    © 2023 온누리마취통증의학과 | 스마트 문진 시스템 프로젝트
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

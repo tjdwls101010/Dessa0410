@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 6: 핵심 기능 매트릭스</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 60px; /* 상하 패딩 조정 */
+            background-color: white;
+            position: relative;
+            border: 1px solid #e0e0e0;
+        }
+        .header {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 30px; /* 간격 조정 */
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0B4F6C;
+        }
+        .header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .table-container {
+            width: 100%;
+            flex-grow: 1;
+            overflow-x: auto; /* 내용 많을 시 가로 스크롤 */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 14px 18px; /* 패딩 조정 */
+            text-align: left;
+            vertical-align: top; /* 상단 정렬 */
+            font-size: 0.95rem; /* 15px */
+            line-height: 1.6;
+        }
+        thead th {
+            background-color: #F3F4F6; /* 헤더 배경색 */
+            font-weight: 600;
+            color: #1F2937;
+            position: sticky; /* 스크롤 시 헤더 고정 */
+            top: 0;
+            z-index: 10;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #F9FAFB; /* 짝수 행 배경색 */
+        }
+        tbody tr:hover {
+            background-color: #EFF6FF; /* 호버 시 배경색 */
+        }
+        td:first-child { /* 기능 명칭 */
+            font-weight: 500;
+            color: #0B4F6C; /* 테마 색상 */
+            width: 20%; /* 너비 조정 */
+        }
+        td:nth-child(2) { /* 핵심 내용 */
+            width: 45%; /* 너비 조정 */
+            color: #374151;
+        }
+        td:last-child { /* 주요 기술/특징 */
+            width: 35%; /* 너비 조정 */
+            color: #4B5563;
+        }
+        .tech-tag {
+            display: inline-block;
+            background-color: #E0E7FF; /* 기술 태그 배경색 */
+            color: #4338CA; /* 기술 태그 글자색 */
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem; /* 13px */
+            margin-right: 5px;
+            margin-bottom: 5px;
+            white-space: nowrap; /* 줄바꿈 방지 */
+        }
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h2>2.1 핵심 기능 매트릭스</h2>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>기능 명칭</th>
+                        <th>핵심 내용</th>
+                        <th>주요 기술 / 특징</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-keyboard mr-2 text-blue-600"></i>디지털 사전 문진</td>
+                        <td>환자가 모바일/웹을 통해 통증, 기능 제한, 관련 증상 등을 체계적으로 입력</td>
+                        <td>
+                            <span class="tech-tag">표준화 척도 (VAS, DN4, ODI, Red Flags)</span>
+                            <span class="tech-tag">직관적 UI/UX</span>
+                            <span class="tech-tag">반응형 디자인</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-brain mr-2 text-purple-600"></i>AI 기반 분석 리포트</td>
+                        <td>입력된 데이터를 AI 알고리즘으로 분석하여 위험도, 예상 원인 등을 시각화/점수화</td>
+                        <td>
+                            <span class="tech-tag">머신러닝 패턴 분석</span>
+                            <span class="tech-tag">데이터 시각화 엔진</span>
+                            <span class="tech-tag">위험도 스코어링</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-file-alt mr-2 text-green-600"></i>환자 맞춤형 리포트</td>
+                        <td>분석 결과를 환자가 이해하기 쉬운 그래프, 요약 메시지, 행동 제안 형태로 제공</td>
+                        <td>
+                            <span class="tech-tag">개인화 콘텐츠 생성</span>
+                            <span class="tech-tag">이해도 중심 디자인</span>
+                            <span class="tech-tag">행동 유도 (CTA)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-link mr-2 text-red-600"></i>병원 시스템 연동</td>
+                        <td>환자 리포트 결과를 EMR(전자의무기록) 시스템과 안전하게 연동하여 의료진에게 전달</td>
+                        <td>
+                            <span class="tech-tag">API 연동</span>
+                            <span class="tech-tag">데이터 보안 프로토콜</span>
+                            <span class="tech-tag">HL7/FHIR 고려</span>
+                            <span class="tech-tag">HIPAA 준수</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-comments mr-2 text-yellow-600"></i>AI 챗봇 ‘척추 톡톡’</td>
+                        <td>생성된 리포트 내용을 기반으로 환자의 추가 질문에 실시간 답변 및 정보 제공</td>
+                        <td>
+                            <span class="tech-tag">RAG (검색 증강 생성)</span>
+                            <span class="tech-tag">자연어 처리 (NLP)</span>
+                            <span class="tech-tag">맥락 인지 상담</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-camera mr-2 text-gray-600"></i>(부가) OCR 연동</td>
+                        <td>디지털 기기 사용이 어려운 환자를 위한 종이 문진표 자동 데이터 변환 지원</td>
+                        <td>
+                            <span class="tech-tag">광학 문자 인식 (OCR)</span>
+                            <span class="tech-tag">접근성 향상</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <span>스마트 문진 시스템 제안</span>
+            <span>Slide 6</span>
+        </div>
+    </div>
+</body>
+</html>

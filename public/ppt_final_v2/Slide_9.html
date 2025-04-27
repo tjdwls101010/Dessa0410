@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 9: 투자 및 수익성 분석</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Spotify Dark Background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px; /* 16:10 ratio */
+            background-color: #1f1f1f; /* Slightly Lighter Dark */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            padding: 48px; /* 3rem */
+            border-radius: 8px;
+        }
+        .content-grid {
+            flex-grow: 1; /* Take remaining space */
+            display: grid;
+            grid-template-columns: 4fr 6fr; /* 40% : 60% split */
+            gap: 32px; /* 2rem */
+            margin-top: 20px; /* Space below title */
+        }
+        .left-column, .right-column {
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 1.3rem; /* 20.8px */
+            font-weight: 600;
+            color: #1DB954; /* Spotify Green */
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #1DB954; /* Spotify Green */
+            width: fit-content;
+        }
+        .investment-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 24px;
+        }
+        .investment-table th {
+            background-color: #282828; /* Spotify Card Background */
+            color: #FFFFFF; /* White */
+            text-align: left;
+            padding: 12px;
+            font-weight: 600;
+        }
+        .investment-table td {
+            padding: 12px;
+            border-bottom: 1px solid #333333; /* Darker Border */
+            color: #b3b3b3; /* Spotify Light Gray */
+        }
+        .investment-table tr:last-child td {
+            font-weight: 600;
+            color: #FFFFFF; /* White */
+            background-color: #282828; /* Spotify Card Background */
+        }
+        .amount {
+            text-align: right;
+            font-family: 'Roboto Mono', monospace;
+        }
+        .chart-container {
+            background-color: #282828; /* Spotify Card Background */
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            border: 1px solid #333333; /* Darker Border */
+        }
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .kpi-card {
+            background-color: #282828; /* Spotify Card Background */
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid #333333; /* Darker Border */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .kpi-title {
+            font-size: 0.85rem;
+            color: #b3b3b3; /* Spotify Light Gray */
+            margin-bottom: 8px;
+        }
+        .kpi-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1DB954; /* Spotify Green */
+            margin-bottom: 4px;
+        }
+        .kpi-trend {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #1ED760; /* Lighter Spotify Green */
+        }
+        .kpi-trend.up {
+            color: #1ED760; /* Lighter Spotify Green */
+        }
+        .kpi-trend.down {
+            color: #FC605C; /* Vibrant Red */
+        }
+        .kpi-trend i {
+            margin-right: 4px;
+        }
+        .roi-summary {
+            margin-top: 24px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #b3b3b3; /* Spotify Light Gray */
+        }
+        .roi-highlight {
+            color: #1DB954; /* Spotify Green */
+            font-weight: 600;
+        }
+        h2 {
+            color: #FFFFFF; /* White */
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h2 class="text-3xl font-bold mb-4 text-center">투자 및 수익성 분석</h2>
+
+        <div class="content-grid">
+            <!-- Left Column: Investment Breakdown -->
+            <div class="left-column">
+                <h3 class="section-title">투자 내역</h3>
+                
+                <table class="investment-table">
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th class="amount">비용 (단위: 만원)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>시스템 개발</td>
+                            <td class="amount">3,500</td>
+                        </tr>
+                        <tr>
+                            <td>AI 모델 학습/고도화</td>
+                            <td class="amount">1,800</td>
+                        </tr>
+                        <tr>
+                            <td>인프라 구축</td>
+                            <td class="amount">1,200</td>
+                        </tr>
+                        <tr>
+                            <td>교육 및 운영</td>
+                            <td class="amount">800</td>
+                        </tr>
+                        <tr>
+                            <td>마케팅 및 홍보</td>
+                            <td class="amount">700</td>
+                        </tr>
+                        <tr>
+                            <td><strong>총 투자액</strong></td>
+                            <td class="amount"><strong>8,000</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- KPI Cards -->
+                <h3 class="section-title">주요 수익 지표</h3>
+                <div class="kpi-container">
+                    <div class="kpi-card">
+                        <div class="kpi-title">투자 회수 기간</div>
+                        <div class="kpi-value">2.4년</div>
+                        <div class="kpi-trend up"><i class="fas fa-check-circle"></i>계획 내 회수</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">5년 ROI</div>
+                        <div class="kpi-value">215%</div>
+                        <div class="kpi-trend up"><i class="fas fa-arrow-up"></i>목표 초과 달성</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">신규 환자 유입</div>
+                        <div class="kpi-value">+18%</div>
+                        <div class="kpi-trend up"><i class="fas fa-user-plus"></i>연간 증가율</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">환자 재방문율</div>
+                        <div class="kpi-value">+12%</div>
+                        <div class="kpi-trend up"><i class="fas fa-redo"></i>기존 대비 증가</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: ROI Chart -->
+            <div class="right-column">
+                <h3 class="section-title">누적 수익성 분석</h3>
+                
+                <div class="chart-container">
+                    <canvas id="roiChart" height="280"></canvas>
+                </div>
+                
+                <div class="roi-summary">
+                    <p>스마트 문진 시스템은 <span class="roi-highlight">초기 2년간의 투자 비용을 상쇄한 후</span>, 3년차부터 꾸준한 수익 창출이 예상됩니다. 주요 수익원은 신규 환자 유입 증가(42%), 재방문율 향상(28%), 병원 운영 효율화를 통한 비용 절감(30%)으로 구성됩니다.</p>
+                    <p class="mt-2">특히 <span class="roi-highlight">SaaS 모델로의 확장 시 추가 수익 가능성이 높으며</span>, 타 병원 라이센싱을 통해 5년 후 연간 추가 6천만원 이상의 라이센스 수익이 예상됩니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ROI Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('roiChart').getContext('2d');
+            
+            const roiChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: '누적 수익률',
+                            data: [-85, -25, 65, 145, 215],
+                            borderColor: '#1DB954', // Spotify Green
+                            backgroundColor: 'rgba(29, 185, 84, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.2,
+                            fill: false,
+                            pointBackgroundColor: '#1DB954',
+                            pointBorderColor: '#FFFFFF',
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            yAxisID: 'y',
+                        },
+                        {
+                            type: 'bar',
+                            label: '연간 투자/수익',
+                            data: [-6800, -1200, 3200, 3800, 4200],
+                            backgroundColor: function(context) {
+                                const value = context.dataset.data[context.dataIndex];
+                                return value < 0 ? 'rgba(252, 96, 92, 0.7)' : 'rgba(29, 185, 84, 0.7)'; // Conditional color
+                            },
+                            borderColor: function(context) {
+                                const value = context.dataset.data[context.dataIndex];
+                                return value < 0 ? '#FC605C' : '#1DB954'; // Conditional color
+                            },
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            yAxisID: 'y1',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#FFFFFF',
+                                font: {
+                                    family: 'Inter'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#333333',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#EEEEEE',
+                            borderColor: '#555555',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        if (context.datasetIndex === 0) {
+                                            label += context.parsed.y + '%';
+                                        } else {
+                                            label += (context.parsed.y < 0 ? '-' : '+') + Math.abs(context.parsed.y) + '만원';
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                                color: '#444444'
+                            },
+                            ticks: {
+                                color: '#b3b3b3'
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '누적 수익률 (%)',
+                                color: '#1DB954',
+                                font: {
+                                    size: 12,
+                                    weight: 'bold'
+                                }
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                },
+                                color: '#b3b3b3'
+                            },
+                            grid: {
+                                color: '#333333'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '연간 투자/수익 (만원)',
+                                color: '#b3b3b3',
+                                font: {
+                                    size: 12,
+                                    weight: 'bold'
+                                }
+                            },
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value < 0 ? '-' + Math.abs(value) : '+' + value;
+                                },
+                                color: '#b3b3b3'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

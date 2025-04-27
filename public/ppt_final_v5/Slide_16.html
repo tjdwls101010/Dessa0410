@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 16: 향후 발전 및 확장 로드맵</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 60px;
+            background: linear-gradient(to right, #f3f4f6, #e5e7eb); /* 밝은 회색 계열 */
+            position: relative;
+            border: 1px solid #d1d5db;
+            overflow: hidden;
+        }
+        .header {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0B4F6C;
+        }
+        .header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .header span {
+            font-size: 1.1rem;
+            color: #4B5563;
+            margin-left: 10px;
+        }
+        .roadmap-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch; /* 카드 높이 맞춤 */
+            gap: 25px;
+            flex-grow: 1;
+            margin-top: 20px;
+            position: relative;
+        }
+        .stage-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #d1d5db;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            width: 32%; /* 카드 너비 */
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stage-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+        }
+        .stage-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .stage-number {
+            background-color: #0B4F6C; /* 테마 색상 */
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .stage-title-group h3 {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            color: #1F2937;
+        }
+        .stage-title-group span {
+            font-size: 0.9rem; /* 14.4px */
+            color: #6B7280;
+        }
+        .stage-content ul {
+            list-style: none;
+            padding-left: 5px;
+            flex-grow: 1;
+        }
+        .stage-content li {
+            font-size: 0.9rem; /* 14.4px */
+            line-height: 1.7;
+            color: #4B5563;
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px; /* 아이콘 공간 */
+        }
+        .stage-content li i {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            color: #F9A03F; /* 강조색 */
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+        /* 화살표 (옵션) */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: #9ca3af; /* 회색 화살표 */
+            opacity: 0.7;
+        }
+        .arrow-1 { left: 32%; }
+        .arrow-2 { left: 65.5%; }
+
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h2>5. 향후 발전 및 확장 로드맵 <span>: 지속 가능한 혁신을 향하여</span></h2>
+        </div>
+
+        <div class="roadmap-container">
+            <!-- 1단계 -->
+            <div class="stage-card">
+                <div class="stage-header">
+                    <div class="stage-number">1</div>
+                    <div class="stage-title-group">
+                        <h3>시스템 안정화 및 고도화</h3>
+                        <span>(향후 6개월 ~ 1년)</span>
+                    </div>
+                </div>
+                <div class="stage-content">
+                    <ul>
+                        <li><i class="fas fa-comments"></i>사용자 피드백 기반 집중 개선 (UI/UX, 문진 항목, AI 알고리즘 튜닝)</li>
+                        <li><i class="fas fa-chart-bar"></i>데이터 시각화 기능 강화 (리포트 디자인 및 방식 다양화)</li>
+                        <li><i class="fas fa-shield-alt"></i>보안 및 안정성 지속적 강화</li>
+                        <li><i class="fas fa-users-cog"></i>의료진 사용 편의성 증대</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="arrow arrow-1"><i class="fas fa-chevron-right"></i></div>
+
+            <!-- 2단계 -->
+            <div class="stage-card">
+                <div class="stage-header">
+                    <div class="stage-number">2</div>
+                    <div class="stage-title-group">
+                        <h3>서비스 범위 확대</h3>
+                        <span>(향후 1년 ~ 2년)</span>
+                    </div>
+                </div>
+                <div class="stage-content">
+                    <ul>
+                        <li><i class="fas fa-globe"></i>다국어 지원 (영어, 중국어, 일본어 등)</li>
+                        <li><i class="fas fa-bone"></i>질환 범위 확장 (어깨, 무릎 등 타 근골격계 질환 검토)</li>
+                        <li><i class="fas fa-mobile-alt"></i>네이티브 모바일 앱 개발 (접근성 및 UX 향상)</li>
+                        <li><i class="fas fa-notes-medical"></i>타 진료과 적용 가능성 탐색</li>
+                    </ul>
+                </div>
+            </div>
+
+             <div class="arrow arrow-2"><i class="fas fa-chevron-right"></i></div>
+
+            <!-- 3단계 -->
+            <div class="stage-card">
+                <div class="stage-header">
+                    <div class="stage-number">3</div>
+                    <div class="stage-title-group">
+                        <h3>플랫폼 확장 및 생태계 구축</h3>
+                        <span>(향후 2년 이상)</span>
+                    </div>
+                </div>
+                <div class="stage-content">
+                    <ul>
+                        <li><i class="fas fa-cloud"></i>클라우드 기반 SaaS 모델 전환 (타 병원 대상 서비스)</li>
+                        <li><i class="fas fa-heartbeat"></i>통합 건강 관리 플랫폼 연계 (웨어러블, 식이, 운동 등)</li>
+                        <li><i class="fas fa-flask"></i>임상 연구 지원 플랫폼 활용 (비식별 데이터 기반)</li>
+                        <li><i class="fas fa-network-wired"></i>의료 데이터 생태계 기여</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>스마트 문진 시스템 제안</span>
+            <span>Slide 16</span>
+        </div>
+    </div>
+</body>
+</html>

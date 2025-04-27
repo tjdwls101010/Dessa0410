@@ -4,6 +4,7 @@ import type React from "react"
 import { useState, useEffect, useCallback, useRef } from "react" // Added useRef
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { SurveyTooltip } from "./survey-tooltip" // SurveyTooltip 컴포넌트 import 추가
 
 interface StepStatus {
   total: number
@@ -204,22 +205,34 @@ export function FunctionalLimitationsStep({
       </p>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">15. 개인 위생: (예: 세수, 양치질, 머리 감기, 샤워 등)</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">15. 개인 위생: (예: 세수, 양치질, 머리 감기, 샤워 등)</Label>
+          <SurveyTooltip questionId="15" />
+        </div>
         {renderOptions("personalHygiene", generalScale)}
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">16. 옷 입기: (예: 상의, 하의, 양말, 신발 신기 등)</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">16. 옷 입기: (예: 상의, 하의, 양말, 신발 신기 등)</Label>
+          <SurveyTooltip questionId="16" />
+        </div>
         {renderOptions("dressing", generalScale)}
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">17. 물건 들기/옮기기: (예: 가벼운 장바구니, 서류 가방 등 2-5kg 정도)</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">17. 물건 들기/옮기기: (예: 가벼운 장바구니, 서류 가방 등 2-5kg 정도)</Label>
+          <SurveyTooltip questionId="17" />
+        </div>
         {renderOptions("lifting", generalScale)}
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">18. 걷기:</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">18. 걷기:</Label>
+          <SurveyTooltip questionId="18" />
+        </div>
          <RadioGroup
             value={formData.walking?.toString() ?? ""}
             onValueChange={(value) => handleChange("walking", parseInt(value, 10))}
@@ -236,7 +249,10 @@ export function FunctionalLimitationsStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">19. 앉아 있기:</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">19. 앉아 있기:</Label>
+          <SurveyTooltip questionId="19" />
+        </div>
          <RadioGroup
             value={formData.sitting?.toString() ?? ""}
             onValueChange={(value) => handleChange("sitting", parseInt(value, 10))}
@@ -254,7 +270,10 @@ export function FunctionalLimitationsStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">20. 서 있기:</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">20. 서 있기:</Label>
+          <SurveyTooltip questionId="20" />
+        </div>
          <RadioGroup
             value={formData.standing?.toString() ?? ""}
             onValueChange={(value) => handleChange("standing", parseInt(value, 10))}
@@ -272,31 +291,46 @@ export function FunctionalLimitationsStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          21. 수면: (통증 때문에 잠들기 어렵거나, 자다가 깨거나, 숙면을 취하지 못하는 정도)
-        </Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">
+            21. 수면: (통증 때문에 잠들기 어렵거나, 자다가 깨거나, 숙면을 취하지 못하는 정도)
+          </Label>
+          <SurveyTooltip questionId="21" />
+        </div>
         {renderOptions("sleeping", sleepingScale)}
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">22. 집중력: (통증 때문에 책 읽기, 업무, 대화 등에 집중하기 어려운 정도)</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">22. 집중력: (통증 때문에 책 읽기, 업무, 대화 등에 집중하기 어려운 정도)</Label>
+          <SurveyTooltip questionId="22" />
+        </div>
         {renderOptions("concentration", concentrationScale)}
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          23. 업무 또는 학업: (통증 때문에 평소 하던 업무/학업 수행에 지장을 받는 정도)
-        </Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">
+            23. 업무 또는 학업: (통증 때문에 평소 하던 업무/학업 수행에 지장을 받는 정도)
+          </Label>
+          <SurveyTooltip questionId="23" />
+        </div>
         {renderOptions("workStudy", workStudyScale)}
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">24. 운전 또는 대중교통 이용:</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">24. 운전 또는 대중교통 이용:</Label>
+          <SurveyTooltip questionId="24" />
+        </div>
         {renderOptions("transportation", transportationScale)}
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">25. 여가 활동: (예: 가벼운 운동, 취미 활동, 친구 만나기 등)</Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">25. 여가 활동: (예: 가벼운 운동, 취미 활동, 친구 만나기 등)</Label>
+          <SurveyTooltip questionId="25" />
+        </div>
          <RadioGroup
             value={formData.leisure?.toString() ?? ""}
             onValueChange={(value) => handleChange("leisure", parseInt(value, 10))}
@@ -313,9 +347,12 @@ export function FunctionalLimitationsStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          26. 정서 상태: (통증 때문에 기분이 가라앉거나, 예민해지거나, 불안감을 느끼는 정도)
-        </Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">
+            26. 정서 상태: (통증 때문에 기분이 가라앉거나, 예민해지거나, 불안감을 느끼는 정도)
+          </Label>
+          <SurveyTooltip questionId="26" />
+        </div>
          <RadioGroup
             value={formData.emotionalState?.toString() ?? ""}
             onValueChange={(value) => handleChange("emotionalState", parseInt(value, 10))}

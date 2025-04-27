@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Medical Questionnaire - Project Background</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #4860ff 0%, #9f6bff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            overflow: hidden;
+            position: relative;
+            background: #ffffff;
+        }
+        .bg-gradient-light {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f5f0ff 100%);
+        }
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="slide-container mx-auto shadow-xl">
+        <!-- Header & Title -->
+        <div class="w-full bg-white px-14 py-6 border-b border-gray-200">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold">
+                        <span class="gradient-text">프로젝트 배경 및 당위성</span>
+                    </h1>
+                    <p class="text-gray-600 mt-2">왜 지금 '스마트 문진'인가?</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-stethoscope text-blue-500 text-xl mr-2"></i>
+                    <span class="text-gray-700 font-medium">온누리마취통증의학과</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="w-full p-10 bg-gradient-light">
+            <!-- Stats Row -->
+            <div class="flex justify-between mb-8">
+                <div class="stat-card bg-white w-[30%] p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                    <div class="flex items-start">
+                        <div class="p-3 rounded-full bg-blue-100 mr-4">
+                            <i class="fas fa-user-injured text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">국내 척추 질환 진료 인원</h3>
+                            <p class="text-3xl font-bold text-blue-600 mt-2">1,131<span class="text-lg">만 명</span></p>
+                            <p class="text-sm text-gray-500 mt-1">2022년 기준, 건강보험심사평가원</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm">
+                        <span class="text-red-500 font-medium"><i class="fas fa-arrow-up mr-1"></i>지난 10년간 꾸준히 증가</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card bg-white w-[30%] p-6 rounded-xl shadow-md border-t-4 border-purple-500">
+                    <div class="flex items-start">
+                        <div class="p-3 rounded-full bg-purple-100 mr-4">
+                            <i class="fas fa-hourglass-half text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">병원 방문 지연 시간</h3>
+                            <p class="text-3xl font-bold text-purple-600 mt-2">6+<span class="text-lg">개월</span></p>
+                            <p class="text-sm text-gray-500 mt-1">초기 증상 발현부터 실제 진료까지</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm">
+                        <span class="text-orange-500 font-medium"><i class="fas fa-exclamation-triangle mr-1"></i>골든타임 손실</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card bg-white w-[30%] p-6 rounded-xl shadow-md border-t-4 border-indigo-500">
+                    <div class="flex items-start">
+                        <div class="p-3 rounded-full bg-indigo-100 mr-4">
+                            <i class="fas fa-chart-line text-indigo-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">2030 세대 유병률</h3>
+                            <p class="text-3xl font-bold text-indigo-600 mt-2"><i class="fas fa-arrow-up text-xl mr-1"></i><span class="text-lg">급증 추세</span></p>
+                            <p class="text-sm text-gray-500 mt-1">스마트폰 사용, 좌식 생활 영향</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm">
+                        <span class="text-indigo-500 font-medium"><i class="fas fa-phone mr-1"></i>디지털 네이티브 세대</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Key Issues Section -->
+            <div class="grid grid-cols-2 gap-8">
+                <!-- Left Column -->
+                <div>
+                    <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center text-gray-800">
+                            <i class="fas fa-epidemic text-red-500 mr-3"></i>척추 질환의 팬데믹
+                        </h3>
+                        <div class="pl-3 border-l-4 border-red-400">
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-red-500 mt-1 mr-2"></i>
+                                    <span>더 이상 <strong>특정 연령의 문제가 아닌</strong> 사회적 질환으로 인식 변화 필요</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-red-500 mt-1 mr-2"></i>
+                                    <span>젊은 층(2030세대)의 척추 질환 유병률 <strong>기하급수적 증가</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-red-500 mt-1 mr-2"></i>
+                                    <span>미래의 <strong>잠재적 만성 통증 환자 증가</strong> 예고</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-4 flex items-center text-gray-800">
+                            <i class="fas fa-clock text-orange-500 mr-3"></i>놓치는 '골든타임'
+                        </h3>
+                        <div class="pl-3 border-l-4 border-orange-400">
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-orange-500 mt-1 mr-2"></i>
+                                    <span>영상 진단 기술 발전에도 <strong>실제 치료 시작은 지연</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-orange-500 mt-1 mr-2"></i>
+                                    <span>치료 지연 시 <strong>증상 악화, 만성화, 신경 손상 심화</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-orange-500 mt-1 mr-2"></i>
+                                    <span><strong>총 의료비 2~3배 이상 증가</strong> (개인 및 사회적 비용)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div>
+                    <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center text-gray-800">
+                            <i class="fas fa-laptop-medical text-blue-500 mr-3"></i>디지털 전환(DX) 시대의 의료
+                        </h3>
+                        <div class="pl-3 border-l-4 border-blue-400">
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>환자들의 <strong>능동적 참여 및 개인 맞춤형</strong> 의료 서비스 요구 증대</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span>병원의 <strong>데이터 기반 정밀 진단 및 치료</strong> 필요성 확대</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                    <span><strong>환자 경험 중심의 서비스</strong>가 경쟁 우위 요소로 부상</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart Section -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">연령대별 척추 질환 진료 추이</h3>
+                        <div>
+                            <canvas id="ageChart" width="100%" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Summary Box -->
+            <div class="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl border border-blue-200">
+                <h3 class="text-xl font-semibold gradient-text mb-3">프로젝트 목적: 데이터로 환자와 병원을 연결하는 스마트 솔루션</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    본 '스마트 문진 시스템'은 이러한 시대적 요구와 문제점을 정면으로 해결하기 위해 기획되었습니다. 단순히 증상을 묻는 것을 넘어, 
+                    <strong>데이터 분석 기반의 인사이트를 제공</strong>하여 환자와 의료진 모두에게 가치 있는 솔루션을 제공하고자 합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Age Group Spine Disease Trend Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('ageChart').getContext('2d');
+            
+            const ageChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2018', '2019', '2020', '2021', '2022'],
+                    datasets: [
+                        {
+                            label: '20-30대',
+                            data: [100, 120, 160, 220, 280],
+                            borderColor: '#6366f1',
+                            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: '40-50대',
+                            data: [250, 270, 280, 300, 330],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: '60대 이상',
+                            data: [350, 380, 400, 410, 420],
+                            borderColor: '#a855f7',
+                            backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        annotation: {
+                            annotations: {
+                                line1: {
+                                    type: 'line',
+                                    yMin: 220,
+                                    yMax: 220,
+                                    xMin: 'Jun 2021',
+                                    xMax: 'Jun 2021',
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    borderWidth: 2,
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: '환자 수 지수 (2018=100)'
+                            },
+                            beginAtZero: false
+                        }
+                    },
+                    maintainAspectRatio: false,
+                    responsive: true
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

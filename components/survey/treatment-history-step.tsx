@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
+import { SurveyTooltip } from "./survey-tooltip" // SurveyTooltip 컴포넌트 import 추가
 
 interface TreatmentHistoryStepProps {
   data: any
@@ -61,8 +62,8 @@ export function TreatmentHistoryStep({ data, onComplete }: TreatmentHistoryStepP
       setFormData({
         ...formData,
         previousTreatments: checked
-          ? [...formData.previousTreatments.filter((id) => id !== "none"), treatmentId]
-          : formData.previousTreatments.filter((id) => id !== treatmentId),
+          ? [...formData.previousTreatments.filter((id: string) => id !== "none"), treatmentId] // id 타입 명시
+          : formData.previousTreatments.filter((id: string) => id !== treatmentId), // id 타입 명시
       })
     }
   }
@@ -78,8 +79,8 @@ export function TreatmentHistoryStep({ data, onComplete }: TreatmentHistoryStepP
       setFormData({
         ...formData,
         medicalHistory: checked
-          ? [...formData.medicalHistory.filter((id) => id !== "none"), conditionId]
-          : formData.medicalHistory.filter((id) => id !== conditionId),
+          ? [...formData.medicalHistory.filter((id: string) => id !== "none"), conditionId] // id 타입 명시
+          : formData.medicalHistory.filter((id: string) => id !== conditionId), // id 타입 명시
       })
     }
   }
@@ -92,8 +93,11 @@ export function TreatmentHistoryStep({ data, onComplete }: TreatmentHistoryStepP
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       <div className="space-y-4">
-        <Label>이전에 받아본 치료가 있나요? (해당하는 항목 모두 선택)</Label>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label>31. 이전에 받아본 치료가 있나요? (해당하는 항목 모두 선택)</Label> {/* 질문 번호 추가 */}
+          <SurveyTooltip questionId="31" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4"> {/* 제목과 옵션 간격 추가 */}
           {treatments.map((treatment) => (
             <div key={treatment.id} className="flex items-center space-x-2">
               <Checkbox
@@ -168,8 +172,11 @@ export function TreatmentHistoryStep({ data, onComplete }: TreatmentHistoryStepP
       </div>
 
       <div className="space-y-4">
-        <Label>관련 있을 수 있는 기존 질환이 있나요? (해당하는 항목 모두 선택)</Label>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label>32. 관련 있을 수 있는 기존 질환이 있나요? (해당하는 항목 모두 선택)</Label> {/* 질문 번호 추가 */}
+          <SurveyTooltip questionId="32" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4"> {/* 제목과 옵션 간격 추가 */}
           {medicalConditions.map((condition) => (
             <div key={condition.id} className="flex items-center space-x-2">
               <Checkbox

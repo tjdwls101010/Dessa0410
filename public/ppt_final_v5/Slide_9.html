@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 9: 디지털 사전 문진 시스템</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 60px;
+            background-color: white;
+            position: relative;
+            border: 1px solid #e0e0e0;
+        }
+        .header {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 25px; /* 간격 조정 */
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0B4F6C;
+        }
+        .header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .header span {
+            font-size: 1.1rem; /* 17.6px */
+            color: #4B5563;
+            margin-left: 10px;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3열 레이아웃 */
+            gap: 30px;
+            flex-grow: 1;
+            margin-top: 15px;
+        }
+        .content-section {
+            background-color: #F9FAFB; /* 섹션 배경색 */
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #e5e7eb;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .section-icon {
+            font-size: 1.6rem; /* 아이콘 크기 */
+            color: #F9A03F; /* 강조색 */
+            margin-right: 12px;
+            width: 30px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            color: #1F2937;
+        }
+        .section-content ul {
+            list-style: none;
+            padding-left: 5px;
+        }
+        .section-content li {
+            font-size: 0.9rem; /* 14.4px */
+            line-height: 1.7;
+            color: #4B5563;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px; /* 아이콘 공간 */
+        }
+        .section-content li::before {
+            content: "\f00c"; /* Font Awesome check icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #10B981; /* 녹색 체크 */
+            position: absolute;
+            left: 0;
+            top: 4px;
+            font-size: 0.8rem;
+        }
+        .section-content strong {
+            font-weight: 600;
+            color: #0B4F6C; /* 테마 색상 */
+        }
+        .tool-tag {
+            display: inline-block;
+            background-color: #DBEAFE; /* 연한 파랑 */
+            color: #1E40AF; /* 진한 파랑 */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: 5px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h2>3.1 디지털 사전 문진 시스템 <span>: 정확하고 편리한 데이터 입력의 시작</span></h2>
+        </div>
+
+        <div class="content-grid">
+            <!-- 근거 기반 표준화 도구 -->
+            <div class="content-section">
+                <div class="section-header">
+                    <div class="section-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <h3 class="section-title">근거 기반 표준화 도구</h3>
+                </div>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>VAS</strong><span class="tool-tag">통증 강도</span>: 주관적 통증 강도를 시각적 슬라이더로 표현 (0-10점).</li>
+                        <li><strong>DN4</strong><span class="tool-tag">신경병증성</span>: 신경병증성 통증(저림, 화끈거림 등) 가능성 선별 (4개 질문).</li>
+                        <li><strong>ODI</strong><span class="tool-tag">기능 제한</span>: 허리 통증으로 인한 일상생활 기능 제한 정도 평가 (10개 항목).</li>
+                        <li><strong>Red Flags</strong><span class="tool-tag">위험 신호</span>: 심각한 기저 질환(종양, 감염 등) 시사 위험 신호 질문.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 사용자 경험(UX) 최적화 -->
+            <div class="content-section">
+                <div class="section-header">
+                    <div class="section-icon"><i class="fas fa-user-friends"></i></div>
+                    <h3 class="section-title">사용자 경험(UX) 최적화</h3>
+                </div>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>반응형 디자인:</strong> 모든 기기(PC, 모바일, 태블릿) 최적화.</li>
+                        <li><strong>쉬운 용어 & 시각 자료:</strong> 의학 용어 최소화, 그림/아이콘 활용.</li>
+                        <li><strong>단계별 진행:</strong> 예상 소요 시간 안내, 사용자 피로도 감소.</li>
+                        <li><strong>접근성 강화:</strong> 큰 글씨 옵션, 음성 안내(향후) 등 배려.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- OCR 기반 연계 -->
+            <div class="content-section">
+                <div class="section-header">
+                    <div class="section-icon"><i class="fas fa-camera-retro"></i></div>
+                    <h3 class="section-title">OCR 기반 연계</h3>
+                </div>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>디지털 소외 계층 지원:</strong> 디지털 문진이 어려운 환자 대상.</li>
+                        <li><strong>종이 문진표 자동 변환:</strong> 카메라 촬영/스캔으로 데이터 자동 입력.</li>
+                        <li><strong>데이터 누락 방지:</strong> 아날로그 정보의 디지털 통합 관리.</li>
+                        <li><strong>관리 효율성 증대:</strong> 수기 입력 과정 생략.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>스마트 문진 시스템 제안</span>
+            <span>Slide 9</span>
+        </div>
+    </div>
+</body>
+</html>

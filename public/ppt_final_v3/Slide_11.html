@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 11: 기능별 상세 구현 전략 - AI 챗봇 '척추 톡톡'</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px;
+            background-color: #f8fafc; /* Consistent background */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #ec4899, #d946ef); /* Pink to Fuchsia */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .feature-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .feature-title {
+            font-size: 1.15rem; /* Slightly larger than list items */
+            font-weight: 600; /* font-semibold */
+            color: #a21caf; /* Fuchsia-700 */
+            margin-bottom: 1rem; /* mb-4 */
+            display: flex;
+            align-items: center;
+        }
+        .feature-icon {
+            margin-right: 0.75rem; /* mr-3 */
+            font-size: 1.2rem;
+            width: 24px; /* Fixed width */
+            text-align: center;
+        }
+        .list-item {
+             display: flex;
+             align-items: start;
+             margin-bottom: 0.5rem; /* mb-2 */
+             line-height: 1.6;
+             font-size: 0.95rem; /* Slightly larger text */
+        }
+        .list-icon {
+            font-size: 0.9rem;
+            color: #ec4899; /* Pink-500 */
+            margin-right: 0.5rem; /* mr-2 */
+            margin-top: 0.35rem; /* Adjust alignment */
+            width: 16px; /* Fixed width */
+            text-align: center;
+        }
+        .rag-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #fce7f3; /* Pink-50 */
+            border-radius: 0.5rem;
+        }
+        .rag-item {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #831843; /* Pink-900 */
+        }
+        .rag-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .plus-icon {
+            font-size: 1rem;
+            color: #be185d; /* Pink-700 */
+            margin: 0 0.5rem;
+        }
+        .safety-card {
+            background-color: #fffbeb; /* Amber-50 */
+            border: 1px solid #fef3c7; /* Amber-200 */
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-top: auto; /* Push to bottom */
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-8">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">상세 구현 전략 (4): <span class="gradient-text">AI 챗봇 ‘척추 톡톡’</span></h1>
+             <p class="text-xl text-gray-600">환자 중심의 능동적 소통 채널 강화</p>
+        </div>
+
+        <div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Left Column -->
+            <div class="feature-card">
+                <h2 class="feature-title"><i class="fas fa-user-md feature-icon"></i>리포트 기반 맥락 인지 상담</h2>
+                <div class="list-item">
+                    <i class="fas fa-check list-icon"></i>
+                    <p class="text-gray-700">환자가 조회 중인 <span class="font-semibold">리포트 내용을 AI가 인지</span>하여 관련 질문에 개인화되고 정확한 답변 제공</p>
+                </div>
+                <p class="text-sm text-gray-500 pl-6 mb-4"> (예: "제 ODI 점수가 의미하는 게 뭔가요?", "Red Flags 해당 시 대처법")</p>
+
+                <h2 class="feature-title"><i class="fas fa-cogs feature-icon"></i>RAG 기술 적용 (Retrieval-Augmented Generation)</h2>
+                 <p class="text-gray-700 mb-3">단순 정보 검색을 넘어, 개인 상황과 병원 특성을 반영한 심층 정보 제공:</p>
+                 <div class="rag-diagram">
+                     <div class="rag-item">
+                         <i class="fas fa-file-medical rag-icon"></i>
+                         <p>환자 리포트</p>
+                     </div>
+                     <i class="fas fa-plus plus-icon"></i>
+                     <div class="rag-item">
+                         <i class="fas fa-hospital rag-icon"></i>
+                         <p>병원 특화 정보<br/>(FAQ 등)</p>
+                     </div>
+                     <i class="fas fa-plus plus-icon"></i>
+                     <div class="rag-item">
+                         <i class="fas fa-book-medical rag-icon"></i>
+                         <p>일반 의학 지식</p>
+                     </div>
+                     <i class="fas fa-arrow-right plus-icon mx-4"></i>
+                      <div class="rag-item">
+                         <i class="fas fa-comment-dots rag-icon text-pink-600"></i>
+                         <p class="font-semibold text-pink-700">맞춤형 답변 생성</p>
+                     </div>
+                 </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="feature-card">
+                <h2 class="feature-title"><i class="fas fa-comments-dollar feature-icon"></i>공감과 신뢰의 전문적 커뮤니케이션</h2>
+                <div class="list-item">
+                    <i class="fas fa-check list-icon"></i>
+                    <p class="text-gray-700">온누리마취통증의학과 <span class="font-semibold">의료진의 상담 스타일 및 표현 학습</span></p>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-check list-icon"></i>
+                    <p class="text-gray-700">기계적 답변 지양, <span class="font-semibold text-pink-600">따뜻하고 신뢰감 있는 어조</span>로 소통</p>
+                </div>
+                 <div class="list-item">
+                    <i class="fas fa-check list-icon"></i>
+                    <p class="text-gray-700">환자 불안감 공감 및 <span class="font-semibold">긍정적 치료 의지</span> 북돋는 역할</p>
+                </div>
+
+                <div class="safety-card mt-6">
+                    <h3 class="font-semibold text-amber-800 mb-2 flex items-center"><i class="fas fa-shield-virus mr-2 text-amber-600"></i>의료법 준수 및 안전장치</h3>
+                     <p class="text-sm text-amber-700 mb-2"><i class="fas fa-info-circle mr-1"></i> AI 답변은 정보 제공 목적이며, <span class="font-bold">의료인의 전문적 판단을 대체 불가</span>함을 명확히 고지.</p>
+                     <p class="text-sm text-amber-700"><i class="fas fa-exclamation-triangle mr-1"></i> 특정 키워드(응급 상황 등) 감지 시 <span class="font-bold">즉시 전문가 상담/응급 연락 안내</span> 프로토콜 내장.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 11
+        </div>
+    </div>
+</body>
+</html>

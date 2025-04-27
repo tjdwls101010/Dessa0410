@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 7: AI 챗봇 ‘척추 톡톡’ 상세</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1280px;
+            height: 800px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1180px;
+            height: 740px;
+            background-color: white;
+            border-radius: 16px;
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 35px; /* Adjusted margin */
+            color: #4a5568; /* Gray-700 */
+        }
+        .header i {
+            font-size: 1.8rem;
+            color: #667eea; /* Indigo-500 */
+            margin-right: 12px;
+        }
+        .header h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 600;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; /* Adjust column ratio */
+            gap: 40px;
+            flex-grow: 1;
+            align-items: flex-start; /* Align items to top */
+        }
+        .section-title {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1e293b; /* Slate-800 */
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 8px;
+            color: #764ba2; /* Purple from gradient */
+        }
+        .chatbot-feature {
+            display: flex;
+            align-items: flex-start; /* Align icon top */
+            background-color: #f1f5f9; /* Slate-100 */
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .chatbot-feature:hover {
+            background-color: #e2e8f0; /* Slate-200 */
+        }
+        .feature-icon {
+            font-size: 1.8rem;
+            color: #667eea; /* Indigo-500 */
+            margin-right: 18px;
+            width: 35px;
+            text-align: center;
+            margin-top: 3px; /* Align icon slightly lower */
+        }
+        .feature-info h4 {
+            font-size: 1.05rem; /* 17px */
+            font-weight: 600;
+            color: #334155; /* Slate-700 */
+            margin-bottom: 5px;
+        }
+        .feature-info p {
+            font-size: 0.9rem; /* 14.4px */
+            color: #475569; /* Slate-600 */
+            line-height: 1.6;
+        }
+        .highlight {
+            font-weight: 600;
+            color: #d946ef; /* Fuchsia-500 */
+        }
+        .chatbot-visualization {
+            background-color: #f0f9ff; /* Sky-50 */
+            border: 1px solid #bae6fd; /* Sky-200 */
+            border-radius: 12px;
+            padding: 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-window {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            flex-grow: 1;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow-y: auto; /* Add scroll if content overflows */
+            max-height: 450px; /* Limit height */
+        }
+        .chat-message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-end; /* Align avatar bottom */
+        }
+        .chat-message.user {
+            justify-content: flex-end;
+        }
+        .chat-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #cbd5e1; /* Slate-300 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            color: #475569; /* Slate-600 */
+            margin-right: 10px;
+        }
+        .chat-message.user .chat-avatar {
+            margin-right: 0;
+            margin-left: 10px;
+            background-color: #a5b4fc; /* Indigo-300 */
+            color: #3730a3; /* Indigo-800 */
+        }
+        .chat-bubble {
+            max-width: 75%;
+            padding: 12px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .chat-message.bot .chat-bubble {
+            background-color: #e0f2fe; /* Sky-100 */
+            color: #0c4a6e; /* Sky-800 */
+            border-bottom-left-radius: 3px;
+        }
+        .chat-message.user .chat-bubble {
+            background-color: #eef2ff; /* Indigo-50 */
+            color: #3730a3; /* Indigo-800 */
+            border-bottom-right-radius: 3px;
+        }
+        .disclaimer {
+            font-size: 0.8rem;
+            color: #ef4444; /* Red-500 */
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <i class="fas fa-comments"></i>
+            <h2>기능 상세: AI 챗봇 ‘척추 톡톡’</h2>
+        </div>
+        <div class="content-grid">
+            <div class="section features-section">
+                <h3 class="section-title"><i class="fas fa-robot"></i>챗봇 핵심 기능</h3>
+                <div class="chatbot-feature">
+                    <i class="fas fa-file-alt feature-icon"></i>
+                    <div class="feature-info">
+                        <h4>리포트 기반 질의응답</h4>
+                        <p>환자 본인의 <span class="highlight">AI 분석 리포트 내용에 기반</span>하여 궁금한 점을 실시간으로 질문하고 답변 확인</p>
+                    </div>
+                </div>
+                <div class="chatbot-feature">
+                    <i class="fas fa-layer-group feature-icon text-teal-500"></i>
+                    <div class="feature-info">
+                        <h4>RAG 기술 기반 통합 응답</h4>
+                        <p><span class="highlight">리포트 정보 + 병원 내부 지식</span> (치료법, FAQ 등)을 결합하여 <span class="highlight">맥락에 맞는 포괄적인 답변</span> 제공 (Retrieval-Augmented Generation)</p>
+                    </div>
+                </div>
+                <div class="chatbot-feature">
+                    <i class="fas fa-user-nurse feature-icon text-pink-500"></i>
+                    <div class="feature-info">
+                        <h4>전문의 말투 학습</h4>
+                        <p>실제 의료진의 상담 스타일을 학습하여 <span class="highlight">공감과 신뢰를 주는 어조</span>로 답변, 환자 친화적 경험 제공</p>
+                    </div>
+                </div>
+                <div class="chatbot-feature">
+                    <i class="fas fa-balance-scale feature-icon text-red-500"></i>
+                    <div class="feature-info">
+                        <h4>의료법 준수 및 안전장치</h4>
+                        <p>의료법 가이드라인에 따라 <span class="highlight">의학적 진단/판단 불가 안내</span>를 자동화하여 안전하고 책임감 있는 정보 제공</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section visualization-section">
+                 <div class="chatbot-visualization">
+                     <h3 class="section-title"><i class="fas fa-comment-dots"></i>챗봇 상담 예시</h3>
+                     <div class="chat-window">
+                         <div class="chat-message user">
+                             <div class="chat-bubble">제 리포트에 나온 ODI 점수가 높던데, 이게 어떤 의미인가요?</div>
+                             <div class="chat-avatar"><i class="fas fa-user"></i></div>
+                         </div>
+                         <div class="chat-message bot">
+                             <div class="chat-avatar"><i class="fas fa-robot"></i></div>
+                             <div class="chat-bubble">
+                                 네, 환자님의 ODI 점수는 6점으로 확인됩니다. 이는 척추 통증으로 인해 일상생활에 어느 정도 불편함을 겪고 계심을 의미할 수 있습니다. 예를 들어, 앉아있거나 물건을 드는 동작에서 어려움을 느끼실 수 있습니다.
+                                 <div class="disclaimer">*본 답변은 의학적 진단이 아니며, 참고용 정보입니다. 정확한 진단 및 상담은 반드시 전문 의료진과 상의하시기 바랍니다.</div>
+                             </div>
+                         </div>
+                          <div class="chat-message user">
+                             <div class="chat-bubble">그럼 어떤 치료를 고려해볼 수 있을까요?</div>
+                             <div class="chat-avatar"><i class="fas fa-user"></i></div>
+                         </div>
+                         <div class="chat-message bot">
+                             <div class="chat-avatar"><i class="fas fa-robot"></i></div>
+                             <div class="chat-bubble">
+                                 환자님의 상태와 유사한 경우, 온누리병원에서는 일반적으로 물리치료, 약물치료, 또는 신경차단술 등을 고려해볼 수 있습니다. 하지만 가장 적합한 치료법은 전문의의 정확한 진단 후에 결정됩니다.
+                                  <div class="disclaimer">*본 답변은 의학적 진단이 아니며, 참고용 정보입니다. 정확한 진단 및 상담은 반드시 전문 의료진과 상의하시기 바랍니다.</div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 2: 프로젝트 배경 및 목적</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Spotify Dark Background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px; /* 16:10 ratio */
+            background-color: #1f1f1f; /* Slightly Lighter Dark */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            padding: 48px; /* 3rem */
+            border-radius: 8px;
+        }
+        .content-grid {
+            flex-grow: 1; /* Take remaining space */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px; /* 2rem */
+        }
+        .section-title {
+            font-size: 1.5rem; /* 24px */
+            font-weight: 600; /* semibold */
+            color: #1DB954; /* Spotify Green */
+            margin-bottom: 16px; /* 1rem */
+            border-bottom: 2px solid #1ED760; /* Lighter Green */
+            padding-bottom: 8px; /* 0.5rem */
+        }
+        .list-item {
+            display: flex;
+            align-items: flex-start; /* Align icon top */
+            margin-bottom: 12px; /* 0.75rem */
+            font-size: 1rem; /* 16px */
+            color: #b3b3b3; /* Spotify Light Gray */
+        }
+        .list-item i {
+            color: #1DB954; /* Spotify Green */
+            margin-right: 12px; /* 0.75rem */
+            width: 20px; /* Fixed width for alignment */
+            text-align: center;
+            margin-top: 4px; /* Adjust icon vertical alignment */
+        }
+        .problem-card {
+            background-color: #2a1d1d; /* Dark Red Background */
+            border-left: 4px solid #FC605C; /* Vibrant Red */
+            padding: 16px; /* 1rem */
+            margin-top: 20px; /* 1.25rem */
+            border-radius: 4px;
+        }
+        .problem-card h4 {
+            font-weight: 600;
+            color: #FC605C; /* Vibrant Red */
+            margin-bottom: 8px;
+        }
+        .problem-card p {
+            color: #e6a4a4; /* Light Red */
+            font-size: 0.9rem; /* 14.4px */
+        }
+        .objective-item strong {
+            color: #1DB954; /* Spotify Green */
+        }
+        h2 {
+            color: #FFFFFF; /* White */
+        }
+        .info-card {
+            background-color: #203d3a; /* Dark Teal Background */
+            border: 1px solid #1DB954; /* Spotify Green Border */
+            padding: 16px;
+            border-radius: 4px;
+            color: #b3b3b3;
+        }
+        .info-card i {
+            color: #1DB954;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h2 class="text-3xl font-bold mb-8 text-center">프로젝트 배경 및 목적</h2>
+        <div class="content-grid">
+            <!-- Left Column: Background -->
+            <div>
+                <h3 class="section-title">배경: 증가하는 척추 질환, 지연되는 치료</h3>
+                <ul class="space-y-3">
+                    <li class="list-item">
+                        <i class="fas fa-chart-line fa-fw"></i>
+                        <span>척추 질환 환자 수 꾸준히 증가 (최근 10년), <strong style="color: #FC605C;">특히 2030세대 유병률 급증</strong></span>
+                    </li>
+                    <li class="list-item">
+                        <i class="fas fa-hourglass-half fa-fw"></i>
+                        <span>조기 진단 기술 발전에도 불구, <strong style="color: #FC605C;">실제 치료 시점은 지연</strong>되는 경향</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="fas fa-eye-slash fa-fw"></i>
+                        <span>초기 증상 비특이성으로 <strong style="color: #FC605C;">질환 인지 부족 및 치료 골든타임 상실</strong></span>
+                    </li>
+                </ul>
+                <div class="problem-card">
+                    <h4>주요 문제점</h4>
+                    <p><i class="fas fa-exclamation-triangle mr-2"></i>증상 악화, 삶의 질 저하, 높은 치료 비용 발생</p>
+                </div>
+            </div>
+
+            <!-- Right Column: Objectives -->
+            <div>
+                <h3 class="section-title">목적: 스마트 문진 시스템 개발</h3>
+                <ul class="space-y-4">
+                    <li class="list-item objective-item">
+                        <i class="fas fa-search-plus fa-fw"></i>
+                        <span><strong>질환의 선제적 발견:</strong> 조기 이상 신호 포착 및 분석</span>
+                    </li>
+                    <li class="list-item objective-item">
+                        <i class="fas fa-chalkboard-teacher fa-fw"></i>
+                        <span><strong>이해도 향상 및 자가 관리 지원:</strong> 환자 맞춤형 정보 제공</span>
+                    </li>
+                    <li class="list-item objective-item">
+                        <i class="fas fa-link fa-fw"></i>
+                        <span><strong>효율적인 진료 프로세스 연결:</strong> 병원-환자 간 정보 연계 강화</span>
+                    </li>
+                    <li class="list-item objective-item">
+                        <i class="fas fa-shield-alt fa-fw"></i>
+                        <span><strong>척추 질환 예방 및 치료 골든타임 확보:</strong> 데이터 기반 관리 체계 구축</span>
+                    </li>
+                </ul>
+                <div class="mt-6 p-4 info-card rounded-md">
+                    <i class="fas fa-lightbulb mr-2"></i>
+                    데이터 기반의 스마트 문진 시스템을 통해 환자 중심의 선제적이고 효율적인 의료 서비스 제공
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 12: AI 챗봇 ‘척추 톡톡’</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 60px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%); /* 연한 하늘색-민트색 그라데이션 */
+            position: relative;
+            border: 1px solid #e0e0e0;
+        }
+        .header {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0B4F6C;
+        }
+        .header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .header span {
+            font-size: 1.1rem;
+            color: #4B5563;
+            margin-left: 10px;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2열 레이아웃 */
+            grid-template-rows: repeat(2, auto); /* 2행 레이아웃 */
+            gap: 30px;
+            flex-grow: 1;
+            margin-top: 15px;
+        }
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .card-icon {
+            font-size: 1.8rem; /* 아이콘 크기 */
+            color: #F9A03F; /* 강조색 */
+            margin-right: 15px;
+            width: 35px;
+            text-align: center;
+        }
+        .card-title {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            color: #1F2937;
+        }
+        .card-content ul {
+            list-style: none;
+            padding-left: 5px;
+            flex-grow: 1;
+        }
+        .card-content li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #4B5563;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 22px;
+        }
+        .card-content li::before {
+            content: "\f0eb"; /* Font Awesome lightbulb */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #F59E0B; /* 노란색 */
+            position: absolute;
+            left: 0;
+            top: 5px;
+            font-size: 0.9rem;
+        }
+        .card-content strong {
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .tech-highlight {
+            font-weight: 600;
+            color: #1D4ED8; /* 파란색 강조 */
+        }
+        .safety-highlight {
+            font-weight: 600;
+            color: #B91C1C; /* 빨간색 강조 */
+        }
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h2>3.4 AI 챗봇 ‘척추 톡톡’ <span>: 환자 중심의 소통 채널 강화</span></h2>
+        </div>
+
+        <div class="content-grid">
+            <!-- 리포트 기반 맥락 인지형 상담 -->
+            <div class="feature-card">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-comments-dollar"></i></div>
+                    <h3 class="card-title">리포트 기반 맥락 인지형 상담</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>환자가 조회 중인 <strong>리포트 내용을 AI가 인지</strong>하여 질문 응대.</li>
+                        <li>개인의 상황에 맞는 <strong>개인화되고 정확한 답변</strong> 제공.</li>
+                        <li>(예: "제 ODI 점수가 의미하는 게 뭔가요?", "Red Flags 해당 시 조치는?")</li>
+                        <li>단순 정보 전달을 넘어, 환자 맞춤형 소통 실현.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- RAG 기술 적용 -->
+            <div class="feature-card">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-book-open-reader"></i></div>
+                    <h3 class="card-title">RAG 기술 적용 (검색 증강 생성)</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li><strong class="tech-highlight">환자 리포트 + 병원 특화 정보(FAQ 등) + 일반 의학 지식</strong> 통합 참조.</li>
+                        <li>단순 검색을 넘어, <strong>개인 상황과 병원 특성을 반영</strong>한 심층 정보 제공.</li>
+                        <li>최신 정보 및 병원 정책을 반영한 답변 생성 가능.</li>
+                        <li>지속적인 학습을 통해 답변 품질 향상.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 공감과 신뢰의 커뮤니케이션 -->
+            <div class="feature-card">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-handshake-angle"></i></div>
+                    <h3 class="card-title">공감과 신뢰의 커뮤니케이션</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>온누리마취통증의학과 <strong>의료진의 상담 스타일 학습</strong>.</li>
+                        <li>기계적 답변이 아닌, <strong>따뜻하고 신뢰감 있는 어조</strong>로 소통.</li>
+                        <li>환자의 불안감에 공감하고 <strong>긍정적 치료 의지</strong> 북돋음.</li>
+                        <li>병원 브랜드 이미지와 일관된 사용자 경험 제공.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 의료법 준수 및 안전장치 -->
+            <div class="feature-card">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                    <h3 class="card-title">의료법 준수 및 안전장치</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>챗봇 답변은 정보 제공 목적, <strong class="safety-highlight">진단/처방 대체 불가</strong> 명확히 고지.</li>
+                        <li>특정 키워드(응급 상황 암시 등) 감지 시 <strong class="safety-highlight">즉시 전문가 상담/응급 연락 안내</strong>.</li>
+                        <li>의료법 및 관련 규정 준수 설계.</li>
+                        <li>환자 안전을 최우선으로 고려한 운영.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>스마트 문진 시스템 제안</span>
+            <span>Slide 12</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertTriangle } from "lucide-react"
+import { SurveyTooltip } from "./survey-tooltip" // SurveyTooltip 컴포넌트 import 추가
 
 interface StepStatus {
   total: number
@@ -101,8 +102,11 @@ export function RedFlagsStep({
     // Remove form tag
     <div className="space-y-8">
       <div className="space-y-4">
-        <Label className="text-base font-semibold">33. 다음 중 하나 이상 해당 사항이 있습니까? (중복 선택 가능)</Label>
-        <div className="grid grid-cols-1 gap-4">
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">33. 다음 중 하나 이상 해당 사항이 있습니까? (중복 선택 가능)</Label>
+          <SurveyTooltip questionId="33" />
+        </div>
+        <div className="grid grid-cols-1 gap-4 mt-4"> {/* 제목과 옵션 간격 추가 */}
           {redFlagItems.map((item) => (
             <div key={item.id} className="flex items-center space-x-2">
               <Checkbox

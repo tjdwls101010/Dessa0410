@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
+import { SurveyTooltip } from "./survey-tooltip" // SurveyTooltip 컴포넌트 import 추가
 
 interface StepStatus {
   total: number
@@ -199,9 +200,12 @@ export function PainIntensityStep({
     // Remove form tag
     <div className="space-y-8">
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          11. 지난 일주일간 느낀 통증 중 가장 심했을 때의 통증 강도는 어느 정도였습니까? (0=통증 없음, 10=극심한 통증)
-        </Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">
+            11. 지난 일주일간 느낀 통증 중 가장 심했을 때의 통증 강도는 어느 정도였습니까? (0=통증 없음, 10=극심한 통증)
+          </Label>
+          <SurveyTooltip questionId="11" />
+        </div>
         <div className="space-y-3">
           <Slider
             value={[formData.maxPainIntensity]}
@@ -226,9 +230,12 @@ export function PainIntensityStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          12. 지난 일주일간 평균적인 통증 강도는 어느 정도였습니까? (0=통증 없음, 10=극심한 통증)
-        </Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">
+            12. 지난 일주일간 평균적인 통증 강도는 어느 정도였습니까? (0=통증 없음, 10=극심한 통증)
+          </Label>
+          <SurveyTooltip questionId="12" />
+        </div>
         <div className="space-y-3">
           <Slider
             value={[formData.avgPainIntensity]}
@@ -253,9 +260,12 @@ export function PainIntensityStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          13. 통증을 더 심하게 만드는 활동이나 자세는 무엇입니까? (중복 선택 가능, 없으면 '없음' 선택)
-        </Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">
+            13. 통증을 더 심하게 만드는 활동이나 자세는 무엇입니까? (중복 선택 가능, 없으면 '없음' 선택)
+          </Label>
+          <SurveyTooltip questionId="13" />
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {painTriggers.map((trigger) => (
             <div key={trigger.id} className="flex items-center space-x-2">
@@ -295,9 +305,12 @@ export function PainIntensityStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          14. 통증을 완화시키는 활동이나 자세는 무엇입니까? (중복 선택 가능, 없으면 '없음' 선택)
-        </Label>
+        <div className="flex items-center"> {/* Flex container 추가 */}
+          <Label className="text-base font-semibold">
+            14. 통증을 완화시키는 활동이나 자세는 무엇입니까? (중복 선택 가능, 없으면 '없음' 선택)
+          </Label>
+          <SurveyTooltip questionId="14" />
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {painRelievers.map((reliever) => (
             <div key={reliever.id} className="flex items-center space-x-2">

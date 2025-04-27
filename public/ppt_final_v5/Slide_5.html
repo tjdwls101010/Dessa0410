@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 5: 핵심 기능 및 기대 효과</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            background: linear-gradient(135deg, #E0F2FE 0%, #FFFBEB 100%); /* 밝고 부드러운 그라데이션 */
+            color: #1F2937; /* 어두운 텍스트 */
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .section-title {
+            font-size: 2.5rem; /* 40px */
+            font-weight: 600;
+            color: #0B4F6C; /* 테마 색상 */
+            margin-bottom: 1.5rem; /* 24px */
+            text-align: center;
+        }
+        .main-title {
+            font-size: 4rem; /* 64px */
+            font-weight: 700;
+            margin-bottom: 1rem; /* 16px */
+            text-align: center;
+            line-height: 1.2;
+            color: #0B4F6C;
+        }
+        .subtitle {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 400;
+            color: #4B5563; /* 중간 톤 텍스트 */
+            margin-bottom: 4rem; /* 64px */
+            text-align: center;
+            max-width: 75%;
+        }
+        .footer-info {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem; /* 16px */
+            color: #6B7280; /* 회색 텍스트 */
+        }
+        /* 장식 요소 */
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .circle-1 {
+            width: 250px;
+            height: 250px;
+            background-color: #F9A03F; /* 강조색 */
+            top: 50px;
+            right: 50px;
+            filter: blur(40px);
+        }
+        .circle-2 {
+            width: 350px;
+            height: 350px;
+            background-color: #79B4A9; /* 보조색 */
+            bottom: -100px;
+            left: -150px;
+            filter: blur(50px);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="decorative-circle circle-1"></div>
+        <div class="decorative-circle circle-2"></div>
+
+        <div class="section-title">
+            <i class="fas fa-cogs mr-2"></i> 2. 핵심 기능 및 기대 효과
+        </div>
+        <h1 class="main-title">무엇을, 어떻게 구현하여<br>어떤 가치를 창출하는가?</h1>
+        <p class="subtitle">스마트 문진 시스템의 구체적인 기능과 이를 통해 얻을 수 있는 실질적인 혜택</p>
+
+        <div class="footer-info">
+            <span>온누리마취통증의학과</span>
+            <span>Slide 5</span>
+        </div>
+    </div>
+</body>
+</html>

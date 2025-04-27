@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 1: 표지</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Spotify Dark Background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 전체 화면 높이 */
+            margin: 0;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px; /* 16:10 비율 */
+            background-color: #1f1f1f; /* Slightly Lighter Dark */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); /* Darker shadow */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* 세로 중앙 정렬 */
+            align-items: center; /* 가로 중앙 정렬 */
+            padding: 64px; /* 4rem */
+            position: relative; /* 로고 배치를 위해 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            border-radius: 8px; /* Optional: slightly rounded corners */
+        }
+        .logo-placeholder {
+            position: absolute;
+            bottom: 48px; /* 3rem */
+            right: 48px; /* 3rem */
+            font-size: 3rem; /* 아이콘 크기 */
+            color: #404040; /* Darker Gray for placeholder */
+        }
+        h1 {
+            color: #1DB954; /* Spotify Green */
+            text-shadow: 0 2px 8px rgba(29, 185, 84, 0.3); /* Green glow */
+        }
+        .text-gray-300 {
+            color: #b3b3b3 !important; /* Spotify Light Gray */
+        }
+        .text-gray-400 {
+            color: #a7a7a7 !important; /* Spotify Muted Gray */
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="text-5xl font-bold mb-6">온누리마취통증의학과<br>스마트 문진 시스템 개발 보고서</h1>
+        <p class="text-2xl text-gray-300 mb-12">데이터 기반 환자 중심 의료 혁신</p>
+        <div class="absolute bottom-16 left-1/2 transform -translate-x-1/2 text-gray-400 text-lg">
+            <p>2025년 4월</p>
+            <p class="mt-1">발표자: [이름]</p>
+        </div>
+        <div class="logo-placeholder">
+            <i class="fas fa-hospital" style="color: #1DB954;"></i> <!-- 온누리병원 로고 플레이스홀더 - 그린 색상 -->
+        </div>
+    </div>
+</body>
+</html>

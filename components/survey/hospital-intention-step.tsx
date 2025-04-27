@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
+import { SurveyTooltip } from "./survey-tooltip" // SurveyTooltip 컴포넌트 import 추가
 
 interface StepStatus {
   total: number
@@ -138,7 +139,10 @@ export function HospitalIntentionStep({
     // Remove form tag
     <div className="space-y-8">
       <div className="space-y-4">
-        <Label className="text-base font-semibold">34. 위 설문에 응답하면서, 전문적인 진료나 상담의 필요성을 느끼셨습니까?</Label>
+        <div className="flex items-center">
+          <Label className="text-base font-semibold">34. 위 설문에 응답하면서, 전문적인 진료나 상담의 필요성을 느끼셨습니까?</Label>
+          <SurveyTooltip questionId="34" />
+        </div>
         <RadioGroup
           value={formData.consultationNeed}
           onValueChange={(value) => handleChange("consultationNeed", value)}
@@ -170,9 +174,12 @@ export function HospitalIntentionStep({
       </div>
 
       <div className="space-y-4">
-        <Label className="text-base font-semibold">
-          35. (선택) 통증 개선을 위해 어떤 종류의 치료에 관심이 있으십니까? (중복 선택 가능)
-        </Label>
+        <div className="flex items-center">
+          <Label className="text-base font-semibold">
+            35. (선택) 통증 개선을 위해 어떤 종류의 치료에 관심이 있으십니까? (중복 선택 가능)
+          </Label>
+          <SurveyTooltip questionId="35" />
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {treatmentOptions.map((option) => (
             <div key={option.id} className="flex items-center space-x-2">

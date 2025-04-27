@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 8: 기능별 상세 구현 전략 - 디지털 사전 문진</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px;
+            background-color: #f8fafc; /* Consistent background */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #2563eb, #1d4ed8); /* Darker Blue gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-title {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            color: #1e3a8a; /* Blue-800 */
+            margin-bottom: 1rem; /* mb-4 */
+            padding-bottom: 0.5rem; /* pb-2 */
+            border-bottom: 2px solid #bfdbfe; /* Blue-200 border */
+        }
+        .tool-card {
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 1rem 1.5rem; /* p-4 pr-6 */
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-sm */
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .tool-icon {
+            font-size: 1.5rem;
+            color: #3b82f6; /* Blue-500 */
+            margin-right: 1rem; /* mr-4 */
+            width: 32px; /* Fixed width */
+            text-align: center;
+        }
+        .ux-item {
+             display: flex;
+             align-items: start; /* Align items top */
+             margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .ux-icon {
+            font-size: 1.1rem;
+            color: #10b981; /* Teal-500 */
+            margin-right: 0.75rem; /* mr-3 */
+            margin-top: 0.25rem; /* Adjust alignment */
+            width: 20px; /* Fixed width */
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-8">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">상세 구현 전략 (1): <span class="gradient-text">디지털 사전 문진 시스템</span></h1>
+             <p class="text-xl text-gray-600">정확하고 편리한 데이터 입력 환경 구축</p>
+        </div>
+
+        <div class="flex-grow grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Section 1: Standardized Tools -->
+            <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 class="section-title"><i class="fas fa-clipboard-check mr-2"></i>근거 기반 표준 평가 도구</h2>
+                <div class="tool-card">
+                    <i class="fas fa-ruler-horizontal tool-icon"></i>
+                    <div>
+                        <h3 class="font-semibold text-gray-700">VAS (Visual Analogue Scale)</h3>
+                        <p class="text-sm text-gray-600">주관적 통증 강도 시각적 표현 (0-10점)</p>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <i class="fas fa-bolt tool-icon"></i>
+                    <div>
+                        <h3 class="font-semibold text-gray-700">DN4 (Douleur Neuropathique 4)</h3>
+                        <p class="text-sm text-gray-600">신경병증성 통증 가능성 선별 (4개 질문)</p>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <i class="fas fa-wheelchair tool-icon"></i>
+                    <div>
+                        <h3 class="font-semibold text-gray-700">ODI (Oswestry Disability Index)</h3>
+                        <p class="text-sm text-gray-600">일상생활 기능 제한 정도 평가 (10개 항목)</p>
+                    </div>
+                </div>
+                <div class="tool-card bg-red-50 border-red-200">
+                    <i class="fas fa-flag tool-icon text-red-500"></i>
+                    <div>
+                        <h3 class="font-semibold text-red-700">Red Flags</h3>
+                        <p class="text-sm text-red-600">심각한 기저 질환 시사 위험 신호 스크리닝</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: UX Optimization -->
+            <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 class="section-title"><i class="fas fa-magic mr-2"></i>사용자 경험(UX) 최적화</h2>
+                 <div class="ux-item">
+                     <i class="fas fa-mobile-alt ux-icon"></i>
+                     <p class="text-gray-700"><span class="font-semibold">반응형 디자인:</span> 모든 기기(스마트폰, 태블릿, PC) 최적화</p>
+                 </div>
+                 <div class="ux-item">
+                     <i class="fas fa-comments ux-icon"></i>
+                     <p class="text-gray-700"><span class="font-semibold">쉬운 용어 & 시각 자료:</span> 의학 용어 최소화, 그림/아이콘 활용</p>
+                 </div>
+                 <div class="ux-item">
+                     <i class="fas fa-tasks ux-icon"></i>
+                     <p class="text-gray-700"><span class="font-semibold">단계별 진행 & 시간 안내:</span> 사용자 피로도 감소 및 이탈 방지</p>
+                 </div>
+                 <div class="ux-item">
+                     <i class="fas fa-universal-access ux-icon"></i>
+                     <p class="text-gray-700"><span class="font-semibold">접근성 강화:</span> 큰 글씨 옵션, (향후) 음성 안내 지원 고려</p>
+                 </div>
+                 <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md">
+                     <p class="text-sm text-blue-700 font-medium"><i class="fas fa-info-circle mr-1"></i> 목표: 사용자의 입력 정확도 향상 및 완료율 극대화</p>
+                 </div>
+            </div>
+
+             <!-- Section 3: OCR Integration -->
+             <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col">
+                 <h2 class="section-title"><i class="fas fa-camera-retro mr-2"></i>OCR 기반 연계 (부가 기능)</h2>
+                 <div class="flex-grow flex flex-col items-center justify-center text-center">
+                     <i class="fas fa-file-invoice text-6xl text-gray-400 mb-4"></i>
+                     <p class="text-gray-700 mb-3">디지털 문진이 어려운 환자를 위해, 기존 <span class="font-semibold">종이 문진표</span>를 촬영/스캔하여 주요 내용을 <span class="font-semibold text-purple-600">자동으로 디지털 데이터 변환</span></p>
+                     <p class="text-sm text-gray-500">(데이터 누락 방지 및 관리 효율성 증대)</p>
+                 </div>
+                 <div class="mt-4 p-4 bg-purple-50 border border-purple-200 rounded-md text-center">
+                      <p class="text-sm text-purple-700 font-medium"><i class="fas fa-users mr-1"></i> 디지털 소외 계층 포용 및 데이터 일관성 확보</p>
+                  </div>
+             </div>
+        </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 8
+        </div>
+    </div>
+</body>
+</html>

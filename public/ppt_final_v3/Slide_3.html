@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 3: 프로젝트 배경 및 당위성 - 프로젝트 목적</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px;
+            background-color: #f8fafc; /* Consistent background */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6); /* Blue to Purple */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .purpose-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 2rem; /* p-8 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .purpose-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+        }
+        .purpose-icon {
+            font-size: 2rem; /* Slightly smaller than previous slide */
+            margin-bottom: 1rem;
+            width: 48px; /* Fixed width for alignment */
+            height: 48px; /* Fixed height for alignment */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-10">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">프로젝트 목적: <span class="gradient-text">데이터로 환자와 병원을 연결하다</span></h1>
+             <p class="text-xl text-gray-600">단순 문진을 넘어, 데이터 기반 인사이트를 통한 가치 창출</p>
+        </div>
+
+        <div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Purpose 1: 선제적 스크리닝 및 조기 개입 -->
+            <div class="purpose-card">
+                <div class="purpose-icon bg-blue-500">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">1. 선제적 질환 스크리닝 및 조기 개입 유도</h2>
+                <p class="text-gray-600 text-base leading-relaxed">
+                    환자 입력 데이터를 AI가 분석하여 잠재적 위험 신호를 조기에 포착하고, 필요한 경우 전문가 개입을 적시에 유도합니다. 척추 질환의 <span class="font-bold text-blue-600">'골든타임'</span> 확보에 결정적인 역할을 수행합니다.
+                </p>
+            </div>
+
+            <!-- Purpose 2: 환자 중심 정보 제공 -->
+            <div class="purpose-card">
+                 <div class="purpose-icon bg-purple-500">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">2. 환자 중심 정보 제공 및 자기 효능감 증진</h2>
+                <p class="text-gray-600 text-base leading-relaxed">
+                    어려운 의학 용어 대신, 시각화된 데이터와 쉬운 설명으로 환자 상태를 명확히 인지시킵니다. 치료 필요성에 대한 공감대를 형성하고, <span class="font-bold text-purple-600">능동적인 자가 관리 및 치료 참여</span>를 독려합니다.
+                </p>
+            </div>
+
+            <!-- Purpose 3: 진료 프로세스 최적화 -->
+            <div class="purpose-card">
+                 <div class="purpose-icon bg-teal-500">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">3. 진료 프로세스 최적화 및 의료진 효율 증대</h2>
+                <p class="text-gray-600 text-base leading-relaxed">
+                    환자 내원 전 표준화된 핵심 정보를 확보하여 진료 대기 시간 단축, 초진 문진 시간 절약, 핵심 질문 집중을 가능하게 합니다. 이는 <span class="font-bold text-teal-600">의료진 번아웃 예방</span> 및 <span class="font-bold">진료 질 향상</span>에 기여합니다.
+                </p>
+            </div>
+
+            <!-- Purpose 4: 병원 경쟁력 강화 -->
+            <div class="purpose-card">
+                 <div class="purpose-icon bg-yellow-500">
+                    <i class="fas fa-hospital-user"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">4. 병원 디지털 경쟁력 및 신뢰도 제고</h2>
+                <p class="text-gray-600 text-base leading-relaxed">
+                    혁신적인 디지털 솔루션 도입으로 <span class="font-bold text-yellow-600">환자 중심의 선진 의료 서비스</span> 이미지를 구축합니다. 이는 신규 환자 유치 및 기존 환자 충성도 강화로 이어져 <span class="font-bold">병원의 지속 가능한 성장</span>을 지원합니다.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 3
+        </div>
+    </div>
+</body>
+</html>

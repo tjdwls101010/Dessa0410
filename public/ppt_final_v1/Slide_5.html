@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 5: AI 분석 리포트 상세</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1280px;
+            height: 800px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1180px;
+            height: 740px;
+            background-color: white;
+            border-radius: 16px;
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            color: #4a5568; /* Gray-700 */
+        }
+        .header i {
+            font-size: 1.8rem;
+            color: #667eea; /* Indigo-500 */
+            margin-right: 12px;
+        }
+        .header h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 600;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr; /* Adjust column ratio */
+            gap: 40px;
+            flex-grow: 1;
+            align-items: center; /* Center content vertically */
+        }
+        .section-title {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1e293b; /* Slate-800 */
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 8px;
+            color: #764ba2; /* Purple from gradient */
+        }
+        .report-feature {
+            display: flex;
+            align-items: flex-start;
+            background-color: #f1f5f9; /* Slate-100 */
+            border-radius: 10px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+         .report-feature:hover {
+             box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+         }
+        .feature-icon {
+            font-size: 2rem;
+            color: #667eea; /* Indigo-500 */
+            margin-right: 20px;
+            width: 40px;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .feature-info h4 {
+            font-size: 1.1rem; /* 18px */
+            font-weight: 600;
+            color: #334155; /* Slate-700 */
+            margin-bottom: 5px;
+        }
+        .feature-info p {
+            font-size: 0.9rem; /* 14.4px */
+            color: #475569; /* Slate-600 */
+            line-height: 1.6;
+        }
+        .highlight {
+            font-weight: 600;
+            color: #d946ef; /* Fuchsia-500 */
+        }
+        .report-visual {
+            background-color: #eef2ff; /* Indigo-50 */
+            border: 1px solid #c7d2fe; /* Indigo-200 */
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%; /* Fill grid cell height */
+        }
+        .report-visual h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4338ca; /* Indigo-700 */
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .chart-placeholder {
+            width: 100%;
+            max-width: 350px; /* Limit chart width */
+            height: 200px; /* Fixed height */
+            margin-bottom: 15px;
+        }
+        .report-visual p {
+            font-size: 0.9rem;
+            color: #4f46e5; /* Indigo-600 */
+            text-align: center;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <i class="fas fa-chart-bar"></i>
+            <h2>기능 상세: AI 분석 리포트</h2>
+        </div>
+        <div class="content-grid">
+            <div class="section report-visual-section">
+                <div class="report-visual">
+                     <h4>설문 데이터 → 이해하기 쉬운 시각적 리포트</h4>
+                     <div class="chart-placeholder">
+                         <canvas id="reportChart"></canvas>
+                     </div>
+                     <p>복잡한 건강 정보를 <span class="highlight">한눈에 파악</span>하고, 자신의 상태를 <span class="highlight">객관적으로 인지</span>하도록 지원합니다.</p>
+                </div>
+            </div>
+            <div class="section report-features-section">
+                <h3 class="section-title"><i class="fas fa-puzzle-piece"></i>리포트 주요 구성 요소</h3>
+                <div class="report-feature">
+                    <i class="fas fa-chart-pie feature-icon"></i>
+                    <div class="feature-info">
+                        <h4>데이터 시각화</h4>
+                        <p>점수화된 통증/기능 정보, 위험도 등을 <span class="highlight">그래프, 차트 등 시각적 요소</span> 중심으로 제공하여 직관적 이해 증진</p>
+                    </div>
+                </div>
+                <div class="report-feature">
+                    <i class="fas fa-comment-medical feature-icon text-amber-500"></i>
+                    <div class="feature-info">
+                        <h4>행동 유도 메시지</h4>
+                        <p>"지금 전문가 상담이 필요합니다", "이 운동을 꾸준히 해보세요" 등 <span class="highlight">개인 맞춤형 안내 문구</span>를 포함하여 <span class="highlight">적절한 행동 유도</span></p>
+                    </div>
+                </div>
+                <div class="report-feature">
+                    <i class="fas fa-hospital-alt feature-icon text-green-500"></i>
+                    <div class="feature-info">
+                        <h4>병원 연결 기능</h4>
+                        <p>리포트 확인 후 <span class="highlight">즉시 온누리병원 진료 예약</span> 또는 관련 정보 확인이 가능하도록 연결하여 <span class="highlight">치료 접근성 향상</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Placeholder chart for visual representation
+        const ctxReport = document.getElementById('reportChart').getContext('2d');
+        const reportChart = new Chart(ctxReport, {
+            type: 'radar', // Example chart type
+            data: {
+                labels: ['통증 강도(VAS)', '기능 제한(ODI)', '신경 통증(DN4)', '위험 신호(Flags)', '생활 습관'],
+                datasets: [{
+                    label: '나의 상태',
+                    data: [7, 6, 3, 2, 5], // Example data
+                    fill: true,
+                    backgroundColor: 'rgba(102, 126, 234, 0.3)', // Indigo semi-transparent
+                    borderColor: 'rgb(102, 126, 234)', // Indigo solid
+                    pointBackgroundColor: 'rgb(102, 126, 234)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(102, 126, 234)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: {
+                    line: {
+                        borderWidth: 2
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: false },
+                        suggestedMin: 0,
+                        suggestedMax: 10,
+                         pointLabels: { font: { size: 11 } },
+                         ticks: { display: false } // Hide scale numbers
+                    }
+                },
+                plugins: {
+                    legend: { display: false } // Hide legend
+                }
+            }
+        });
+    </script>
+</body>
+</html>

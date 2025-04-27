@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 10: AI 분석 리포트</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 60px;
+            background-color: white;
+            position: relative;
+            border: 1px solid #e0e0e0;
+        }
+        .header {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0B4F6C;
+        }
+        .header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .header span {
+            font-size: 1.1rem;
+            color: #4B5563;
+            margin-left: 10px;
+        }
+        .content-area {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* 2:1 비율의 2열 레이아웃 */
+            gap: 40px;
+            flex-grow: 1;
+            margin-top: 15px;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px; /* 섹션 간 간격 */
+        }
+        .side-content {
+             background-color: #F9FAFB;
+             border-radius: 10px;
+             padding: 25px;
+             border: 1px solid #e5e7eb;
+             display: flex;
+             flex-direction: column;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .section-icon {
+            font-size: 1.6rem;
+            color: #F9A03F;
+            margin-right: 12px;
+            width: 30px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1F2937;
+        }
+        .section-content ul {
+            list-style: none;
+            padding-left: 5px;
+        }
+        .section-content li {
+            font-size: 0.95rem; /* 15.2px */
+            line-height: 1.7;
+            color: #4B5563;
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 22px;
+        }
+        .section-content li::before {
+            content: "\f105"; /* Font Awesome angle-right */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #0B4F6C; /* 테마 색상 */
+            position: absolute;
+            left: 0;
+            top: 5px;
+            font-size: 0.9rem;
+        }
+        .section-content strong {
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .highlight {
+            background-color: #FEF3C7; /* 연한 노랑 배경 */
+            color: #92400E; /* 갈색 텍스트 */
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .red-flag {
+            color: #DC2626; /* 빨간색 */
+            font-weight: bold;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #10B981; /* 녹색 버튼 */
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+            margin-top: auto; /* 버튼을 아래로 밀기 */
+            transition: background-color 0.2s ease;
+            text-decoration: none; /* 링크 밑줄 제거 */
+        }
+        .cta-button:hover {
+            background-color: #059669; /* 호버 시 더 진한 녹색 */
+        }
+        .chart-container {
+            height: 180px; /* 차트 높이 */
+            margin-top: 10px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h2>3.2 AI 분석 리포트 <span>: 데이터를 인사이트로 전환하는 엔진</span></h2>
+        </div>
+
+        <div class="content-area">
+            <div class="main-content">
+                <!-- 다차원 분석 및 시각화 -->
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-chart-pie"></i></div>
+                        <h3 class="section-title">다차원 분석 및 시각화</h3>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li>VAS, DN4, ODI 점수 종합 분석 → <strong>통증 심각도, 신경병증성 통증 가능성, 기능 제한 수준</strong> 정량화 (<span class="highlight">점수/단계</span> 제시).</li>
+                            <li><strong class="red-flag">Red Flags 해당 여부</strong> 명확히 표시 및 경고 알림.</li>
+                            <li>시간 경과에 따른 <strong>변화 추이 시각화</strong> (재문진 시): 치료 효과/악화 여부 직관적 파악.</li>
+                        </ul>
+                        <div class="chart-container">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 행동 유도 메시지 -->
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-directions"></i></div>
+                        <h3 class="section-title">행동 유도 메시지 (Call-to-Action)</h3>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li>분석 결과 기반 <strong>명확하고 구체적인 다음 단계 행동 제안</strong>:
+                                <ul class="list-disc pl-5 mt-1">
+                                    <li>"가까운 시일 내 전문가 상담 권장"</li>
+                                    <li>"응급 상황 가능성, 즉시 병원 문의"</li>
+                                    <li>"안정적 상태, 정기적 관찰 필요"</li>
+                                </ul>
+                            </li>
+                            <li>환자 불안감 해소 및 <strong>적극적 의료 참여 유도</strong> (심리적 '넛지').</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 병원 연계 기능 -->
+            <div class="side-content">
+                 <div class="section-header">
+                    <div class="section-icon"><i class="fas fa-hospital-user"></i></div>
+                    <h3 class="section-title">병원 연계 기능 강화</h3>
+                </div>
+                <div class="section-content">
+                    <ul>
+                        <li>리포트 내 <strong>온누리마취통증의학과 진료 예약 바로가기</strong> 버튼 제공.</li>
+                        <li>환자 내원에 필요한 <strong>병원 정보 통합 제공</strong> (위치, 진료 시간, 의료진 등).</li>
+                        <li>환자의 다음 행동을 자연스럽게 병원 방문으로 연결.</li>
+                    </ul>
+                </div>
+                <a href="#" class="cta-button">
+                    <i class="fas fa-calendar-check mr-2"></i> 온누리마취통증의학과 진료 예약하기
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>스마트 문진 시스템 제안</span>
+            <span>Slide 10</span>
+        </div>
+    </div>
+
+    <script>
+        // 예시 차트 (시간 경과에 따른 변화 추이)
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        const trendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1월', '2월', '3월', '4월', '5월'],
+                datasets: [{
+                    label: 'VAS 점수',
+                    data: [7, 6, 6, 5, 4],
+                    borderColor: 'rgb(59, 130, 246)', // Blue
+                    tension: 0.1,
+                    fill: false
+                }, {
+                    label: 'ODI 점수',
+                    data: [45, 40, 38, 30, 25],
+                    borderColor: 'rgb(249, 160, 63)', // Orange
+                    tension: 0.1,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 10,
+                            boxWidth: 12,
+                            font: { size: 11 }
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: 50, // ODI 최대값 고려
+                         ticks: { font: { size: 10 } }
+                    },
+                    x: {
+                         ticks: { font: { size: 10 } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

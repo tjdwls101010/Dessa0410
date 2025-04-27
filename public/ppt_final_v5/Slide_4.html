@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 4: 프로젝트 목적</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            background: linear-gradient(to bottom right, #ffffff, #f0f4f7); /* 부드러운 흰색-회색 그라데이션 */
+            position: relative;
+            border: 1px solid #e0e0e0;
+        }
+        .header {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0B4F6C;
+        }
+        .header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .header span {
+            font-size: 1.25rem; /* 20px */
+            color: #4B5563;
+            margin-left: 10px;
+        }
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px; /* 간격 조정 */
+            flex-grow: 1;
+            align-content: start; /* 위쪽 정렬 */
+        }
+        .objective-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            display: flex;
+            align-items: flex-start; /* 아이콘과 텍스트 상단 정렬 */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .objective-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+        .objective-icon {
+            font-size: 2rem; /* 아이콘 크기 조정 */
+            color: #F9A03F; /* 강조색 */
+            margin-right: 20px;
+            margin-top: 5px; /* 아이콘 위치 미세 조정 */
+            width: 40px; /* 아이콘 영역 고정 */
+            text-align: center;
+        }
+        .objective-content h3 {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 8px;
+        }
+        .objective-content p {
+            font-size: 0.95rem; /* 15px */
+            line-height: 1.6;
+            color: #4B5563;
+        }
+        .objective-content strong {
+            color: #0B4F6C; /* 테마 색상 강조 */
+            font-weight: 600;
+        }
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h2>1.2 프로젝트 목적 <span>: 데이터로 환자와 병원을 연결하는 스마트 솔루션</span></h2>
+        </div>
+
+        <div class="objectives-grid">
+            <div class="objective-item">
+                <div class="objective-icon"><i class="fas fa-bullseye"></i></div>
+                <div class="objective-content">
+                    <h3>선제적 질환 스크리닝 및 조기 개입 유도</h3>
+                    <p>환자 입력 데이터를 AI가 분석하여 <strong>잠재적 위험 신호를 조기에 포착</strong>하고, 필요시 <strong>적시 전문가 개입을 유도</strong>하여 척추 질환의 '골든타임'을 확보합니다.</p>
+                </div>
+            </div>
+
+            <div class="objective-item">
+                <div class="objective-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <div class="objective-content">
+                    <h3>환자 중심 정보 제공 및 자기 효능감 증진</h3>
+                    <p>어려운 의학 용어 대신 <strong>시각화된 데이터와 쉬운 설명</strong>으로 환자 상태 인지를 돕고, 치료 필요성 공감대 형성 및 <strong>능동적 자가 관리/치료 참여</strong>를 독려합니다.</p>
+                </div>
+            </div>
+
+            <div class="objective-item">
+                <div class="objective-icon"><i class="fas fa-tasks"></i></div>
+                <div class="objective-content">
+                    <h3>진료 프로세스 최적화 및 의료진 효율 증대</h3>
+                    <p>내원 전 표준화된 정보 확보로 <strong>진료 대기/문진 시간 단축, 핵심 질문 집중</strong>을 가능하게 하여 의료진 번아웃 예방 및 <strong>환자당 진료의 질을 향상</strong>시킵니다.</p>
+                </div>
+            </div>
+
+            <div class="objective-item">
+                <div class="objective-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="objective-content">
+                    <h3>디지털 경쟁력 강화 및 브랜드 신뢰도 제고</h3>
+                    <p>혁신 솔루션 도입으로 <strong>환자 중심 선진 의료 이미지</strong>를 구축하고, <strong>신규 환자 유치 및 기존 환자 충성도 강화</strong>에 기여하여 온누리마취통증의학과의 경쟁력을 높입니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>스마트 문진 시스템 제안</span>
+            <span>Slide 4</span>
+        </div>
+    </div>
+</body>
+</html>

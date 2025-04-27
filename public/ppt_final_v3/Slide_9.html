@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 9: 기능별 상세 구현 전략 - AI 분석 리포트</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Chart.js (Included for consistency) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Annotation Plugin (Included for consistency) -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px;
+            background-color: #f8fafc; /* Consistent background */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #7c3aed, #a78bfa); /* Purple gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-title {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            color: #5b21b6; /* Purple-700 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            padding-bottom: 0.5rem; /* pb-2 */
+            border-bottom: 2px solid #ddd6fe; /* Purple-200 border */
+            display: flex;
+            align-items: center;
+        }
+        .section-icon {
+            margin-right: 0.75rem; /* mr-3 */
+            font-size: 1.4rem; /* Slightly smaller */
+        }
+        .content-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            height: 100%; /* Make cards in a row equal height */
+        }
+        .list-item {
+             display: flex;
+             align-items: start;
+             margin-bottom: 0.75rem; /* mb-3 */
+             line-height: 1.6;
+        }
+        .list-icon {
+            font-size: 1rem;
+            color: #8b5cf6; /* Purple-500 */
+            margin-right: 0.75rem; /* mr-3 */
+            margin-top: 0.3rem; /* Adjust alignment */
+            width: 18px; /* Fixed width */
+            text-align: center;
+        }
+        .cta-card {
+            background-color: #faf5ff; /* Purple-50 */
+            border: 1px solid #e9d5ff; /* Purple-200 */
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-top: 1rem; /* mt-4 */
+        }
+        .cta-icon {
+            color: #9333ea; /* Purple-600 */
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-8">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">상세 구현 전략 (2): <span class="gradient-text">AI 분석 리포트</span></h1>
+             <p class="text-xl text-gray-600">데이터를 실행 가능한 인사이트로 전환하는 핵심 엔진</p>
+        </div>
+
+        <div class="flex-grow grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Section 1: Analysis & Visualization -->
+            <div class="content-card">
+                <h2 class="section-title"><i class="fas fa-chart-line section-icon"></i>다차원 분석 및 시각화</h2>
+                <div class="list-item">
+                    <i class="fas fa-check list-icon"></i>
+                    <p class="text-gray-700"><span class="font-semibold">정량화된 평가:</span> 통증 심각도, 신경병증성 통증 가능성, 기능 제한 수준을 점수/단계(경증/중등도/중증)로 제시</p>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-check list-icon"></i>
+                    <p class="text-gray-700"><span class="font-semibold">Red Flags 명시:</span> 해당 여부 명확히 표시 및 <span class="text-red-600 font-medium">경고 알림</span> 제공</p>
+                </div>
+                <div class="list-item">
+                    <i class="fas fa-check list-icon"></i>
+                    <p class="text-gray-700"><span class="font-semibold">변화 추이 시각화:</span> 재문진 시 이전 데이터와 비교하여 증상 변화를 <span class="text-blue-600 font-medium">그래프로 제공</span> (치료 효과/악화 파악)</p>
+                </div>
+            </div>
+
+            <!-- Section 2: Call-to-Action -->
+            <div class="content-card">
+                <h2 class="section-title"><i class="fas fa-bullhorn section-icon"></i>행동 유도 메시지 (CTA)</h2>
+                 <p class="text-gray-700 mb-4">분석 결과에 기반하여 명확하고 구체적인 다음 단계 행동 제안:</p>
+                <div class="cta-card">
+                    <p class="text-purple-800 font-medium"><i class="fas fa-exclamation-circle cta-icon"></i> "가까운 시일 내 전문가 상담 권장"</p>
+                </div>
+                 <div class="cta-card">
+                    <p class="text-red-800 font-medium"><i class="fas fa-ambulance cta-icon text-red-600"></i> "응급 상황 가능성, 즉시 병원 문의"</p>
+                 </div>
+                 <div class="cta-card">
+                    <p class="text-green-800 font-medium"><i class="fas fa-shield-alt cta-icon text-green-600"></i> "안정적 상태, 정기적 관찰 필요"</p>
+                 </div>
+                 <p class="text-gray-600 mt-4 text-sm">환자의 불안감을 해소하고 적극적인 의료 참여를 유도하는 심리적 <span class="font-semibold">'넛지(Nudge)'</span> 역할 수행</p>
+            </div>
+
+             <!-- Section 3: Hospital Integration -->
+             <div class="content-card">
+                 <h2 class="section-title"><i class="fas fa-hospital-link section-icon"></i>병원 연계 기능 강화</h2>
+                 <div class="list-item">
+                     <i class="fas fa-calendar-check list-icon"></i>
+                     <p class="text-gray-700"><span class="font-semibold">진료 예약 바로가기:</span> 리포트 하단에 온누리마취통증의학과 <span class="text-blue-600 font-medium">예약 버튼</span> 삽입</p>
+                 </div>
+                 <div class="list-item">
+                     <i class="fas fa-map-marked-alt list-icon"></i>
+                     <p class="text-gray-700"><span class="font-semibold">병원 정보 통합 제공:</span> 환자 내원에 필요한 정보(위치, 진료 시간, 의료진 등) 제공</p>
+                 </div>
+                 <div class="mt-6 flex flex-col items-center text-center">
+                     <i class="fas fa-door-open text-4xl text-gray-400 mb-3"></i>
+                     <p class="text-gray-600 font-medium">환자의 내원 결정부터 실제 방문까지의 <span class="font-semibold">여정을 매끄럽게 연결</span></p>
+                 </div>
+             </div>
+        </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 9
+        </div>
+    </div>
+</body>
+</html>

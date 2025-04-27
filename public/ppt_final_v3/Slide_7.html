@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 7: 핵심 기능 및 기대 효과 - 병원 측면 (경영)</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%); /* Light blue gradient background */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #fb923c, #f59e0b); /* Orange to Amber */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .impact-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 2rem; /* p-8 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .impact-card:hover {
+             transform: scale(1.03);
+        }
+        .impact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #f97316; /* Orange-500 */
+        }
+        .central-image {
+            background-color: #fff; /* White background for the central card */
+            padding: 2.5rem;
+            border-radius: 1rem; /* rounded-2xl */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0; /* Slate-200 border */
+        }
+        .central-icon {
+            font-size: 4rem;
+            color: #4f46e5; /* Indigo-600 */
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-10 text-center">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">기대 효과 (병원 경영): <span class="gradient-text">혁신 이미지 구축 → 브랜드 가치 상승</span></h1>
+             <p class="text-xl text-gray-600">지속 가능한 성장을 위한 디지털 경쟁력 확보</p>
+        </div>
+
+        <div class="flex-grow flex items-center justify-center">
+            <div class="grid grid-cols-3 gap-12 items-center w-full max-w-6xl">
+                <!-- Left Impact Card -->
+                <div class="impact-card">
+                    <i class="fas fa-users impact-icon"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">신규 환자 유입 증대</h3>
+                    <p class="text-gray-600 text-base">특히 디지털에 익숙한 젊은 층에게 <span class="font-medium">매력적인 선택지</span>로 부상</p>
+                </div>
+
+                <!-- Central Image/Concept -->
+                <div class="central-image">
+                     <i class="fas fa-rocket central-icon"></i>
+                    <h2 class="text-2xl font-bold text-indigo-700 mb-2 text-center">스마트 문진 시스템 도입</h2>
+                    <p class="text-gray-700 text-center text-lg leading-relaxed">
+                        최신 기술 수용 & <br/> <span class="font-semibold">환자 중심 철학 실천</span>을 <br/> 강력하게 어필
+                    </p>
+                </div>
+
+                <!-- Right Impact Card -->
+                <div class="impact-card">
+                    <i class="fas fa-hand-holding-heart impact-icon"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">기존 환자 만족도 & 충성도 향상</h3>
+                    <p class="text-gray-600 text-base">혁신적인 경험 제공으로 <span class="font-medium">재방문율 증가</span> 및 <span class="font-medium">긍정적 구전 효과</span> 확산</p>
+                </div>
+            </div>
+        </div>
+         <div class="text-center mt-10 text-lg text-gray-700 font-medium">
+             <i class="fas fa-medal text-yellow-500 mr-2"></i> 지속 가능한 성장의 발판 마련 및 <span class="font-semibold text-indigo-600">지역 사회 내 경쟁 우위 확보</span>
+         </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 7
+        </div>
+    </div>
+</body>
+</html>

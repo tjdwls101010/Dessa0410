@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 14: 기대되는 혁신적 가치</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 60px;
+            background-color: white;
+            position: relative;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+        .header {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0B4F6C;
+        }
+        .header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .header span {
+            font-size: 1.1rem;
+            color: #4B5563;
+            margin-left: 10px;
+        }
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2열 */
+            grid-template-rows: repeat(2, 1fr); /* 2행 */
+            gap: 30px;
+            flex-grow: 1;
+            margin-top: 15px;
+        }
+        .value-card {
+            background: linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            display: flex;
+            align-items: flex-start; /* 아이콘과 내용 상단 정렬 */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+         .value-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+        .value-icon {
+            font-size: 2.2rem; /* 아이콘 크기 */
+            color: #F9A03F; /* 강조색 */
+            margin-right: 20px;
+            margin-top: 3px; /* 아이콘 위치 미세 조정 */
+            width: 40px;
+            text-align: center;
+            flex-shrink: 0; /* 아이콘 크기 유지 */
+        }
+        .value-content h3 {
+            font-size: 1.3rem; /* 21px */
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 10px;
+        }
+        .value-content p {
+            font-size: 0.95rem; /* 15px */
+            line-height: 1.7;
+            color: #4B5563;
+        }
+        .value-content strong {
+            font-weight: 600;
+            color: #0B4F6C; /* 테마 색상 */
+        }
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h2>4.1 기대되는 혁신적 가치 <span>(프로젝트 의의)</span></h2>
+        </div>
+
+        <div class="value-grid">
+            <div class="value-card">
+                <div class="value-icon"><i class="fas fa-user-graduate"></i></div>
+                <div class="value-content">
+                    <h3>환자 역량 강화 (Patient Empowerment)</h3>
+                    <p>자신의 건강 상태를 명확히 이해하고 치료 과정에 <strong>주도적으로 참여</strong>하도록 지원. 수동적 환자에서 <strong>능동적 건강 관리 주체로 전환</strong> 촉진 (치료 순응도 향상 및 예후 개선 기대).</p>
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon"><i class="fas fa-database"></i></div>
+                <div class="value-content">
+                    <h3>데이터 기반 정밀 의료 실현</h3>
+                    <p>표준화된 데이터의 체계적 축적/분석을 통해 <strong>진단 정확성 향상</strong> 및 <strong>환자별 최적 치료 전략 수립</strong> 지원. 장기적으로 예측 모델 개발 및 예방적 개입 기반 마련.</p>
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon"><i class="fas fa-business-time"></i></div>
+                <div class="value-content">
+                    <h3>병원 운영 효율성 극대화</h3>
+                    <p>문진 프로세스 자동화, 진료 준비 시간 단축, 커뮤니케이션 개선 등으로 <strong>한정된 의료 자원의 효율적 배분</strong> 가능. 환자 만족도 증대와 병원 수익성 개선에 동시 기여.</p>
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon"><i class="fas fa-trophy"></i></div>
+                <div class="value-content">
+                    <h3>디지털 헬스케어 선도 병원 위상 정립</h3>
+                    <p>성공적인 시스템 도입/운영은 온누리마취통증의학과가 <strong>미래 지향적, 혁신적 의료 서비스를 제공하는 선도 기관</strong>임을 입증. 타 병원과의 <strong>차별화된 경쟁 우위</strong> 확보.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>스마트 문진 시스템 제안</span>
+            <span>Slide 14</span>
+        </div>
+    </div>
+</body>
+</html>

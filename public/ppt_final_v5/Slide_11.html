@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 11: 병원 시스템(EMR) 연동</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 60px;
+            background-color: white;
+            position: relative;
+            border: 1px solid #e0e0e0;
+        }
+        .header {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0B4F6C;
+        }
+        .header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .header span {
+            font-size: 1.1rem;
+            color: #4B5563;
+            margin-left: 10px;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2열 레이아웃 */
+            gap: 35px;
+            flex-grow: 1;
+            margin-top: 15px;
+        }
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px; /* 섹션 간 간격 */
+        }
+        .content-section {
+            background-color: #F9FAFB;
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #e5e7eb;
+            flex-grow: 1; /* 섹션 높이 채우기 */
+            display: flex; /* 내부 요소 정렬 위해 */
+            flex-direction: column;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .section-icon {
+            font-size: 1.6rem;
+            color: #F9A03F;
+            margin-right: 12px;
+            width: 30px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1F2937;
+        }
+        .section-content ul {
+            list-style: none;
+            padding-left: 5px;
+            flex-grow: 1; /* 내용 영역 채우기 */
+        }
+        .section-content li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #4B5563;
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 22px;
+        }
+        .section-content li::before {
+            content: "\f058"; /* Font Awesome check-circle */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #10B981; /* 녹색 */
+            position: absolute;
+            left: 0;
+            top: 5px;
+            font-size: 0.9rem;
+        }
+        .section-content strong {
+            font-weight: 600;
+            color: #0B4F6C;
+        }
+        .protocol-tag {
+            display: inline-block;
+            background-color: #FEF9C3; /* 연한 노랑 */
+            color: #713F12; /* 갈색 */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 0 3px 3px 0;
+        }
+        .security-tag {
+            display: inline-block;
+            background-color: #FEE2E2; /* 연한 빨강 */
+            color: #991B1B; /* 진한 빨강 */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 0 3px 3px 0;
+        }
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <h2>3.3 병원 시스템(EMR) 연동 <span>: 끊김 없는 정보 흐름 구축</span></h2>
+        </div>
+
+        <div class="content-grid">
+            <!-- 왼쪽 컬럼 -->
+            <div class="content-column">
+                <!-- 표준 프로토콜 준수 -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-shield-halved"></i></div>
+                        <h3 class="section-title">표준 프로토콜 및 보안 준수</h3>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li><strong>안전하고 효율적인 연동:</strong> 국제 표준 <span class="protocol-tag">HL7</span>, <span class="protocol-tag">FHIR</span> 등 고려 설계.</li>
+                            <li><strong>정보 보안 최우선:</strong> <span class="security-tag">개인정보보호법</span> 등 관련 규정 철저 준수.</li>
+                            <li><strong>데이터 무결성 확보:</strong> 전송 과정에서의 데이터 위변조 방지.</li>
+                            <li><strong>접근 통제 강화:</strong> 인가된 사용자만 정보 접근 가능.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 진료 효율 극대화 -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-rocket"></i></div>
+                        <h3 class="section-title">진료 효율 극대화 지원</h3>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li><strong>사전 계획 수립:</strong> 사전 정보 기반 예상 진단 및 추가 검사 계획 용이.</li>
+                            <li><strong>핵심 질문 집중:</strong> 환자 대면 시 반복 질문 생략, 심층 문진 가능.</li>
+                            <li><strong>진료 깊이 증진:</strong> 제한된 시간 내 더 정확하고 효율적인 진료 제공.</li>
+                            <li><strong>의료진 만족도 향상:</strong> 불필요한 업무 감소 및 진료 집중 환경 조성.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 오른쪽 컬럼 -->
+            <div class="content-column">
+                <!-- 의료진 맞춤 정보 -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-user-md"></i></div>
+                        <h3 class="section-title">의료진 맞춤 정보 제공</h3>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li><strong>EMR 내 즉시 확인:</strong> 환자 사전 문진 결과 <span class="highlight">요약/상세 리포트</span> 확인.</li>
+                            <li><strong>핵심 정보 강조:</strong> VAS 점수, Red Flags 여부 등 중요 정보 시각적 강조.</li>
+                            <li><strong>직관적 인터페이스:</strong> 의료진이 쉽게 정보를 파악하고 활용 가능.</li>
+                            <li><strong>진료 흐름 방해 최소화:</strong> 기존 EMR 워크플로우와 자연스러운 통합.</li>
+                        </ul>
+                    </div>
+                </div>
+                 <!-- 향후 확장 -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon"><i class="fas fa-chart-area"></i></div>
+                        <h3 class="section-title">(향후 확장) 환자 관리 대시보드</h3>
+                    </div>
+                    <div class="section-content">
+                        <ul>
+                            <li><strong>데이터 기반 인사이트:</strong> 축적된 문진 데이터 활용.</li>
+                            <li><strong>병원 운영 지원:</strong> 특정 질환 유병률 변화, 치료 반응성 분석.</li>
+                            <li><strong>연구 활동 기여:</strong> 환자군 특성 파악, 임상 연구 기반 마련.</li>
+                            <li><strong>지속적 의료 질 향상:</strong> 데이터 기반 의사결정 지원.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>스마트 문진 시스템 제안</span>
+            <span>Slide 11</span>
+        </div>
+    </div>
+</body>
+</html>

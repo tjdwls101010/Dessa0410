@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 6: 핵심 기능 및 기대 효과 - 병원 측면 (효율성)</title>
+    <!-- Tailwind CSS v3.4.17 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide-container {
+            width: 1280px;
+            min-height: 800px;
+            background-color: #f8fafc; /* Consistent background */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #10b981, #3b82f6); /* Teal to Blue */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .process-step {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 160px;
+        }
+        .process-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem; /* mb-3 */
+            color: #14b8a6; /* Teal-500 */
+        }
+        .arrow-icon {
+            font-size: 2.5rem;
+            color: #9ca3af; /* Gray-400 */
+            align-self: center;
+            margin: 0 1rem; /* Add horizontal margin */
+        }
+        .benefit-card {
+            background-color: #f0fdfa; /* Teal-50 background */
+            border: 1px solid #ccfbf1; /* Teal-100 border */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 1.5rem; /* p-6 */
+            display: flex;
+            align-items: center;
+        }
+        .benefit-icon {
+            font-size: 1.5rem;
+            color: #0d9488; /* Teal-600 */
+            margin-right: 1rem; /* mr-4 */
+            min-width: 24px; /* Ensure icon space */
+        }
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0d9488; /* Teal-600 */
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="slide-container p-16 flex flex-col shadow-lg">
+        <div class="w-full mb-10">
+             <h1 class="text-4xl font-bold text-gray-800 mb-2">기대 효과 (병원): <span class="gradient-text">사전 정보 확보 → 진료 효율성 및 질 향상</span></h1>
+             <p class="text-xl text-gray-600">의료진의 업무 부담 경감 및 환자 중심 진료 강화</p>
+        </div>
+
+        <div class="flex-grow flex flex-col justify-around">
+            <!-- Process Flow -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">진료 효율성 증대 프로세스</h2>
+                <div class="flex justify-center items-center">
+                    <div class="process-step w-1/4">
+                        <i class="fas fa-mobile-alt process-icon"></i>
+                        <p class="font-medium text-gray-700">디지털 문진</p>
+                        <p class="text-sm text-gray-500">환자 정보 입력</p>
+                    </div>
+                    <i class="fas fa-long-arrow-alt-right arrow-icon"></i>
+                    <div class="process-step w-1/4">
+                        <i class="fas fa-database process-icon"></i>
+                        <p class="font-medium text-gray-700">병원 시스템 연동</p>
+                        <p class="text-sm text-gray-500">EMR 자동 전송</p>
+                    </div>
+                    <i class="fas fa-long-arrow-alt-right arrow-icon"></i>
+                    <div class="process-step w-1/4 bg-teal-50 border-teal-200">
+                        <i class="fas fa-user-md process-icon text-teal-600"></i>
+                        <p class="font-semibold text-teal-800">의료진 사전 확인</p>
+                        <p class="text-sm text-teal-600">핵심 정보 미리 파악</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits & Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <div class="space-y-4">
+                    <div class="benefit-card">
+                        <i class="fas fa-check-circle benefit-icon"></i>
+                        <p class="text-gray-700">반복적인 질문 생략 및 <span class="font-semibold">맞춤 심층 질문 준비</span></p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-check-circle benefit-icon"></i>
+                        <p class="text-gray-700">진단 및 치료 계획 수립 시간 단축 → <span class="font-semibold">진료의 깊이 증진</span></p>
+                    </div>
+                     <div class="benefit-card">
+                        <i class="fas fa-check-circle benefit-icon"></i>
+                        <p class="text-gray-700">표준화된 데이터 기반 <span class="font-semibold">환자 추적 관리 및 치료 효과 평가 용이</span></p>
+                    </div>
+                     <div class="benefit-card">
+                        <i class="fas fa-check-circle benefit-icon"></i>
+                        <p class="text-gray-700">장기적으로 <span class="font-semibold">임상 연구 데이터 축적</span> 및 의료 질 향상 기여</p>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 text-center">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">예상되는 초진 시간 단축 효과</h3>
+                    <p class="stat-highlight mb-2">약 15-20%</p>
+                    <p class="text-gray-600">제한된 진료 시간 내 더 높은 수준의 의료 서비스 제공 가능</p>
+                    <div class="mt-4 h-2 bg-teal-200 rounded-full overflow-hidden">
+                        <div class="h-full bg-teal-500" style="width: 17.5%;"></div> {/* Average 17.5% */}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-right text-sm text-gray-500">
+            Slide 6
+        </div>
+    </div>
+</body>
+</html>
