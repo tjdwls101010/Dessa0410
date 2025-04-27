@@ -1,7 +1,7 @@
 // components/survey/survey-tooltip.tsx
 import React from 'react';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { HelpCircle } from 'lucide-react'; // 아이콘 예시
+import * as TooltipPrimitive from "@radix-ui/react-tooltip"
+import { HelpCircle } from 'lucide-react';
 
 // Suvey_Tooltip.md 에서 파싱한 데이터 (실제로는 별도 파일이나 상위 컴포넌트에서 관리)
 const tooltipData: Record<string, { reference: string; significance: string }> = {
@@ -54,23 +54,31 @@ export function SurveyTooltip({ questionId }: SurveyTooltipProps) {
   }
 
   return (
-    <TooltipProvider delayDuration={300}>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <span className="inline-flex items-center cursor-help">
-            <HelpCircle className="ml-1.5 h-4 w-4 text-muted-foreground hover:text-primary transition-colors" />
-          </span>
-        </TooltipTrigger>
-        <TooltipContent 
-          sideOffset={5}
-          className="max-w-xs p-3 bg-background border shadow-lg rounded-md z-50"
-        >
-          <p className="text-sm font-semibold mb-1 text-primary">참고 지표:</p>
-          <p className="text-sm mb-2">{data.reference}</p>
-          <p className="text-sm font-semibold mb-1 text-primary">임상적 의의:</p>
-          <p className="text-sm">{data.significance}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <TooltipPrimitive.Provider delayDuration={100}>
+      <TooltipPrimitive.Root>
+        <TooltipPrimitive.Trigger asChild>
+          <button 
+            type="button" 
+            className="inline-flex items-center justify-center ml-1.5"
+          >
+            <HelpCircle className="h-4 w-4 text-muted-foreground hover:text-primary transition-colors" />
+          </button>
+        </TooltipPrimitive.Trigger>
+        <TooltipPrimitive.Portal>
+          <TooltipPrimitive.Content
+            side="top"
+            align="center"
+            sideOffset={5}
+            className="max-w-xs p-3 z-[999] bg-popover rounded-md shadow-md border text-popover-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
+          >
+            <p className="text-sm font-semibold mb-1 text-primary">참고 지표:</p>
+            <p className="text-sm mb-2">{data.reference}</p>
+            <p className="text-sm font-semibold mb-1 text-primary">임상적 의의:</p>
+            <p className="text-sm">{data.significance}</p>
+            <TooltipPrimitive.Arrow className="fill-current text-popover" />
+          </TooltipPrimitive.Content>
+        </TooltipPrimitive.Portal>
+      </TooltipPrimitive.Root>
+    </TooltipPrimitive.Provider>
   );
 }
