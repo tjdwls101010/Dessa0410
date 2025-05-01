@@ -9,6 +9,21 @@ const config = {
     "./src/**/*.{ts,tsx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
+  // faq-data.ts에서 동적으로 사용되는 클래스들이 Purge되지 않도록 safelist에 추가
+  safelist: [
+    {
+      pattern: /^bg-(blue|purple|green|amber|cyan|pink|red|orange|violet|emerald|indigo|gray)-100$/,
+    },
+    {
+      pattern: /^text-(blue|purple|green|amber|cyan|pink|red|orange|violet|emerald|indigo|gray)-800$/,
+    },
+    'bg-blue-500', // '전체' 태그 기본 배경
+    'text-white', // '전체' 태그 기본 텍스트
+    'bg-blue-600', // '전체' 태그 선택 시 배경
+    'border-blue-600', // '전체' 태그 선택 시 테두리
+    'ring-blue-500', // '전체' 태그 선택 시 링
+    // primary 관련 클래스는 테마에 정의되어 있어 safelist 불필요할 수 있음
+  ],
   prefix: "",
   theme: {
     container: {
