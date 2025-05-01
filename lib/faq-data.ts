@@ -1,254 +1,42 @@
+import qnaData from "@/Documents/References/QnA.json"; // QnA.json 파일 import
+
 export interface FaqItem {
-  id: string
-  question_title: string
-  question_content: string
-  answer_content: string
-  url?: string
-  tags: string[]
+  id: string;
+  question_title: string;
+  question_content: string;
+  answer_content: string;
+  url?: string;
+  tag: string[]; // 'tags'에서 'tag'로 변경 (QnA.json 형식에 맞춤)
 }
 
-// FAQ 데이터에서 태그를 자동으로 추출하는 함수
-function extractTags(question: string): string[] {
-  const commonTags = [
-    { keywords: ["어깨", "승모근"], tag: "어깨" },
-    { keywords: ["목", "경추"], tag: "목" },
-    { keywords: ["허리", "요추", "등"], tag: "허리/등" },
-    { keywords: ["무릎", "다리", "하지", "종아리", "허벅지", "발목", "발"], tag: "다리/무릎" },
-    { keywords: ["손목", "손가락", "팔꿈치", "팔"], tag: "팔/손" },
-    { keywords: ["가슴", "흉부"], tag: "가슴" },
-    { keywords: ["통증", "아프", "쑤시", "찌릿"], tag: "통증" },
-    { keywords: ["붓", "부종"], tag: "부종" },
-    { keywords: ["수술"], tag: "수술" },
-    { keywords: ["운동"], tag: "운동" },
-    { keywords: ["신경", "신경통"], tag: "신경통" },
-  ]
-
-  const text = question.toLowerCase()
-  const foundTags = new Set<string>()
-
-  commonTags.forEach(({ keywords, tag }) => {
-    if (keywords.some((keyword) => text.includes(keyword))) {
-      foundTags.add(tag)
-    }
-  })
-
-  return Array.from(foundTags)
-}
-
-// FAQ 데이터 배열
-export const faqData: FaqItem[] = [
-  {
-    id: "1",
-    question_title: "오른쪽 가슴통증",
-    question_content:
-      "오른쪽 가슴에 통증이 오는데 자세를 바굴때마다 아프고무거운 물건을 들고나서 부터 그러는거 같기도하고 걸을대도 통증이 오고잘려고 누워도 통증이 오고 자세를 바꿀대마다 바늘로 찌르는거 같은 통증이 오는데시간이 지나면 괜찮아 지기도 하고요큰병원 가봐야 될까요",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 여자분이라면 유방의 문제등에 의한 경우도 있지만 대개 신체 활동을 중심으로 증상의 경감이 생기는 경우는 대흉근 소흉근등의 가슴 근육의 부종이나 근막의 문제인 경우가 많고 이 경우 늑간 근육들도 자극하므로 호흡 패턴등에도 자극 받기도 합니다. 정확한 진단은 초음파 검사로 간단히 확인할수 있는 만큼 증상의 지속이나 악화시는 가까운 근골격계 초음파가 가능한 전문의 진료를 받으시길 바랍니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70119&docId=452914201&answerNo=1",
-    tags: extractTags("오른쪽 가슴통증"),
-  },
-  {
-    id: "2",
-    question_title: "며칠전 마취 부위 붓기와 뭉침으로 문의드렸었는데요.",
-    question_content:
-      "며칠전 볼 안쪽 마취 부위 붓기와 뭉침으로 문의드렸었는데요.일주일이 지난 지금도 붓기와 뭉침이 그대로이고만져보면 안에 뭉친부위들이 그대로 만져집니다.뻐근하고 묵직한 느낌도 그대로고요.보통 이런경우 어느정도 시간이 지나야 괜찮아지는지요.사실 너무 걱정되고 부작용이 생긴것같아 심리적으로 상당히 불안해서 다시 문의드려봅니다.",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 주사 부위에 지속적인 부종이나 붓기는 대개 1,2주내에 문제없이 감소되는 것이 일반적이지만 지속되는 것이 계속해서 문제가 되고 불안 요소가 있으시다면 초음파 검사를 통해 혹시 있을수도 문제가 있는 지 확인해 보시면 될 것으로 판단됩니다. 빠른 쾌유를 바라겠습니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70119&docId=452895896&answerNo=1",
-    tags: extractTags("마취 부위 붓기와 뭉침"),
-  },
-  {
-    id: "3",
-    question_title: "내과 질문드립니다",
-    question_content:
-      "어지럽고 식은땀나면서 가슴과 배 사이에 아리는 통증 과 해당 부위 뒤쪽 등에도 통증이 자주 나타나서 병원에 갔엇는데요 그당시에 의사분께서 초음파검사 해보시고는 담낭에 돌있다고 하셔서 담낭제거 수술 받았는데 받은지 1년정도 되어가는데도 계속 통증이및 어지러움, 식은땀이 계속 나는데 어디가 문제일까요?",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 상복부에 불편감이 존재하면 소화기능을 담당하는 식도나 위등의 문제가 있으면 상기 증상들이 발생할수 있으나 만성적인 이런 소화기계의 문제와 연계된 증상들과 떼어서 생각할수 없는 문제가 횡격막의 기능 이상이나 긴장감증가이며 이러한 횡격막 문제는 경흉추를 포함한 요추등의 만성적 문제와 연결고리가 있는 경우가 많습니다. 환자분이 호소하시는 증상과 함께 목주위나 허리 주위 피로감이나 결림등의 증상 반복시는 척추 전반의 기능과 문제에 대한 확인과 치료 및 재활이 가능한 전문의의 진료를 받으시길 권해 드립니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=7010102&docId=452861903&answerNo=1",
-    tags: extractTags("가슴과 배 사이에 아리는 통증 과 해당 부위 뒤쪽 등에도 통증"),
-  },
-  {
-    id: "4",
-    question_title: "손가락 끝 통증",
-    question_content:
-      "가운데 손가락 끝에 통증이 있습니다.가만히 있으면 아프지 않고 손으로 눌러도 아프지 않습니다.무엇인가에 닿거나 하면 통증이 있습니다.이런 경우 병원 어디를 가야 하나요? 말초신경 문제 인가요?",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 손가락 끝부분의 통감이나 감각을 느끼게 하는 지간신경의 신경통증일수도 있고 심하지 않는 손가락 끝의 부종에 의한 자극이 닿일때 증가되어 나타날 수도 있습니다. 일단 뼈에 문제는 아닌 것으로 판단되므로 초음파 검사를 통해 신경에 문제인지 단순 염증이나 부종에 의한 자극인지 확인하시고 그에 맞는 치료를 받으시길 바랍니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70119&docId=452467546&answerNo=1",
-    tags: extractTags("손가락 끝 통증"),
-  },
-  {
-    id: "5",
-    question_title: "직장인 입니다 몇일동안 어깨가 아파서 안마기를 삿는데 사용후 승모근에...",
-    question_content:
-      "직장인 입니다몇일동안 어깨가 아파서 안마기를 삿는데사용후 승모근에 근육통?이 왔어요뭉친 근육을 풀어주려고 사용한건데 ->근육통 정상인가요?건색해보니 근육통을 풀어주려고 안마기를 사용한다는 말만 있어서요",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 근육통은 일단 근육통인지 다른 문제가 근육통처럼 보이는 지 확인하는 것이 일차적인 문제입니다. 일단 근육통이라는 전제하에 급성 근육통의 경우 근육 근막의 운동등으로 인한 자극으로 염증 부종이 생긴 상태라고 볼수 있는데 이러한 상태의 근육을 지나치게 스트레칭등으로 자극하거나 안마기등으로 충격을 주면 이완 및 증상완화를 위해 한 행동이 오히려 독이 되는 경우가 있습니다. 운동후 근육근막통 치료의 시작은 운동을 쉬어 주는 것이고 통증의 경감을 봐 가면서 문제 부위에 대한 안마기등 사용으로 접근하셔야 부작용도 없고 휴유증도 남지 않습니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70111&docId=452888017&answerNo=1",
-    tags: extractTags("어깨가 아파서 안마기를 삿는데사용후 승모근에 근육통"),
-  },
-  {
-    id: "6",
-    question_title: "넘어지면서 손목을 짚었는데, 저렇게멍이들고 통증도있어요, 근육이나인대...",
-    question_content: "넘어지면서 손목을 짚었는데, 저렇게멍이들고 통증도있어요, 근육이나인대가놀란걸까요?",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 현재 상태를 명확히 알수는 없지만 손목 관절과 맞닿은 척골의 끝단 부위 손상이 있을 것으로 보입니다. 멍이란 것이 모세혈관 출혈 같은 경미한 경우도 있지만 분명 미세 손상이라도 손상에 의해 발생하는 것인 만큼 방사선 촬영을 통한 골절 유무 확인, 초음파 검사를 통한 인대 연골등의 손상 유무를 반드시 확인할 필요가 있어 보입니다. 초기 치료로 완치될 문제를 손목같이 지속적으로 사용해야 하는 신체 부위는 고질병으로 고생할 수 있습니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70119&docId=452601941&answerNo=1",
-    tags: extractTags("넘어지면서 손목을 짚었는데, 저렇게멍이들고 통증도있어요"),
-  },
-  {
-    id: "7",
-    question_title: "손목 통증",
-    question_content:
-      "타자못칠 정도의 손목 통증이라면 질병이 대부분 무엇일까요.저번에 무거운 거 들어서 손목이 나갔는데 엑스레이상으론 문제가 없다고 하십니다.",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 손목 관절 문제는 문제가 있다고 하더라도 방사선 검사로 알수 있는 건 극히 제한적입니다. 결국 손목의 통증의 원인이 넘어지거나 해서 뼈의 골절이 없는 이상 대개는 손목 관절 주위의 근육 근막 인대 연골의 만성적으로 누적된 문제에 의한 손상이나 염증으로 발생하는 만큼 초음파 검사로 확인하는 것은 필수적인 검사입니다. 손목은 만성이 되면 고질병으로 고생하는 만큼 증상이 악화되거나 지속된다면 초음파 검사등의 추가적인 검사로 정확한 원인을 확인하시고 그에 맞는 치료를 받으시길 권해 드립니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70107&docId=452614620&answerNo=1",
-    tags: extractTags("손목 통증"),
-  },
-  {
-    id: "8",
-    question_title: "다리 통증 나닌 이유가 뭔지 궁굼해요",
-    question_content:
-      "고3이 되고 최근들어 학교 다니면서 다리 통증이 자주 났고 특히 종아리 쪽이랑 무릎궆히는 쪽이 너무 아파서 병원에 진료를 받으러갔습니다. 엑스레이를 찍고 검사를 받았는데 아무런 이상이 없다고 하고 진통제 같은 약 처방을 받았고 약을 2주동안 먹었음에도 불구하고 그후에도 다리 통증이 자주 나타납니다. 아파서 미칠거같은데 해결방법이 없을까요..",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 특별히 다친 적이 없고 방사선 검사상 뼈에 문제가 없는데 소염진통제를 복용했는데도 지속되는 무릎 주위 다리에 통증이 있다는 얘기는 근육근막통이나 관절 주위를 지지해 주는 인대등의 부종이나 염증 소견일 가능성이 큽니다. 일단 문제점의 파악을 위해서는 초음파 검사가 필요해 보이고 이러한 하체의 피로감이나 통증은 결국 허리와 연관된 보행상등의 문제의 만성화로 생기는 만큼 치료를 해도 반복되는 문제가 있다면 무릎이나 하체를 쓰는 형태는 문제는 없는 지 확인이 필요할 수 있습니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70119&docId=452646890&answerNo=1",
-    tags: extractTags("다리 통증 종아리 쪽이랑 무릎궆히는 쪽이 너무 아파서"),
-  },
-  {
-    id: "9",
-    question_title: "운동후 무릎통증이 있습니다",
-    question_content: "운동을하면 무릎을 많이써서그런지 저녁마다 통증이 심합니다한의원같은곳 가봐야하려나요",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 어떤 형태의 운동이든지간에 운동후에 통증이 있다먼 일단은 운동을 쉬는 게 일차적인 치료입니다. 특히나 무릎통증은 비정상적인 하중이나 관절 운동 형태가 반복되면서 발생한 문제인 만큼 운동의 조정이 필요할 겁니다. 그리고 무릎통증이 운동 휴지기를 갖는데도 지속되거나 다시 운동을 시작하면 또 재발한다면 전문의 진료를 반드시 받으셔야 더 악화된 질환으로 진행되는 걸 막을 수 있을 겁니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70119&docId=452613016&answerNo=1",
-    tags: extractTags("운동후 무릎통증"),
-  },
-  {
-    id: "10",
-    question_title: "오스굿씨 관절경 수술한지 3년정도 됐",
-    question_content:
-      "오스굿씨 관절경 수술한지 3년정도 됐습니다 하기 전보단 상태는 많이 좋아졌지만 아플때는 너무 아파요 밑에 튀어나온 뼈부분이요.. 뼈조각을 제거 히면 괜찮아 질줄 알았는데 통증이 왜 안없어지는건가요 다리 전체적으로도 많이 부음 운동 해도 통증으로 못하고 하면 또 다리 부음",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 정형외과적인 접근에서 오스굿씨병의 치료는 슬개골하인대등에 염증을 지속적으로 만드는 경골의 뼈조각을 제거하는 수술적 접근을 하지만 예방 및 재활치료를 하는 의사로서 제가 보는 오스굿씨병의 근본적 원인은 허리에 있습니다. 허리 골반의 기능적 문제로 야기되는 보행과 같은 무릎 및 발목 관절등의 비정상적인 운동형태를 야기하고 이 과정에 관절을 지탱하는 인대나 근육의 긴장도와 피로감 누적이 오스굿씨병의 근본적 이유라고 생각합니다. 그래서 환자분의 경우처럼 수술로 인대에 충격을 주는 뼈조각을 제거하였지만 염증이 지속되고 하체 전반의 피로감과 부종이 지속되는 것이라 판단됩니다. 허리 하체에 대한 정확한 평가와 재활이 가능한 전문의의 검진과 치료를 받아 보시길 권해 드립니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70119&docId=452567228&answerNo=1",
-    tags: extractTags("오스굿씨 관절경 수술 무릎 다리 부종"),
-  },
-  {
-    id: "11",
-    question_title: "입 벌릴때 왼쪽 귀 앞쪽에서 통증",
-    question_content: "입 벌릴때 왼쪽 귀 앞쪽에서 통증",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 안면 근육 턱관절 주위근육등의 긴장으로 인한 근육통일 가능성도 있고 턱관절의 문제로 인한 관절통 일수도 있습니다. 턱관절 주위 문제는 지속적인 저작 운동을 해야 하는 곳인 만큼 만성이 되면 치료가 힘들어 지는 경우가 많은 만큼 증상 지속시는 전문의 진료를 꼭 받으시길 바랍니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70119&docId=452474303&answerNo=1",
-    tags: extractTags("입 벌릴때 왼쪽 귀 앞쪽에서 통증"),
-  },
-  {
-    id: "12",
-    question_title: "하지정맥류 레이저 수술 후 통증, 부종",
-    question_content:
-      "아빠가 하지정맥류 사타구니쪽 혈관이 문제가 되어 레이저 수술을 받으셨어요! 종아리는 튀어나온 혈관을 제거했구요!!지금 2주가 넘어가는데 다리가 많이 아프고 엄청 붓는다고하세요.원래 이런가요?처음엔 종아리로 시작해 허벅지도 붓고 요샌 발등까지 부었다고해요.통증도 심해서 약이 필수고..병원에서는 일반적인 일은 아니라고 검사를 하고 더 지켜보자고 했다네요! 같은 자세로 있거나 오래 서서 일을 하셔서 더 그런걸까요? 아니면 혹시 부작용인걸까요?",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 하지정맥류 자체는 정맥의 밸브 기능이 망가져서 정맥 혈류의 저류가 생기고 이로 인한 통증이 심해지면 수술을 고려하기도 하는 질환입니다. 하지만 하지정맥류 발병의 근본 원인은 허리를 포함 하체의 전반적인 문제의 결과로 하지 근육의 피로감 누적이 질환이 생기는 선제 조건입니다. 수술이라는 것이 기능을 잃은 혈관의 제거가 목적인 만큼 하지정맥류 발병의 원인이 되는 허리 문제나 전반적인 하체 상태등이 누적된 문제가 많고 이러한 하체 문제를 악화시키는 요인들이 지속되는 상태라면 수술 자체의 문제는 없다는 전제하에서도 하지 부종이 더 증가하거나 재활 과정의 회복이 더딜수 있습니다. 따라서 나중에 현재 문제가 해결된다고 해도 허리등 컨디션 관리등을 잘하지 못하면 재발 가능성도 언제나 있는 겁니다. 빠른 쾌유를 바라겠습니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70107&docId=452397288&answerNo=1",
-    tags: extractTags("하지정맥류 레이저 수술 후 통증, 부종"),
-  },
-  {
-    id: "13",
-    question_title: "왼쪽 가슴 찌릿 (유방암X)",
-    question_content:
-      "일주일전부터 조금씩 왼쪽 가슴이 왼쪽으로 누워서 잘때(왼쪽가슴이 눌리면서) 통증이 있거나샤워할때 유방 위쪽? 부분이 통증이 있다가이제는 좀더 쎄게 아프기 시작했어요..내과가서 유방초음파 검사했는데 이상은 없다고합니다..그래도 계속 아픈데 이경우 이제 어디병원을 찾아야가할까요??유방에는 문제가 없고.. 답답한게 유방은 계속 누를때마다 찌릿찌릿 통증이 조금씩 길게 느껴지고 있어요",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 유방의 유선등의 조직에 문제가 없다면 유방을 받히고 있는 대흉근 소흉근의 근육이나 근육을 싸고 있는 근막에 긴장이나 부종등으로 인한 통증일 가능성이 큽니다. 특히나 평상시 목 어깨등 뭉침 불편감등이 있었다면 더욱 가능성이 큽니다. 근육 근막에 대한 초음파 검사등 확인이 가능하고 치료가 가능한 전문의를 찾아서 검진 및 치료를 받으신다면 도움이 될거라 판단됩니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=7011404&docId=452162752&answerNo=1",
-    tags: extractTags("왼쪽 가슴 찌릿"),
-  },
-  {
-    id: "14",
-    question_title: "대상포진 통증",
-    question_content:
-      "10일전 대상포진 진단후 항바이러스제 7일 복용후 피부과내원.대상포진이 아니라고 하니당황스럽네요.그런데 가슴과 등쪽 통증은 나아지질 않습니다.신경과 협진후 신경검사 흉부사진촬영 검사.이상소견은 없다고 하는데 물리 치료나 바르는 파스좀 발라도 괜찮을 런지요?",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 등쪽이나 가슴 부위 쪽으로 대상포진과 유사한 띠 모양의 통증은 흉추나 흉곽 주위 근육 근막의 긴장에 어한 근육근막통증과 이로 인해 유발되는 늑간신경통과 같은 신경통도 같이 동반될수 있구요. 일단 물리치료나 소염진통제등의 약복용, 소염진통제가 들어 있는 파스나 크림 사용할수 있지만 증상이 지속된다면 초음파 검사등으로 근육등 상태 파악과 신경치료가 필요할 수도 있습니다. 또한 만성적인 경우는 근본적 재발 방지를 위해 경추나 요추등에 대한 재활치료를 병행하기도 합니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70108&docId=452394252&answerNo=1",
-    tags: extractTags("대상포진 통증 가슴과 등쪽 통증"),
-  },
-  {
-    id: "15",
-    question_title: "지간신경통 어캐 낫나여",
-    question_content: "지간신경통 어캐 낫나여",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 발가락이나 손가락에 생긴 지간신경통은 만성인 경우가 많고 그 근본적 원인이 허리와 경추등 운동 기능등의 문제를 깔고 있는 만큼 지간신경통에 대한 치료 자체도 만성통증을 해결하려니 힘든 부분이 있지만 더 중요한게 손가락 발가락을 도와 줘야하는 경추 요추 기능의 재활이 되지 않으면 재발을 반복하는 경우가 많습니다. 만성과 재발이 반복되는 상태라면 전반적이고 종합적인 접근이 가능한 전문의 진료를 받으시는게 좋아 보입니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70108&docId=452366447&answerNo=1",
-    tags: extractTags("지간신경통"),
-  },
-  {
-    id: "16",
-    question_title: "허벅지를 바늘로 막 찌르는것 같은 통증",
-    question_content:
-      "운동하고 왔는데 허벅지를 바늘로 쿡쿡이 아니라 쭉 찔러넣는 아픔이 났다가 30초정도 지나면 통증이 사라졌다가 다시 자세를 바꾸거나 재채기같은걸 하면서 몸이 움직이면 또 그 증상이 나와요통증이 나올때 다리를 꾹 눌러주고 있는데 나아지지 않아요자주그런건 아닌데 가끔 운동 후에 이럽니다왜 그럴까요",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 특정 동작이나 행동에서 몸에 이상이 있다면 그 행동 동작이 유발원인이거나 악화 원인일 겁니다. 일단 운동후에 허벅지 증상이 생긴다는 것은 현재 하시는 운동 형태와 운동 강도에 일차적으로 문제가 있어 보입니다. 문제되는 허벅지 부위에 근육근막의 부종과 긴장감이 운동으로 인해 증가하다 보니 근육근막에 통증이 생기고 근육과 근막 사이에 존재하는 신경과 혈관의 압박통이 생겨 찌르는 듯한 통증이 동반뎌는 것으로 보입니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70119&docId=452337956&answerNo=1",
-    tags: extractTags("허벅지를 바늘로 막 찌르는것 같은 통증"),
-  },
-  {
-    id: "17",
-    question_title: "목 오른쪽 쇠골 위 턱끝 밑 혈관 눌림",
-    question_content:
-      "오른쪽 목 쇠골 위 턱끝 아래, 혈관 중 어느 혈점을 정확히 누르는 것처럼 멍한 상태가 가끔씩 강하게 느껴집니다. 예전에는 일주일에 한두번 정도였어서 크게 신경쓰지 않았지만, 이후 빈도수가 증가하여 현재 아침 저녁으로 깨어있는 기간 동안 여러번 느껴집니다. 언젠가는 꽤나 극심한 통증이 있었습니다. 그 때 당시 아주 잠시 였지만 오른쪽 혈관의 어느 부위를 정확하게 아주 세게 혈점을 누르는 듯한 느낌이었는데, 목 전체적으로 아니고, 오른쪽 목 쇠골 위 턱끝 아래 특정부위, 아주 작은 그 지점에서만 통증이 느껴집니다. 특정한 부위입니다. 바로 위나 아래 방항에서도 느껴지지 않는 것 같고 특정 지점에서만 반복적으로 강한 통증이 느껴집니다.",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 경부 전면부 통증은 다양한 원인으로 발생 가능합니다. 단순한 근육근막통에서부터 암까지. 현재 증상으로는 근육근막통증과 그로 인해 압박되는 신경통과 혈관통 증상으로 유추해 볼수 있으나 정확하고 빠른 확인 방법으로 초음파검사가 있는 만큼 초음파 검사가 가능한 전문의의 진료를 받아서 만성화가 되지 않도록 하시는게 현명해 보입니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70119&docId=452163196&answerNo=1",
-    tags: extractTags("목 오른쪽 쇠골 위 턱끝 밑 혈관 눌림"),
-  },
-  {
-    id: "18",
-    question_title: "갑자기 등통증 요통이 생겼어요",
-    question_content:
-      "삼일전에 갑자기 왼쪽 날개뼈 밑에 통증이있다가 지금은 날개뼈 밑 통증은 미미해지고요통이 생겼어요요통은 정확히 양쪽이구요 생리통 마냥 통증이있네요 ㅜㅜ양쪽 아랫배도 아픈것같고..찾아보니 췌장이랑 신장에 이상이있을경우등통증고ㅏ 요통이있을 수 있다고해서괜히 겁이나서 질문합니다내과방문을 해야 할까요..",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 통증은 몸이 주는 경고입니다! 어떠한 통증도 원인없이 발생하지 않습니다. 또한 강도가 같더라도 지속되는 통증, 통증의 강도나 범위 통증 발생형태가 변하는 경우의 통증은 반드시 원인을 확인하고 그에 따른 관리나 치료를 받으시는 게 중요합니다. 일단 현재 환자분께서 느끼는 증상의 가장 많은 경우는 허리 흉추등의 근육 근막의 긴장에 의한 근육근막통과 그와 연계된 신경통인 경우가 제일 많습니다. 하지만 걱정하신 췌장,비뇨기기계, 자궁, 소장대장 문제등과도 관련해서 생길 수 있는 만큼 가까운 병원의 전문의 진료를 받으셔서 증상이 지속된다면 원인들을 하나하나 확인하시길 권해 드립니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=7010105&docId=452042079&answerNo=1",
-    tags: extractTags("갑자기 등통증 요통이 생겼어요"),
-  },
-  {
-    id: "19",
-    question_title: "양쪽 옆구리 뼈 가 아픈이유",
-    question_content:
-      "안녕하세여 양쪽 옆구리 손으로 뼈 만지면 왜 아픈가여? 가슴 손으로 만져도 안파요 왜그런건가여? 큰병인지 걱정입니다",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 당연히 옆구리 내에 장기들에 문제가 있어도 옆구리 주위 압통과 긴장감 있을수 있지만 허리에서 이어진 등과 흉추등의 긴장도 증가로 인해 늑골 주위 근육 근막의 부종 경직등이 생기면 염증 반응으로 압통이 생기고 늑골에 인접한 늑간신경을 자극하여 신경통 증상도 있을수 있습니다. 너무 증상이 오래 가면 만성적인 문제로 갈수 있는 부위인 만큼 증상이 지속되면 전문의 진료를 받으시길 바랍니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70105&docId=452123354&answerNo=1",
-    tags: extractTags("양쪽 옆구리 뼈 가 아픈이유"),
-  },
-  {
-    id: "20",
-    question_title: "누웠을때 오른쪽 허리뒤가 아픈것도 신경통 증상인가요?",
-    question_content:
-      "쇼파나 침대에 누우면 종종 오른쪽 허리뒤쪽이 콕콕 쑤시는데 혹시 신경통일까요? 신경통 증상에는 어떤게 있나요?",
-    answer_content:
-      "안녕하세요. 하이닥-네이버 지식iN 상담의 김영환 입니다. ​ 허리 통증이나 댕김 증상이라고 해서 다 신경통은 아닙니다. 허리에 신경통은 척추 유발 신경통으로 디스크나 협착증으로 신경이 눌려서 생기는 신경통,허리관절 또는 추간판등에 염증으로 생기는 신경통, 허리 주위 근육 근막등의 문제에 의한 신경통등 결과적으로 비슷해 보이는 증상에 원인은 너무도 다를수 있습니다. 허리는 아플 수 없을 만큼 시스템적으로 안정적인 신체 구조입니다. 여기에 부분적이라도 불편감이 생겼다는 얘기는 만성적으로 누적된 문제가 많은 것인 만큼 생활 개선, 운동방법 개선등 본인 노력이 일차고 그래도 해결 안되는 문제는 전문의와 반드시 의논하고 해결해야 큰 문제로 이어지지 않습니다.",
-    url: "https://kin.naver.com/qna/detail.naver?d1id=7&dirId=70108&docId=452128076&answerNo=1",
-    tags: extractTags("누웠을때 오른쪽 허리뒤가 아픈것도 신경통 증상"),
-  },
-]
+// FAQ 데이터 배열 (QnA.json 데이터 사용)
+export const faqData: FaqItem[] = qnaData.map((item) => ({
+  ...item,
+  id: item.id.toString(), // id를 string으로 변환
+}));
 
 // 모든 태그 목록을 가져오는 함수
 export function getAllTags(): string[] {
-  const allTags = new Set<string>()
+  const allTags = new Set<string>();
   faqData.forEach((item) => {
-    item.tags.forEach((tag) => allTags.add(tag))
-  })
-  return Array.from(allTags).sort()
+    item.tag.forEach((tag) => allTags.add(tag)); // 'tags'에서 'tag'로 변경
+  });
+  // 사용자가 제공한 새 태그 목록으로 고정하고 정렬
+  const fixedTags = [
+    "허리/등/척추", "무릎", "어깨", "발/발목", "손/팔",
+    "통증", "인대/근육", "신경통/저림", "관절염/퇴행성", "연골",
+    "운동/재활", "자세/보행", "주사/시술", "검사", "수술"
+  ];
+  // 실제 데이터에 있는 태그와 고정 태그 목록을 합치고 중복 제거 후 정렬
+  fixedTags.forEach(tag => allTags.add(tag));
+  return Array.from(allTags).sort();
 }
 
 // 검색어에 따라 FAQ 항목을 필터링하고 점수 기반으로 정렬하는 함수
 export function searchFaq(query: string): FaqItem[] {
-  if (!query.trim()) return faqData
+  if (!query.trim()) return faqData;
 
-  const lowerQuery = query.toLowerCase()
+  const lowerQuery = query.toLowerCase();
 
   // 1. 검색어 포함 항목 필터링
   const filteredItems = faqData.filter(
@@ -256,30 +44,30 @@ export function searchFaq(query: string): FaqItem[] {
       item.question_title.toLowerCase().includes(lowerQuery) ||
       item.question_content.toLowerCase().includes(lowerQuery) ||
       item.answer_content.toLowerCase().includes(lowerQuery) ||
-      item.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)),
-  )
+      item.tag.some((tag) => tag.toLowerCase().includes(lowerQuery)), // 'tags'에서 'tag'로 변경
+  );
 
   // 2. 각 항목에 점수 계산
   const scoredItems = filteredItems.map((item) => {
-    let score = 0
+    let score = 0;
     if (item.question_title.toLowerCase().includes(lowerQuery)) {
-      score += 3 // 제목 포함 시 3점
+      score += 3; // 제목 포함 시 3점
     }
-    if (item.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))) {
-      score += 2 // 태그 포함 시 2점
+    if (item.tag.some((tag) => tag.toLowerCase().includes(lowerQuery))) { // 'tags'에서 'tag'로 변경
+      score += 2; // 태그 포함 시 2점
     }
     if (item.question_content.toLowerCase().includes(lowerQuery)) {
-      score += 1 // 질문 내용 포함 시 1점
+      score += 1; // 질문 내용 포함 시 1점
     }
     if (item.answer_content.toLowerCase().includes(lowerQuery)) {
-      score += 1 // 답변 내용 포함 시 1점
+      score += 1; // 답변 내용 포함 시 1점
     }
     // FaqItem 타입에 score 속성이 없으므로, 새로운 객체를 반환.
-    return { ...item, score }
-  })
+    return { ...item, score };
+  });
 
   // 3. 점수 기준으로 내림차순 정렬
-  scoredItems.sort((a, b) => b.score - a.score)
+  scoredItems.sort((a, b) => b.score - a.score);
 
   // 4. score 속성 제거 후 반환 (FaqItem 타입 유지)
   return scoredItems.map(({ score, ...rest }) => rest as FaqItem);
@@ -287,38 +75,42 @@ export function searchFaq(query: string): FaqItem[] {
 
 // 태그로 FAQ 항목을 필터링하는 함수
 export function filterByTag(tag: string): FaqItem[] {
-  if (!tag) return faqData
-  return faqData.filter((item) => item.tags.includes(tag))
+  if (!tag) return faqData;
+  return faqData.filter((item) => item.tag.includes(tag)); // 'tags'에서 'tag'로 변경
 }
 
 // 여러 태그로 FAQ 항목을 필터링하는 함수 (OR 조건)
 export function filterByTagsOr(tags: string[]): FaqItem[] {
-  if (!tags.length) return faqData
-  return faqData.filter((item) => item.tags.some((tag) => tags.includes(tag)))
+  if (!tags.length) return faqData;
+  return faqData.filter((item) => item.tag.some((tag) => tags.includes(tag))); // 'tags'에서 'tag'로 변경
 }
 
 // 여러 태그로 FAQ 항목을 필터링하는 함수 (AND 조건)
 export function filterByTagsAnd(tags: string[]): FaqItem[] {
-  if (!tags.length) return faqData
-  return faqData.filter((item) => tags.every((tag) => item.tags.includes(tag)))
+  if (!tags.length) return faqData;
+  return faqData.filter((item) => tags.every((tag) => item.tag.includes(tag))); // 'tags'에서 'tag'로 변경
 }
 
-// 태그 색상 매핑 추가
+// 태그 색상 매핑 (새로운 태그 목록 반영)
 export const tagColors: Record<string, { bg: string; text: string }> = {
+  "허리/등/척추": { bg: "bg-green-100", text: "text-green-800" },
+  무릎: { bg: "bg-amber-100", text: "text-amber-800" },
   어깨: { bg: "bg-blue-100", text: "text-blue-800" },
-  목: { bg: "bg-purple-100", text: "text-purple-800" },
-  "허리/등": { bg: "bg-green-100", text: "text-green-800" },
-  "다리/무릎": { bg: "bg-amber-100", text: "text-amber-800" },
-  "팔/손": { bg: "bg-cyan-100", text: "text-cyan-800" },
-  가슴: { bg: "bg-pink-100", text: "text-pink-800" },
+  "발/발목": { bg: "bg-yellow-100", text: "text-yellow-800" },
+  "손/팔": { bg: "bg-cyan-100", text: "text-cyan-800" },
   통증: { bg: "bg-red-100", text: "text-red-800" },
-  부종: { bg: "bg-orange-100", text: "text-orange-800" },
+  "인대/근육": { bg: "bg-emerald-100", text: "text-emerald-800" }, // 다른 태그와 통일성 있게 수정
+  "신경통/저림": { bg: "bg-indigo-100", text: "text-indigo-800" },
+  "관절염/퇴행성": { bg: "bg-lime-100", text: "text-lime-800" },
+  "연골": { bg: "bg-fuchsia-100", text: "text-fuchsia-800" },
+  "운동/재활": { bg: "bg-emerald-100", text: "text-emerald-800" },
+  "자세/보행": { bg: "bg-rose-100", text: "text-rose-800" },
+  "주사/시술": { bg: "bg-sky-100", text: "text-sky-800" },
+  검사: { bg: "bg-stone-100", text: "text-stone-800" },
   수술: { bg: "bg-violet-100", text: "text-violet-800" },
-  운동: { bg: "bg-emerald-100", text: "text-emerald-800" },
-  신경통: { bg: "bg-indigo-100", text: "text-indigo-800" },
-}
+};
 
 // 태그에 대한 색상 클래스를 가져오는 함수
 export function getTagColorClasses(tag: string): { bg: string; text: string } {
-  return tagColors[tag] || { bg: "bg-gray-100", text: "text-gray-800" }
+  return tagColors[tag] || { bg: "bg-gray-100", text: "text-gray-800" };
 }

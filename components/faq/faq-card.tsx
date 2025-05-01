@@ -27,7 +27,7 @@ export function FaqCard({ faq, onClick }: FaqCardProps) {
       </CardContent>
       <CardFooter className="pt-0 pb-4">
         <div className="flex flex-wrap gap-1">
-          {faq.tags.map((tag) => {
+          {faq.tag.map((tag) => {
             const { bg, text } = getTagColorClasses(tag)
             return (
               <Badge key={tag} variant="outline" className={`text-xs ${bg} ${text} border-transparent`}>

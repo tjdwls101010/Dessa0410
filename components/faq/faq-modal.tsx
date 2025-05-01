@@ -23,7 +23,7 @@ export function FaqModal({ faq, isOpen, onClose }: FaqModalProps) {
         <DialogHeader className="pr-10"> {/* 닫기 버튼과 겹치지 않도록 패딩 추가 */}
           <DialogTitle className="text-2xl font-semibold mb-1">{faq.question_title}</DialogTitle> {/* 폰트 크기 및 굵기 조정 */}
           <div className="flex flex-wrap gap-2 mt-2"> {/* 태그 간격 조정 */}
-            {faq.tags.map((tag) => {
+            {faq.tag.map((tag) => {
               const { bg, text } = getTagColorClasses(tag)
               return (
                 <Badge key={tag} variant="secondary" className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${bg} ${text} border-transparent`}> {/* 디자인 변경: secondary variant, 패딩, 둥근 모서리 */}
