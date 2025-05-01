@@ -244,19 +244,45 @@ export function getAllTags(): string[] {
   return Array.from(allTags).sort()
 }
 
-// 검색어에 따라 FAQ 항목을 필터링하는 함수
+// 검색어에 따라 FAQ 항목을 필터링하고 점수 기반으로 정렬하는 함수
 export function searchFaq(query: string): FaqItem[] {
   if (!query.trim()) return faqData
 
   const lowerQuery = query.toLowerCase()
 
-  return faqData.filter(
+  // 1. 검색어 포함 항목 필터링
+  const filteredItems = faqData.filter(
     (item) =>
       item.question_title.toLowerCase().includes(lowerQuery) ||
       item.question_content.toLowerCase().includes(lowerQuery) ||
       item.answer_content.toLowerCase().includes(lowerQuery) ||
       item.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)),
   )
+
+  // 2. 각 항목에 점수 계산
+  const scoredItems = filteredItems.map((item) => {
+    let score = 0
+    if (item.question_title.toLowerCase().includes(lowerQuery)) {
+      score += 3 // 제목 포함 시 3점
+    }
+    if (item.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))) {
+      score += 2 // 태그 포함 시 2점
+    }
+    if (item.question_content.toLowerCase().includes(lowerQuery)) {
+      score += 1 // 질문 내용 포함 시 1점
+    }
+    if (item.answer_content.toLowerCase().includes(lowerQuery)) {
+      score += 1 // 답변 내용 포함 시 1점
+    }
+    // FaqItem 타입에 score 속성이 없으므로, 새로운 객체를 반환.
+    return { ...item, score }
+  })
+
+  // 3. 점수 기준으로 내림차순 정렬
+  scoredItems.sort((a, b) => b.score - a.score)
+
+  // 4. score 속성 제거 후 반환 (FaqItem 타입 유지)
+  return scoredItems.map(({ score, ...rest }) => rest as FaqItem);
 }
 
 // 태그로 FAQ 항목을 필터링하는 함수
