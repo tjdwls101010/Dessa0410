@@ -44,64 +44,67 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">예약 확인</CardTitle>
-          <CardDescription className="text-center">
+      <Card className="w-full max-w-xl">
+        <CardHeader className="space-y-2 px-6 py-6">
+          <CardTitle className="text-3xl font-bold text-center">예약 확인</CardTitle>
+          <CardDescription className="text-center text-lg">
             예약하실 때 입력하신 정보와 받으신 비밀번호를 입력해주세요.
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">이름</Label>
+        <CardContent className="px-6 py-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-3">
+              <Label htmlFor="name" className="text-lg">이름</Label>
               <Input 
                 id="name" 
                 placeholder="예약하신 이름을 입력하세요" 
                 value={name} 
                 onChange={(e) => setName(e.target.value)}
                 required 
+                className="h-12 text-lg"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="phone">전화번호</Label>
+            <div className="space-y-3">
+              <Label htmlFor="phone" className="text-lg">전화번호</Label>
               <Input 
                 id="phone" 
                 placeholder="010-0000-0000" 
                 value={phone} 
                 onChange={(e) => setPhone(e.target.value)}
                 required 
+                className="h-12 text-lg"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">예약 비밀번호</Label>
+            <div className="space-y-3">
+              <Label htmlFor="password" className="text-lg">예약 비밀번호</Label>
               <Input 
                 id="password" 
                 placeholder="SMS로 받으신 6자리 비밀번호" 
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)}
                 required 
+                className="h-12 text-lg"
               />
             </div>
 
             {error && (
               <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
+                <AlertDescription className="text-base">{error}</AlertDescription>
               </Alert>
             )}
 
             {success && (
               <Alert>
-                <AlertDescription>{success}</AlertDescription>
+                <AlertDescription className="text-base">{success}</AlertDescription>
               </Alert>
             )}
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full h-12 text-lg font-medium" disabled={isLoading}>
               {isLoading ? "확인 중..." : "로그인"}
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-center text-sm text-muted-foreground">
+        <CardFooter className="flex justify-center text-base text-muted-foreground px-6 py-4">
           <p>예약하신 정보로 로그인하시면 예약 내용을 확인하실 수 있습니다.</p>
         </CardFooter>
       </Card>
