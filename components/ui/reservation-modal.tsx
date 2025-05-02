@@ -192,6 +192,67 @@ export function ReservationModal({
       if (updateError) throw updateError;
       
       console.log("예약 정보 업데이트 성공:", data)
+      
+      // SMS API 호출하여 메시지 발송
+      try {
+        // 모든 선호 시간을 문자열로 구성
+        let preferenceText = '';
+        
+        // 1순위 정보 추가
+        if (pref1Date && prefTimes.time1) {
+          preferenceText += `\n1순위: ${format(pref1Date, "yyyy년 MM월 dd일")} ${prefTimes.time1}`;
+        }
+        
+        // 2순위 정보 추가
+        if (pref2Date && prefTimes.time2) {
+          preferenceText += `\n2순위: ${format(pref2Date, "yyyy년 MM월 dd일")} ${prefTimes.time2}`;
+        }
+        
+        // 3순위 정보 추가
+        if (pref3Date && prefTimes.time3) {
+          preferenceText += `\n3순위: ${format(pref3Date, "yyyy년 MM월 dd일")} ${prefTimes.time3}`;
+        }
+          
+        const smsResponse = await fetch('/api/sms', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            to: phoneNumber,
+            name,
+            preferenceText,
+            reportId
+          }),
+        });
+        
+        const smsResult = await smsResponse.json();
+        
+        if (!smsResponse.ok) {
+          console.error('SMS 발송 실패:', smsResult.error);
+        } else {
+          console.log('SMS 발송 성공:', smsResult);
+          
+          // SMS 발송 성공 시 비밀번호를 surveys 테이블에 저장
+          if (smsResult.password) {
+            const { error: passwordUpdateError } = await supabase
+              .from('surveys')
+              .update({
+                reservation_password: smsResult.password
+              })
+              .eq('id', reportId);
+              
+            if (passwordUpdateError) {
+              console.error('비밀번호 저장 실패:', passwordUpdateError);
+            } else {
+              console.log('비밀번호 저장 성공:', smsResult.password);
+            }
+          }
+        }
+      } catch (smsError) {
+        console.error('SMS API 호출 실패:', smsError);
+        // SMS 발송 실패해도 예약은 성공한 것으로 처리
+      }
 
       // 폼 초기화 및 모달 닫기
       setName("")
