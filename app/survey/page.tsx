@@ -119,7 +119,7 @@ export default function SurveyPage() {
       const reportId = await handleSubmit()
       if (reportId) {
         // Navigation is now handled here after handleSubmit completes
-        router.push(`/report/${reportId}`)
+        router.push(`/report/${reportId}?new=true`)
       }
       // If handleSubmit fails, the error toast is shown inside handleSubmit
       // and we stay on the survey page.

@@ -1,8 +1,13 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { useAuth } from "@/lib/auth-context"
 
 export default function Header() {
+  const { user, logout, isLoading } = useAuth()
+
   return (
     <header className="border-b">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -23,17 +28,43 @@ export default function Header() {
             FAQ
           </Link>
         </nav>
-        <Link href="https://www.notion.so/1c30ffd9516c801087baf57dd51e5cca" target="_blank" rel="noopener noreferrer">
-          <Button variant="outline" size="sm" className="gap-2 bg-white text-black border border-gray-200 hover:bg-gray-50">
-            <Image 
-              src="/Notion Logo.png" 
-              alt="Notion" 
-              width={16} 
-              height={16} 
-            />
-            <span>노션 바로가기</span>
-          </Button>
-        </Link>
+        <div className="flex items-center gap-2">
+          {user ? (
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium">{user.name}님</span>
+              <Button 
+                onClick={logout} 
+                variant="outline" 
+                size="sm" 
+                disabled={isLoading}
+              >
+                로그아웃
+              </Button>
+              {user.reportId && (
+                <Link href={`/report/${user.reportId}`}>
+                  <Button size="sm">내 예약 확인</Button>
+                </Link>
+              )}
+            </div>
+          ) : (
+            <Link href="/login">
+              <Button variant="outline" size="sm">
+                예약 확인
+              </Button>
+            </Link>
+          )}
+          <Link href="https://www.notion.so/1c30ffd9516c801087baf57dd51e5cca" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="sm" className="gap-2 bg-white text-black border border-gray-200 hover:bg-gray-50">
+              <Image 
+                src="/Notion Logo.png" 
+                alt="Notion" 
+                width={16} 
+                height={16} 
+              />
+              <span>노션 바로가기</span>
+            </Button>
+          </Link>
+        </div>
       </div>
     </header>
   )
