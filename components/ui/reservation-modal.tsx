@@ -70,6 +70,19 @@ export function ReservationModal({
     else if (priority === 3) setPref3Date(date)
   }
 
+  // 기본 정보가 모두 입력되었는지 확인
+  const isBasicInfoComplete = name !== "" && phoneNumber !== "" && birthDate !== ""
+
+  // 적어도 하나의 예약 선호 시간이 선택되었는지 확인
+  const hasAtLeastOnePreference = 
+    (pref1Date && prefTimes.time1) ||
+    (pref2Date && prefTimes.time2) ||
+    (pref3Date && prefTimes.time3)
+
+  // 순위별 선택이 올바른지 확인 (순서대로 선택되었는지)
+  const isPriority2Available = pref1Date && prefTimes.time1
+  const isPriority3Available = pref2Date && prefTimes.time2
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // 예약 정보 제출 로직
@@ -154,6 +167,11 @@ export function ReservationModal({
                   const setDateFunc = (date: Date | undefined) => handlePrefDateSelect(priority as 1 | 2 | 3, date);
                   const setTimeFunc = (time: string) => handleTimeSelect(`time${priority}` as 'time1' | 'time2' | 'time3', time);
                   const priorityIndex = priority - 1; // 배열 인덱스 계산
+                  
+                  // 우선순위 선택 가능 여부 (순서대로만 입력 가능)
+                  const isDisabled = 
+                    (priority === 2 && !isPriority2Available) || 
+                    (priority === 3 && !isPriority3Available);
 
                   return (
                     <div key={priority} className="space-y-2">
@@ -164,21 +182,26 @@ export function ReservationModal({
                         {/* 날짜 선택 */}
                         <Popover
                           open={popoverOpenStates[priorityIndex]}
-                          onOpenChange={(isOpen) =>
+                          onOpenChange={(isOpen) => {
+                            // disabled 상태일 때는 팝오버가 열리지 않게 함
+                            if (isDisabled && isOpen) return;
+                            
                             setPopoverOpenStates(prev => {
                               const newState = [...prev];
                               newState[priorityIndex] = isOpen;
                               return newState;
                             })
-                          }
+                          }}
                         >
                           <PopoverTrigger asChild>
                             <Button
                               variant={"outline"}
                               className={cn(
                                 "w-full justify-start text-left font-normal",
-                                !currentPrefDate && "text-muted-foreground"
+                                !currentPrefDate && "text-muted-foreground",
+                                isDisabled && "opacity-50 cursor-not-allowed"
                               )}
+                              disabled={isDisabled}
                             >
                               <CalendarIcon className="mr-2 h-4 w-4" />
                               {currentPrefDate ? format(currentPrefDate, "PPP", { locale: ko }) : <span>날짜 선택</span>}
@@ -203,12 +226,15 @@ export function ReservationModal({
                           </PopoverContent>
                         </Popover>
                         {/* 시간 선택 */}
-                        <Select value={currentPrefTime || ""} onValueChange={setTimeFunc}>
+                        <Select 
+                          value={currentPrefTime || ""} 
+                          onValueChange={setTimeFunc}
+                          disabled={isDisabled || !currentPrefDate} // 날짜 선택 전에는 시간 선택 불가
+                        >
                           <SelectTrigger>
                             <SelectValue placeholder="시간 선택" />
                           </SelectTrigger>
                           <SelectContent>
-                            {/* <SelectItem value="" disabled>시간 선택</SelectItem>  <-- 이 부분 삭제 */}
                             {timeOptions.map((time) => (
                               <SelectItem key={`time${priority}-${time}`} value={time}>
                                 {time}
@@ -249,7 +275,7 @@ export function ReservationModal({
             </Button>
             <Button
               onClick={handleSubmit}
-              disabled={!pref1Date || !prefTimes.time1} // 1순위 날짜와 시간 필수
+              disabled={!isBasicInfoComplete || !hasAtLeastOnePreference}
               className="bg-blue-500 hover:bg-blue-600"
             >
               확인
