@@ -5,10 +5,7 @@ export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">서비스 소개</h1>
-          <p className="text-xl text-muted-foreground">온누리마취통증의학과 자가 통증 점검 시스템에 대해 알아보세요.</p>
-        </div>
+
 
         <div className="space-y-8">
           <Card>
