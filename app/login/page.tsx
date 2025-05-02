@@ -28,6 +28,16 @@ export default function LoginPage() {
     setError(null)
     setSuccess(null)
 
+    // Admin 계정 확인 (이름: 운영자, 전화번호: 12345678900, 비밀번호: 111111)
+    if (name === "운영자" && phone === "12345678900" && password === "111111") {
+      setSuccess("관리자 로그인 성공! 관리자 페이지로 이동합니다...")
+      setTimeout(() => {
+        router.push('/admin') // /admin 경로로 리다이렉트
+      }, 1000)
+      return // Admin 로그인 처리 후 함수 종료
+    }
+
+    // 일반 사용자 로그인 (기존 Supabase 로직)
     const result = await login(name, phone, password)
     
     if (result.success) {
@@ -77,12 +87,20 @@ export default function LoginPage() {
             </div>
             <div className="space-y-3">
               <Label htmlFor="password" className="text-lg">예약 비밀번호</Label>
-              <Input 
-                id="password" 
-                placeholder="SMS로 받으신 6자리 비밀번호" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)}
-                required 
+              <Input
+                id="password"
+                type="password"
+                placeholder="SMS로 받으신 6자리 비밀번호"
+                value={password}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // 숫자만 입력 가능하고, 최대 6자리까지만 허용
+                  if (/^[0-9]*$/.test(value) && value.length <= 6) {
+                    setPassword(value);
+                  }
+                }}
+                maxLength={6} // 최대 입력 길이 제한
+                required
                 className="h-12 text-lg"
               />
             </div>
