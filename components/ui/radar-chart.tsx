@@ -43,20 +43,20 @@ const RadarChartComponent = ({
   };
 
   return (
-    <div className={cn("w-full h-80", className)} {...props}>
+    <div className={cn("w-full h-full min-h-[480px]", className)} {...props}>
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
           <PolarGrid gridType="circle" stroke="#e5e7eb" />
           <PolarAngleAxis 
             dataKey="subject" 
-            tick={{ fill: "#6b7280", fontSize: 12 }}
+            tick={{ fill: "#6b7280", fontSize: 13 }}
             stroke="#d1d5db"
           />
           <PolarRadiusAxis 
             domain={[0, 5]} 
             tickCount={6} 
             axisLine={false}
-            tick={{ fill: "#9ca3af", fontSize: 10 }}
+            tick={{ fill: "#9ca3af", fontSize: 11 }}
           />
           
           {/* 배경 레이더 그리드 (최대값) */}

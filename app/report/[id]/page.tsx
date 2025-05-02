@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SurveyModal from "@/components/survey/survey-modal";
 import { ReservationModal } from "@/components/ui/reservation-modal"; // 변경된 ReservationModal 컴포넌트 경로
 import { RadarChartComponent } from "@/components/ui/radar-chart";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 // Dialog 관련 import는 ReservationModal에서 처리하므로 제거
 // AlertDialog 관련 import도 ReservationModal에서 처리하므로 제거
 // Input, Label 등 폼 관련 요소 import 제거 (ReservationModal에서 사용)
@@ -425,25 +426,54 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
               <CardTitle className="text-lg text-yellow-800">통증 강도 및 영향 요인</CardTitle>
             </CardHeader>
             <CardContent className="p-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <p className="font-semibold mb-2">최대 통증 강도 (0-10)</p>
-                <div className="w-full bg-gray-200 rounded-full h-4">
-                  <div
-                    className={`h-4 rounded-full ${getPainColorClass(surveyData.c11_max_pain_vas)}`}
-                    style={{ width: `${(surveyData.c11_max_pain_vas || 0) * 10}%` }}
-                  ></div>
+              {/* 통증 강도 바 차트 */}
+              <div className="col-span-1 md:col-span-2 mb-2">
+                <p className="font-semibold mb-4 text-gray-700">통증 강도 (0-10)</p>
+                <div className="h-64">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                      data={[
+                        {
+                          name: '최대 통증',
+                          강도: surveyData.c11_max_pain_vas || 0,
+                          fill: surveyData.c11_max_pain_vas && surveyData.c11_max_pain_vas > 6 ? '#f87171' : surveyData.c11_max_pain_vas && surveyData.c11_max_pain_vas > 3 ? '#facc15' : '#4ade80',
+                        },
+                        {
+                          name: '평균 통증',
+                          강도: surveyData.c12_avg_pain_vas || 0,
+                          fill: surveyData.c12_avg_pain_vas && surveyData.c12_avg_pain_vas > 6 ? '#f87171' : surveyData.c12_avg_pain_vas && surveyData.c12_avg_pain_vas > 3 ? '#facc15' : '#4ade80',
+                        },
+                      ]}
+                      margin={{
+                        top: 5,
+                        right: 30,
+                        left: 20,
+                        bottom: 20,
+                      }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                      <XAxis dataKey="name" />
+                      <YAxis domain={[0, 10]} ticks={[0, 2, 4, 6, 8, 10]} label={{ value: '강도', angle: -90, position: 'insideLeft', offset: -5 }} />
+                      <Tooltip 
+                        formatter={(value) => [`${value}/10`, '통증 강도']}
+                        contentStyle={{
+                          backgroundColor: "white",
+                          borderRadius: "0.375rem",
+                          border: "1px solid #e5e7eb",
+                          padding: "0.5rem",
+                          fontSize: "0.875rem",
+                        }}
+                      />
+                      <Bar
+                        dataKey="강도"
+                        radius={[4, 4, 0, 0]}
+                        barSize={60}
+                        label={{ position: 'top', formatter: (value: number) => `${value}/10` }}
+                        isAnimationActive={true}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
                 </div>
-                <p className="text-right text-sm mt-1">{surveyData.c11_max_pain_vas ?? 'N/A'}/10</p>
-              </div>
-              <div>
-                <p className="font-semibold mb-2">평균 통증 강도 (0-10)</p>
-                <div className="w-full bg-gray-200 rounded-full h-4">
-                  <div
-                    className={`h-4 rounded-full ${getPainColorClass(surveyData.c12_avg_pain_vas)}`}
-                    style={{ width: `${(surveyData.c12_avg_pain_vas || 0) * 10}%` }}
-                  ></div>
-                </div>
-                <p className="text-right text-sm mt-1">{surveyData.c12_avg_pain_vas ?? 'N/A'}/10</p>
               </div>
               <div>
                 <p className="font-semibold mb-1">통증 악화 요인</p>
@@ -472,114 +502,115 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
             </CardContent>
           </Card>
 
-          {/* Functional Limitations - Radar Chart */}
+          {/* Functional Limitations - Combined */}
           <Card className="border-orange-100 mb-4">
             <CardHeader className="bg-orange-50 rounded-t-lg py-3 px-4">
-              <CardTitle className="text-lg text-orange-800">일상생활 영향도 (레이더 차트)</CardTitle>
+              <CardTitle className="text-lg text-orange-800">일상생활 영향도</CardTitle>
             </CardHeader>
             <CardContent className="p-4">
-              <RadarChartComponent 
-                data={[
-                  { 
-                    subject: '개인 위생', 
-                    value: surveyData.d15_personal_hygiene || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '옷 입기', 
-                    value: surveyData.d16_dressing || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '물건 들기', 
-                    value: surveyData.d17_lifting || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '걷기', 
-                    value: surveyData.d18_walking || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '앉아있기', 
-                    value: surveyData.d19_sitting || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '서있기', 
-                    value: surveyData.d20_standing || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '수면', 
-                    value: surveyData.d21_sleep || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '집중력', 
-                    value: surveyData.d22_concentration || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '업무/학업', 
-                    value: surveyData.d23_work_study || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '운전/대중교통', 
-                    value: surveyData.d24_driving_transport || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '여가 활동', 
-                    value: surveyData.d25_leisure || 0, 
-                    fullMark: 5 
-                  },
-                  { 
-                    subject: '기분/정서', 
-                    value: surveyData.d26_mood || 0, 
-                    fullMark: 5 
-                  },
-                ]}
-              />
-            </CardContent>
-          </Card>
-
-          {/* Functional Limitations - Progress Bars */}
-          <Card className="border-orange-100">
-            <CardHeader className="bg-orange-50 rounded-t-lg py-3 px-4">
-              <CardTitle className="text-lg text-orange-800">일상생활 영향도 (상세)</CardTitle>
-            </CardHeader>
-            <CardContent className="p-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-                {[
-                  { key: 'd15_personal_hygiene', label: '개인 위생' },
-                  { key: 'd16_dressing', label: '옷 입기' },
-                  { key: 'd17_lifting', label: '물건 들기' },
-                  { key: 'd18_walking', label: '걷기' },
-                  { key: 'd19_sitting', label: '앉아있기' },
-                  { key: 'd20_standing', label: '서있기' },
-                  { key: 'd21_sleep', label: '수면' },
-                  { key: 'd22_concentration', label: '집중력' },
-                  { key: 'd23_work_study', label: '업무/학업' },
-                  { key: 'd24_driving_transport', label: '운전/대중교통' },
-                  { key: 'd25_leisure', label: '여가 활동' },
-                  { key: 'd26_mood', label: '기분/정서' },
-                ].map(({ key, label }) => {
-                  const limitation = surveyData[key as keyof SurveyData] as number | undefined | null;
-                  const { width, color, text } = getLimitationStyle(limitation);
-                  return (
-                    <div key={key}>
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="font-medium text-sm">{label}</span>
-                        <span className="text-xs text-gray-500">{text}</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
-                        <div className={`h-2.5 rounded-full ${color}`} style={{ width }}></div>
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* 레이더 차트 - 좌측에 크게 */}
+                <div className="md:flex-1 md:min-h-[480px]">
+                  <RadarChartComponent 
+                    data={[
+                      { 
+                        subject: '개인 위생', 
+                        value: surveyData.d15_personal_hygiene || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '옷 입기', 
+                        value: surveyData.d16_dressing || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '물건 들기', 
+                        value: surveyData.d17_lifting || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '걷기', 
+                        value: surveyData.d18_walking || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '앉아있기', 
+                        value: surveyData.d19_sitting || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '서있기', 
+                        value: surveyData.d20_standing || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '수면', 
+                        value: surveyData.d21_sleep || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '집중력', 
+                        value: surveyData.d22_concentration || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '업무/학업', 
+                        value: surveyData.d23_work_study || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '운전/대중교통', 
+                        value: surveyData.d24_driving_transport || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '여가 활동', 
+                        value: surveyData.d25_leisure || 0, 
+                        fullMark: 5 
+                      },
+                      { 
+                        subject: '기분/정서', 
+                        value: surveyData.d26_mood || 0, 
+                        fullMark: 5 
+                      },
+                    ]}
+                  />
+                </div>
+                
+                {/* 상세 정보 (프로그레스 바) - 우측에 1열로 */}
+                <div className="md:w-72 flex-shrink-0">
+                  <h3 className="text-md font-semibold mb-3 text-gray-700">상세 수치</h3>
+                  <div className="flex flex-col gap-y-4">
+                    {[
+                      { key: 'd15_personal_hygiene', label: '개인 위생' },
+                      { key: 'd16_dressing', label: '옷 입기' },
+                      { key: 'd17_lifting', label: '물건 들기' },
+                      { key: 'd18_walking', label: '걷기' },
+                      { key: 'd19_sitting', label: '앉아있기' },
+                      { key: 'd20_standing', label: '서있기' },
+                      { key: 'd21_sleep', label: '수면' },
+                      { key: 'd22_concentration', label: '집중력' },
+                      { key: 'd23_work_study', label: '업무/학업' },
+                      { key: 'd24_driving_transport', label: '운전/대중교통' },
+                      { key: 'd25_leisure', label: '여가 활동' },
+                      { key: 'd26_mood', label: '기분/정서' },
+                    ].map(({ key, label }) => {
+                      const limitation = surveyData[key as keyof SurveyData] as number | undefined | null;
+                      const { width, color, text } = getLimitationStyle(limitation);
+                      return (
+                        <div key={key}>
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="font-medium text-sm">{label}</span>
+                            <span className="text-xs text-gray-500">{text}</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2.5">
+                            <div className={`h-2.5 rounded-full ${color}`} style={{ width }}></div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
