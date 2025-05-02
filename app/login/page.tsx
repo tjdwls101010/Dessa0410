@@ -30,10 +30,27 @@ export default function LoginPage() {
 
     // Admin 계정 확인 (이름: 운영자, 전화번호: 12345678900, 비밀번호: 111111)
     if (name === "운영자" && phone === "12345678900" && password === "111111") {
-      setSuccess("관리자 로그인 성공! 관리자 페이지로 이동합니다...")
-      setTimeout(() => {
-        router.push('/admin') // /admin 경로로 리다이렉트
-      }, 1000)
+      try {
+        // 서버에 관리자 로그인 요청을 보내 세션 쿠키에 저장
+        const response = await fetch('/api/auth/admin-login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, phone, password }),
+        });
+
+        if (!response.ok) {
+          throw new Error('관리자 로그인 처리 중 오류가 발생했습니다.');
+        }
+
+        setSuccess("관리자 로그인 성공! 관리자 페이지로 이동합니다...")
+        setTimeout(() => {
+          router.push('/admin') // /admin 경로로 리다이렉트
+        }, 1000)
+      } catch (error) {
+        setError(error instanceof Error ? error.message : '관리자 로그인 처리 중 오류가 발생했습니다.');
+      }
       return // Admin 로그인 처리 후 함수 종료
     }
 

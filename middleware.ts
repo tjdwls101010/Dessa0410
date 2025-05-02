@@ -7,6 +7,11 @@ const protectedRoutes = [
   '/report'
 ];
 
+// 관리자 접근이 필요한 경로
+const adminRoutes = [
+  '/admin'
+];
+
 // 로그인 없이 접근 가능한 경로
 const publicRoutes = [
   '/',
@@ -20,7 +25,9 @@ export function middleware(request: NextRequest) {
   
   // 세션 쿠키 확인
   const sessionCookie = request.cookies.get('user_session')?.value;
-  const isLoggedIn = sessionCookie ? JSON.parse(sessionCookie).isLoggedIn : false;
+  const session = sessionCookie ? JSON.parse(sessionCookie) : null;
+  const isLoggedIn = session?.isLoggedIn || false;
+  const isAdmin = session?.isAdmin || false;
   
   // URL 쿼리 파라미터 확인
   const { searchParams } = request.nextUrl;
@@ -39,12 +46,23 @@ export function middleware(request: NextRequest) {
     path === route || path.startsWith(`${route}/`)
   );
   
+  // 관리자 경로 체크 (접두사 기반)
+  const isAdminRoute = adminRoutes.some(route => 
+    path === route || path.startsWith(`${route}/`)
+  );
+  
   // 로그인되지 않은 사용자가 보호된 경로에 접근하려는 경우
   if (isProtectedRoute && !isLoggedIn) {
     // 로그인 후 돌아올 URL을 쿼리 파라미터로 포함하여 로그인 페이지로 리다이렉트
     const redirectUrl = new URL('/login', request.url);
     redirectUrl.searchParams.set('from', path);
     return NextResponse.redirect(redirectUrl);
+  }
+  
+  // 관리자가 아닌 사용자가 관리자 경로에 접근하려는 경우
+  if (isAdminRoute && (!isLoggedIn || !isAdmin)) {
+    // 비관리자는 메인 페이지로 리다이렉트
+    return NextResponse.redirect(new URL('/', request.url));
   }
   
   // 로그인된 사용자가 로그인 페이지에 접근하려는 경우 메인 페이지로 리다이렉트
