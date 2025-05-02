@@ -1,14 +1,15 @@
 "use client"
 
 import * as React from "react"
-import { format, addDays, startOfWeek, isSameDay } from "date-fns"
+import { format, addDays, startOfWeek, isSameDay, isEqual } from "date-fns"
 import { ko } from "date-fns/locale"
 import { cn } from "@/lib/utils"
 
 interface WeekCalendarProps {
   selectedDate: Date
-  onDateSelect: (date: Date) => void // 날짜 선택 콜백 함수 추가
+  onDateSelect: (date: Date) => void
   className?: string
+  onBookedTimesChange?: (date: Date, bookedTimes: string[]) => void
 }
 
 // 가상의 예약 데이터 타입
@@ -22,8 +23,9 @@ interface Appointment {
 
 export function WeekCalendar({
   selectedDate,
-  onDateSelect, // 콜백 함수 받기
-  className
+  onDateSelect,
+  className,
+  onBookedTimesChange
 }: WeekCalendarProps) {
   // 가상의 예약 데이터 (실제로는 API에서 가져와야 함) - 데이터 양 증가
   const [appointments, setAppointments] = React.useState<Appointment[]>([
@@ -51,6 +53,54 @@ export function WeekCalendar({
     { id: "20", date: new Date(2025, 4, 9), startTime: "07:00", endTime: "08:00", title: "예약 완료" },
   ])
 
+  // 이전에 전달한 예약 시간을 기억하기 위한 ref
+  const prevBookedTimesRef = React.useRef<string[]>([]);
+  const prevSelectedDateRef = React.useRef<Date | null>(null);
+
+  // 특정 날짜의 예약된 시간 목록을 반환하는 함수
+  const getBookedTimesForDate = React.useCallback((date: Date): string[] => {
+    return appointments
+      .filter(app => isSameDay(app.date, date))
+      .map(app => app.startTime);
+  }, [appointments]);
+
+  // 선택된 날짜 변경 시 예약된 시간 정보 전달
+  React.useEffect(() => {
+    if (onBookedTimesChange) {
+      // 날짜가 변경되었거나 처음 렌더링된 경우에만 처리
+      if (!prevSelectedDateRef.current || !isSameDay(prevSelectedDateRef.current, selectedDate)) {
+        const bookedTimes = getBookedTimesForDate(selectedDate);
+        prevSelectedDateRef.current = selectedDate;
+        
+        // 이전에 전달한 값과 현재 값을 비교하여 변경된 경우에만 콜백 호출
+        const prevBookedTimes = prevBookedTimesRef.current;
+        const isBookedTimesChanged = 
+          prevBookedTimes.length !== bookedTimes.length ||
+          !prevBookedTimes.every((time, i) => bookedTimes.includes(time));
+        
+        if (isBookedTimesChanged) {
+          prevBookedTimesRef.current = bookedTimes;
+          onBookedTimesChange(selectedDate, bookedTimes);
+        }
+      }
+    }
+  }, [selectedDate, appointments, getBookedTimesForDate, onBookedTimesChange]);
+
+  // 직접 특정 날짜의 예약 정보를 조회하는 함수 추가
+  const checkBookedTimesForDate = React.useCallback((date: Date) => {
+    if (onBookedTimesChange) {
+      const bookedTimes = getBookedTimesForDate(date);
+      onBookedTimesChange(date, bookedTimes);
+    }
+  }, [getBookedTimesForDate, onBookedTimesChange]);
+
+  // 사용자가 날짜를 클릭할 때 호출되는 함수
+  const handleDateClick = (date: Date) => {
+    onDateSelect(date);
+    // 선택된 날짜의 예약 정보를 즉시 확인
+    checkBookedTimesForDate(date);
+  };
+
   // 선택된 날짜를 기준으로 7일 표시 (선택된 날짜 - 3일 부터 시작)
   const displayStartDate = addDays(selectedDate, -3)
 
@@ -68,7 +118,7 @@ export function WeekCalendar({
           return (
             <div
               key={index}
-              onClick={() => onDateSelect(day)} // 클릭 시 콜백 함수 호출
+              onClick={() => handleDateClick(day)} // handleDateClick 사용
               className={cn(
                 "text-center py-2 text-sm cursor-pointer", // cursor-pointer 추가
                 isSelected ? "bg-blue-500 text-white" : "hover:bg-gray-100", // 호버 효과 추가

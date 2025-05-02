@@ -30,6 +30,15 @@ export function ReservationModal({
   const pathname = usePathname() // 현재 URL 경로 가져오기
   const reportId = pathname?.split('/').pop() || '' // URL에서 UUID 추출
   
+  // 시간 옵션 생성 - 코드 상단으로 이동
+  const timeOptions = [
+    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+    "12:00", "12:30", "13:00", "13:30", "14:00", 
+    "14:30", "15:00", "15:30", "16:00", "16:30", "17:00",
+    "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
+    "20:30", "21:00"
+  ]
+
   const [selectedDate, setSelectedDate] = React.useState<Date>(new Date()) // 오른쪽 달력용 선택 날짜
   const [name, setName] = React.useState("")
   const [phoneNumber, setPhoneNumber] = React.useState("")
@@ -54,6 +63,9 @@ export function ReservationModal({
     time3: null
   })
 
+  // 날짜별 예약된 시간 목록 상태 추가
+  const [bookedTimesByDate, setBookedTimesByDate] = React.useState<Map<string, string[]>>(new Map())
+
   // 각 순위별 Popover 열림 상태
   const [popoverOpenStates, setPopoverOpenStates] = React.useState<boolean[]>([false, false, false]);
 
@@ -70,12 +82,60 @@ export function ReservationModal({
     }))
   }
 
+  // 특정 날짜의 예약된 시간을 직접 확인하는 함수 추가
+  const getBookedTimesForDate = React.useCallback((date: Date | undefined): string[] => {
+    if (!date) return [];
+    const dateStr = format(date, 'yyyy-MM-dd');
+    return bookedTimesByDate.get(dateStr) || [];
+  }, [bookedTimesByDate]);
+
   // 각 순위별 날짜 선택 핸들러
   const handlePrefDateSelect = (priority: 1 | 2 | 3, date: Date | undefined) => {
     if (priority === 1) setPref1Date(date)
     else if (priority === 2) setPref2Date(date)
     else if (priority === 3) setPref3Date(date)
+    
+    // 날짜가 변경되면 시간 선택 초기화
+    if (priority === 1) setPrefTimes(prev => ({ ...prev, time1: null }))
+    else if (priority === 2) setPrefTimes(prev => ({ ...prev, time2: null }))
+    else if (priority === 3) setPrefTimes(prev => ({ ...prev, time3: null }))
+
+    // 선택한 날짜의 예약된 시간 정보를 직접 확인
+    if (date) {
+      // 해당 날짜의 예약된 시간이 아직 불러와지지 않았다면 WeekCalendar에 요청
+      const dateStr = format(date, 'yyyy-MM-dd');
+      if (!bookedTimesByDate.has(dateStr)) {
+        // 선택된 날짜로 WeekCalendar를 업데이트하여 해당 날짜의 예약 정보를 가져옴
+        setSelectedDate(date);
+      }
+    }
   }
+
+  // 예약된 시간 정보 처리 핸들러를 useCallback으로 감싸기
+  const handleBookedTimesChange = React.useCallback((date: Date, bookedTimes: string[]) => {
+    const dateStr = format(date, 'yyyy-MM-dd');
+    setBookedTimesByDate(prev => {
+      const prevBookedTimes = prev.get(dateStr);
+      // 이전 값과 동일한지 비교하여 불필요한 상태 업데이트 방지
+      if (prevBookedTimes && 
+          prevBookedTimes.length === bookedTimes.length && 
+          prevBookedTimes.every((time, i) => time === bookedTimes[i])) {
+        return prev;
+      }
+      const newMap = new Map(prev);
+      newMap.set(dateStr, bookedTimes);
+      return newMap;
+    });
+  }, []);
+
+  // 특정 날짜에 대해 예약 가능한 시간 옵션 필터링
+  const getAvailableTimeOptions = React.useCallback((date: Date | undefined) => {
+    if (!date) return timeOptions;
+    
+    const bookedTimes = getBookedTimesForDate(date);
+    
+    return timeOptions.filter(time => !bookedTimes.includes(time));
+  }, [getBookedTimesForDate, timeOptions]);
 
   // 기본 정보가 모두 입력되었는지 확인
   const isBasicInfoComplete = name !== "" && phoneNumber !== "" && birthDate !== ""
@@ -151,14 +211,6 @@ export function ReservationModal({
       setIsSubmitting(false)
     }
   }
-
-  // 시간 옵션 생성
-  const timeOptions = [
-    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
-    "14:30", "15:00", "15:30", "16:00", "16:30", "17:00",
-    "17:30", "18:00", "18:30", "19:00", "19:30", "20:00",
-    "20:30", "21:00"
-  ]
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -285,7 +337,8 @@ export function ReservationModal({
                             <SelectValue placeholder="시간 선택" />
                           </SelectTrigger>
                           <SelectContent>
-                            {timeOptions.map((time) => (
+                            {/* 선택된 날짜의 예약 가능한 시간만 표시 */}
+                            {getAvailableTimeOptions(currentPrefDate).map((time) => (
                               <SelectItem key={`time${priority}-${time}`} value={time}>
                                 {time}
                               </SelectItem>
@@ -312,7 +365,8 @@ export function ReservationModal({
               <div>
                 <WeekCalendar
                   selectedDate={selectedDate}
-                  onDateSelect={handleDateSelect} // onDateSelect prop 추가 및 핸들러 연결
+                  onDateSelect={handleDateSelect}
+                  onBookedTimesChange={handleBookedTimesChange}
                 />
               </div>
             </div>
