@@ -53,7 +53,7 @@ export default function Header() {
               </Button>
             </Link>
           )}
-          <Link href="https://www.notion.so/1c30ffd9516c801087baf57dd51e5cca" target="_blank" rel="noopener noreferrer">
+          {/* <Link href="https://www.notion.so/1c30ffd9516c801087baf57dd51e5cca" target="_blank" rel="noopener noreferrer">
             <Button variant="outline" size="sm" className="gap-2 bg-white text-black border border-gray-200 hover:bg-gray-50">
               <Image 
                 src="/Notion Logo.png" 
@@ -63,7 +63,7 @@ export default function Header() {
               />
               <span>노션 바로가기</span>
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </header>
