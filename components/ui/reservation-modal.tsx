@@ -15,6 +15,8 @@ import { Calendar } from "./calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "./popover"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select"
 import { cn } from "@/lib/utils"
+import { supabase } from "@/lib/supabaseClient"
+import { usePathname } from "next/navigation"
 
 interface ReservationModalProps {
   open: boolean
@@ -25,11 +27,16 @@ export function ReservationModal({
   open,
   onOpenChange
 }: ReservationModalProps) {
+  const pathname = usePathname() // 현재 URL 경로 가져오기
+  const reportId = pathname?.split('/').pop() || '' // URL에서 UUID 추출
+  
   const [selectedDate, setSelectedDate] = React.useState<Date>(new Date()) // 오른쪽 달력용 선택 날짜
   const [name, setName] = React.useState("")
   const [phoneNumber, setPhoneNumber] = React.useState("")
   const [birthDate, setBirthDate] = React.useState("") // 생년월일 (기존 Input type="date" 유지)
   const [memo, setMemo] = React.useState("")
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
 
   // 각 순위별 날짜 상태 추가
   const [pref1Date, setPref1Date] = React.useState<Date | undefined>(undefined)
@@ -83,29 +90,66 @@ export function ReservationModal({
   const isPriority2Available = pref1Date && prefTimes.time1
   const isPriority3Available = pref2Date && prefTimes.time2
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // 예약 정보 제출 로직
-    console.log({
-      name,
-      phoneNumber,
-      birthDate, // 생년월일
-      preference1: { date: pref1Date ? format(pref1Date, "yyyy-MM-dd") : undefined, time: prefTimes.time1 },
-      preference2: { date: pref2Date ? format(pref2Date, "yyyy-MM-dd") : undefined, time: prefTimes.time2 },
-      preference3: { date: pref3Date ? format(pref3Date, "yyyy-MM-dd") : undefined, time: prefTimes.time3 },
-      memo
-    })
+    setIsSubmitting(true)
+    setError(null)
+    
+    try {
+      if (!reportId) {
+        throw new Error("리포트 ID를 찾을 수 없습니다. 페이지를 새로고침한 후 다시 시도해 주세요.")
+      }
+      
+      // 예약 정보 로깅
+      console.log({
+        reportId,
+        name,
+        phoneNumber,
+        birthDate,
+        preference1: { date: pref1Date ? format(pref1Date, "yyyy-MM-dd") : undefined, time: prefTimes.time1 },
+        preference2: { date: pref2Date ? format(pref2Date, "yyyy-MM-dd") : undefined, time: prefTimes.time2 },
+        preference3: { date: pref3Date ? format(pref3Date, "yyyy-MM-dd") : undefined, time: prefTimes.time3 },
+        memo
+      })
+      
+      // Supabase 테이블 업데이트 (기존 reportId를 가진 row를 업데이트)
+      const { data, error: updateError } = await supabase
+        .from('surveys')
+        .update({
+          reservation_name: name,
+          reservation_phone: phoneNumber,
+          reservation_birth: birthDate,
+          reservation_memo: memo,
+          reservation_day1: pref1Date ? format(pref1Date, "yyyy-MM-dd") : null,
+          reservation_time1: prefTimes.time1,
+          reservation_day2: pref2Date ? format(pref2Date, "yyyy-MM-dd") : null,
+          reservation_time2: prefTimes.time2,
+          reservation_day3: pref3Date ? format(pref3Date, "yyyy-MM-dd") : null,
+          reservation_time3: prefTimes.time3,
+        })
+        .eq('id', reportId)
 
-    // 폼 초기화 및 모달 닫기
-    setName("")
-    setPhoneNumber("")
-    setBirthDate("")
-    setMemo("")
-    setPref1Date(undefined)
-    setPref2Date(undefined)
-    setPref3Date(undefined)
-    setPrefTimes({ time1: null, time2: null, time3: null })
-    onOpenChange(false)
+      if (updateError) throw updateError;
+      
+      console.log("예약 정보 업데이트 성공:", data)
+
+      // 폼 초기화 및 모달 닫기
+      setName("")
+      setPhoneNumber("")
+      setBirthDate("")
+      setMemo("")
+      setPref1Date(undefined)
+      setPref2Date(undefined)
+      setPref3Date(undefined)
+      setPrefTimes({ time1: null, time2: null, time3: null })
+      onOpenChange(false)
+      
+    } catch (err) {
+      console.error("예약 정보 저장 실패:", err)
+      setError(err instanceof Error ? err.message : "예약 저장 중 오류가 발생했습니다.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   // 시간 옵션 생성
@@ -136,6 +180,12 @@ export function ReservationModal({
           <p className="text-sm mb-4">
             아래 정보를 입력하고, 선호하는 예약 시간을 선택해주세요.
           </p>
+
+          {error && (
+            <div className="mb-4 p-2 bg-red-50 border border-red-200 rounded text-red-600 text-sm">
+              {error}
+            </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* 왼쪽: 예약 정보 입력 폼 */}
@@ -275,10 +325,10 @@ export function ReservationModal({
             </Button>
             <Button
               onClick={handleSubmit}
-              disabled={!isBasicInfoComplete || !hasAtLeastOnePreference}
+              disabled={!isBasicInfoComplete || !hasAtLeastOnePreference || isSubmitting}
               className="bg-blue-500 hover:bg-blue-600"
             >
-              확인
+              {isSubmitting ? "처리 중..." : "확인"}
             </Button>
           </div>
         </div>

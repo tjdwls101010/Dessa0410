@@ -34,6 +34,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { supabase } from "@/lib/supabaseClient"; // Supabase 클라이언트 추가
 
 interface ReservationModalProps {
   open: boolean;
@@ -52,6 +53,8 @@ for (let hour = 9; hour < 18; hour++) {
 
 export default function ReservationModal({ open, onOpenChange, triggerButton }: ReservationModalProps) {
   const [confirmationAlertOpen, setConfirmationAlertOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // 예약 폼 상태 (Modal 내부에서 관리하거나 props로 받을 수 있음. 여기서는 내부 관리)
   const [name, setName] = useState("");
@@ -66,21 +69,49 @@ export default function ReservationModal({ open, onOpenChange, triggerButton }: 
   const [memo, setMemo] = useState(""); // 메모 상태 추가 (올바른 위치로 이동)
 
   // 예약 폼 제출 핸들러
-  const handleReservationSubmit = (e: React.FormEvent) => {
+  const handleReservationSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: 실제 예약 데이터 처리 로직 추가 (API 호출 등)
-    console.log("Reservation Data:", {
-      name,
-      phone,
-      birthDate: birthDate ? format(birthDate, "yyyy-MM-dd") : undefined,
-      preference1: { date: pref1Date ? format(pref1Date, "yyyy-MM-dd") : undefined, time: pref1Time },
-      preference2: { date: pref2Date ? format(pref2Date, "yyyy-MM-dd") : undefined, time: pref2Time },
-      preference3: { date: pref3Date ? format(pref3Date, "yyyy-MM-dd") : undefined, time: pref3Time },
-      memo, // 메모 데이터 추가
-    });
-    // 예약 데이터 처리 후 확인 팝업 열기
-    onOpenChange(false); // 예약 모달 닫기
-    setConfirmationAlertOpen(true); // 확인 팝업 열기
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      // Supabase에 데이터 저장
+      const { data, error } = await supabase.from('surveys').insert([
+        {
+          reservation_name: name,
+          reservation_phone: phone,
+          reservation_birth: birthDate ? format(birthDate, "yyyy-MM-dd") : null,
+          reservation_memo: memo,
+          reservation_day1: pref1Date ? format(pref1Date, "yyyy-MM-dd") : null,
+          reservation_time1: pref1Time || null,
+          reservation_day2: pref2Date ? format(pref2Date, "yyyy-MM-dd") : null,
+          reservation_time2: pref2Time || null,
+          reservation_day3: pref3Date ? format(pref3Date, "yyyy-MM-dd") : null,
+          reservation_time3: pref3Time || null,
+        }
+      ]);
+
+      if (error) throw error;
+
+      console.log("Reservation Data saved:", {
+        name,
+        phone,
+        birthDate: birthDate ? format(birthDate, "yyyy-MM-dd") : undefined,
+        preference1: { date: pref1Date ? format(pref1Date, "yyyy-MM-dd") : undefined, time: pref1Time },
+        preference2: { date: pref2Date ? format(pref2Date, "yyyy-MM-dd") : undefined, time: pref2Time },
+        preference3: { date: pref3Date ? format(pref3Date, "yyyy-MM-dd") : undefined, time: pref3Time },
+        memo,
+      });
+      
+      // 예약 데이터 처리 후 확인 팝업 열기
+      onOpenChange(false); // 예약 모달 닫기
+      setConfirmationAlertOpen(true); // 확인 팝업 열기
+    } catch (err) {
+      console.error("Error saving reservation:", err);
+      setError(err instanceof Error ? err.message : "예약 저장 중 오류가 발생했습니다.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // 확인 팝업 닫기 핸들러
@@ -112,6 +143,11 @@ export default function ReservationModal({ open, onOpenChange, triggerButton }: 
           </DialogHeader>
           <form onSubmit={handleReservationSubmit}>
             <div className="grid gap-4 py-4">
+              {error && (
+                <div className="col-span-4 text-red-500 text-sm">
+                  {error}
+                </div>
+              )}
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="name" className="text-right">
                   이름
@@ -237,7 +273,9 @@ export default function ReservationModal({ open, onOpenChange, triggerButton }: 
               <DialogClose asChild>
                 <Button type="button" variant="outline">취소</Button>
               </DialogClose>
-              <Button type="submit">확인</Button>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "처리 중..." : "확인"}
+              </Button>
             </DialogFooter>
           </form>
         </DialogContent>
