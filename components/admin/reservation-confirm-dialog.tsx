@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import { useRouter } from "next/navigation"
 
 type ReservationOption = {
   day: string
@@ -36,6 +37,8 @@ export function ReservationConfirmDialog({
 }) {
   const [open, setOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string>("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   // 예약 옵션 생성
   const reservationOptions: ReservationOption[] = []
@@ -63,6 +66,43 @@ export function ReservationConfirmDialog({
       label: `희망일3: ${options.day3} ${options.time3}`
     })
   }
+
+  // 예약 확정 핸들러
+  const handleConfirm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (!selectedOption) return;
+    
+    try {
+      setIsSubmitting(true);
+      
+      const formData = new FormData();
+      formData.append('id', reservationId);
+      formData.append('day', selectedOption.split('_')[0]);
+      formData.append('time', selectedOption.split('_')[1]);
+      
+      const response = await fetch('/api/admin/reservation/confirm', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error('예약 확정 중 오류가 발생했습니다');
+      }
+      
+      // 다이얼로그 닫기
+      setOpen(false);
+      
+      // 페이지 새로고침 제거
+      // 클라이언트 측에서 데이터 상태만 업데이트하도록 함
+      // router.refresh();
+      
+    } catch (error) {
+      console.error('예약 확정 오류:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -93,28 +133,13 @@ export function ReservationConfirmDialog({
           </RadioGroup>
         </div>
         <DialogFooter>
-          <form action="/api/admin/reservation/confirm" method="POST">
-            <input type="hidden" name="id" value={reservationId} />
-            {selectedOption && (
-              <>
-                <input 
-                  type="hidden" 
-                  name="day" 
-                  value={selectedOption.split('_')[0]} 
-                />
-                <input 
-                  type="hidden" 
-                  name="time" 
-                  value={selectedOption.split('_')[1]} 
-                />
-              </>
-            )}
+          <form onSubmit={handleConfirm}>
             <Button 
               type="submit" 
-              disabled={!selectedOption}
+              disabled={!selectedOption || isSubmitting}
               className="text-green-600 border-green-600 hover:bg-green-50"
             >
-              예약 확정하기
+              {isSubmitting ? "처리 중..." : "예약 확정하기"}
             </Button>
           </form>
         </DialogFooter>

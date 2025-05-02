@@ -12,8 +12,11 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ReservationConfirmDialog } from '@/components/admin/reservation-confirm-dialog';
+import { ReservationEditButton } from '@/components/admin/reservation-edit-button';
+import { AdminCalendar } from '@/components/admin/admin-calendar';
+import { ErrorDisplay } from '@/components/admin/error-display';
 import Link from 'next/link';
-import { BarChart3 } from 'lucide-react';
+import { BarChart3, Database } from 'lucide-react';
 
 // Supabase 클라이언트 초기화
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -63,16 +66,68 @@ export default async function AdminPage() {
     return (
       <div className="container mx-auto py-10 px-4">
         <h1 className="text-3xl font-bold mb-6">관리자 페이지</h1>
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-          <p>데이터를 불러오는 중 오류가 발생했습니다. 나중에 다시 시도해주세요.</p>
+        
+        <ErrorDisplay 
+          title="데이터 불러오기 오류"
+          message="예약 정보를 불러오는 중 문제가 발생했습니다."
+          details={error}
+          suggestions={[
+            "Supabase 연결 정보가 올바른지 확인해주세요.",
+            "데이터베이스 구조 업데이트를 실행해보세요.",
+            "문제가 지속되면 개발자에게 연락해주세요."
+          ]}
+        />
+        
+        {/* 데이터베이스 마이그레이션 실행 버튼 */}
+        <div className="mt-8 p-4 border rounded-md bg-white">
+          <h2 className="text-lg font-medium mb-4">데이터베이스 문제 해결</h2>
+          <p className="mb-4 text-gray-600">데이터베이스 구조를 업데이트하여 문제를 해결할 수 있습니다.</p>
+          <Link href="/api/admin/db-migration/add-appointment-type" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" className="flex items-center gap-2">
+              <Database className="w-4 h-4" />
+              <span>데이터베이스 구조 업데이트 실행</span>
+            </Button>
+          </Link>
         </div>
       </div>
     );
   }
 
+  // 확정된 예약만 필터링 (AdminCalendar에 전달할 데이터)
+  const confirmedAppointments = reservations?.filter(
+    (res) => res.reservation_day0 && res.reservation_time0 && res.reservation_status === 'confirmed'
+  ).map(appointment => ({
+    ...appointment,
+    appointment_type: '일반예약' // appointment_type 필드가 없으므로 기본값 제공
+  })) || [];
+
   return (
     <div className="container mx-auto py-10 px-4">
       <h1 className="text-3xl font-bold mb-6">관리자 페이지</h1>
+      
+      {/* 데이터베이스 마이그레이션 버튼 - 항상 표시
+      <div className="bg-white p-4 rounded-md shadow-md mb-8 flex items-center justify-between">
+        <div>
+          <h2 className="text-md font-medium">데이터베이스 구조 업데이트</h2>
+          <p className="text-sm text-gray-500">예약 시스템에 필요한 필드를 추가합니다.</p>
+        </div>
+        <Link href="/api/admin/db-migration/add-appointment-type" target="_blank" rel="noopener noreferrer">
+          <Button variant="outline" size="sm" className="flex items-center gap-2">
+            <Database className="w-4 h-4" />
+            <span>업데이트 실행</span>
+          </Button>
+        </Link>
+      </div> */}
+      
+      {/* 타임테이블 달력 섹션 */}
+      <div className="bg-white p-6 rounded-md shadow-md mb-8">
+        <h2 className="text-xl font-semibold mb-4">진료 스케줄</h2>
+        <AdminCalendar 
+          confirmedAppointments={confirmedAppointments}
+        />
+      </div>
+      
+      {/* 기존 예약 테이블 섹션 */}
       <div className="bg-white p-6 rounded-md shadow-md">
         <h2 className="text-xl font-semibold mb-4">예약 요청 목록</h2>
         
@@ -143,18 +198,14 @@ export default async function AdminPage() {
                             }}
                           />
                         )}
-                        <form action={`/api/admin/reservation/cancel`} method="POST">
-                          <input type="hidden" name="id" value={reservation.id} />
-                          <Button 
-                            type="submit"
-                            variant="outline" 
-                            size="sm"
-                            className="text-red-600 border-red-600 hover:bg-red-50"
-                            disabled={reservation.reservation_status === 'cancelled'}
-                          >
-                            취소
-                          </Button>
-                        </form>
+                        <ReservationEditButton
+                          reservationId={reservation.id}
+                          reservationDate={reservation.reservation_day0 || ''}
+                          reservationTime={reservation.reservation_time0 || ''}
+                          reservationName={reservation.reservation_name || ''}
+                          reservationPhone={reservation.reservation_phone || ''}
+                          isDisabled={reservation.reservation_status === 'cancelled'}
+                        />
                       </div>
                     </TableCell>
                   </TableRow>

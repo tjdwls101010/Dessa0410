@@ -3,7 +3,7 @@
 import * as React from "react"
 import { X, ChevronDown, Calendar as CalendarIcon } from "lucide-react"
 import { ko } from "date-fns/locale"
-import { format } from "date-fns"
+import { format, isSameDay } from "date-fns"
 import { Dialog, DialogContent, DialogTitle } from "./dialog"
 import { Button } from "./button"
 import { Input } from "./input"
@@ -89,6 +89,54 @@ export function ReservationModal({
     return bookedTimesByDate.get(dateStr) || [];
   }, [bookedTimesByDate]);
 
+  // 선택된 날짜가 변경될 때마다 예약 정보를 실시간으로 가져오기
+  React.useEffect(() => {
+    const fetchAppointmentsForDate = async () => {
+      if (!selectedDate) return;
+      
+      // 해당 날짜 형식 변환
+      const dateStr = format(selectedDate, 'yyyy-MM-dd');
+      
+      try {
+        // Supabase에서 해당 날짜의 확정된 예약 정보 가져오기
+        const { data, error } = await supabase
+          .from('surveys')
+          .select('reservation_time0')
+          .eq('reservation_day0', dateStr)
+          .eq('reservation_status', 'confirmed')
+          .not('reservation_time0', 'is', null);
+        
+        if (error) {
+          console.error('예약 정보 조회 오류:', error);
+          return;
+        }
+        
+        // 예약된 시간 목록 추출
+        const bookedTimes = data.map(item => item.reservation_time0);
+        
+        // 상태 업데이트
+        setBookedTimesByDate(prev => {
+          const newMap = new Map(prev);
+          newMap.set(dateStr, bookedTimes);
+          return newMap;
+        });
+        
+        // 만약 현재 선택된 날짜 중 하나라면 해당 시간 선택 옵션 업데이트를 위해 콜백 호출
+        if (pref1Date && isSameDay(pref1Date, selectedDate)) {
+          handleBookedTimesChange(selectedDate, bookedTimes);
+        } else if (pref2Date && isSameDay(pref2Date, selectedDate)) {
+          handleBookedTimesChange(selectedDate, bookedTimes);
+        } else if (pref3Date && isSameDay(pref3Date, selectedDate)) {
+          handleBookedTimesChange(selectedDate, bookedTimes);
+        }
+      } catch (err) {
+        console.error('예약 정보 처리 중 오류:', err);
+      }
+    };
+    
+    fetchAppointmentsForDate();
+  }, [selectedDate]);
+
   // 각 순위별 날짜 선택 핸들러
   const handlePrefDateSelect = (priority: 1 | 2 | 3, date: Date | undefined) => {
     if (priority === 1) setPref1Date(date)
@@ -100,14 +148,46 @@ export function ReservationModal({
     else if (priority === 2) setPrefTimes(prev => ({ ...prev, time2: null }))
     else if (priority === 3) setPrefTimes(prev => ({ ...prev, time3: null }))
 
-    // 선택한 날짜의 예약된 시간 정보를 직접 확인
+    // 선택한 날짜에 대한 예약 데이터 가져오기
     if (date) {
-      // 해당 날짜의 예약된 시간이 아직 불러와지지 않았다면 WeekCalendar에 요청
-      const dateStr = format(date, 'yyyy-MM-dd');
-      if (!bookedTimesByDate.has(dateStr)) {
-        // 선택된 날짜로 WeekCalendar를 업데이트하여 해당 날짜의 예약 정보를 가져옴
-        setSelectedDate(date);
-      }
+      // 메인 달력 날짜 업데이트
+      setSelectedDate(date);
+      
+      // 해당 날짜의 예약 상태 확인을 위한 Supabase 쿼리 실행
+      const fetchAppointmentsForSelectedDate = async () => {
+        const dateStr = format(date, 'yyyy-MM-dd');
+        
+        try {
+          const { data, error } = await supabase
+            .from('surveys')
+            .select('reservation_time0')
+            .eq('reservation_day0', dateStr)
+            .eq('reservation_status', 'confirmed')
+            .not('reservation_time0', 'is', null);
+            
+          if (error) {
+            console.error('예약 정보 조회 오류:', error);
+            return;
+          }
+          
+          // 예약된 시간 목록 추출
+          const bookedTimes = data.map(item => item.reservation_time0);
+          
+          // 상태 업데이트
+          setBookedTimesByDate(prev => {
+            const newMap = new Map(prev);
+            newMap.set(dateStr, bookedTimes);
+            return newMap;
+          });
+          
+          // 예약된 시간 정보 전달
+          handleBookedTimesChange(date, bookedTimes);
+        } catch (err) {
+          console.error('예약 정보 처리 중 오류:', err);
+        }
+      };
+      
+      fetchAppointmentsForSelectedDate();
     }
   }
 
@@ -425,12 +505,14 @@ export function ReservationModal({
               {/* 주달력 (예약 현황) */}
               <div>
                 <WeekCalendar
+                  key={`week-${format(selectedDate, 'yyyy-MM-dd')}`}
                   selectedDate={selectedDate}
                   onDateSelect={handleDateSelect}
                   onBookedTimesChange={handleBookedTimesChange}
                 />
               </div>
             </div>
+
           </div>
 
           {/* 하단 버튼 */}

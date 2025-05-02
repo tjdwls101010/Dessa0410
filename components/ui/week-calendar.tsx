@@ -1,9 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { format, addDays, startOfWeek, isSameDay, isEqual } from "date-fns"
+import { format, addDays, startOfWeek, isSameDay, isEqual, parseISO } from "date-fns"
 import { ko } from "date-fns/locale"
 import { cn } from "@/lib/utils"
+import { supabase } from "@/lib/supabaseClient"
 
 interface WeekCalendarProps {
   selectedDate: Date
@@ -12,12 +13,12 @@ interface WeekCalendarProps {
   onBookedTimesChange?: (date: Date, bookedTimes: string[]) => void
 }
 
-// 가상의 예약 데이터 타입
+// 예약 데이터 타입
 interface Appointment {
   id: string
   date: Date
   startTime: string
-  endTime: string
+  endTime?: string
   title: string
 }
 
@@ -27,35 +28,61 @@ export function WeekCalendar({
   className,
   onBookedTimesChange
 }: WeekCalendarProps) {
-  // 가상의 예약 데이터 (실제로는 API에서 가져와야 함) - 데이터 양 증가
-  const [appointments, setAppointments] = React.useState<Appointment[]>([
-    // 4월
-    { id: "1", date: new Date(2025, 3, 15), startTime: "07:00", endTime: "08:00", title: "예약 완료" },
-    { id: "2", date: new Date(2025, 3, 16), startTime: "08:00", endTime: "09:00", title: "예약 완료" },
-    { id: "3", date: new Date(2025, 3, 17), startTime: "19:00", endTime: "20:00", title: "예약 완료" },
-    { id: "4", date: new Date(2025, 3, 18), startTime: "10:00", endTime: "11:00", title: "예약 완료" },
-    { id: "5", date: new Date(2025, 3, 18), startTime: "14:00", endTime: "15:00", title: "예약 완료" },
-    { id: "6", date: new Date(2025, 3, 21), startTime: "09:00", endTime: "10:00", title: "예약 완료" },
-    { id: "7", date: new Date(2025, 3, 22), startTime: "11:00", endTime: "12:00", title: "예약 완료" },
-    { id: "8", date: new Date(2025, 3, 23), startTime: "15:00", endTime: "16:00", title: "예약 완료" },
-    { id: "9", date: new Date(2025, 3, 24), startTime: "17:00", endTime: "18:00", title: "예약 완료" },
-    { id: "10", date: new Date(2025, 3, 25), startTime: "07:00", endTime: "08:00", title: "예약 완료" },
-    { id: "11", date: new Date(2025, 3, 28), startTime: "16:00", endTime: "17:00", title: "예약 완료" },
-    { id: "12", date: new Date(2025, 3, 29), startTime: "18:00", endTime: "19:00", title: "예약 완료" },
-    { id: "13", date: new Date(2025, 3, 30), startTime: "08:00", endTime: "09:00", title: "예약 완료" },
-    // 5월
-    { id: "14", date: new Date(2025, 4, 1), startTime: "10:00", endTime: "11:00", title: "예약 완료" },
-    { id: "15", date: new Date(2025, 4, 2), startTime: "13:00", endTime: "14:00", title: "예약 완료" },
-    { id: "16", date: new Date(2025, 4, 5), startTime: "09:00", endTime: "10:00", title: "예약 완료" },
-    { id: "17", date: new Date(2025, 4, 6), startTime: "11:00", endTime: "12:00", title: "예약 완료" },
-    { id: "18", date: new Date(2025, 4, 7), startTime: "15:00", endTime: "16:00", title: "예약 완료" },
-    { id: "19", date: new Date(2025, 4, 8), startTime: "17:00", endTime: "18:00", title: "예약 완료" },
-    { id: "20", date: new Date(2025, 4, 9), startTime: "07:00", endTime: "08:00", title: "예약 완료" },
-  ])
+  // 실제 예약 데이터를 저장할 상태
+  const [appointments, setAppointments] = React.useState<Appointment[]>([])
+  const [isLoading, setIsLoading] = React.useState(true)
 
   // 이전에 전달한 예약 시간을 기억하기 위한 ref
   const prevBookedTimesRef = React.useRef<string[]>([]);
   const prevSelectedDateRef = React.useRef<Date | null>(null);
+
+  // Supabase에서 예약 데이터 가져오기
+  React.useEffect(() => {
+    const fetchAppointments = async () => {
+      setIsLoading(true)
+      try {
+        // 선택된 날짜를 기준으로 표시 범위 계산
+        const startDate = addDays(selectedDate, -7) // 7일 전부터
+        const endDate = addDays(selectedDate, 7) // 7일 후까지
+        
+        const startDateStr = format(startDate, 'yyyy-MM-dd')
+        const endDateStr = format(endDate, 'yyyy-MM-dd')
+        
+        // surveys 테이블에서 확정된 예약 중 선택된 날짜 주변의 데이터만 가져오기
+        const { data, error } = await supabase
+          .from('surveys')
+          .select('id, reservation_day0, reservation_time0, reservation_name')
+          .not('reservation_day0', 'is', null)
+          .not('reservation_time0', 'is', null)
+          .eq('reservation_status', 'confirmed')
+          .gte('reservation_day0', startDateStr)
+          .lte('reservation_day0', endDateStr)
+        
+        if (error) {
+          console.error('예약 데이터 조회 오류:', error)
+          return
+        }
+        
+        // 데이터 형식 변환
+        if (data) {
+          const formattedAppointments = data.map(item => ({
+            id: item.id,
+            date: parseISO(item.reservation_day0),
+            startTime: item.reservation_time0,
+            title: "예약 완료"
+          }))
+          
+          setAppointments(formattedAppointments)
+        }
+      } catch (err) {
+        console.error('예약 데이터 처리 중 오류:', err)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    fetchAppointments()
+  }, [selectedDate]) // 선택된 날짜가 변경될 때마다 데이터 다시 가져오기
 
   // 특정 날짜의 예약된 시간 목록을 반환하는 함수
   const getBookedTimesForDate = React.useCallback((date: Date): string[] => {
@@ -163,6 +190,34 @@ export function WeekCalendar({
   
   // 시간 슬롯 렌더링
   const renderTimeSlots = () => {
+    if (isLoading) {
+      return (
+        <div className="text-xs">
+          {timeSlots.map((group, groupIndex) => (
+            <div key={groupIndex} className="mb-2">
+              <div className="font-medium py-1 px-2 bg-gray-100">{group.label}</div>
+              <div className="grid grid-cols-7 gap-1 p-1">
+                {/* 요일별 스켈레톤 로딩 UI */}
+                {Array.from({ length: 7 }, (_, dayIndex) => (
+                  <div
+                    key={dayIndex} 
+                    className="min-h-[100px] flex flex-col gap-1"
+                  >
+                    {group.slots.map((_, slotIndex) => (
+                      <div 
+                        key={`${dayIndex}-${slotIndex}`}
+                        className="text-center py-1 rounded text-xs bg-gray-200 animate-pulse h-5"
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+    
     return (
       <div className="text-xs">
         {timeSlots.map((group, groupIndex) => (
