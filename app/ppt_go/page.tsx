@@ -184,7 +184,7 @@ export default function PresentationPage() {
       </a>
       <a
         href=""
-        download="PPT_Mid3.pdf"
+        download=""
         className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50 flex items-center justify-center"
         aria-label="Download Presentation PDF"
       >
