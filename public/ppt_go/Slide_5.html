@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>솔루션 구성 요소 - 온누리통증의학과 서비스 개선 프로젝트</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e1f5fe 100%);
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            /* margin: 0 auto; */
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        }
+        .chart-container {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 150px; /* Smaller chart */
+            height: 150px;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        .component-card {
+            transition: all 0.3s ease;
+        }
+        .component-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .arrow {
+            color: #93c5fd; /* Light blue arrow */
+            font-size: 2rem;
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body class="">
+    <div class="slide bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
+        <!-- 상단 장식 패턴 -->
+        <div class="absolute top-0 right-0 w-full h-24 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-20px]"></div>
+        
+        <!-- 메인 콘텐츠 -->
+        <div class="flex flex-col h-full z-10 p-16">
+            <!-- 제목 -->
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold text-blue-900 mb-2">솔루션 구성 요소 - 전체 조망</h1>
+                <div class="w-72 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+            </div>
+            
+            <!-- 부제목 -->
+            <p class="text-lg text-blue-700 mb-8 font-medium">
+                <i class="fas fa-sitemap mr-2 text-blue-500"></i>원활한 환자 여정을 위한 5가지 핵심 구성 요소:
+            </p>
+            
+            <!-- 5가지 구성 요소 - 순환형 시각화 -->
+            <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-6 mb-8">
+                <!-- 1. 정보 수집 -->
+                <div class="component-card bg-white bg-opacity-80 rounded-xl p-4 shadow-md flex flex-col items-center w-48 text-center">
+                    <div class="bg-blue-100 p-3 rounded-full mb-3">
+                        <i class="fas fa-file-alt text-blue-600 text-2xl"></i>
+                    </div>
+                    <span class="font-semibold text-blue-800 text-sm mb-1">환자 정보 수집</span>
+                    <p class="text-xs text-gray-600">온라인 설문</p>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+                
+                <!-- 2. 리포트 생성 -->
+                <div class="component-card bg-white bg-opacity-80 rounded-xl p-4 shadow-md flex flex-col items-center w-48 text-center">
+                    <div class="bg-indigo-100 p-3 rounded-full mb-3">
+                        <i class="fas fa-chart-bar text-indigo-600 text-2xl"></i>
+                    </div>
+                    <span class="font-semibold text-blue-800 text-sm mb-1">AI 맞춤 리포트</span>
+                    <p class="text-xs text-gray-600">데이터 분석 및 시각화</p>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+                
+                <!-- 3. 챗봇 지원 -->
+                <div class="component-card bg-white bg-opacity-80 rounded-xl p-4 shadow-md flex flex-col items-center w-48 text-center">
+                    <div class="bg-purple-100 p-3 rounded-full mb-3">
+                        <i class="fas fa-comments text-purple-600 text-2xl"></i>
+                    </div>
+                    <span class="font-semibold text-blue-800 text-sm mb-1">환자 지원 챗봇</span>
+                    <p class="text-xs text-gray-600">질문 답변 및 안내</p>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+                
+                <!-- 4. 예약 시스템 -->
+                <div class="component-card bg-white bg-opacity-80 rounded-xl p-4 shadow-md flex flex-col items-center w-48 text-center">
+                    <div class="bg-pink-100 p-3 rounded-full mb-3">
+                        <i class="fas fa-calendar-check text-pink-600 text-2xl"></i>
+                    </div>
+                    <span class="font-semibold text-blue-800 text-sm mb-1">온라인 예약</span>
+                    <p class="text-xs text-gray-600">편리한 진료 신청</p>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+                
+                <!-- 5. FAQ 웹페이지 -->
+                <div class="component-card bg-white bg-opacity-80 rounded-xl p-4 shadow-md flex flex-col items-center w-48 text-center">
+                    <div class="bg-green-100 p-3 rounded-full mb-3">
+                        <i class="fas fa-book-open text-green-600 text-2xl"></i>
+                    </div>
+                    <span class="font-semibold text-blue-800 text-sm mb-1">FAQ 웹페이지</span>
+                    <p class="text-xs text-gray-600">정보 제공</p>
+                </div>
+            </div>
+            
+            <!-- 통합된 환자 경험 -->
+            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl p-6 shadow-md text-white mt-auto">
+                <h3 class="text-xl font-bold mb-3 flex items-center">
+                    <i class="fas fa-link mr-2"></i>
+                    통합된 환자 경험
+                </h3>
+                <p class="text-sm leading-relaxed">
+                    각 구성 요소는 독립적으로 가치를 제공하면서도 서로 유기적으로 연결되어 <span class="font-semibold">끊김 없는(Seamless) 환자 여정</span>을 지원하며, 데이터는 각 단계에서 활용되어 서비스 품질을 지속적으로 향상시킵니다.
+                </p>
+            </div>
+            
+            <!-- 하단 바 -->
+            <div class="absolute bottom-12 left-0 w-full flex justify-center">
+                <div class="w-1/2 h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
+            </div>
+        </div>
+        
+        <!-- 데이터 시각화 차트 (도넛) -->
+        <div class="chart-container">
+            <canvas id="componentChart"></canvas>
+        </div>
+    </div>
+
+    <!-- <script>
+        // 도넛 차트 데이터
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('componentChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['정보수집', '리포트', '챗봇', '예약', 'FAQ'],
+                    datasets: [{
+                        label: '솔루션 구성 요소',
+                        data: [20, 20, 20, 20, 20], // Equal weight
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(109, 40, 217, 0.7)',
+                            'rgba(168, 85, 247, 0.7)',
+                            'rgba(236, 72, 153, 0.7)',
+                            'rgba(16, 185, 129, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(109, 40, 217, 1)',
+                            'rgba(168, 85, 247, 1)',
+                            'rgba(236, 72, 153, 1)',
+                            'rgba(16, 185, 129, 1)'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                           display: false // Hide legend for simplicity
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    },
+                    cutout: '50%'
+                }
+            });
+        });
+    </script> -->
+</body>
+</html> 

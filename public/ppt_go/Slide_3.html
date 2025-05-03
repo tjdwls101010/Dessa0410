@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로젝트 배경 및 당위성 - 온누리통증의학과 서비스 개선 프로젝트</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e1f5fe 100%);
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            /* margin: 0 auto; */
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        }
+        .chart-container {
+            position: absolute;
+            bottom: 40px;
+            right: 50px;
+            width: 40%;
+            height: 40%;
+            z-index: 1;
+        }
+        .bg-card {
+            transition: all 0.3s ease;
+        }
+        .bg-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="">
+    <div class="slide bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
+        <!-- 상단 장식 패턴 -->
+        <div class="absolute top-0 right-0 w-full h-24 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-20px]"></div>
+        
+        <!-- 메인 콘텐츠 -->
+        <div class="flex flex-col h-full z-10 p-16">
+            <!-- 제목 -->
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold text-blue-900 mb-2">프로젝트 배경 및 당위성</h1>
+                <div class="w-64 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+            </div>
+            
+            <!-- 내용 카드 그리드 -->
+            <div class="grid grid-cols-2 gap-6">
+                <!-- 카드 1: 의료서비스 환경 변화 -->
+                <div class="bg-card bg-white bg-opacity-80 rounded-xl p-6 shadow-md relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500 opacity-10 transform rotate-45 translate-x-8 -translate-y-8"></div>
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-sync-alt text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-blue-800">의료서비스 환경 변화</h3>
+                    </div>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        디지털 기술의 발전으로 의료 서비스 패러다임이 <span class="font-medium text-blue-600">치료 중심에서 예방·건강관리 중심</span>으로 전환되고 있습니다. 환자들은 이제 더 많은 정보와 맞춤형 서비스를 기대합니다.
+                    </p>
+                    <div class="mt-4 flex">
+                        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full mr-2">#디지털전환</span>
+                        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">#예방중심</span>
+                    </div>
+                </div>
+                
+                <!-- 카드 2: 환자 경험의 중요성 증가 -->
+                <div class="bg-card bg-white bg-opacity-80 rounded-xl p-6 shadow-md relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500 opacity-10 transform rotate-45 translate-x-8 -translate-y-8"></div>
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-user-plus text-indigo-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-blue-800">환자 경험의 중요성 증가</h3>
+                    </div>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        의료 서비스 선택에 있어 진료 품질뿐만 아니라 <span class="font-medium text-indigo-600">전반적인 환자 경험</span>이 중요한 요소로 부각되고 있습니다. 특히 디지털 네이티브 세대의 환자들은 편리하고 개인화된 서비스를 요구합니다.
+                    </p>
+                    <div class="mt-4 flex">
+                        <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full mr-2">#환자중심</span>
+                        <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">#경험설계</span>
+                    </div>
+                </div>
+                
+                <!-- 카드 3: 비대면 서비스 수요 증가 -->
+                <div class="bg-card bg-white bg-opacity-80 rounded-xl p-6 shadow-md relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500 opacity-10 transform rotate-45 translate-x-8 -translate-y-8"></div>
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-laptop-medical text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-blue-800">비대면 서비스 수요 증가</h3>
+                    </div>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        코로나19 이후 <span class="font-medium text-purple-600">비대면 의료 서비스에 대한 수요가 크게 증가</span>했습니다. 원격 진료, 온라인 예약, 디지털 건강 기록 등 디지털 솔루션의 활용이 필수적이 되었습니다.
+                    </p>
+                    <div class="mt-4 flex">
+                        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full mr-2">#비대면진료</span>
+                        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">#디지털솔루션</span>
+                    </div>
+                </div>
+                
+                <!-- 카드 4: 진료 효율성 개선 필요 -->
+                <div class="bg-card bg-white bg-opacity-80 rounded-xl p-6 shadow-md relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-pink-500 opacity-10 transform rotate-45 translate-x-8 -translate-y-8"></div>
+                    <div class="flex items-center mb-4">
+                        <div class="bg-pink-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-chart-line text-pink-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-blue-800">진료 효율성 개선 필요</h3>
+                    </div>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        사전에 환자 정보를 수집하고 분석함으로써 <span class="font-medium text-pink-600">실제 진료 시간을 더 효율적으로 활용</span>할 수 있으며, 이는 의료진과 환자 모두에게 혜택을 제공합니다.
+                    </p>
+                    <div class="mt-4 flex">
+                        <span class="text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded-full mr-2">#진료효율화</span>
+                        <span class="text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded-full">#데이터기반</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 하단 바 -->
+            <div class="absolute bottom-12 left-0 w-full flex justify-center">
+                <div class="w-1/2 h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
+            </div>
+        </div>
+        
+        <!-- 데이터 시각화 차트 -->
+        <div class="chart-container">
+            <canvas id="dataChart"></canvas>
+        </div>
+    </div>
+
+    <!-- <script>
+        // 차트 데이터
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('dataChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: '비대면 서비스 선호도 (%)',
+                        data: [35, 58, 72, 78, 85],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(79, 70, 229, 0.7)',
+                            'rgba(139, 92, 246, 0.7)',
+                            'rgba(190, 24, 185, 0.7)',
+                            'rgba(219, 39, 119, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(79, 70, 229, 1)',
+                            'rgba(139, 92, 246, 1)',
+                            'rgba(190, 24, 185, 1)',
+                            'rgba(219, 39, 119, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#1e40af',
+                            bodyColor: '#1e3a8a',
+                            borderColor: '#ddd',
+                            borderWidth: 1,
+                            padding: 10,
+                            cornerRadius: 8,
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script> -->
+</body>
+</html> 
