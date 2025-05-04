@@ -18,19 +18,19 @@
             background: linear-gradient(135deg, #f0f9ff 0%, #e1f5fe 100%);
         }
         .slide {
-            width: 100%;
-            height: 100%;
+            width: 1920px;
+            height: 1200px;
             position: relative;
-            /* margin: 0 auto; */
+            margin: 0 auto;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
         }
         .chart-container {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
-            width: 25%;
-            height: 25%;
+            bottom: 30px; /* Adjusted position */
+            left: 30px;  /* Adjusted position */
+            width: 25%; /* Maintained relative size */
+            height: 25%; /* Maintained relative size */
             z-index: 1;
             opacity: 0.9;
         }
@@ -46,7 +46,7 @@
             overflow: hidden;
             height: 100%;
             width: 100%;
-            max-height: 500px;
+            max-height: 700px; /* Increased max height for larger slide */
         }
         .image-placeholder img {
             max-width: 100%;
@@ -69,33 +69,33 @@
         }
     </style>
 </head>
-<body class="">
+<body class="flex items-center justify-center bg-gray-100">
     <div class="slide bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
         <!-- 상단 장식 패턴 -->
-        <div class="absolute top-0 right-0 w-full h-24 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-20px]"></div>
+        <div class="absolute top-0 right-0 w-full h-36 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-30px]"></div>
         
         <!-- 메인 콘텐츠 -->
-        <div class="flex h-full z-10 p-16 gap-8">
+        <div class="flex h-full z-10 p-24 gap-12">
             <!-- 왼쪽 컬럼: 설명 -->
             <div class="w-1/2 flex flex-col">
                 <!-- 제목 -->
-                <div class="mb-6">
-                    <h1 class="text-4xl font-bold text-blue-900 mb-2">관리자측 예약 관리 시스템</h1>
-                    <div class="w-72 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                <div class="mb-10">
+                    <h1 class="text-6xl font-bold text-blue-900 mb-4">관리자측 예약 관리 시스템</h1>
+                    <div class="w-108 h-2.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
                 </div>
 
                 <!-- 목적 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm mb-4">
-                    <h3 class="font-semibold text-blue-800 mb-2 flex items-center"><i class="fas fa-user-shield mr-2 text-red-500"></i>목적</h3>
-                    <p class="text-sm text-gray-700 leading-relaxed">
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-user-shield mr-3 text-red-500"></i>목적</h3>
+                    <p class="text-base text-gray-700 leading-relaxed">
                         병원 스태프가 환자 예약을 효율적으로 관리하고 <span class="font-medium text-indigo-600">전체 일정을 한눈에 파악</span>할 수 있도록 합니다.
                     </p>
                 </div>
 
                 <!-- 주요 기능 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm mb-4">
-                    <h3 class="font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-tasks mr-2 text-purple-500"></i>주요 기능</h3>
-                    <ul class="space-y-1 text-sm text-gray-700 text-xs list-none pl-0">
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-tasks mr-3 text-purple-500"></i>주요 기능</h3>
+                    <ul class="space-y-1.5 text-base text-gray-700 list-none pl-0">
                         <li class="list-item">관리자용 캘린더로 전체 예약 현황 시각적 확인</li>
                         <li class="list-item">환자 예약 신청 접수 및 확정/거절 처리</li>
                         <li class="list-item">예약 생성, 수정, 취소 기능</li>
@@ -105,20 +105,20 @@
                 </div>
 
                 <!-- 운영 효율화 및 데이터 활용 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm flex-grow">
-                     <h3 class="font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-chart-bar mr-2 text-green-500"></i>운영 효율화 및 데이터 활용</h3>
-                     <div class="grid grid-cols-2 gap-x-4 text-xs text-gray-700">
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm flex-grow">
+                     <h3 class="text-xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-chart-bar mr-3 text-green-500"></i>운영 효율화 및 데이터 활용</h3>
+                     <div class="grid grid-cols-2 gap-x-6 text-sm text-gray-700">
                         <div>
-                            <h4 class="font-medium mb-1 text-blue-700">운영 효율화</h4>
-                            <ul class="list-disc list-inside space-y-1">
+                            <h4 class="font-medium mb-2 text-blue-700">운영 효율화</h4>
+                            <ul class="list-disc list-inside space-y-1.5">
                                 <li>행정 부담 감소 (자동화)</li>
                                 <li>효율적인 일정 관리</li>
                                 <li>노쇼(No-show) 관리</li>
                             </ul>
                         </div>
                         <div>
-                             <h4 class="font-medium mb-1 text-indigo-700">데이터 활용</h4>
-                            <ul class="list-disc list-inside space-y-1">
+                             <h4 class="font-medium mb-2 text-indigo-700">데이터 활용</h4>
+                            <ul class="list-disc list-inside space-y-1.5">
                                 <li>예약 패턴 분석</li>
                                 <li>운영 최적화</li>
                                 <li>마케팅 활용</li>
@@ -128,23 +128,23 @@
                 </div>
 
                 <!-- 차트 컨테이너 -->
-                <div class="chart-container mt-4">
+                <div class="chart-container mt-6">
                     <canvas id="adminChart"></canvas>
                 </div>
             </div>
             
             <!-- 오른쪽 컬럼: 이미지 -->
             <div class="w-1/2 flex items-center justify-center">
-                <div class="image-placeholder rounded-lg shadow-lg">
+                <div class="image-placeholder rounded-xl shadow-lg">
                      <img src="Images/관리자페이지.png" alt="관리자 대시보드 예시" />
-                     <!-- <span class="block p-4">관리자 대시보드 이미지<br>(Images/관리자페이지.png)</span> -->
+                     <!-- <span class="block p-6">관리자 대시보드 이미지<br>(Images/관리자페이지.png)</span> -->
                 </div>
             </div>
         </div>
 
         <!-- 하단 바 -->
-        <div class="absolute bottom-12 left-0 w-full flex justify-center">
-            <div class="w-1/2 h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
+        <div class="absolute bottom-20 left-0 w-full flex justify-center">
+            <div class="w-7/12 h-3 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
         </div>
     </div>
 

@@ -18,19 +18,19 @@
             background: linear-gradient(135deg, #f0f9ff 0%, #e1f5fe 100%);
         }
         .slide {
-            width: 100%;
-            height: 100%;
+            width: 1920px;
+            height: 1200px;
             position: relative;
-            /* margin: 0 auto; */
+            margin: 0 auto;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
         }
         .chart-container {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
-            width: 25%;
-            height: 20%;
+            bottom: 30px; /* Adjusted position */
+            left: 30px;  /* Adjusted position */
+            width: 25%; /* Maintained relative size */
+            height: 20%; /* Maintained relative size */
             z-index: 1;
             opacity: 0.8;
         }
@@ -46,7 +46,7 @@
             overflow: hidden; /* Prevent image overflow */
             height: 100%; /* Fill height of parent */
             width: 100%; /* Fill width of parent */
-            max-height: 450px; /* Limit max height */
+            max-height: 650px; /* Increased max height for larger slide */
         }
         .image-placeholder img {
             max-width: 100%;
@@ -55,69 +55,69 @@
         }
     </style>
 </head>
-<body class="">
+<body class="flex items-center justify-center bg-gray-100">
     <div class="slide bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
         <!-- 상단 장식 패턴 -->
-        <div class="absolute top-0 right-0 w-full h-24 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-20px]"></div>
+        <div class="absolute top-0 right-0 w-full h-36 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-30px]"></div>
         
         <!-- 메인 콘텐츠 -->
-        <div class="flex h-full z-10 p-16 gap-8">
+        <div class="flex h-full z-10 p-24 gap-12">
             <!-- 왼쪽 컬럼: 설명 -->
             <div class="w-1/2 flex flex-col">
                 <!-- 제목 -->
-                <div class="mb-6">
-                    <h1 class="text-4xl font-bold text-blue-900 mb-2">환자 정보 수집 시스템</h1>
-                    <div class="w-64 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                <div class="mb-10">
+                    <h1 class="text-6xl font-bold text-blue-900 mb-4">환자 정보 수집 시스템</h1>
+                    <div class="w-96 h-2.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
                 </div>
 
                 <!-- 목적 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm mb-4">
-                    <h3 class="font-semibold text-blue-800 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-red-500"></i>목적</h3>
-                    <p class="text-sm text-gray-700 leading-relaxed">
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-bullseye mr-3 text-red-500"></i>목적</h3>
+                    <p class="text-base text-gray-700 leading-relaxed">
                         진료 전 환자의 통증 상태, 병력, 생활 습관 등 관련 정보를 <span class="font-medium text-indigo-600">체계적이고 상세하게 수집</span>하여 효율적인 진료를 지원합니다.
                     </p>
                 </div>
 
                 <!-- 주요 설문 항목 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm mb-4 flex-grow">
-                    <h3 class="font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-list-ul mr-2 text-green-500"></i>주요 설문 항목</h3>
-                    <ul class="space-y-1.5 text-sm text-gray-700 text-xs list-none pl-0">
-                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2 text-xs"></i>기본 정보 및 인적 사항</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2 text-xs"></i>통증 강도 (VAS 척도 활용)</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2 text-xs"></i>통증 부위 (신체 그림 선택 인터페이스)</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2 text-xs"></i>통증 특징 (DN4 등 신경병증성 통증 평가)</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2 text-xs"></i>기능 제한 (ODI, NDI 등 기능 평가 지표)</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-2 text-xs"></i>생활 습관 및 병력, 과거 치료 이력</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle text-red-400 mr-2 text-xs"></i>위험 신호(Red flags) 스크리닝</li>
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6 flex-grow">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-list-ul mr-3 text-green-500"></i>주요 설문 항목</h3>
+                    <ul class="space-y-2 text-base text-gray-700 list-none pl-0">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-3 text-sm"></i>기본 정보 및 인적 사항</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-3 text-sm"></i>통증 강도 (VAS 척도 활용)</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-3 text-sm"></i>통증 부위 (신체 그림 선택 인터페이스)</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-3 text-sm"></i>통증 특징 (DN4 등 신경병증성 통증 평가)</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-3 text-sm"></i>기능 제한 (ODI, NDI 등 기능 평가 지표)</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-blue-400 mr-3 text-sm"></i>생활 습관 및 병력, 과거 치료 이력</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-red-400 mr-3 text-sm"></i>위험 신호(Red flags) 스크리닝</li>
                     </ul>
                 </div>
 
                 <!-- 차별화 요소 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm mt-auto">
-                    <h3 class="font-semibold text-blue-800 mb-2 flex items-center"><i class="fas fa-star mr-2 text-yellow-500"></i>차별화 요소</h3>
-                    <p class="text-sm text-gray-700 leading-relaxed">
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mt-auto">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-star mr-3 text-yellow-500"></i>차별화 요소</h3>
+                    <p class="text-base text-gray-700 leading-relaxed">
                         <span class="font-medium text-purple-600">국제 공인 평가지표</span> 활용, 단계별 진행으로 피로도 감소, <span class="font-medium text-pink-600">직관적인 UI/UX</span> 제공
                     </p>
                 </div>
                 <!-- 차트 컨테이너 -->
-                <div class="chart-container mt-4">
+                <div class="chart-container mt-6">
                     <canvas id="surveyChart"></canvas>
                 </div>
             </div>
             
             <!-- 오른쪽 컬럼: 이미지 -->
             <div class="w-1/2 flex items-center justify-center">
-                <div class="image-placeholder rounded-lg shadow-lg">
+                <div class="image-placeholder rounded-xl shadow-lg">
                     <!-- 실제 이미지 경로 삽입 -->
                     <img src="Images/설문.png" alt="설문 인터페이스 예시" />
-                    <!-- <span class="block p-4">설문 인터페이스 이미지<br>(Images/설문.png)</span> -->
+                    <!-- <span class="block p-6">설문 인터페이스 이미지<br>(Images/설문.png)</span> -->
                 </div>
             </div>
         </div>
 
         <!-- 하단 바 -->
-        <div class="absolute bottom-12 left-0 w-full flex justify-center">
-            <div class="w-1/2 h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
+        <div class="absolute bottom-20 left-0 w-full flex justify-center">
+            <div class="w-7/12 h-3 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
         </div>
     </div>
 

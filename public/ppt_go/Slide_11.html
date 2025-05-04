@@ -18,19 +18,19 @@
             background: linear-gradient(135deg, #f0f9ff 0%, #e1f5fe 100%);
         }
         .slide {
-            width: 100%;
-            height: 100%;
+            width: 1920px;
+            height: 1200px;
             position: relative;
-            /* margin: 0 auto; */
+            margin: 0 auto;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
         }
         .chart-container {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
-            width: 28%;
-            height: 22%;
+            bottom: 30px; /* Adjusted position */
+            left: 30px;  /* Adjusted position */
+            width: 28%; /* Maintained relative size */
+            height: 22%; /* Maintained relative size */
             z-index: 1;
             opacity: 0.9;
         }
@@ -46,7 +46,7 @@
             overflow: hidden;
             height: 100%;
             width: 100%;
-            max-height: 500px;
+            max-height: 700px; /* Increased max height for larger slide */
         }
         .image-placeholder img {
             max-width: 100%;
@@ -56,85 +56,85 @@
         .tag {
             background-color: rgba(59, 130, 246, 0.1);
             color: rgba(37, 99, 235, 1);
-            padding: 0.2rem 0.6rem;
+            padding: 0.3rem 0.8rem; /* Increased padding */
             border-radius: 999px;
-            font-size: 0.7rem;
+            font-size: 0.8rem; /* Increased font size */
             font-weight: 500;
-            margin: 0.2rem;
+            margin: 0.3rem; /* Increased margin */
             display: inline-block;
         }
     </style>
 </head>
-<body class="">
+<body class="flex items-center justify-center bg-gray-100">
     <div class="slide bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
         <!-- 상단 장식 패턴 -->
-        <div class="absolute top-0 right-0 w-full h-24 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-20px]"></div>
+        <div class="absolute top-0 right-0 w-full h-36 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-30px]"></div>
         
         <!-- 메인 콘텐츠 -->
-        <div class="flex h-full z-10 p-16 gap-8">
+        <div class="flex h-full z-10 p-24 gap-12">
             <!-- 왼쪽 컬럼: 설명 -->
             <div class="w-1/2 flex flex-col">
                 <!-- 제목 -->
-                <div class="mb-6">
-                    <h1 class="text-4xl font-bold text-blue-900 mb-2">FAQ 웹페이지</h1>
-                    <div class="w-48 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                <div class="mb-10">
+                    <h1 class="text-6xl font-bold text-blue-900 mb-4">FAQ 웹페이지</h1>
+                    <div class="w-72 h-2.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
                 </div>
 
                 <!-- 목적 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm mb-4">
-                    <h3 class="font-semibold text-blue-800 mb-2 flex items-center"><i class="fas fa-question-circle mr-2 text-red-500"></i>목적</h3>
-                    <p class="text-sm text-gray-700 leading-relaxed">
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-question-circle mr-3 text-red-500"></i>목적</h3>
+                    <p class="text-base text-gray-700 leading-relaxed">
                         환자들이 자주 묻는 질문과 그에 대한 <span class="font-medium text-indigo-600">전문적인 답변</span>을 쉽게 찾아볼 수 있는 정보성 콘텐츠를 제공합니다.
                     </p>
                 </div>
 
                 <!-- 콘텐츠 소스 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm mb-4">
-                    <h3 class="font-semibold text-blue-800 mb-2 flex items-center"><i class="fas fa-database mr-2 text-green-500"></i>콘텐츠 소스</h3>
-                    <p class="text-sm text-gray-700 leading-relaxed">
-                         김영환 원장이 <span class="font-medium text-green-600">네이버 지식iN</span>에 직접 작성한 약 <span class="font-bold text-lg text-green-700">900</span>개의 통증 관련 답변 데이터 활용.
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-database mr-3 text-green-500"></i>콘텐츠 소스</h3>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                         김영환 원장이 <span class="font-medium text-green-600">네이버 지식iN</span>에 직접 작성한 약 <span class="font-bold text-xl text-green-700">900</span>개의 통증 관련 답변 데이터 활용.
                     </p>
                 </div>
 
                  <!-- 주요 기능 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm mb-4">
-                    <h3 class="font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-search mr-2 text-purple-500"></i>주요 기능</h3>
-                    <ul class="space-y-1.5 text-sm text-gray-700 text-xs list-none pl-0">
-                        <li class="flex items-center"><i class="fas fa-tags text-blue-400 mr-2 text-xs"></i><span class="font-semibold">태그 기반 필터링:</span> 질병명, 증상, 치료법 등</li>
-                        <li class="flex items-center"><i class="fas fa-keyboard text-blue-400 mr-2 text-xs"></i><span class="font-semibold">키워드 검색 기능</span></li>
-                        <li class="flex items-center"><i class="fas fa-folder-open text-blue-400 mr-2 text-xs"></i><span class="font-semibold">카테고리별 정보 분류</span></li>
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-search mr-3 text-purple-500"></i>주요 기능</h3>
+                    <ul class="space-y-2 text-base text-gray-700 list-none pl-0">
+                        <li class="flex items-center"><i class="fas fa-tags text-blue-400 mr-3 text-sm"></i><span class="font-semibold">태그 기반 필터링:</span> 질병명, 증상, 치료법 등</li>
+                        <li class="flex items-center"><i class="fas fa-keyboard text-blue-400 mr-3 text-sm"></i><span class="font-semibold">키워드 검색 기능</span></li>
+                        <li class="flex items-center"><i class="fas fa-folder-open text-blue-400 mr-3 text-sm"></i><span class="font-semibold">카테고리별 정보 분류</span></li>
                     </ul>
-                     <div class="mt-3">
+                     <div class="mt-4">
                          <span class="tag">#허리디스크</span> <span class="tag">#목디스크</span> <span class="tag">#어깨통증</span> <span class="tag">#무릎통증</span> <span class="tag">#신경차단술</span> <span class="tag">#도수치료</span> <span class="tag">#체외충격파</span>
                      </div>
                 </div>
 
                 <!-- 가치 제안 -->
-                 <div class="bg-gradient-to-r from-green-500 to-blue-600 rounded-lg p-4 shadow-sm text-white mt-auto">
-                    <h3 class="font-semibold mb-2 flex items-center"><i class="fas fa-thumbs-up mr-2"></i>가치 제안</h3>
-                    <p class="text-xs leading-relaxed">
+                 <div class="bg-gradient-to-r from-green-500 to-blue-600 rounded-xl p-6 shadow-sm text-white mt-auto">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center"><i class="fas fa-thumbs-up mr-3"></i>가치 제안</h3>
+                    <p class="text-sm leading-relaxed">
                         신뢰성 있는 의학 정보 제공, 환자 교육, 검색 엔진 최적화(SEO)를 통한 병원 마케팅 효과 증대.
                     </p>
                 </div>
 
                 <!-- 차트 컨테이너 -->
-                <div class="chart-container mt-4">
+                <div class="chart-container mt-6">
                     <canvas id="faqChart"></canvas>
                 </div>
             </div>
             
             <!-- 오른쪽 컬럼: 이미지 -->
             <div class="w-1/2 flex items-center justify-center">
-                <div class="image-placeholder rounded-lg shadow-lg">
+                <div class="image-placeholder rounded-xl shadow-lg">
                     <img src="Images/질답.png" alt="FAQ 웹페이지 예시" />
-                    <!-- <span class="block p-4">FAQ 웹페이지 이미지<br>(Images/질답.png)</span> -->
+                    <!-- <span class="block p-6">FAQ 웹페이지 이미지<br>(Images/질답.png)</span> -->
                 </div>
             </div>
         </div>
 
         <!-- 하단 바 -->
-        <div class="absolute bottom-12 left-0 w-full flex justify-center">
-            <div class="w-1/2 h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
+        <div class="absolute bottom-20 left-0 w-full flex justify-center">
+            <div class="w-7/12 h-3 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
         </div>
     </div>
 

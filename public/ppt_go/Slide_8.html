@@ -18,18 +18,19 @@
             background: linear-gradient(135deg, #f0f9ff 0%, #e1f5fe 100%);
         }
         .slide {
-            width: 100%;
-            height: 100%;
+            width: 1920px;
+            height: 1200px;
             position: relative;
+            margin: 0 auto;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
         }
         .chart-container {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
-            width: 25%;
-            height: 25%;
+            bottom: 30px; /* Adjusted position */
+            left: 30px;  /* Adjusted position */
+            width: 25%; /* Maintained relative size */
+            height: 25%; /* Maintained relative size */
             z-index: 1;
             opacity: 0.8;
         }
@@ -45,7 +46,7 @@
             overflow: hidden;
             height: 100%;
             width: 100%;
-            max-height: 500px;
+            max-height: 700px; /* Increased max height for larger slide */
         }
         .image-placeholder img {
             max-width: 100%;
@@ -54,68 +55,68 @@
         }
     </style>
 </head>
-<body class="">
+<body class="flex items-center justify-center bg-gray-100">
     <div class="slide bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
         <!-- 상단 장식 패턴 -->
-        <div class="absolute top-0 right-0 w-full h-24 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-20px]"></div>
+        <div class="absolute top-0 right-0 w-full h-36 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-30px]"></div>
         
         <!-- 메인 콘텐츠 -->
-        <div class="flex h-full z-10 p-16 gap-8">
+        <div class="flex h-full z-10 p-24 gap-12">
             <!-- 왼쪽 컬럼: 설명 -->
             <div class="w-1/2 flex flex-col">
                 <!-- 제목 -->
-                <div class="mb-6">
-                    <h1 class="text-4xl font-bold text-blue-900 mb-2">환자 지원 챗봇</h1>
-                    <div class="w-48 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                <div class="mb-10">
+                    <h1 class="text-6xl font-bold text-blue-900 mb-4">환자 지원 챗봇</h1>
+                    <div class="w-72 h-2.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
                 </div>
 
                 <!-- 목적 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm mb-4">
-                    <h3 class="font-semibold text-blue-800 mb-2 flex items-center"><i class="fas fa-bullseye mr-2 text-red-500"></i>목적</h3>
-                    <p class="text-sm text-gray-700 leading-relaxed">
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-bullseye mr-3 text-red-500"></i>목적</h3>
+                    <p class="text-base text-gray-700 leading-relaxed">
                         설문 결과 및 생성된 리포트를 바탕으로 환자의 궁금증을 해소하고, 안심시키며, <span class="font-medium text-indigo-600">병원 방문을 자연스럽게 유도</span>합니다.
                     </p>
                 </div>
 
                 <!-- 프롬프트 엔지니어링 전략 -->
-                <div class="bg-white bg-opacity-70 rounded-lg p-4 shadow-sm mb-4">
-                    <h3 class="font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-wrench mr-2 text-gray-500"></i>프롬프트 엔지니어링 전략</h3>
-                    <ul class="space-y-1.5 text-sm text-gray-700 text-xs list-none pl-0">
-                        <li class="flex items-center"><i class="fas fa-user-md text-blue-400 mr-2 text-xs"></i><span class="font-semibold">데이터 기반 페르소나:</span> 원장님 답변 900여개 분석 기반</li>
-                        <li class="flex items-center"><i class="fas fa-id-card text-blue-400 mr-2 text-xs"></i><span class="font-semibold">개인화된 상호작용:</span> 환자 설문/리포트 기반 맞춤 응답</li>
-                        <li class="flex items-center"><i class="fas fa-user-shield text-blue-400 mr-2 text-xs"></i><span class="font-semibold">명확한 역할 정의:</span> 의료 전문가 아님 명시, 방문 권유</li>
-                        <li class="flex items-center"><i class="fas fa-heart text-blue-400 mr-2 text-xs"></i><span class="font-semibold">공감 및 안심:</span> 불편감 공감, 긍정적 전망 제시</li>
+                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-wrench mr-3 text-gray-500"></i>프롬프트 엔지니어링 전략</h3>
+                    <ul class="space-y-2 text-base text-gray-700 list-none pl-0">
+                        <li class="flex items-center"><i class="fas fa-user-md text-blue-400 mr-3 text-sm"></i><span class="font-semibold">데이터 기반 페르소나:</span> 원장님 답변 900여개 분석 기반</li>
+                        <li class="flex items-center"><i class="fas fa-id-card text-blue-400 mr-3 text-sm"></i><span class="font-semibold">개인화된 상호작용:</span> 환자 설문/리포트 기반 맞춤 응답</li>
+                        <li class="flex items-center"><i class="fas fa-user-shield text-blue-400 mr-3 text-sm"></i><span class="font-semibold">명확한 역할 정의:</span> 의료 전문가 아님 명시, 방문 권유</li>
+                        <li class="flex items-center"><i class="fas fa-heart text-blue-400 mr-3 text-sm"></i><span class="font-semibold">공감 및 안심:</span> 불편감 공감, 긍정적 전망 제시</li>
                     </ul>
                 </div>
                 
                  <!-- 주요 특징 -->
-                <div class="bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg p-4 shadow-sm text-white flex-grow">
-                    <h3 class="font-semibold mb-2 flex items-center"><i class="fas fa-star mr-2"></i>주요 특징</h3>
-                    <ul class="space-y-1.5 text-xs list-none pl-0">
-                        <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-xs"></i>환자 특성 맞춤 개인화된 대화</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-xs"></i>온누리통증의학과 치료법 소개</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-xs"></i>불필요한 걱정 해소 및 심리적 지원</li>
+                <div class="bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl p-6 shadow-sm text-white flex-grow">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center"><i class="fas fa-star mr-3"></i>주요 특징</h3>
+                    <ul class="space-y-2 text-sm list-none pl-0">
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3 text-sm"></i>환자 특성 맞춤 개인화된 대화</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3 text-sm"></i>온누리통증의학과 치료법 소개</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3 text-sm"></i>불필요한 걱정 해소 및 심리적 지원</li>
                     </ul>
                 </div>
 
                 <!-- 차트 컨테이너 -->
-                <div class="chart-container mt-4">
+                <div class="chart-container mt-6">
                     <canvas id="chatbotChart"></canvas>
                 </div>
             </div>
             
             <!-- 오른쪽 컬럼: 이미지 -->
             <div class="w-1/2 flex items-center justify-center">
-                <div class="image-placeholder rounded-lg shadow-lg">
+                <div class="image-placeholder rounded-xl shadow-lg">
                     <img src="Images/챗봇.png" alt="챗봇 인터페이스 예시" />
-                    <!-- <span class="block p-4">챗봇 인터페이스 이미지<br>(Images/챗봇.png)</span> -->
+                    <!-- <span class="block p-6">챗봇 인터페이스 이미지<br>(Images/챗봇.png)</span> -->
                 </div>
             </div>
         </div>
 
         <!-- 하단 바 -->
-        <div class="absolute bottom-12 left-0 w-full flex justify-center">
-            <div class="w-1/2 h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
+        <div class="absolute bottom-20 left-0 w-full flex justify-center">
+            <div class="w-7/12 h-3 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
         </div>
     </div>
 
