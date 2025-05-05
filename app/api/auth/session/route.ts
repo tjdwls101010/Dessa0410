@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 export async function GET(req: NextRequest) {
   try {
     // 세션 쿠키 가져오기
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const sessionCookie = cookieStore.get('user_session');
     
     if (!sessionCookie) {
