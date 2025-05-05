@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -9,7 +9,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useAuth } from "@/lib/auth-context"
 
-export default function LoginPage() {
+// 실제 로그인 폼 컴포넌트
+function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { login, isLoading } = useAuth()
@@ -70,6 +71,71 @@ export default function LoginPage() {
   }
 
   return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-3">
+        <Label htmlFor="name" className="text-lg">이름</Label>
+        <Input 
+          id="name" 
+          placeholder="예약하신 이름을 입력하세요" 
+          value={name} 
+          onChange={(e) => setName(e.target.value)}
+          required 
+          className="h-12 text-lg"
+        />
+      </div>
+      <div className="space-y-3">
+        <Label htmlFor="phone" className="text-lg">전화번호</Label>
+        <Input 
+          id="phone" 
+          placeholder="010-0000-0000" 
+          value={phone} 
+          onChange={(e) => setPhone(e.target.value)}
+          required 
+          className="h-12 text-lg"
+        />
+      </div>
+      <div className="space-y-3">
+        <Label htmlFor="password" className="text-lg">예약 비밀번호</Label>
+        <Input
+          id="password"
+          type="password"
+          placeholder="SMS로 받으신 6자리 비밀번호"
+          value={password}
+          onChange={(e) => {
+            const value = e.target.value;
+            // 숫자만 입력 가능하고, 최대 6자리까지만 허용
+            if (/^[0-9]*$/.test(value) && value.length <= 6) {
+              setPassword(value);
+            }
+          }}
+          maxLength={6} // 최대 입력 길이 제한
+          required
+          className="h-12 text-lg"
+        />
+      </div>
+
+      {error && (
+        <Alert variant="destructive">
+          <AlertDescription className="text-base">{error}</AlertDescription>
+        </Alert>
+      )}
+
+      {success && (
+        <Alert>
+          <AlertDescription className="text-base">{success}</AlertDescription>
+        </Alert>
+      )}
+
+      <Button type="submit" className="w-full h-12 text-lg font-medium" disabled={isLoading}>
+        {isLoading ? "확인 중..." : "로그인"}
+      </Button>
+    </form>
+  )
+}
+
+// 메인 로그인 페이지 컴포넌트
+export default function LoginPage() {
+  return (
     <div className="flex min-h-screen items-start justify-center bg-gray-50 p-4 pt-20">
       <Card className="w-full max-w-xl">
         <CardHeader className="space-y-2 px-6 py-6">
@@ -79,65 +145,9 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="px-6 py-4">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-3">
-              <Label htmlFor="name" className="text-lg">이름</Label>
-              <Input 
-                id="name" 
-                placeholder="예약하신 이름을 입력하세요" 
-                value={name} 
-                onChange={(e) => setName(e.target.value)}
-                required 
-                className="h-12 text-lg"
-              />
-            </div>
-            <div className="space-y-3">
-              <Label htmlFor="phone" className="text-lg">전화번호</Label>
-              <Input 
-                id="phone" 
-                placeholder="010-0000-0000" 
-                value={phone} 
-                onChange={(e) => setPhone(e.target.value)}
-                required 
-                className="h-12 text-lg"
-              />
-            </div>
-            <div className="space-y-3">
-              <Label htmlFor="password" className="text-lg">예약 비밀번호</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="SMS로 받으신 6자리 비밀번호"
-                value={password}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  // 숫자만 입력 가능하고, 최대 6자리까지만 허용
-                  if (/^[0-9]*$/.test(value) && value.length <= 6) {
-                    setPassword(value);
-                  }
-                }}
-                maxLength={6} // 최대 입력 길이 제한
-                required
-                className="h-12 text-lg"
-              />
-            </div>
-
-            {error && (
-              <Alert variant="destructive">
-                <AlertDescription className="text-base">{error}</AlertDescription>
-              </Alert>
-            )}
-
-            {success && (
-              <Alert>
-                <AlertDescription className="text-base">{success}</AlertDescription>
-              </Alert>
-            )}
-
-            <Button type="submit" className="w-full h-12 text-lg font-medium" disabled={isLoading}>
-              {isLoading ? "확인 중..." : "로그인"}
-            </Button>
-          </form>
+          <Suspense fallback={<div className="text-center py-4">로딩 중...</div>}>
+            <LoginForm />
+          </Suspense>
         </CardContent>
         <CardFooter className="flex justify-center text-base text-muted-foreground px-6 py-4">
           <p>예약하신 정보로 로그인하시면 예약 내용을 확인하실 수 있습니다.</p>
