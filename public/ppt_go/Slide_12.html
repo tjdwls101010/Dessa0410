@@ -3,143 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>기술 스택 및 아키텍처 - 온누리통증의학과 서비스 개선 프로젝트</title>
+    <title>기대 효과</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Chart.js is not needed for this slide -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden;
             height: 100vh;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e1f5fe 100%);
+            background-color: white;
         }
         .slide {
-            width: 1920px;
-            height: 1200px;
-            position: relative;
-            margin: 0 auto;
+            width: 1800px;
+            height: 1126px;
             overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
-        .tech-card {
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .effect-card {
             transition: all 0.3s ease;
-            border-left-width: 4px;
-            border-color: transparent;
         }
-        .tech-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        .effect-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        .card-framework { border-color: #3b82f6; } /* Blue */
-        .card-ui { border-color: #10b981; }        /* Green */
-        .card-db { border-color: #a855f7; }         /* Purple */
-        .card-api { border-color: #f59e0b; }         /* Amber */
-        .card-arch { border-color: #ef4444; }        /* Red */
-        
-        .tech-icon { 
-            font-size: 2.25rem; /* Increased icon size */
-            width: 50px; /* Increased icon width */
-            text-align: center;
+        .icon-sparkle {
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+        }
+        .benefit-item {
+            position: relative;
+            padding-left: 40px;
+        }
+        .benefit-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            background: rgba(34, 197, 94, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #22C55E;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .impact-meter {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .impact-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22C55E 0%, #16A34A 100%);
+            border-radius: 4px;
+            animation: fill-animation 2s ease-out;
+        }
+        @keyframes fill-animation {
+            from { width: 0%; }
+            to { width: var(--width); }
         }
     </style>
 </head>
-<body class="flex items-center justify-center bg-gray-100">
-    <div class="slide bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
-        <!-- 상단 장식 패턴 -->
-        <div class="absolute top-0 right-0 w-full h-36 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-30px]"></div>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="slide bg-white relative">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 bg-pattern opacity-50"></div>
         
-        <!-- 메인 콘텐츠 -->
-        <div class="flex flex-col h-full z-10 p-24">
-            <!-- 제목 -->
-            <div class="mb-16">
-                <h1 class="text-6xl font-bold text-blue-900 mb-4">기술 스택 및 아키텍처</h1>
-                <div class="w-108 h-2.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+        <!-- Left side decorative element -->
+        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
+        
+        <div class="relative z-10 p-16 pl-36">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-10">
+                <div>
+                    <h1 class="text-4xl font-bold text-blue-600">기대 효과</h1>
+                    <p class="text-xl text-blue-400 mt-2">Expected Benefits & Impact</p>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-blue-500 text-3xl icon-sparkle"></i>
+                    </div>
+                </div>
             </div>
             
-            <!-- 기술 스택 그리드 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 flex-grow">
-                <!-- 프레임워크 및 언어 -->
-                <div class="tech-card card-framework bg-white bg-opacity-80 rounded-xl p-8 shadow-sm">
-                    <h3 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
-                        <i class="fas fa-laptop-code tech-icon mr-4 text-blue-600"></i>프레임워크 & 언어
-                    </h3>
-                    <ul class="space-y-3 text-base text-gray-700">
-                        <li class="flex items-center"><i class="fab fa-react text-sky-500 w-6 mr-3"></i>Next.js (React 기반)</li>
-                        <li class="flex items-center"><i class="fab fa-js-square text-yellow-500 w-6 mr-3"></i>TypeScript (타입 안전성)</li>
-                    </ul>
-                </div>
-
-                <!-- UI/UX -->
-                <div class="tech-card card-ui bg-white bg-opacity-80 rounded-xl p-8 shadow-sm">
-                    <h3 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
-                        <i class="fas fa-palette tech-icon mr-4 text-green-600"></i>UI/UX
-                    </h3>
-                    <ul class="space-y-3 text-base text-gray-700">
-                        <li class="flex items-center"><i class="fas fa-drafting-compass text-gray-600 w-6 mr-3"></i>Shadcn UI (컴포넌트)</li>
-                        <li class="flex items-center"><i class="fas fa-paint-brush text-teal-500 w-6 mr-3"></i>Tailwind CSS (스타일링)</li>
-                    </ul>
-                </div>
-
-                <!-- 데이터베이스 -->
-                 <div class="tech-card card-db bg-white bg-opacity-80 rounded-xl p-8 shadow-sm">
-                    <h3 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
-                        <i class="fas fa-database tech-icon mr-4 text-purple-600"></i>데이터베이스
-                    </h3>
-                    <ul class="space-y-3 text-base text-gray-700">
-                         <li class="flex items-center"><i class="fas fa-bolt text-green-500 w-6 mr-3"></i>Supabase (PostgreSQL BaaS)</li>
-                         <!-- Add specific PostgreSQL icon if needed -->
-                    </ul>
-                </div>
-
-                <!-- API 및 외부 서비스 -->
-                 <div class="tech-card card-api bg-white bg-opacity-80 rounded-xl p-8 shadow-sm">
-                    <h3 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
-                        <i class="fas fa-plug tech-icon mr-4 text-amber-600"></i>API & 외부 서비스
-                    </h3>
-                    <ul class="space-y-3 text-base text-gray-700">
-                        <li class="flex items-center"><i class="fab fa-google text-blue-500 w-6 mr-3"></i>Google Gemini API (AI)</li>
-                        <li class="flex items-center"><i class="fas fa-sms text-orange-500 w-6 mr-3"></i>Solapi API (SMS 발송)</li>
-                    </ul>
-                </div>
-
-                <!-- 시스템 아키텍처 -->
-                <div class="tech-card card-arch bg-white bg-opacity-80 rounded-xl p-8 shadow-sm md:col-span-2 lg:col-span-1">
-                     <h3 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
-                        <i class="fas fa-server tech-icon mr-4 text-red-600"></i>시스템 아키텍처
-                    </h3>
-                    <ul class="space-y-3 text-base text-gray-700">
-                        <li class="flex items-center"><i class="fas fa-cloud text-sky-600 w-6 mr-3"></i>클라우드 기반 서버리스</li>
-                        <li class="flex items-center"><i class="fas fa-shield-alt text-gray-700 w-6 mr-3"></i>보안 및 안정성 고려</li>
-                        <li class="flex items-center"><i class="fas fa-expand-arrows-alt text-indigo-600 w-6 mr-3"></i>확장성 있는 설계</li>
-                    </ul>
-                </div>
-                 
-                <!-- 간단한 아키텍처 다이어그램 (텍스트 기반) -->
-                <div class="bg-gradient-to-r from-blue-100 to-indigo-100 rounded-xl p-8 shadow-sm md:col-span-2 lg:col-span-3 mt-6 border border-blue-200">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-4 text-center"><i class="fas fa-project-diagram mr-2"></i>간단한 시스템 흐름</h3>
-                    <div class="text-center text-base text-blue-900 font-medium flex justify-around items-center">
-                        <span><i class="fas fa-user mr-1"></i>환자 (웹/앱)</span>
-                        <i class="fas fa-long-arrow-alt-right mx-3 text-lg"></i>
-                        <span><i class="fab fa-react mr-1"></i>Next.js (Frontend)</span>
-                        <i class="fas fa-long-arrow-alt-right mx-3 text-lg"></i>
-                        <span><i class="fas fa-bolt mr-1"></i>Supabase (Backend/DB)</span>
-                        <i class="fas fa-long-arrow-alt-right mx-3 text-lg"></i>
-                        <span><i class="fab fa-google mr-1"></i>Gemini API</span>
-                        <span class="mx-1"> & </span>
-                        <span><i class="fas fa-sms ml-1 mr-1"></i>Solapi</span>
+            <!-- Patient Experience Innovation -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-user-friends mr-2"></i>
+                    환자 경험 혁신
+                </h2>
+                <div class="effect-card bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl p-8 text-white">
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-mobile-alt text-2xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold">정보 접근성 및 예약 편의성 극대화</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="benefit-item text-green-100">
+                                    <span class="font-semibold">24시간 언제든지</span> 온라인 예약 및 정보 조회
+                                </div>
+                                <div class="benefit-item text-green-100">
+                                    <span class="font-semibold">체계적인 설문 시스템</span>으로 진료 전 정보 수집
+                                </div>
+                                <div class="benefit-item text-green-100">
+                                    <span class="font-semibold">FAQ 기반</span> 즉시 궁금증 해결
+                                </div>
+                            </div>
+                            <div class="impact-meter">
+                                <div class="impact-fill" style="--width: 95%;"></div>
+                            </div>
+                            <p class="text-xs text-green-200 mt-2">편의성 향상 95%</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-heart text-2xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold">신뢰도 및 만족도 향상</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="benefit-item text-green-100">
+                                    <span class="font-semibold">AI 기반 맞춤형</span> 건강 리포트 제공
+                                </div>
+                                <div class="benefit-item text-green-100">
+                                    <span class="font-semibold">전문의 페르소나</span> 기반 개인화 상담
+                                </div>
+                                <div class="benefit-item text-green-100">
+                                    <span class="font-semibold">데이터 기반</span> 정확한 정보 제공
+                                </div>
+                            </div>
+                            <div class="impact-meter">
+                                <div class="impact-fill" style="--width: 92%;"></div>
+                            </div>
+                            <p class="text-xs text-green-200 mt-2">신뢰도 향상 92%</p>
+                        </div>
                     </div>
-                 </div>
-
+                </div>
             </div>
-        </div>
-
-        <!-- 하단 바 -->
-        <div class="absolute bottom-20 left-0 w-full flex justify-center">
-            <div class="w-7/12 h-3 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
+            
+            <!-- Hospital Operation Efficiency -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-hospital mr-2"></i>
+                    병원 운영 효율 증대
+                </h2>
+                <div class="effect-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-8 text-white">
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-clock text-2xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold">진료 준비 시간 단축</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="benefit-item text-blue-100">
+                                    <span class="font-semibold">사전 정보 수집</span>으로 효율적 진료 가능
+                                </div>
+                                <div class="benefit-item text-blue-100">
+                                    <span class="font-semibold">체계적 환자 데이터</span> 미리 파악
+                                </div>
+                                <div class="benefit-item text-blue-100">
+                                    <span class="font-semibold">AI 분석 결과</span> 활용한 맞춤 진료
+                                </div>
+                            </div>
+                            <div class="impact-meter">
+                                <div class="impact-fill" style="--width: 88%;"></div>
+                            </div>
+                            <p class="text-xs text-blue-200 mt-2">진료 준비시간 88% 단축</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-tasks text-2xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold">행정 업무 부담 감소</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="benefit-item text-blue-100">
+                                    <span class="font-semibold">예약 관리 자동화</span> 및 디지털화
+                                </div>
+                                <div class="benefit-item text-blue-100">
+                                    <span class="font-semibold">SMS 알림 자동 발송</span> 시스템
+                                </div>
+                                <div class="benefit-item text-blue-100">
+                                    <span class="font-semibold">반복 업무 자동화</span>로 효율성 증대
+                                </div>
+                            </div>
+                            <div class="impact-meter">
+                                <div class="impact-fill" style="--width: 85%;"></div>
+                            </div>
+                            <p class="text-xs text-blue-200 mt-2">행정업무 85% 감소</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hospital Competitiveness -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-trophy mr-2"></i>
+                    병원 경쟁력 강화
+                </h2>
+                <div class="grid grid-cols-3 gap-6">
+                    <!-- Innovation & Technology -->
+                    <div class="effect-card bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl p-6 text-white">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-rocket text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-4">차별화된 서비스</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="benefit-item text-purple-100">
+                                    최신 기술 도입으로 <span class="font-semibold">혁신적 의료 서비스</span> 제공
+                                </div>
+                                <div class="benefit-item text-purple-100">
+                                    <span class="font-semibold">AI 기반 맞춤형 진료</span>로 차별화
+                                </div>
+                            </div>
+                            <div class="impact-meter">
+                                <div class="impact-fill" style="--width: 90%;"></div>
+                            </div>
+                            <p class="text-xs text-purple-200 mt-2">혁신성 90%</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Data-driven Decision -->
+                    <div class="effect-card bg-gradient-to-br from-orange-500 to-red-500 rounded-xl p-6 text-white">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-chart-bar text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-4">데이터 기반 의사결정</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="benefit-item text-orange-100">
+                                    <span class="font-semibold">환자 데이터 분석</span>으로 인사이트 도출
+                                </div>
+                                <div class="benefit-item text-orange-100">
+                                    <span class="font-semibold">운영 최적화</span> 및 서비스 개선
+                                </div>
+                            </div>
+                            <div class="impact-meter">
+                                <div class="impact-fill" style="--width: 93%;"></div>
+                            </div>
+                            <p class="text-xs text-orange-200 mt-2">데이터 활용도 93%</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Brand Image -->
+                    <div class="effect-card bg-gradient-to-br from-teal-500 to-cyan-500 rounded-xl p-6 text-white">
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-star text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-4">혁신적 병원 이미지</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="benefit-item text-teal-100">
+                                    <span class="font-semibold">최첨단 기술 도입</span> 병원으로 포지셔닝
+                                </div>
+                                <div class="benefit-item text-teal-100">
+                                    <span class="font-semibold">환자 중심 서비스</span> 브랜드 구축
+                                </div>
+                            </div>
+                            <div class="impact-meter">
+                                <div class="impact-fill" style="--width: 87%;"></div>
+                            </div>
+                            <p class="text-xs text-teal-200 mt-2">브랜드 가치 87%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Summary Impact -->
+            <div class="bg-white rounded-xl border-2 border-blue-200 p-6">
+                <h2 class="text-2xl font-semibold text-blue-600 mb-4">
+                    <i class="fas fa-bullseye mr-2"></i>
+                    종합 임팩트
+                </h2>
+                <div class="grid grid-cols-4 gap-6 text-center">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <div class="text-3xl font-bold text-green-600 mb-2">95%</div>
+                        <div class="text-sm text-green-700 font-semibold">환자 만족도 향상</div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">85%</div>
+                        <div class="text-sm text-blue-700 font-semibold">운영 효율성 증대</div>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <div class="text-3xl font-bold text-purple-600 mb-2">90%</div>
+                        <div class="text-sm text-purple-700 font-semibold">기술 혁신도</div>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <div class="text-3xl font-bold text-orange-600 mb-2">92%</div>
+                        <div class="text-sm text-orange-700 font-semibold">전체 경쟁력</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="flex justify-end mt-6">
+                <div class="bg-blue-600 text-white px-6 py-3 rounded-full flex items-center">
+                    <i class="fas fa-arrow-right mr-2 text-yellow-300"></i> 
+                    <span>AI와 디지털 기술로 의료 서비스의 새로운 패러다임 창조</span>
+                </div>
+            </div>
         </div>
     </div>
 </body>

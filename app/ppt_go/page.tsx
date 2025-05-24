@@ -174,7 +174,7 @@ export default function PresentationPage() {
       </button>
 
       <a
-        href=""
+        href="https://docs.google.com/document/d/1RQqoX5PAF3nPEOGWILHafwb8SGGeOQV9aYRdVYi_tXs/edit?usp=sharing"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-24 right-8 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition-colors z-50 flex items-center justify-center"

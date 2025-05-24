@@ -3,187 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ 웹페이지 - 온누리통증의학과 서비스 개선 프로젝트</title>
+    <title>기술 스택 및 시스템 아키텍처</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden;
             height: 100vh;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e1f5fe 100%);
+            background-color: white;
         }
         .slide {
-            width: 1920px;
-            height: 1200px;
+            width: 1800px;
+            height: 1126px;
+            overflow: hidden;
             position: relative;
-            margin: 0 auto;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
         }
-        .chart-container {
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .tech-stack-card {
+            transition: all 0.3s ease;
+        }
+        .tech-stack-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .icon-gear {
+            animation: gear-rotate 4s linear infinite;
+        }
+        @keyframes gear-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .architecture-flow {
+            position: relative;
+        }
+        .architecture-flow::after {
+            content: '↔';
             position: absolute;
-            bottom: 30px; /* Adjusted position */
-            left: 30px;  /* Adjusted position */
-            width: 28%; /* Maintained relative size */
-            height: 22%; /* Maintained relative size */
-            z-index: 1;
-            opacity: 0.9;
+            top: 50%;
+            right: -30px;
+            font-size: 24px;
+            color: #3B82F6;
+            font-weight: bold;
+            transform: translateY(-50%);
         }
-        .image-placeholder {
-            background-color: #e2e8f0;
-            border: 2px dashed #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #94a3b8;
-            font-size: 0.9rem;
-            overflow: hidden;
-            height: 100%;
-            width: 100%;
-            max-height: 700px; /* Increased max height for larger slide */
+        .architecture-flow:last-child::after {
+            display: none;
         }
-        .image-placeholder img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        .tag {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: rgba(37, 99, 235, 1);
-            padding: 0.3rem 0.8rem; /* Increased padding */
-            border-radius: 999px;
-            font-size: 0.8rem; /* Increased font size */
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 500;
-            margin: 0.3rem; /* Increased margin */
+            margin: 2px;
             display: inline-block;
         }
     </style>
 </head>
-<body class="flex items-center justify-center bg-gray-100">
-    <div class="slide bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
-        <!-- 상단 장식 패턴 -->
-        <div class="absolute top-0 right-0 w-full h-36 bg-blue-500 opacity-10 transform -skew-y-6 translate-y-[-30px]"></div>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="slide bg-white relative">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 bg-pattern opacity-50"></div>
         
-        <!-- 메인 콘텐츠 -->
-        <div class="flex h-full z-10 p-24 gap-12">
-            <!-- 왼쪽 컬럼: 설명 -->
-            <div class="w-1/2 flex flex-col">
-                <!-- 제목 -->
-                <div class="mb-10">
-                    <h1 class="text-6xl font-bold text-blue-900 mb-4">FAQ 웹페이지</h1>
-                    <div class="w-72 h-2.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+        <!-- Left side decorative element -->
+        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
+        
+        <div class="relative z-10 p-16 pl-36">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-4xl font-bold text-blue-600">기술 스택 및 시스템 아키텍처</h1>
+                    <p class="text-xl text-blue-400 mt-2">Technology Stack & System Architecture</p>
                 </div>
-
-                <!-- 목적 -->
-                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-question-circle mr-3 text-red-500"></i>목적</h3>
-                    <p class="text-base text-gray-700 leading-relaxed">
-                        환자들이 자주 묻는 질문과 그에 대한 <span class="font-medium text-indigo-600">전문적인 답변</span>을 쉽게 찾아볼 수 있는 정보성 콘텐츠를 제공합니다.
-                    </p>
-                </div>
-
-                <!-- 콘텐츠 소스 -->
-                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-3 flex items-center"><i class="fas fa-database mr-3 text-green-500"></i>콘텐츠 소스</h3>
-                    <p class="text-base text-gray-700 leading-relaxed">
-                         김영환 원장이 <span class="font-medium text-green-600">네이버 지식iN</span>에 직접 작성한 약 <span class="font-bold text-xl text-green-700">900</span>개의 통증 관련 답변 데이터 활용.
-                    </p>
-                </div>
-
-                 <!-- 주요 기능 -->
-                <div class="bg-white bg-opacity-70 rounded-xl p-6 shadow-sm mb-6">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-search mr-3 text-purple-500"></i>주요 기능</h3>
-                    <ul class="space-y-2 text-base text-gray-700 list-none pl-0">
-                        <li class="flex items-center"><i class="fas fa-tags text-blue-400 mr-3 text-sm"></i><span class="font-semibold">태그 기반 필터링:</span> 질병명, 증상, 치료법 등</li>
-                        <li class="flex items-center"><i class="fas fa-keyboard text-blue-400 mr-3 text-sm"></i><span class="font-semibold">키워드 검색 기능</span></li>
-                        <li class="flex items-center"><i class="fas fa-folder-open text-blue-400 mr-3 text-sm"></i><span class="font-semibold">카테고리별 정보 분류</span></li>
-                    </ul>
-                     <div class="mt-4">
-                         <span class="tag">#허리디스크</span> <span class="tag">#목디스크</span> <span class="tag">#어깨통증</span> <span class="tag">#무릎통증</span> <span class="tag">#신경차단술</span> <span class="tag">#도수치료</span> <span class="tag">#체외충격파</span>
-                     </div>
-                </div>
-
-                <!-- 가치 제안 -->
-                 <div class="bg-gradient-to-r from-green-500 to-blue-600 rounded-xl p-6 shadow-sm text-white mt-auto">
-                    <h3 class="text-xl font-semibold mb-3 flex items-center"><i class="fas fa-thumbs-up mr-3"></i>가치 제안</h3>
-                    <p class="text-sm leading-relaxed">
-                        신뢰성 있는 의학 정보 제공, 환자 교육, 검색 엔진 최적화(SEO)를 통한 병원 마케팅 효과 증대.
-                    </p>
-                </div>
-
-                <!-- 차트 컨테이너 -->
-                <div class="chart-container mt-6">
-                    <canvas id="faqChart"></canvas>
+                <div class="flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-cogs text-blue-500 text-3xl icon-gear"></i>
+                    </div>
                 </div>
             </div>
             
-            <!-- 오른쪽 컬럼: 이미지 -->
-            <div class="w-1/2 flex items-center justify-center">
-                <div class="image-placeholder rounded-xl shadow-lg">
-                    <img src="Images/질답.png" alt="FAQ 웹페이지 예시" />
-                    <!-- <span class="block p-6">FAQ 웹페이지 이미지<br>(Images/질답.png)</span> -->
+            <!-- Frontend Technology -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-laptop-code mr-2"></i>
+                    프론트엔드 기술 스택
+                </h2>
+                <div class="tech-stack-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-8 text-white">
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fab fa-react text-2xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold">Core Framework</h3>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                                    <span><strong>Next.js (App Router)</strong> - 최신 풀스택 프레임워크</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                                    <span><strong>TypeScript</strong> - 타입 안정성 보장</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-paint-brush text-2xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold">UI/UX Stack</h3>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                                    <span><strong>Shadcn UI</strong> - 모던 컴포넌트 라이브러리</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                                    <span><strong>Tailwind CSS</strong> - 유틸리티 기반 스타일링</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Backend & Database -->
+            <div class="grid grid-cols-2 gap-8 mb-8">
+                <!-- Backend -->
+                <div class="tech-stack-card bg-gradient-to-br from-green-500 to-teal-500 rounded-xl p-6 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-server text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">백엔드/데이터베이스</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-green-400 bg-opacity-30 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-database mr-3 text-yellow-300"></i>
+                                <span class="font-bold">Supabase</span>
+                            </div>
+                            <p class="text-sm text-green-100">PostgreSQL 기반 BaaS 플랫폼</p>
+                            <div class="mt-2">
+                                <span class="tech-badge">실시간 DB</span>
+                                <span class="tech-badge">인증 시스템</span>
+                                <span class="tech-badge">RESTful API</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI & API -->
+                <div class="tech-stack-card bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl p-6 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-brain text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">AI 및 외부 API</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-purple-400 bg-opacity-30 p-3 rounded-lg">
+                            <div class="flex items-center mb-1">
+                                <i class="fab fa-google mr-2 text-yellow-300"></i>
+                                <span class="font-bold text-sm">Google Gemini API</span>
+                            </div>
+                            <p class="text-xs text-purple-100">AI 리포트 생성 & 챗봇</p>
+                        </div>
+                        <div class="bg-pink-400 bg-opacity-30 p-3 rounded-lg">
+                            <div class="flex items-center mb-1">
+                                <i class="fas fa-sms mr-2 text-yellow-300"></i>
+                                <span class="font-bold text-sm">Solapi API</span>
+                            </div>
+                            <p class="text-xs text-pink-100">SMS 발송 서비스</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- State Management & Middleware -->
+            <div class="grid grid-cols-2 gap-8 mb-8">
+                <div class="tech-stack-card bg-gradient-to-br from-orange-500 to-red-500 rounded-xl p-6 text-white">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-layer-group text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">상태 관리</h3>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                        <span><strong>React Context API</strong> - 글로벌 상태 관리</span>
+                    </div>
+                </div>
+                
+                <div class="tech-stack-card bg-gradient-to-br from-indigo-500 to-blue-500 rounded-xl p-6 text-white">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-shield-alt text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">인증/미들웨어</h3>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                        <span><strong>Next.js Middleware</strong> - 라우팅 & 보안</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- System Architecture -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-sitemap mr-2"></i>
+                    시스템 아키텍처 컨셉
+                </h2>
+                <div class="bg-white rounded-xl border-2 border-blue-200 p-8">
+                    <div class="grid grid-cols-5 gap-4 items-center">
+                        <!-- User -->
+                        <div class="architecture-flow bg-gradient-to-br from-green-400 to-green-500 rounded-xl p-6 text-white text-center">
+                            <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">사용자</h4>
+                            <p class="text-xs">웹 브라우저</p>
+                        </div>
+                        
+                        <!-- Next.js -->
+                        <div class="architecture-flow bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl p-6 text-white text-center">
+                            <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                                <i class="fab fa-react text-xl"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Next.js</h4>
+                            <p class="text-xs">프론트/백엔드 로직</p>
+                        </div>
+                        
+                        <!-- Supabase -->
+                        <div class="architecture-flow bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl p-6 text-white text-center">
+                            <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-database text-xl"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Supabase</h4>
+                            <p class="text-xs">DB/Auth</p>
+                        </div>
+                        
+                        <!-- Google Gemini -->
+                        <div class="architecture-flow bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl p-6 text-white text-center">
+                            <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-brain text-xl"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Gemini API</h4>
+                            <p class="text-xs">AI 분석</p>
+                        </div>
+                        
+                        <!-- Solapi -->
+                        <div class="architecture-flow bg-gradient-to-br from-pink-400 to-red-500 rounded-xl p-6 text-white text-center">
+                            <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-sms text-xl"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Solapi API</h4>
+                            <p class="text-xs">알림</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Architecture Description -->
+                    <div class="mt-8 bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-bold text-gray-700 mb-4">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            아키텍처 특징
+                        </h3>
+                        <div class="grid grid-cols-2 gap-6 text-sm text-gray-600">
+                            <div>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-check-circle mr-2 text-green-500"></i>
+                                    <span class="font-semibold">마이크로서비스 기반 구조</span>
+                                </div>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-check-circle mr-2 text-green-500"></i>
+                                    <span class="font-semibold">RESTful API 통신</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-check-circle mr-2 text-green-500"></i>
+                                    <span class="font-semibold">실시간 데이터 동기화</span>
+                                </div>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-check-circle mr-2 text-green-500"></i>
+                                    <span class="font-semibold">확장 가능한 클라우드 인프라</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="flex justify-end mt-6">
+                <div class="bg-blue-600 text-white px-6 py-3 rounded-full flex items-center">
+                    <i class="fas fa-arrow-right mr-2 text-yellow-300"></i> 
+                    <span>현대적이고 확장 가능한 기술 스택으로 안정적인 서비스 구현</span>
                 </div>
             </div>
         </div>
-
-        <!-- 하단 바 -->
-        <div class="absolute bottom-20 left-0 w-full flex justify-center">
-            <div class="w-7/12 h-3 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"></div>
-        </div>
     </div>
-
-    <!-- <script>
-        // 차트 데이터
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('faqChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['허리 통증', '목/어깨 통증', '무릎 통증', '기타 부위', '치료법 문의'],
-                    datasets: [{
-                        label: 'FAQ 콘텐츠 카테고리 분포 (%)',
-                        data: [35, 25, 15, 10, 15], // Example data based on 900 answers
-                        backgroundColor: [
-                            'rgba(59, 130, 246, 0.7)',
-                            'rgba(109, 40, 217, 0.7)',
-                            'rgba(16, 185, 129, 0.7)',
-                            'rgba(245, 158, 11, 0.7)', // Amber
-                            'rgba(236, 72, 153, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(59, 130, 246, 1)',
-                            'rgba(109, 40, 217, 1)',
-                            'rgba(16, 185, 129, 1)',
-                            'rgba(245, 158, 11, 1)',
-                            'rgba(236, 72, 153, 1)'
-                        ],
-                        hoverOffset: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                           position: 'bottom',
-                           labels: { font: { size: 9 } }
-                        },
-                        title: {
-                            display: true,
-                            text: 'FAQ 콘텐츠 분포',
-                            font: { size: 10 }
-                        }
-                    },
-                    cutout: '50%'
-                }
-            });
-        });
-    </script> -->
 </body>
 </html> 
