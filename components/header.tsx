@@ -28,7 +28,7 @@ export default function Header() {
             FAQ
           </Link>
           <Link href="/ppt_go" className="text-sm font-medium hover:text-primary">
-            최종 발표 초안
+            최종 발표
           </Link>
         </nav>
         <div className="flex items-center gap-2">

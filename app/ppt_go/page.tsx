@@ -112,7 +112,7 @@ export default function PresentationPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className={`flex-grow px-4 py-8 flex flex-col items-center`}>
-        <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">최종 발표 초안</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">최종 발표</h1>
         <div className={`w-full bg-white p-4 rounded-lg shadow-md`}>
           <div className={`relative aspect-video`}>
             <iframe
