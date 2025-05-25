@@ -183,8 +183,8 @@ export default function PresentationPage() {
         <FileText className="h-6 w-6" />
       </a>
       <a
-        href=""
-        download=""
+        href="/ppt_go/ppt_go.pdf"
+        download="ppt_go.pdf"
         className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50 flex items-center justify-center"
         aria-label="Download Presentation PDF"
       >
