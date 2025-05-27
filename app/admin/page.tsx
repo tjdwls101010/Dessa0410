@@ -1,5 +1,4 @@
 import React from 'react';
-import { createClient } from '@supabase/supabase-js';
 import {
   Table,
   TableBody,
@@ -17,11 +16,7 @@ import { AdminCalendar } from '@/components/admin/admin-calendar';
 import { ErrorDisplay } from '@/components/admin/error-display';
 import Link from 'next/link';
 import { BarChart3, Database } from 'lucide-react';
-
-// Supabase 클라이언트 초기화
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { supabase } from '@/lib/supabaseClient';
 
 // 날짜 포맷 함수
 function formatDate(dateString: string) {
@@ -54,12 +49,27 @@ function formatTimestamp(timestamp: string) {
 }
 
 export default async function AdminPage() {
-  // Supabase에서 예약 데이터 가져오기 (reservation_name이 NULL이 아닌 레코드만)
-  const { data: reservations, error } = await supabase
-    .from('surveys')
-    .select('id, created_at, reservation_name, reservation_phone, reservation_birth, reservation_memo, reservation_day0, reservation_time0, reservation_day1, reservation_time1, reservation_day2, reservation_time2, reservation_day3, reservation_time3, reservation_status')
-    .not('reservation_name', 'is', null)
-    .order('created_at', { ascending: false });
+  let reservations = null;
+  let error = null;
+
+  try {
+    // Supabase에서 예약 데이터 가져오기 (reservation_name이 NULL이 아닌 레코드만)
+    const { data, error: fetchError } = await supabase
+      .from('surveys')
+      .select('id, created_at, reservation_name, reservation_phone, reservation_birth, reservation_memo, reservation_day0, reservation_time0, reservation_day1, reservation_time1, reservation_day2, reservation_time2, reservation_day3, reservation_time3, reservation_status')
+      .not('reservation_name', 'is', null)
+      .order('created_at', { ascending: false });
+    
+    reservations = data;
+    error = fetchError;
+  } catch (clientError) {
+    console.error('Supabase 클라이언트 초기화 오류:', clientError);
+    error = {
+      message: 'Supabase 연결 설정 오류',
+      details: clientError instanceof Error ? clientError.message : String(clientError),
+      code: 'CLIENT_INIT_ERROR'
+    };
+  }
 
   if (error) {
     console.error('Error fetching reservations:', error);
@@ -78,16 +88,31 @@ export default async function AdminPage() {
           ]}
         />
         
-        {/* 데이터베이스 마이그레이션 실행 버튼 */}
-        <div className="mt-8 p-4 border rounded-md bg-white">
-          <h2 className="text-lg font-medium mb-4">데이터베이스 문제 해결</h2>
-          <p className="mb-4 text-gray-600">데이터베이스 구조를 업데이트하여 문제를 해결할 수 있습니다.</p>
-          <Link href="/api/admin/db-migration/add-appointment-type" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" className="flex items-center gap-2">
-              <Database className="w-4 h-4" />
-              <span>데이터베이스 구조 업데이트 실행</span>
-            </Button>
-          </Link>
+        {/* 문제 해결 도구들 */}
+        <div className="mt-8 space-y-4">
+          {/* 환경변수 확인 */}
+          <div className="p-4 border rounded-md bg-white">
+            <h2 className="text-lg font-medium mb-4">환경변수 확인</h2>
+            <p className="mb-4 text-gray-600">Supabase 연결 설정을 확인합니다.</p>
+            <Link href="/api/admin/env-check" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="flex items-center gap-2">
+                <BarChart3 className="w-4 h-4" />
+                <span>환경변수 상태 확인</span>
+              </Button>
+            </Link>
+          </div>
+
+          {/* 데이터베이스 마이그레이션 */}
+          <div className="p-4 border rounded-md bg-white">
+            <h2 className="text-lg font-medium mb-4">데이터베이스 문제 해결</h2>
+            <p className="mb-4 text-gray-600">데이터베이스 구조를 업데이트하여 문제를 해결할 수 있습니다.</p>
+            <Link href="/api/admin/db-migration/add-appointment-type" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="flex items-center gap-2">
+                <Database className="w-4 h-4" />
+                <span>데이터베이스 구조 업데이트 실행</span>
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     );
