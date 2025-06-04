@@ -10,7 +10,7 @@ import { ChevronLeft, ChevronRight, Download, FileText, Maximize, Minimize } fro
 const slideFiles = [
   'Slide_1.html', 'Slide_2.html', 'Slide_3.html', 'Slide_4.html', 'Slide_5.html',
   'Slide_6.html', 'Slide_7.html', 'Slide_8.html', 'Slide_9.html', 'Slide_10.html',
-  'Slide_11.html', 'Slide_12.html', 'Slide_13.html', 'Slide_14.html'
+  'Slide_11.html', 'Slide_12.html'
 ]
 
 export default function PresentationPage() {

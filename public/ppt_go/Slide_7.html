@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주요 기능 상세: AI 기반 개인 맞춤 리포트 생성</title>
+    <title>주요 기능 상세: 환자 지원 AI 챗봇</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -25,39 +25,44 @@
         .bg-pattern {
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        .tech-card {
+        .strategy-card {
             transition: all 0.3s ease;
         }
-        .tech-card:hover {
+        .strategy-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        .icon-rotate {
-            animation: rotate 4s linear infinite;
+        .icon-chat {
+            animation: chat-bubble 2s ease-in-out infinite;
         }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes chat-bubble {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
-        .ai-glow {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-        }
-        .report-flow {
+        .chat-flow {
             position: relative;
         }
-        .report-flow::after {
+        .chat-flow::after {
             content: '';
             position: absolute;
             top: 50%;
-            right: -25px;
+            right: -30px;
             width: 0;
             height: 0;
-            border-left: 20px solid #4F46E5;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
         }
-        .report-flow:last-child::after {
+        .chat-flow-blue::after { border-left: 25px solid #60A5FA; } /* blue-500 */
+        .chat-flow-purple::after { border-left: 25px solid #A78BFA; } /* purple-500 */
+        .chat-flow-indigo::after { border-left: 25px solid #6366F1; } /* indigo-500 */
+        .chat-flow-yellow::after { border-left: 25px solid #FACC15; } /* yellow-500 */
+        .chat-flow-red::after { border-left: 25px solid #EF4444; } /* red-500 */
+
+        .chat-flow:last-child::after {
             display: none;
+        }
+        .prompt-engineering {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
     </style>
 </head>
@@ -69,188 +74,229 @@
         <!-- Left side decorative element -->
         <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
         
-        <div class="relative z-10 p-8 pl-36">
+        <div class="relative z-10 w-full px-36 py-4">
             <!-- Header -->
             <div class="flex justify-between items-center mb-8">
                 <div>
-                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: AI 기반 개인 맞춤 리포트 생성</h1>
-                    <p class="text-xl text-blue-400 mt-2">Personalized AI-Powered Health Report Generation</p>
+                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: 환자 지원 AI 챗봇</h1>
                 </div>
                 <div class="flex items-center">
-                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center ai-glow">
-                        <i class="fas fa-brain text-blue-500 text-3xl icon-rotate"></i>
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-comments text-blue-500 text-3xl icon-chat"></i>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Core Strategy -->
+            <div class="mb-4">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-lightbulb mr-2"></i>
+                    핵심 구현 전략 (프롬프트 엔지니어링)
+                </h2>
+                <div class="grid grid-cols-2 gap-8">
+                    <!-- Data-based Persona -->
+                    <div class="strategy-card bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl p-8 text-white">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user-md text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold">데이터 기반 페르소나</h3>
+                        </div>
+                        <div class="text-purple-100 text-lg leading-relaxed space-y-3">
+                            <div class="bg-purple-400 bg-opacity-30 p-4 rounded-lg">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-database mr-3 text-yellow-300"></i>
+                                    <span class="font-bold">김영환 원장 답변 분석</span>
+                                </div>
+                                <p class="text-sm">약 900건의 실제 답변 데이터 학습</p>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                                <span><strong>어투 & 설명 방식</strong> 반영</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                                <span><strong>전문가 톤앤매너</strong> 구현</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Personalized Interaction -->
+                    <div class="strategy-card bg-gradient-to-br from-indigo-500 to-blue-500 rounded-xl p-8 text-white">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user-cog text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold">개인화된 상호작용</h3>
+                        </div>
+                        <div class="text-blue-100 text-lg leading-relaxed space-y-3">
+                            <div class="flex items-center">
+                                <i class="fas fa-clipboard-list mr-3 text-yellow-300"></i>
+                                <span><strong>환자 설문 결과</strong> 컨텍스트 활용</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-chart-line mr-3 text-yellow-300"></i>
+                                <span><strong>리포트 내용</strong> 기반 대화</span>
+                            </div>
+                            <div class="bg-blue-400 bg-opacity-30 p-4 rounded-lg mt-4">
+                                <div class="text-sm text-blue-100">
+                                    <span class="font-semibold">맞춤형 케어:</span> 개별 환자 상황에 특화된 답변
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Purpose Section -->
-            <div class="mb-4 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-blue-500">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-3">
-                    <i class="fas fa-bullseye mr-2"></i>
-                    목적
-                </h2>
-                <p class="text-lg text-blue-600 font-medium">수집된 설문 데이터를 AI로 분석, 환자 맞춤형 건강 리포트 시각적 제공</p>
-            </div>
-            
-            <!-- Technology Stack -->
-            <div class="grid grid-cols-2 gap-8 mb-4">
-                <!-- AI Technology -->
-                <div class="tech-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-8 text-white">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-microchip text-2xl"></i>
+            <!-- Strategy Implementation -->
+            <div class="grid grid-cols-3 gap-6 mb-4">
+                <!-- Clear Role Definition -->
+                <div class="strategy-card bg-green-500 rounded-xl p-6 text-white">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-shield-alt text-xl"></i>
                         </div>
-                        <h3 class="text-2xl font-bold">주요 기술</h3>
-                    </div>
-                    <div class="text-blue-100 text-lg leading-relaxed space-y-4">
-                        <div class="bg-blue-400 bg-opacity-30 p-4 rounded-lg">
-                            <div class="flex items-center mb-2">
-                                <i class="fas fa-google mr-3 text-yellow-300"></i>
-                                <span class="font-bold">Google Gemini API</span>
-                            </div>
-                            <p class="text-sm">설문 분석 및 리포트 텍스트 생성</p>
-                        </div>
-                        <div class="bg-indigo-400 bg-opacity-30 p-4 rounded-lg">
-                            <div class="flex items-center mb-2">
-                                <i class="fas fa-chart-bar mr-3 text-green-300"></i>
-                                <span class="font-bold">Chart.js</span>
-                            </div>
-                            <p class="text-sm">데이터 시각화 및 추이 분석</p>
+                        <h4 class="font-bold mb-3">명확한 역할 정의</h4>
+                        <div class="text-green-100 text-sm space-y-2">
+                            <p>• 의료 전문가 아님 명시</p>
+                            <p>• 진단 대체 불가 안내</p>
+                            <p>• 면책 조항 포함</p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Report Content -->
-                <div class="tech-card bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl p-8 text-white">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-file-medical text-2xl"></i>
+                <!-- Empathy & Reassurance -->
+                <div class="strategy-card bg-pink-500 rounded-xl p-6 text-white">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-heart text-xl"></i>
                         </div>
-                        <h3 class="text-2xl font-bold">리포트 내용</h3>
+                        <h4 class="font-bold mb-3">공감 및 안심</h4>
+                        <div class="text-pink-100 text-sm space-y-2">
+                            <p>• 환자 불편감 공감</p>
+                            <p>• 긍정적 전망 제시</p>
+                            <p>• 심리적 지지 제공</p>
+                        </div>
                     </div>
-                    <div class="text-indigo-100 text-lg leading-relaxed space-y-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>설문 결과 요약</strong> (점수화)</span>
+                </div>
+                
+                <!-- Hospital Visit Guidance -->
+                <div class="strategy-card bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-6 text-white">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-heart text-xl"></i>
                         </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>통증/기능 변화</strong> 추이 시각화</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>AI 분석 기반</strong> 원인 분석</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>맞춤형 치료법</strong> 및 관리 권고</span>
+                        <h4 class="font-bold mb-3">병원 방문 유도</h4>
+                        <div class="text-white text-sm space-y-2">
+                            <p>• 자연스러운 내원 권유</p>
+                            <p>• 치료 필요성 안내</p>
+                            <p>• 예약 연결 서비스</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Report Generation Flow -->
+            <!-- Interaction Flow -->
             <div class="mb-4">
                 <h2 class="text-2xl font-semibold text-blue-700 mb-6">
-                    <i class="fas fa-cogs mr-2"></i>
-                    리포트 생성 프로세스
+                    <i class="fas fa-route mr-2"></i>
+                    상호작용 플로우
                 </h2>
-                <div class="grid grid-cols-4 gap-6">
-                    <div class="report-flow bg-gradient-to-br from-green-400 to-green-500 rounded-xl p-6 text-white text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-database text-xl"></i>
+                <div class="grid grid-cols-5 gap-4">
+                    <div class="chat-flow chat-flow-blue bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl p-2 text-white text-center">
+                        <div class="w-10 h-10 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-user text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-2">데이터 수집</h4>
-                        <p class="text-sm">설문 결과 분석</p>
+                        <h4 class="font-bold mb-1">환자 질문</h4>
+                        <p class="text-xs">개별 상황 파악</p>
                     </div>
-                    <div class="report-flow bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl p-6 text-white text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-brain text-xl"></i>
+                    <div class="chat-flow chat-flow-purple bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl p-2 text-white text-center">
+                        <div class="w-10 h-10 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-search text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-2">AI 분석</h4>
-                        <p class="text-sm">Gemini API 처리</p>
+                        <h4 class="font-bold mb-1">컨텍스트 분석</h4>
+                        <p class="text-xs">설문/리포트 참조</p>
                     </div>
-                    <div class="report-flow bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl p-6 text-white text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-chart-line text-xl"></i>
+                    <div class="chat-flow chat-flow-indigo bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-xl p-2 text-white text-center">
+                        <div class="w-10 h-10 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-brain text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-2">시각화</h4>
-                        <p class="text-sm">Chart.js 렌더링</p>
+                        <h4 class="font-bold mb-1">AI 답변 생성</h4>
+                        <p class="text-xs">페르소나 기반</p>
                     </div>
-                    <div class="report-flow bg-gradient-to-br from-pink-400 to-pink-500 rounded-xl p-6 text-white text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-file-alt text-xl"></i>
+                    <div class="chat-flow chat-flow-yellow bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-2 text-white text-center">
+                        <div class="w-10 h-10 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-comments text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-2">리포트 완성</h4>
-                        <p class="text-sm">웹페이지 형태</p>
+                        <h4 class="font-bold mb-1">개인화 답변</h4>
+                        <p class="text-xs">맞춤형 상담</p>
+                    </div>
+                    <div class="chat-flow chat-flow-red bg-gradient-to-br from-red-400 to-red-500 rounded-xl p-2 text-white text-center">
+                        <div class="w-10 h-10 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-comments text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">예약 유도</h4>
+                        <p class="text-xs">자연스러운 연결</p>
                     </div>
                 </div>
             </div>
             
-            <!-- Report Features -->
-            <div class="grid grid-cols-3 gap-6 mb-3">
-                <div class="bg-white rounded-xl border-2 border-green-200 p-6">
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-chart-pie text-green-500 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-green-700 mb-2">점수 시각화</h4>
-                        <p class="text-sm text-green-600">통증 강도, 기능 제한도 등 핵심 지표의 직관적 표현</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl border-2 border-blue-200 p-6">
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-lightbulb text-blue-500 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-blue-700 mb-2">AI 인사이트</h4>
-                        <p class="text-sm text-blue-600">통증 원인 추정 및 생활 습관 개선점 제안</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl border-2 border-purple-200 p-6">
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-stethoscope text-purple-500 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-purple-700 mb-2">맞춤형 권고</h4>
-                        <p class="text-sm text-purple-600">온누리통증의학과 제공 치료법 및 건강 관리 가이드</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- User Experience -->
-            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 border-l-4 border-indigo-500">
-                <h2 class="text-2xl font-semibold text-indigo-700 mb-4">
-                    <i class="fas fa-user-check mr-2"></i>
-                    사용자 경험
+            <!-- Key Features
+            <div class="bg-white rounded-xl border-2 border-blue-200 p-4">
+                <h2 class="text-2xl font-semibold text-blue-600 mb-4">
+                    <i class="fas fa-star mr-2"></i>
+                    핵심 특징
                 </h2>
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-globe text-indigo-500"></i>
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-fingerprint text-blue-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-700">개별 상황 맞춤 답변</h4>
+                                <p class="text-sm text-blue-600">환자별 설문 결과와 리포트 내용 반영</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-indigo-700">웹페이지 형태 리포트</h4>
-                            <p class="text-sm text-indigo-600">접근 용이하고 직관적인 인터페이스</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user-check text-indigo-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-indigo-700">의료진 페르소나 구현</h4>
+                                <p class="text-sm text-indigo-600">김영환 원장의 실제 답변 스타일 반영</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-calendar-plus text-purple-500"></i>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-shield-check text-purple-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-purple-700">안전한 의료 상담</h4>
+                                <p class="text-sm text-purple-600">명확한 한계 설정과 면책 조항</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-purple-700">예약 모달 연동</h4>
-                            <p class="text-sm text-purple-600">리포트 확인 후 즉시 예약 가능</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-handshake text-green-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-700">자연스러운 병원 연결</h4>
+                                <p class="text-sm text-green-600">모든 상호작용을 통한 내원 유도</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
             <!-- Footer
             <div class="flex justify-end mt-6">
                 <div class="bg-blue-600 text-white px-6 py-3 rounded-full flex items-center">
                     <i class="fas fa-arrow-right mr-2 text-yellow-300"></i> 
-                    <span>AI 기반 분석으로 개인 맞춤형 건강 관리 솔루션 제공</span>
+                    <span>프롬프트 엔지니어링으로 전문적이고 개인화된 환자 상담 서비스 구현</span>
                 </div>
             </div> -->
         </div>

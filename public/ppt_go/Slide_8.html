@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주요 기능 상세: 환자 지원 AI 챗봇</title>
+    <title>주요 기능 상세: 온라인 예약 시스템</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -25,44 +25,51 @@
         .bg-pattern {
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        .strategy-card {
+        .booking-card {
             transition: all 0.3s ease;
         }
-        .strategy-card:hover {
+        .booking-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        .icon-chat {
-            animation: chat-bubble 2s ease-in-out infinite;
+        .icon-calendar {
+            animation: calendar-flip 3s ease-in-out infinite;
         }
-        @keyframes chat-bubble {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        @keyframes calendar-flip {
+            0%, 100% { transform: scale(1) rotateY(0deg); }
+            50% { transform: scale(1.1) rotateY(10deg); }
         }
-        .chat-flow {
+        .booking-flow {
             position: relative;
         }
-        .chat-flow::after {
+        .booking-flow::after {
             content: '';
             position: absolute;
             top: 50%;
             right: -30px;
             width: 0;
             height: 0;
+            border-left: 25px solid #059669;
             border-top: 15px solid transparent;
             border-bottom: 15px solid transparent;
         }
-        .chat-flow-blue::after { border-left: 25px solid #60A5FA; } /* blue-500 */
-        .chat-flow-purple::after { border-left: 25px solid #A78BFA; } /* purple-500 */
-        .chat-flow-indigo::after { border-left: 25px solid #6366F1; } /* indigo-500 */
-        .chat-flow-yellow::after { border-left: 25px solid #FACC15; } /* yellow-500 */
-        .chat-flow-red::after { border-left: 25px solid #EF4444; } /* red-500 */
-
-        .chat-flow:last-child::after {
+        .booking-flow:last-child::after {
             display: none;
         }
-        .prompt-engineering {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .priority-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            background: #EF4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -74,240 +81,212 @@
         <!-- Left side decorative element -->
         <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
         
-        <div class="relative z-10 w-full px-36 py-4">
+        <div class="relative z-10 p-16 pl-36">
             <!-- Header -->
             <div class="flex justify-between items-center mb-8">
                 <div>
-                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: 환자 지원 AI 챗봇</h1>
-                    <p class="text-xl text-blue-400 mt-2">Intelligent Patient Support Chatbot System</p>
+                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: 온라인 예약 시스템</h1>
                 </div>
                 <div class="flex items-center">
                     <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
-                        <i class="fas fa-comments text-blue-500 text-3xl icon-chat"></i>
+                        <i class="fas fa-calendar-alt text-blue-500 text-3xl icon-calendar"></i>
                     </div>
                 </div>
             </div>
+
             
-            <!-- Purpose Section -->
-            <div class="mb-4 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-blue-500">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-3">
-                    <i class="fas fa-bullseye mr-2"></i>
-                    목적
-                </h2>
-                <p class="text-lg text-blue-600 font-medium">설문 및 리포트 기반 환자 궁금증 해소, 안심 유도, 병원 방문 자연스럽게 유도</p>
-            </div>
-            
-            <!-- Core Strategy -->
-            <div class="mb-4">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
-                    <i class="fas fa-lightbulb mr-2"></i>
-                    핵심 구현 전략 (프롬프트 엔지니어링)
-                </h2>
-                <div class="grid grid-cols-2 gap-8">
-                    <!-- Data-based Persona -->
-                    <div class="strategy-card bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl p-8 text-white">
-                        <div class="flex items-center mb-6">
-                            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-user-md text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold">데이터 기반 페르소나</h3>
+            <!-- Main Features -->
+            <div class="grid grid-cols-2 gap-8 mb-8">
+                <!-- Patient Features -->
+                <div class="booking-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 relative">
+                            <i class="fas fa-user text-2xl"></i>
+                            <div class="priority-badge">1</div>
                         </div>
-                        <div class="text-purple-100 text-lg leading-relaxed space-y-3">
-                            <div class="bg-purple-400 bg-opacity-30 p-4 rounded-lg">
-                                <div class="flex items-center mb-2">
-                                    <i class="fas fa-database mr-3 text-yellow-300"></i>
-                                    <span class="font-bold">김영환 원장 답변 분석</span>
-                                </div>
-                                <p class="text-sm">약 900건의 실제 답변 데이터 학습</p>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                                <span><strong>어투 & 설명 방식</strong> 반영</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                                <span><strong>전문가 톤앤매너</strong> 구현</span>
-                            </div>
-                        </div>
+                        <h3 class="text-2xl font-bold">주요 기능 (환자)</h3>
                     </div>
-                    
-                    <!-- Personalized Interaction -->
-                    <div class="strategy-card bg-gradient-to-br from-indigo-500 to-blue-500 rounded-xl p-8 text-white">
-                        <div class="flex items-center mb-6">
-                            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-user-cog text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold">개인화된 상호작용</h3>
+                    <div class="text-blue-100 text-lg leading-relaxed space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-clock mr-3 text-green-300"></i>
+                            <span><strong>실시간 예약 현황</strong> 확인</span>
                         </div>
-                        <div class="text-blue-100 text-lg leading-relaxed space-y-3">
-                            <div class="flex items-center">
-                                <i class="fas fa-clipboard-list mr-3 text-yellow-300"></i>
-                                <span><strong>환자 설문 결과</strong> 컨텍스트 활용</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-chart-line mr-3 text-yellow-300"></i>
-                                <span><strong>리포트 내용</strong> 기반 대화</span>
-                            </div>
-                            <div class="bg-blue-400 bg-opacity-30 p-4 rounded-lg mt-4">
-                                <div class="text-sm text-blue-100">
-                                    <span class="font-semibold">맞춤형 케어:</span> 개별 환자 상황에 특화된 답변
-                                </div>
-                            </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-sms mr-3 text-green-300"></i>
+                            <span><strong>원하는 날짜/시간</strong> 1~3순위 선택</span>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Strategy Implementation -->
-            <div class="grid grid-cols-3 gap-6 mb-4">
-                <!-- Clear Role Definition -->
-                <div class="strategy-card bg-green-500 rounded-xl p-6 text-white">
-                    <div class="text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-shield-alt text-xl"></i>
+                        <div class="flex items-center">
+                            <i class="fas fa-sms mr-3 text-green-300"></i>
+                            <span><strong>SMS 알림</strong> (Solapi API 연동)</span>
                         </div>
-                        <h4 class="font-bold mb-3">명확한 역할 정의</h4>
-                        <div class="text-green-100 text-sm space-y-2">
-                            <p>• 의료 전문가 아님 명시</p>
-                            <p>• 진단 대체 불가 안내</p>
-                            <p>• 면책 조항 포함</p>
+                        <div class="bg-blue-400 bg-opacity-30 p-4 rounded-lg mt-4">
+                            <div class="text-sm text-blue-100">
+                                <span class="font-semibold">편의성:</span> 24시간 언제든 예약 신청 가능
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Empathy & Reassurance -->
-                <div class="strategy-card bg-pink-500 rounded-xl p-6 text-white">
-                    <div class="text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-heart text-xl"></i>
+                <!-- Admin Features -->
+                <div class="booking-card bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 relative">
+                            <i class="fas fa-user-shield text-2xl"></i>
+                            <div class="priority-badge">2</div>
                         </div>
-                        <h4 class="font-bold mb-3">공감 및 안심</h4>
-                        <div class="text-pink-100 text-sm space-y-2">
-                            <p>• 환자 불편감 공감</p>
-                            <p>• 긍정적 전망 제시</p>
-                            <p>• 심리적 지지 제공</p>
-                        </div>
+                        <h3 class="text-2xl font-bold">주요 기능 (관리자)</h3>
                     </div>
-                </div>
-                
-                <!-- Hospital Visit Guidance -->
-                <div class="strategy-card bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-6 text-white">
-                    <div class="text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-heart text-xl"></i>
+                    <div class="text-indigo-100 text-lg leading-relaxed space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-week mr-3 text-yellow-300"></i>
+                            <span><strong>캘린더 통한</strong> 전체 현황 확인</span>
                         </div>
-                        <h4 class="font-bold mb-3">병원 방문 유도</h4>
-                        <div class="text-white text-sm space-y-2">
-                            <p>• 자연스러운 내원 권유</p>
-                            <p>• 치료 필요성 안내</p>
-                            <p>• 예약 연결 서비스</p>
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks mr-3 text-yellow-300"></i>
+                            <span><strong>예약 관리</strong> (접수, 확인, 생성, 수정)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-double mr-3 text-yellow-300"></i>
+                            <span><strong>취소, 확정</strong> 기능</span>
+                        </div>
+                        <div class="bg-purple-400 bg-opacity-30 p-4 rounded-lg mt-4">
+                            <div class="text-sm text-purple-100">
+                                <span class="font-semibold">효율성:</span> 직관적인 시각적 관리 인터페이스
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Interaction Flow -->
-            <div class="mb-4">
+            <!-- Booking Process Flow -->
+            <div class="mb-8">
                 <h2 class="text-2xl font-semibold text-blue-700 mb-6">
                     <i class="fas fa-route mr-2"></i>
-                    상호작용 플로우
+                    예약 프로세스 플로우 (환자 관점)
                 </h2>
                 <div class="grid grid-cols-5 gap-4">
-                    <div class="chat-flow chat-flow-blue bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl p-2 text-white text-center">
-                        <div class="w-10 h-10 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-user text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">환자 질문</h4>
-                        <p class="text-xs">개별 상황 파악</p>
-                    </div>
-                    <div class="chat-flow chat-flow-purple bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl p-2 text-white text-center">
-                        <div class="w-10 h-10 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                    <div class="booking-flow bg-gradient-to-br from-green-400 to-green-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
                             <i class="fas fa-search text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-1">컨텍스트 분석</h4>
-                        <p class="text-xs">설문/리포트 참조</p>
+                        <h4 class="font-bold mb-1">현황 확인</h4>
+                        <p class="text-xs">실시간 예약 가능</p>
                     </div>
-                    <div class="chat-flow chat-flow-indigo bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-xl p-2 text-white text-center">
-                        <div class="w-10 h-10 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-brain text-lg"></i>
+                    <div class="booking-flow bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-calendar-plus text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-1">AI 답변 생성</h4>
-                        <p class="text-xs">페르소나 기반</p>
+                        <h4 class="font-bold mb-1">날짜 선택</h4>
+                        <p class="text-xs">1~3순위 지정</p>
                     </div>
-                    <div class="chat-flow chat-flow-yellow bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-2 text-white text-center">
-                        <div class="w-10 h-10 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-comments text-lg"></i>
+                    <div class="booking-flow bg-gradient-to-br from-indigo-400 to-purple-500 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-paper-plane text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-1">개인화 답변</h4>
-                        <p class="text-xs">맞춤형 상담</p>
+                        <h4 class="font-bold mb-1">신청 제출</h4>
+                        <p class="text-xs">예약 요청 완료</p>
                     </div>
-                    <div class="chat-flow chat-flow-red bg-gradient-to-br from-red-400 to-red-500 rounded-xl p-2 text-white text-center">
-                        <div class="w-10 h-10 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-comments text-lg"></i>
+                    <div class="booking-flow bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-check-circle text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-1">예약 유도</h4>
-                        <p class="text-xs">자연스러운 연결</p>
+                        <h4 class="font-bold mb-1">SMS 알림</h4>
+                        <p class="text-xs">신청 완료 통지</p>
+                    </div>
+                    <div class="booking-flow bg-gradient-to-br from-red-400 to-pink-500 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-check-circle text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">예약 확정</h4>
+                        <p class="text-xs">관리자 승인 후</p>
                     </div>
                 </div>
             </div>
             
-            <!-- Key Features
-            <div class="bg-white rounded-xl border-2 border-blue-200 p-4">
-                <h2 class="text-2xl font-semibold text-blue-600 mb-4">
-                    <i class="fas fa-star mr-2"></i>
-                    핵심 특징
+            <!-- Admin Management Features -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-cogs mr-2"></i>
+                    관리자 예약 관리 기능
                 </h2>
-                <div class="grid grid-cols-2 gap-8">
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-fingerprint text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-blue-700">개별 상황 맞춤 답변</h4>
-                                <p class="text-sm text-blue-600">환자별 설문 결과와 리포트 내용 반영</p>
-                            </div>
+                <div class="grid grid-cols-6 gap-4">
+                    <div class="bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-inbox text-lg"></i>
                         </div>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-user-check text-indigo-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-indigo-700">의료진 페르소나 구현</h4>
-                                <p class="text-sm text-indigo-600">김영환 원장의 실제 답변 스타일 반영</p>
-                            </div>
-                        </div>
+                        <h4 class="font-bold mb-1">접수</h4>
+                        <p class="text-xs">신규 예약</p>
                     </div>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-shield-check text-purple-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-purple-700">안전한 의료 상담</h4>
-                                <p class="text-sm text-purple-600">명확한 한계 설정과 면책 조항</p>
-                            </div>
+                    <div class="bg-gradient-to-br from-green-400 to-green-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-eye text-lg"></i>
                         </div>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-handshake text-green-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-green-700">자연스러운 병원 연결</h4>
-                                <p class="text-sm text-green-600">모든 상호작용을 통한 내원 유도</p>
-                            </div>
+                        <h4 class="font-bold mb-1">확인</h4>
+                        <p class="text-xs">예약 검토</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-plus text-lg"></i>
                         </div>
+                        <h4 class="font-bold mb-1">생성</h4>
+                        <p class="text-xs">직접 예약</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-edit text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">수정</h4>
+                        <p class="text-xs">일정 변경</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-red-400 to-red-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-times text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">취소</h4>
+                        <p class="text-xs">예약 취소</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-check text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">확정</h4>
+                        <p class="text-xs">예약 승인</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Management & Integration -->
+            <!-- <div class="bg-white rounded-xl border-2 border-blue-200 p-6">
+                <h2 class="text-2xl font-semibold text-blue-600 mb-4">
+                    <i class="fas fa-database mr-2"></i>
+                    데이터 관리 & 통합
+                </h2>
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-server text-blue-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-blue-700 mb-2">Supabase DB 저장</h4>
+                        <p class="text-sm text-blue-600">모든 예약 정보의 안전한 클라우드 저장 및 관리</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-sync text-purple-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-green-700 mb-2">Solapi SMS 연동</h4>
+                        <p class="text-sm text-green-600">예약 신청, 확정, 변경 시 실시간 SMS 알림</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-sync text-purple-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-700 mb-2">실시간 동기화</h4>
+                        <p class="text-sm text-purple-600">환자와 관리자 간 실시간 예약 상태 동기화</p>
                     </div>
                 </div>
             </div> -->
             
-            <!-- Footer
-            <div class="flex justify-end mt-6">
-                <div class="bg-blue-600 text-white px-6 py-3 rounded-full flex items-center">
-                    <i class="fas fa-arrow-right mr-2 text-yellow-300"></i> 
-                    <span>프롬프트 엔지니어링으로 전문적이고 개인화된 환자 상담 서비스 구현</span>
-                </div>
-            </div> -->
+
         </div>
     </div>
 </body>

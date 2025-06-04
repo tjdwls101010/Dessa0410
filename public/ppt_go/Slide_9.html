@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주요 기능 상세: 온라인 예약 시스템</title>
+    <title>주요 기능 상세: FAQ 웹페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -25,51 +25,41 @@
         .bg-pattern {
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        .booking-card {
+        .faq-card {
             transition: all 0.3s ease;
         }
-        .booking-card:hover {
+        .faq-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        .icon-calendar {
-            animation: calendar-flip 3s ease-in-out infinite;
+        .icon-bounce {
+            animation: bounce 2s infinite;
         }
-        @keyframes calendar-flip {
-            0%, 100% { transform: scale(1) rotateY(0deg); }
-            50% { transform: scale(1.1) rotateY(10deg); }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
-        .booking-flow {
-            position: relative;
+        .search-pulse {
+            animation: search-pulse 2s ease-in-out infinite;
         }
-        .booking-flow::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: -30px;
-            width: 0;
-            height: 0;
-            border-left: 25px solid #059669;
-            border-top: 15px solid transparent;
-            border-bottom: 15px solid transparent;
+        @keyframes search-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
         }
-        .booking-flow:last-child::after {
-            display: none;
-        }
-        .priority-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 24px;
-            height: 24px;
-            background: #EF4444;
-            border-radius: 50%;
+        .tag-cloud {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .tag-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -81,227 +71,202 @@
         <!-- Left side decorative element -->
         <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
         
-        <div class="relative z-10 p-16 pl-36">
+        <div class="relative z-10 p-8 pl-36">
             <!-- Header -->
             <div class="flex justify-between items-center mb-8">
                 <div>
-                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: 온라인 예약 시스템</h1>
-                    <p class="text-xl text-blue-400 mt-2">Comprehensive Online Booking Management System</p>
+                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: FAQ 웹페이지</h1>
                 </div>
                 <div class="flex items-center">
                     <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
-                        <i class="fas fa-calendar-alt text-blue-500 text-3xl icon-calendar"></i>
+                        <i class="fas fa-question-circle text-blue-500 text-3xl icon-bounce"></i>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Content Foundation -->
+            <div class="mb-4">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-database mr-2"></i>
+                    콘텐츠 기반
+                </h2>
+                <div class="faq-card bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-spider text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">김영환 원장 네이버 지식인 답변 데이터</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-green-400 bg-opacity-30 p-4 rounded-lg">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-chart-bar mr-3 text-yellow-300"></i>
+                                <span class="font-bold text-xl">약 900건</span>
+                            </div>
+                            <p class="text-green-100">전문의 답변 데이터</p>
+                        </div>
+                        <div class="bg-green-400 bg-opacity-30 p-4 rounded-lg">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-globe mr-3 text-yellow-300"></i>
+                                <span class="font-bold text-xl">웹 크롤링</span>
+                            </div>
+                            <p class="text-teal-100">자동화된 데이터 수집</p>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Purpose Section -->
-            <div class="mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-blue-500">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-3">
-                    <i class="fas fa-bullseye mr-2"></i>
-                    목적
-                </h2>
-                <p class="text-lg text-blue-600 font-medium">시간/장소 제약 없는 편리한 진료 예약 기능 제공</p>
-            </div>
-            
             <!-- Main Features -->
-            <div class="grid grid-cols-2 gap-8 mb-8">
-                <!-- Patient Features -->
-                <div class="booking-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-8 text-white">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 relative">
-                            <i class="fas fa-user text-2xl"></i>
-                            <div class="priority-badge">1</div>
+            <div class="grid grid-cols-3 gap-6 mb-4">
+                <!-- Tag-based Filtering -->
+                <div class="faq-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-6 text-white">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-tags text-xl"></i>
                         </div>
-                        <h3 class="text-2xl font-bold">주요 기능 (환자)</h3>
+                        <h4 class="font-bold text-xl mb-3">태그 기반 필터링</h4>
+                        <p class="text-blue-100 text-sm mb-4">질병명, 증상, 치료법 등으로 체계적 분류</p>
+                        <div class="tag-cloud">
+                            <span class="tag-item">허리디스크</span>
+                            <span class="tag-item">목통증</span>
+                            <span class="tag-item">관절염</span>
+                            <span class="tag-item">물리치료</span>
+                            <span class="tag-item">주사치료</span>
+                        </div>
                     </div>
-                    <div class="text-blue-100 text-lg leading-relaxed space-y-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-clock mr-3 text-green-300"></i>
-                            <span><strong>실시간 예약 현황</strong> 확인</span>
+                </div>
+                
+                <!-- Keyword Search -->
+                <div class="faq-card bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-6 text-white">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4 search-pulse">
+                            <i class="fas fa-search text-xl"></i>
                         </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-sms mr-3 text-green-300"></i>
-                            <span><strong>원하는 날짜/시간</strong> 1~3순위 선택</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-sms mr-3 text-green-300"></i>
-                            <span><strong>SMS 알림</strong> (Solapi API 연동)</span>
-                        </div>
-                        <div class="bg-blue-400 bg-opacity-30 p-4 rounded-lg mt-4">
-                            <div class="text-sm text-blue-100">
-                                <span class="font-semibold">편의성:</span> 24시간 언제든 예약 신청 가능
+                        <h4 class="font-bold text-xl mb-3">키워드 검색</h4>
+                        <p class="text-yellow-100 text-sm mb-4">사용자 입력 키워드로 정확한 Q&A 검색</p>
+                        <div class="bg-yellow-400 bg-opacity-30 p-3 rounded-lg">
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-lightbulb mr-2 text-yellow-300"></i>
+                                <span>실시간 검색 결과 제공</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Admin Features -->
-                <div class="booking-card bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl p-8 text-white">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 relative">
-                            <i class="fas fa-user-shield text-2xl"></i>
-                            <div class="priority-badge">2</div>
+                <!-- Intuitive UI -->
+                <div class="faq-card bg-gradient-to-br from-red-500 to-yellow-500 rounded-xl p-6 text-white">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4 search-pulse">
+                            <i class="fas fa-search text-xl"></i>
                         </div>
-                        <h3 class="text-2xl font-bold">주요 기능 (관리자)</h3>
-                    </div>
-                    <div class="text-indigo-100 text-lg leading-relaxed space-y-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-calendar-week mr-3 text-yellow-300"></i>
-                            <span><strong>캘린더 통한</strong> 전체 현황 확인</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-tasks mr-3 text-yellow-300"></i>
-                            <span><strong>예약 관리</strong> (접수, 확인, 생성, 수정)</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-double mr-3 text-yellow-300"></i>
-                            <span><strong>취소, 확정</strong> 기능</span>
-                        </div>
-                        <div class="bg-purple-400 bg-opacity-30 p-4 rounded-lg mt-4">
-                            <div class="text-sm text-purple-100">
-                                <span class="font-semibold">효율성:</span> 직관적인 시각적 관리 인터페이스
+                        <h4 class="font-bold text-xl mb-3">직관적 UI</h4>
+                        <p class="text-red-100 text-sm mb-4">카드 형태 표시, 상세 내용 모달</p>
+                        <div class="bg-red-400 bg-opacity-30 p-3 rounded-lg">
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-mouse-pointer mr-2 text-yellow-300"></i>
+                                <span>사용자 친화적 인터페이스</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Booking Process Flow -->
-            <div class="mb-8">
+            <!-- User Experience Flow -->
+            <div class="mb-4">
                 <h2 class="text-2xl font-semibold text-blue-700 mb-6">
-                    <i class="fas fa-route mr-2"></i>
-                    예약 프로세스 플로우 (환자 관점)
+                    <i class="fas fa-user-check mr-2"></i>
+                    사용자 경험 플로우
                 </h2>
-                <div class="grid grid-cols-5 gap-4">
-                    <div class="booking-flow bg-gradient-to-br from-green-400 to-green-600 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl p-5 text-white text-center">
+                        <div class="w-14 h-14 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
                             <i class="fas fa-search text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-1">현황 확인</h4>
-                        <p class="text-xs">실시간 예약 가능</p>
+                        <h4 class="font-bold mb-2">검색/필터</h4>
+                        <p class="text-xs">키워드 또는 태그 선택</p>
                     </div>
-                    <div class="booking-flow bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-calendar-plus text-lg"></i>
+                    <div class="bg-gradient-to-br from-green-400 to-green-500 rounded-xl p-5 text-white text-center">
+                        <div class="w-14 h-14 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-list text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-1">날짜 선택</h4>
-                        <p class="text-xs">1~3순위 지정</p>
+                        <h4 class="font-bold mb-2">결과 확인</h4>
+                        <p class="text-xs">카드 형태 Q&A 목록</p>
                     </div>
-                    <div class="booking-flow bg-gradient-to-br from-indigo-400 to-purple-500 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-paper-plane text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">신청 제출</h4>
-                        <p class="text-xs">예약 요청 완료</p>
-                    </div>
-                    <div class="booking-flow bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-check-circle text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">SMS 알림</h4>
-                        <p class="text-xs">신청 완료 통지</p>
-                    </div>
-                    <div class="booking-flow bg-gradient-to-br from-red-400 to-pink-500 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-check-circle text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">예약 확정</h4>
-                        <p class="text-xs">관리자 승인 후</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Admin Management Features -->
-            <div class="mb-6">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
-                    <i class="fas fa-cogs mr-2"></i>
-                    관리자 예약 관리 기능
-                </h2>
-                <div class="grid grid-cols-6 gap-4">
-                    <div class="bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-inbox text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">접수</h4>
-                        <p class="text-xs">신규 예약</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-green-400 to-green-600 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-5 text-white text-center">
+                        <div class="w-14 h-14 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
                             <i class="fas fa-eye text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-1">확인</h4>
-                        <p class="text-xs">예약 검토</p>
+                        <h4 class="font-bold mb-2">상세 보기</h4>
+                        <p class="text-xs">모달창으로 전체 답변</p>
                     </div>
-                    <div class="bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-plus text-lg"></i>
+                    <div class="bg-gradient-to-br from-gray-600 to-gray-700 rounded-xl p-5 text-white text-center">
+                        <div class="w-14 h-14 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-eye text-lg"></i>
                         </div>
-                        <h4 class="font-bold mb-1">생성</h4>
-                        <p class="text-xs">직접 예약</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-yellow-400 to-orange-600 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-edit text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">수정</h4>
-                        <p class="text-xs">일정 변경</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-red-400 to-red-600 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-times text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">취소</h4>
-                        <p class="text-xs">예약 취소</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-xl p-4 text-white text-center">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-check text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">확정</h4>
-                        <p class="text-xs">예약 승인</p>
+                        <h4 class="font-bold mb-2">정보 습득</h4>
+                        <p class="text-xs">전문의 답변 확인</p>
                     </div>
                 </div>
             </div>
             
-            <!-- Data Management & Integration -->
+            <!-- Technical Implementation
             <div class="bg-white rounded-xl border-2 border-blue-200 p-6">
                 <h2 class="text-2xl font-semibold text-blue-600 mb-4">
-                    <i class="fas fa-database mr-2"></i>
-                    데이터 관리 & 통합
+                    <i class="fas fa-cogs mr-2"></i>
+                    기술적 구현
                 </h2>
-                <div class="grid grid-cols-3 gap-6">
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-server text-blue-500 text-2xl"></i>
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-database text-blue-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-700">데이터 전처리</h4>
+                                <p class="text-sm text-blue-600">크롤링 데이터의 태그 분류 및 색인화</p>
+                            </div>
                         </div>
-                        <h4 class="font-bold text-blue-700 mb-2">Supabase DB 저장</h4>
-                        <p class="text-sm text-blue-600">모든 예약 정보의 안전한 클라우드 저장 및 관리</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-filter text-indigo-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-indigo-700">고급 필터링</h4>
+                                <p class="text-sm text-indigo-600">다중 태그 조합 및 스마트 검색</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-sync text-purple-500 text-2xl"></i>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-magic text-purple-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-purple-700">UI/UX 최적화</h4>
+                                <p class="text-sm text-purple-600">반응형 카드 레이아웃 및 모달 시스템</p>
+                            </div>
                         </div>
-                        <h4 class="font-bold text-green-700 mb-2">Solapi SMS 연동</h4>
-                        <p class="text-sm text-green-600">예약 신청, 확정, 변경 시 실시간 SMS 알림</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-sync text-purple-500 text-2xl"></i>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-rocket text-green-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-700">성능 최적화</h4>
+                                <p class="text-sm text-green-600">검색 속도 향상 및 캐싱 시스템</p>
+                            </div>
                         </div>
-                        <h4 class="font-bold text-purple-700 mb-2">실시간 동기화</h4>
-                        <p class="text-sm text-purple-600">환자와 관리자 간 실시간 예약 상태 동기화</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
-            <!-- Footer -->
+            <!-- Footer
             <div class="flex justify-end mt-6">
                 <div class="bg-blue-600 text-white px-6 py-3 rounded-full flex items-center">
                     <i class="fas fa-arrow-right mr-2 text-yellow-300"></i> 
-                    <span>편리한 온라인 예약으로 환자 만족도 향상 및 병원 운영 효율성 증대</span>
+                    <span>전문의 지식을 체계적으로 정리한 종합 의료정보 포털</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

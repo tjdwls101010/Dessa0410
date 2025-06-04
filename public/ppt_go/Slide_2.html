@@ -25,17 +25,46 @@
         .bg-pattern {
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        .agenda-item {
+        .toc-item {
             transition: all 0.3s ease;
         }
-        .agenda-item:hover {
+        .toc-item:hover {
             transform: translateX(10px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
-        .number-badge {
-            width: 50px;
-            height: 60px;
-            min-width: 60px;
+        .icon-bounce {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                transform: translate3d(0,0,0);
+            }
+            40%, 43% {
+                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                transform: translate3d(0, -15px, 0);
+            }
+            70% {
+                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                transform: translate3d(0, -7px, 0);
+            }
+            90% {
+                transform: translate3d(0, -2px, 0);
+            }
+        }
+        .number-circle {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
@@ -49,149 +78,123 @@
         
         <div class="relative z-10 p-16 pl-36">
             <!-- Header -->
-            <div class="flex justify-between items-center mb-8">
+            <div class="flex justify-between items-center mb-12">
                 <div>
-                    <h1 class="text-6xl font-bold text-blue-600">목차</h1>
-                    <p class="text-2xl text-blue-400 mt-1">프레젠테이션 구성 및 흐름</p>
+                    <h1 class="text-5xl font-bold text-blue-600">목차</h1>
                 </div>
                 <div class="flex items-center">
-                    <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center">
-                        <i class="fas fa-list-ol text-blue-500 text-3xl"></i>
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-list text-blue-500 text-3xl icon-bounce"></i>
                     </div>
                 </div>
             </div>
             
-            <!-- Main agenda items -->
-            <div class="space-y-5">
-                <!-- Item 1 -->
-                <div class="agenda-item bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5 flex items-center border-l-4 border-blue-500">
-                    <div class="number-badge bg-gradient-to-br from-blue-500 to-blue-400 text-white rounded-full flex items-center justify-center font-bold text-xl mr-6">
-                        1
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-1">프로젝트 배경 및 필요성</h3>
-                        <p class="text-blue-600 font-medium text-base">(Why?)</p>
-                    </div>
-                    <div class="text-blue-400">
-                        <i class="fas fa-question-circle text-xl"></i>
-                    </div>
-                </div>
-                
-                <!-- Item 2 -->
-                <div class="agenda-item bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-5 flex items-center border-l-4 border-indigo-500">
-                    <div class="number-badge bg-gradient-to-br from-indigo-500 to-indigo-400 text-white rounded-full flex items-center justify-center font-bold text-xl mr-6">
-                        2
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="text-2xl font-bold text-indigo-700 mb-1">프로젝트 개요 및 핵심 가치</h3>
-                        <p class="text-indigo-600 font-medium text-base">(What?)</p>
-                    </div>
-                    <div class="text-indigo-400">
-                        <i class="fas fa-bullseye text-xl"></i>
-                    </div>
-                </div>
-                
-                <!-- Item 3 -->
-                <div class="agenda-item bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-5 flex items-center border-l-4 border-purple-500">
-                    <div class="number-badge bg-gradient-to-br from-purple-500 to-purple-400 text-white rounded-full flex items-center justify-center font-bold text-xl mr-6">
-                        3
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="text-2xl font-bold text-purple-700 mb-1">전체 서비스 구성도</h3>
-                        <p class="text-purple-600 font-medium text-base">(How?)</p>
-                    </div>
-                    <div class="text-purple-400">
-                        <i class="fas fa-sitemap text-xl"></i>
-                    </div>
-                </div>
-                
-                <!-- Item 4 -->
-                <div class="agenda-item bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-5 flex items-center border-l-4 border-green-500">
-                    <div class="number-badge bg-gradient-to-br from-green-500 to-green-400 text-white rounded-full flex items-center justify-center font-bold text-xl mr-6">
-                        4
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="text-2xl font-bold text-green-700 mb-1">주요 기능 상세</h3>
-                        <p class="text-green-600 font-medium text-base">(Detailed Features)</p>
-                        <div class="mt-2 text-sm text-green-600 space-y-0.5">
-                            <div class="flex items-center">
-                                <i class="fas fa-clipboard-list w-3 mr-2"></i>
-                                <span>환자 정보 수집 시스템 (온라인 설문)</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-chart-line w-3 mr-2"></i>
-                                <span>AI 기반 개인 맞춤 리포트 생성</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-comments w-3 mr-2"></i>
-                                <span>환자 지원 AI 챗봇</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-calendar-alt w-3 mr-2"></i>
-                                <span>온라인 예약 시스템</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-question-circle w-3 mr-2"></i>
-                                <span>FAQ 웹페이지</span>
-                            </div>
+            <!-- Table of Contents -->
+            <div class="space-y-6">
+                <!-- TOC Item 1 -->
+                <div class="toc-item bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border-l-6 border-blue-500">
+                    <div class="flex items-center">
+                        <div class="number-circle w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                            1
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-blue-700">프로젝트 배경 및 목표</h3>
+                            <p class="text-blue-600 text-lg mt-1">(Why & What)</p>
+                        </div>
+                        <div class="ml-auto">
+                            <i class="fas fa-bullseye text-blue-500 text-2xl"></i>
                         </div>
                     </div>
-                    <div class="text-green-400">
-                        <i class="fas fa-cogs text-xl"></i>
+                </div>
+
+                <!-- TOC Item 2 -->
+                <div class="toc-item bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-xl p-6 border-l-6 border-indigo-500">
+                    <div class="flex items-center">
+                        <div class="number-circle w-12 h-12 bg-indigo-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                            2
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-indigo-700">전체 서비스 구성도</h3>
+                            <p class="text-indigo-600 text-lg mt-1">(How?)</p>
+                        </div>
+                        <div class="ml-auto">
+                            <i class="fas fa-sitemap text-indigo-500 text-2xl"></i>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Item 5 -->
-                <div class="agenda-item bg-gradient-to-r from-red-50 to-orange-50 rounded-xl p-5 flex items-center border-l-4 border-red-500">
-                    <div class="number-badge bg-gradient-to-br from-red-500 to-red-400 text-white rounded-full flex items-center justify-center font-bold text-xl mr-6">
-                        5
+
+                <!-- TOC Item 3 -->
+                <div class="toc-item bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-6 border-l-6 border-purple-500">
+                    <div class="flex items-center">
+                        <div class="number-circle w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                            3
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-purple-700">주요 기능 상세</h3>
+                            <p class="text-purple-600 text-lg mt-1">(Detailed Features)</p>
+                        </div>
+                        <div class="ml-auto">
+                            <i class="fas fa-cogs text-purple-500 text-2xl"></i>
+                        </div>
                     </div>
-                    <div class="flex-grow">
-                        <h3 class="text-2xl font-bold text-red-700 mb-1">기술 스택 및 시스템 아키텍처</h3>
-                        <p class="text-red-600 font-medium text-base">(Tech Inside)</p>
-                    </div>
-                    <div class="text-red-400">
-                        <i class="fas fa-code text-xl"></i>
+                    <!-- Sub items -->
+                    <div class="mt-4 ml-18 space-y-2">
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-circle text-xs mr-3"></i>
+                            <span class="text-lg">환자 정보 수집 시스템 (온라인 설문)</span>
+                        </div>
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-circle text-xs mr-3"></i>
+                            <span class="text-lg">AI 기반 개인 맞춤 리포트 생성</span>
+                        </div>
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-circle text-xs mr-3"></i>
+                            <span class="text-lg">환자 지원 AI 챗봇</span>
+                        </div>
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-circle text-xs mr-3"></i>
+                            <span class="text-lg">온라인 예약 시스템</span>
+                        </div>
+                        <div class="flex items-center text-purple-600">
+                            <i class="fas fa-circle text-xs mr-3"></i>
+                            <span class="text-lg">FAQ 웹페이지</span>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Item 6 -->
-                <div class="agenda-item bg-gradient-to-r from-yellow-50 to-green-50 rounded-xl p-5 flex items-center border-l-4 border-yellow-500">
-                    <div class="number-badge bg-gradient-to-br from-yellow-500 to-yellow-400 text-white rounded-full flex items-center justify-center font-bold text-xl mr-6">
-                        6
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="text-2xl font-bold text-yellow-700 mb-1">기대 효과</h3>
-                        <p class="text-yellow-600 font-medium text-base">(Benefits)</p>
-                    </div>
-                    <div class="text-yellow-400">
-                        <i class="fas fa-trophy text-xl"></i>
+
+                <!-- TOC Item 4 -->
+                <div class="toc-item bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-6 border-l-6 border-green-500">
+                    <div class="flex items-center">
+                        <div class="number-circle w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                            4
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-green-700">기술 스택 및 시스템 아키텍처</h3>
+                            <p class="text-green-600 text-lg mt-1">(Tech Inside)</p>
+                        </div>
+                        <div class="ml-auto">
+                            <i class="fas fa-code text-green-500 text-2xl"></i>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Item 7 -->
-                <div class="agenda-item bg-gradient-to-r from-teal-50 to-blue-50 rounded-xl p-5 flex items-center border-l-4 border-teal-500">
-                    <div class="number-badge bg-gradient-to-br from-teal-500 to-teal-400 text-white rounded-full flex items-center justify-center font-bold text-xl mr-6">
-                        7
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="text-2xl font-bold text-teal-700 mb-1">결론 및 향후 계획</h3>
-                        <p class="text-teal-600 font-medium text-base">(Conclusion & Next Steps)</p>
-                    </div>
-                    <div class="text-teal-400">
-                        <i class="fas fa-rocket text-xl"></i>
+
+                <!-- TOC Item 5 -->
+                <div class="toc-item bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-6 border-l-6 border-pink-500">
+                    <div class="flex items-center">
+                        <div class="number-circle w-12 h-12 bg-pink-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                            5
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-pink-700">기대 효과 및 결론</h3>
+                            <p class="text-pink-600 text-lg mt-1">(Benefits & Conclusion)</p>
+                        </div>
+                        <div class="ml-auto">
+                            <i class="fas fa-trophy text-pink-500 text-2xl"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Footer
-            <div class="flex justify-center mt-6">
-                <div class="bg-blue-600 text-white px-6 py-3 rounded-full flex items-center">
-                    <i class="fas fa-route mr-2 text-yellow-300"></i> 
-                    <span class="font-semibold text-sm">환자 중심의 디지털 혁신 여정을 시작합니다</span>
-                </div>
-            </div> -->
         </div>
     </div>
 </body>
-</html> 
+</html>
