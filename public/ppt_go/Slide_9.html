@@ -3,271 +3,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주요 기능 상세: FAQ 웹페이지</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>기술 스택 및 시스템 아키텍처 - 환자 중심 의료 서비스</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: white;
-        }
-        .slide {
+        * { font-family: 'Roboto', sans-serif; }
+        
+        .slide-container {
             width: 1800px;
             height: 1126px;
             overflow: hidden;
             position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         }
-        .bg-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(to right, #64748b 1px, transparent 1px),
+                linear-gradient(to bottom, #64748b 1px, transparent 1px);
+            background-size: 40px 40px;
         }
-        .faq-card {
+        
+        .accent-red { color: #ef4444; }
+        .accent-blue { color: #3b82f6; }
+        .accent-green { color: #10b981; }
+        .accent-purple { color: #8b5cf6; }
+        .accent-orange { color: #f97316; }
+        
+        .type-scale-xl { font-size: 4rem; line-height: 1.1; }
+        .type-scale-lg { font-size: 2.5rem; line-height: 1.2; }
+        .type-scale-md { font-size: 1.5rem; line-height: 1.3; }
+        .type-scale-sm { font-size: 1rem; line-height: 1.4; }
+        .type-scale-xs { font-size: 0.875rem; line-height: 1.5; }
+        
+        .floating-shapes {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatComplex 8s ease-in-out infinite;
+        }
+        
+        @keyframes floatComplex {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-10px) rotate(90deg) scale(1.1); }
+            50% { transform: translateY(-5px) rotate(180deg) scale(0.9); }
+            75% { transform: translateY(-15px) rotate(270deg) scale(1.05); }
+        }
+        
+        .tech-highlight {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+        
+        .tech-stack-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+            margin: 1rem;
+        }
+        
+        .tech-stack-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6px;
+            height: 100%;
             transition: all 0.3s ease;
         }
-        .faq-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        
+        .tech-stack-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
-        .icon-bounce {
-            animation: bounce 2s infinite;
+        
+        .user-card::before { background: #ef4444; }
+        .user-card:hover { border-color: #ef4444; box-shadow: 0 25px 50px rgba(239, 68, 68, 0.2); }
+        
+        .nextjs-card::before { background: #3b82f6; }
+        .nextjs-card:hover { border-color: #3b82f6; box-shadow: 0 25px 50px rgba(59, 130, 246, 0.2); }
+        
+        .supabase-card::before { background: #10b981; }
+        .supabase-card:hover { border-color: #10b981; box-shadow: 0 25px 50px rgba(16, 185, 129, 0.2); }
+        
+        .gemini-card::before { background: #8b5cf6; }
+        .gemini-card:hover { border-color: #8b5cf6; box-shadow: 0 25px 50px rgba(139, 92, 246, 0.2); }
+        
+        .solapi-card::before { background: #f97316; }
+        .solapi-card:hover { border-color: #f97316; box-shadow: 0 25px 50px rgba(249, 115, 22, 0.2); }
+        
+        .flow-arrow {
+            position: relative;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            border-radius: 2px;
+            margin: 0 1rem;
+            flex: 1;
         }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+        
+        .flow-arrow::after {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid #10b981;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
         }
-        .search-pulse {
-            animation: search-pulse 2s ease-in-out infinite;
+        
+        .flow-arrow.reverse {
+            background: linear-gradient(90deg, #10b981, #3b82f6);
         }
-        @keyframes search-pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        
+        .flow-arrow.reverse::after {
+            right: auto;
+            left: -12px;
+            border-left: none;
+            border-right: 12px solid #3b82f6;
         }
-        .tag-cloud {
+        
+        .tech-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            position: relative;
+            overflow: hidden;
         }
-        .tag-item {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 4px 12px;
+        
+        .tech-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(10px);
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .feature-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        
+        .architecture-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+            background: white;
             border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .data-flow {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #10b981, #8b5cf6, #f97316);
+            bottom: 0;
+            left: 0;
+            animation: dataFlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes dataFlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .performance-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-stack-pentagon {
+            position: relative;
+            width: 1000px; /* 컨테이너 너비 */
+            height: 800px; /* 컨테이너 높이 */
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tech-stack-pentagon .tech-stack-card {
+            position: absolute;
+            width: 250px; /* 카드 너비 고정 */
+            height: auto;
+            padding: 1.5rem;
+            margin: 0;
+            box-sizing: border-box;
+            transform: translate(-50%, -50%); /* 카드의 중앙을 기준으로 위치 조정 */
+        }
+
+        /* 오각형 꼭짓점 위치 (중앙 (50%, 50%) 기준, 반지름 350px) */
+        /* 각도: 90도 (상단), 18도 (오른쪽 상단), 342도 (오른쪽 하단), 270도 (하단), 198도 (왼쪽 하단) */
+
+        /* 사용자 (Top) */
+        .tech-stack-pentagon .user-card {
+            top: calc(50% - 350px);
+            left: 50%;
+        }
+        /* Next.js (Right Top) */
+        .tech-stack-pentagon .nextjs-card {
+            top: calc(50% - 108.15px);
+            left: calc(50% + 332.85px);
+        }
+        /* Supabase (Right Bottom) */
+        .tech-stack-pentagon .supabase-card {
+            top: calc(50% + 108.15px);
+            left: calc(50% + 332.85px);
+        }
+        /* Solapi API (Bottom) */
+        .tech-stack-pentagon .solapi-card {
+            top: calc(50% + 350px);
+            left: 50%;
+        }
+        /* Google Gemini API (Left Bottom) */
+        .tech-stack-pentagon .gemini-card {
+            top: calc(50% + 108.15px);
+            left: calc(50% - 332.85px);
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="slide bg-white relative">
-        <!-- Background pattern -->
-        <div class="absolute inset-0 bg-pattern opacity-50"></div>
+<body class="bg-gray-50">
+    <div class="slide-container relative">
+        <div class="grid-overlay"></div>
         
-        <!-- Left side decorative element -->
-        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
-        
-        <div class="relative z-10 p-8 pl-36">
-            <!-- Header -->
-            <div class="flex justify-between items-center mb-8">
-                <div>
-                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: FAQ 웹페이지</h1>
-                </div>
-                <div class="flex items-center">
-                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
-                        <i class="fas fa-question-circle text-blue-500 text-3xl icon-bounce"></i>
-                    </div>
-                </div>
-            </div>
-
-            
-            <!-- Content Foundation -->
-            <div class="mb-4">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
-                    <i class="fas fa-database mr-2"></i>
-                    콘텐츠 기반
-                </h2>
-                <div class="faq-card bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-8 text-white">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-spider text-2xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold">김영환 원장 네이버 지식인 답변 데이터</h3>
-                    </div>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-green-400 bg-opacity-30 p-4 rounded-lg">
-                            <div class="flex items-center mb-3">
-                                <i class="fas fa-chart-bar mr-3 text-yellow-300"></i>
-                                <span class="font-bold text-xl">약 900건</span>
-                            </div>
-                            <p class="text-green-100">전문의 답변 데이터</p>
-                        </div>
-                        <div class="bg-green-400 bg-opacity-30 p-4 rounded-lg">
-                            <div class="flex items-center mb-3">
-                                <i class="fas fa-globe mr-3 text-yellow-300"></i>
-                                <span class="font-bold text-xl">웹 크롤링</span>
-                            </div>
-                            <p class="text-teal-100">자동화된 데이터 수집</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Main Features -->
-            <div class="grid grid-cols-3 gap-6 mb-4">
-                <!-- Tag-based Filtering -->
-                <div class="faq-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-6 text-white">
-                    <div class="text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-tags text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-xl mb-3">태그 기반 필터링</h4>
-                        <p class="text-blue-100 text-sm mb-4">질병명, 증상, 치료법 등으로 체계적 분류</p>
-                        <div class="tag-cloud">
-                            <span class="tag-item">허리디스크</span>
-                            <span class="tag-item">목통증</span>
-                            <span class="tag-item">관절염</span>
-                            <span class="tag-item">물리치료</span>
-                            <span class="tag-item">주사치료</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Keyword Search -->
-                <div class="faq-card bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-6 text-white">
-                    <div class="text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4 search-pulse">
-                            <i class="fas fa-search text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-xl mb-3">키워드 검색</h4>
-                        <p class="text-yellow-100 text-sm mb-4">사용자 입력 키워드로 정확한 Q&A 검색</p>
-                        <div class="bg-yellow-400 bg-opacity-30 p-3 rounded-lg">
-                            <div class="flex items-center text-sm">
-                                <i class="fas fa-lightbulb mr-2 text-yellow-300"></i>
-                                <span>실시간 검색 결과 제공</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Intuitive UI -->
-                <div class="faq-card bg-gradient-to-br from-red-500 to-yellow-500 rounded-xl p-6 text-white">
-                    <div class="text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4 search-pulse">
-                            <i class="fas fa-search text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-xl mb-3">직관적 UI</h4>
-                        <p class="text-red-100 text-sm mb-4">카드 형태 표시, 상세 내용 모달</p>
-                        <div class="bg-red-400 bg-opacity-30 p-3 rounded-lg">
-                            <div class="flex items-center text-sm">
-                                <i class="fas fa-mouse-pointer mr-2 text-yellow-300"></i>
-                                <span>사용자 친화적 인터페이스</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- User Experience Flow -->
-            <div class="mb-4">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
-                    <i class="fas fa-user-check mr-2"></i>
-                    사용자 경험 플로우
-                </h2>
-                <div class="grid grid-cols-4 gap-6">
-                    <div class="bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl p-5 text-white text-center">
-                        <div class="w-14 h-14 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-search text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">검색/필터</h4>
-                        <p class="text-xs">키워드 또는 태그 선택</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-green-400 to-green-500 rounded-xl p-5 text-white text-center">
-                        <div class="w-14 h-14 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-list text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">결과 확인</h4>
-                        <p class="text-xs">카드 형태 Q&A 목록</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-5 text-white text-center">
-                        <div class="w-14 h-14 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-eye text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">상세 보기</h4>
-                        <p class="text-xs">모달창으로 전체 답변</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-gray-600 to-gray-700 rounded-xl p-5 text-white text-center">
-                        <div class="w-14 h-14 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-eye text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">정보 습득</h4>
-                        <p class="text-xs">전문의 답변 확인</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Technical Implementation
-            <div class="bg-white rounded-xl border-2 border-blue-200 p-6">
-                <h2 class="text-2xl font-semibold text-blue-600 mb-4">
-                    <i class="fas fa-cogs mr-2"></i>
-                    기술적 구현
-                </h2>
-                <div class="grid grid-cols-2 gap-8">
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-database text-blue-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-blue-700">데이터 전처리</h4>
-                                <p class="text-sm text-blue-600">크롤링 데이터의 태그 분류 및 색인화</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-filter text-indigo-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-indigo-700">고급 필터링</h4>
-                                <p class="text-sm text-indigo-600">다중 태그 조합 및 스마트 검색</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-magic text-purple-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-purple-700">UI/UX 최적화</h4>
-                                <p class="text-sm text-purple-600">반응형 카드 레이아웃 및 모달 시스템</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-rocket text-green-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-green-700">성능 최적화</h4>
-                                <p class="text-sm text-green-600">검색 속도 향상 및 캐싱 시스템</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            
-            <!-- Footer
-            <div class="flex justify-end mt-6">
-                <div class="bg-blue-600 text-white px-6 py-3 rounded-full flex items-center">
-                    <i class="fas fa-arrow-right mr-2 text-yellow-300"></i> 
-                    <span>전문의 지식을 체계적으로 정리한 종합 의료정보 포털</span>
-                </div>
-            </div> -->
+        <!-- Floating Shapes -->
+        <div class="floating-shapes" style="top: 8%; left: 5%;">
+            <i class="fas fa-server text-5xl text-blue-500"></i>
         </div>
+        <div class="floating-shapes" style="top: 12%; right: 8%; animation-delay: -2s;">
+            <i class="fas fa-cloud text-4xl text-green-500"></i>
+        </div>
+        <div class="floating-shapes" style="bottom: 12%; left: 6%; animation-delay: -4s;">
+            <i class="fas fa-mobile-alt text-4xl text-purple-500"></i>
+        </div>
+        <div class="floating-shapes" style="bottom: 8%; right: 10%; animation-delay: -6s;">
+            <i class="fas fa-cogs text-5xl text-orange-500"></i>
+        </div>
+        
+        <!-- Header -->
+        <div class="px-16 pt-12 pb-0">
+            <div class="flex items-end justify-between border-b-2 border-gray-300 pb-6">
+                <div>
+                    <h1 class="type-scale-xl font-light text-gray-900 mb-2">
+                        <span class="tech-highlight">기술 스택</span> 및 시스템 아키텍처
+                    </h1>
+                </div>
+                <div class="text-right">
+                    <div class="type-scale-lg font-bold accent-blue">09</div>
+                    <div class="type-scale-sm text-gray-500">Tech Stack & Architecture</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- System Architecture Flow -->
+        <div class="px-16 py-4">
+            <!-- Main Container with White Background -->
+            <div class="bg-white border-2 border-gray-200 rounded-3xl p-12 shadow-xl relative overflow-hidden">
+                <div class="data-flow"></div>
+                
+                <!-- Row 1: User → Next.js → Supabase -->
+                <div class="flex items-center justify-center mb-16">
+                    <!-- User -->
+                    <div class="tech-stack-card user-card text-center" style="margin: 0; padding: 1.5rem; min-width: 200px;">
+                        <div class="tech-icon bg-red-100">
+                            <i class="fas fa-user text-3xl text-red-600"></i>
+                        </div>
+                        <h3 class="type-scale-md font-bold text-red-800 mb-2">사용자</h3>
+                        <p class="type-scale-sm text-red-700 mb-3">웹 브라우저</p>
+                        <div class="space-y-1">
+                            <span class="performance-badge bg-red-100 text-red-800">모바일</span>
+                            <span class="performance-badge bg-red-100 text-red-800">데스크톱</span>
+                            <span class="performance-badge bg-red-100 text-red-800">태블릿</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-arrow"></div>
+                    
+                    <!-- Next.js -->
+                    <div class="tech-stack-card nextjs-card text-center relative" style="margin: 0; padding: 1.5rem; min-width: 250px;">
+                        <div class="tech-icon bg-blue-100">
+                            <i class="fab fa-js-square text-3xl text-blue-600"></i>
+                        </div>
+                        <h3 class="type-scale-md font-bold text-blue-800 mb-2">Next.js</h3>
+                        <p class="type-scale-sm text-blue-700 mb-3">프론트/백엔드 로직</p>
+                        <div class="space-y-1">
+                            <span class="performance-badge bg-blue-100 text-blue-800">SSR/SSG</span>
+                            <span class="performance-badge bg-blue-100 text-blue-800">API Routes</span>
+                            <span class="performance-badge bg-blue-100 text-blue-800">TypeScript</span>
+                        </div>
+                        
+                        <!-- Vertical Arrow Down -->
+                        <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+                            <div class="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+                            <div class="w-0 h-0 border-l-4 border-r-4 border-t-8 border-l-transparent border-r-transparent border-t-purple-500"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-arrow"></div>
+                    
+                    <!-- Supabase -->
+                    <div class="tech-stack-card supabase-card text-center" style="margin: 0; padding: 1.5rem; min-width: 220px;">
+                        <div class="tech-icon bg-green-100">
+                            <i class="fas fa-database text-3xl text-green-600"></i>
+                        </div>
+                        <h3 class="type-scale-md font-bold text-green-800 mb-2">Supabase</h3>
+                        <p class="type-scale-sm text-green-700 mb-3">DB/Auth</p>
+                        <div class="space-y-1">
+                            <span class="performance-badge bg-green-100 text-green-800">PostgreSQL</span>
+                            <span class="performance-badge bg-green-100 text-green-800">실시간</span>
+                            <span class="performance-badge bg-green-100 text-green-800">인증</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Row 2: Google Gemini API → Solapi API -->
+                <div class="flex items-center justify-center space-x-8 mt-8">
+                    <!-- Google Gemini API -->
+                    <div class="tech-stack-card gemini-card text-center" style="margin: 0; padding: 1.5rem; min-width: 280px;">
+                        <div class="tech-icon bg-purple-100">
+                            <i class="fas fa-brain text-3xl text-purple-600"></i>
+                        </div>
+                        <h3 class="type-scale-md font-bold text-purple-800 mb-2">Google Gemini API</h3>
+                        <p class="type-scale-sm text-purple-700 mb-3">AI 분석</p>
+                        <div class="space-y-1">
+                            <span class="performance-badge bg-purple-100 text-purple-800">자연어 처리</span>
+                            <span class="performance-badge bg-purple-100 text-purple-800">의료 분석</span>
+                            <span class="performance-badge bg-purple-100 text-purple-800">맞춤 추천</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-arrow"></div>
+                    
+                    <!-- Solapi API -->
+                    <div class="tech-stack-card solapi-card text-center" style="margin: 0; padding: 1.5rem; min-width: 250px;">
+                        <div class="tech-icon bg-orange-100">
+                            <i class="fas fa-sms text-3xl text-orange-600"></i>
+                        </div>
+                        <h3 class="type-scale-md font-bold text-orange-800 mb-2">Solapi API</h3>
+                        <p class="type-scale-sm text-orange-700 mb-3">알림</p>
+                        <div class="space-y-1">
+                            <span class="performance-badge bg-orange-100 text-orange-800">SMS 발송</span>
+                            <span class="performance-badge bg-orange-100 text-orange-800">예약 확인</span>
+                            <span class="performance-badge bg-orange-100 text-orange-800">상태 알림</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </body>
 </html> 

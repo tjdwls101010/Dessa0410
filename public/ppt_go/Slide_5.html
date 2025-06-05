@@ -3,228 +3,437 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주요 기능 상세: 환자 정보 수집 시스템 (온라인 설문)</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>AI 기반 개인 맞춤 리포트 생성 - 환자 중심 의료 서비스</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: white;
-        }
-        .slide {
+        * { font-family: 'Roboto', sans-serif; }
+        
+        .slide-container {
             width: 1800px;
             height: 1126px;
             overflow: hidden;
             position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         }
-        .bg-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(to right, #64748b 1px, transparent 1px),
+                linear-gradient(to bottom, #64748b 1px, transparent 1px);
+            background-size: 40px 40px;
         }
-        .feature-card {
+        
+        .accent-red { color: #ef4444; }
+        .accent-blue { color: #3b82f6; }
+        .accent-green { color: #10b981; }
+        .accent-purple { color: #8b5cf6; }
+        .accent-orange { color: #f97316; }
+        
+        .type-scale-xl { font-size: 4rem; line-height: 1.1; }
+        .type-scale-lg { font-size: 2.5rem; line-height: 1.2; }
+        .type-scale-md { font-size: 1.5rem; line-height: 1.3; }
+        .type-scale-sm { font-size: 1rem; line-height: 1.4; }
+        .type-scale-xs { font-size: 0.875rem; line-height: 1.5; }
+        
+        .content-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6px;
+            height: 100%;
             transition: all 0.3s ease;
         }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        
+        .content-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
-        .icon-pulse {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        .step-flow {
+        
+        .summary::before { background: #3b82f6; }
+        .summary:hover { border-color: #3b82f6; box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15); }
+        
+        .visualization::before { background: #10b981; }
+        .visualization:hover { border-color: #10b981; box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15); }
+        
+        .analysis::before { background: #8b5cf6; }
+        .analysis:hover { border-color: #8b5cf6; box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15); }
+        
+        .recommendation::before { background: #f97316; }
+        .recommendation:hover { border-color: #f97316; box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15); }
+        
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
-            z-index: 1; /* 화살표가 다른 요소에 가려지지 않도록 z-index 추가 */
+            overflow: hidden;
         }
-        .step-flow::after {
+        
+        .icon-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(8px);
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatComplex 8s ease-in-out infinite;
+        }
+        
+        @keyframes floatComplex {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-10px) rotate(90deg) scale(1.1); }
+            50% { transform: translateY(-5px) rotate(180deg) scale(0.9); }
+            75% { transform: translateY(-15px) rotate(270deg) scale(1.05); }
+        }
+        
+        .ai-highlight {
+            background: linear-gradient(45deg, #8b5cf6, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+        
+        .image-placeholder {
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+            border: 2px dashed #6366f1;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-placeholder::before {
             content: '';
             position: absolute;
             top: 50%;
-            right: -10px;
-            width: 0;
-            height: 0;
-            border-left: 15px solid var(--arrow-color, #3B82F6);
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            z-index: 2; /* 화살표가 박스 위에 보이도록 z-index 추가 */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: pulse 2s ease-in-out infinite;
         }
-        .step-flow:last-child::after {
-            display: none;
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        .ai-features {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #f59e0b;
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .ai-features::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #f59e0b, #8b5cf6, #3b82f6);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .ai-features:hover::before {
+            opacity: 1;
+        }
+        
+        .analysis-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .analysis-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .sub-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+        
+        .sub-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="slide bg-white relative">
-        <!-- Background pattern -->
-        <div class="absolute inset-0 bg-pattern opacity-50"></div>
+<body class="bg-gray-50">
+    <div class="slide-container relative">
+        <div class="grid-overlay"></div>
         
-        <!-- Left side decorative element -->
-        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
+        <!-- Floating Shapes -->
+        <div class="floating-shapes" style="top: 8%; left: 5%;">
+            <i class="fas fa-brain text-5xl text-purple-500"></i>
+        </div>
+        <div class="floating-shapes" style="top: 12%; right: 8%; animation-delay: -2s;">
+            <i class="fas fa-chart-line text-4xl text-blue-500"></i>
+        </div>
+        <div class="floating-shapes" style="bottom: 12%; left: 6%; animation-delay: -4s;">
+            <i class="fas fa-file-medical-alt text-4xl text-green-500"></i>
+        </div>
+        <div class="floating-shapes" style="bottom: 8%; right: 10%; animation-delay: -6s;">
+            <i class="fas fa-robot text-5xl text-orange-500"></i>
+        </div>
         
-        <div class="relative z-10 p-12 pl-36">
-            <!-- Header -->
-            <div class="flex justify-between items-center mb-6">
+        <!-- Header -->
+        <div class="px-16 pt-12 pb-0">
+            <div class="flex items-end justify-between border-b-2 border-gray-300 pb-6">
                 <div>
-                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: 환자 정보 수집 온라인 설문</h1>
+                    <h1 class="type-scale-xl font-light text-gray-900 mb-2">
+                        주요 기능 상세: <span class="ai-highlight">AI 기반 개인 맞춤 리포트 생성</span>
+                    </h1>
                 </div>
-                <div class="flex items-center">
-                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
-                        <i class="fas fa-clipboard-list text-blue-500 text-3xl icon-pulse"></i>
-                    </div>
+                <div class="text-right">
+                    <div class="type-scale-lg font-bold accent-purple">05</div>
+                    <div class="type-scale-sm text-gray-500">AI Report Generation</div>
                 </div>
             </div>
-
-            
-            <!-- Main Features Grid -->
-            <div class="grid grid-cols-2 gap-6 mb-6">
-                <!-- Technical Foundation -->
-                <div class="feature-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-8 text-white">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-code text-2xl"></i>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="px-16 py-6">
+            <div class="grid grid-cols-12 gap-8">
+                <!-- Left Column - Report Contents -->
+                <div class="col-span-7">
+                    <h2 class="type-scale-lg font-bold text-gray-900 mb-6">
+                        <i class="fas fa-file-alt accent-purple mr-3"></i>
+                        리포트 내용
+                    </h2>
+                    
+                    <div class="space-y-5">
+                        <!-- Summary -->
+                        <div class="content-card summary p-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="icon-container bg-blue-100">
+                                    <i class="fas fa-list-ol text-2xl text-blue-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="type-scale-md font-bold text-gray-900 mb-2">설문 결과 요약 (점수화)</h3>
+                                    <p class="type-scale-sm text-blue-800">각 평가지표별 점수와 전체적인 건강 상태 수치화</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-2xl font-bold">기술적 구현</h3>
-                    </div>
-                    <div class="text-blue-100 text-lg leading-relaxed space-y-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>Next.js 기반</strong> 웹 애플리케이션</span>
+                        
+                        <!-- Visualization -->
+                        <div class="content-card visualization p-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="icon-container bg-green-100">
+                                    <i class="fas fa-chart-bar text-2xl text-green-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="type-scale-md font-bold text-gray-900 mb-2">통증/기능 변화 추이 시각화</h3>
+                                    <p class="type-scale-sm text-green-800">시간에 따른 통증 변화와 기능 개선 정도를 그래프로 표현</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>모달 형태</strong> 설문 시스템</span>
+                        
+                        <!-- AI Analysis -->
+                        <div class="content-card analysis p-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="icon-container bg-purple-100">
+                                    <i class="fas fa-brain text-2xl text-purple-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="type-scale-md font-bold text-gray-900 mb-3">AI 분석 기반 진단</h3>
+                                    <div class="space-y-2">
+                                        <div class="sub-item">
+                                            <div class="sub-bullet bg-purple-500"></div>
+                                            <span class="type-scale-sm text-gray-700"><strong>통증 심각도 및 예상 원인</strong></span>
+                                        </div>
+                                        <div class="sub-item">
+                                            <div class="sub-bullet bg-purple-500"></div>
+                                            <span class="type-scale-sm text-gray-700"><strong>기능적 영향 및 만성화 위험도</strong></span>
+                                        </div>
+                                        <div class="sub-item">
+                                            <div class="sub-bullet bg-purple-500"></div>
+                                            <span class="type-scale-sm text-gray-700"><strong>위험 신호</strong></span>
+                                        </div>
+                                        <div class="sub-item">
+                                            <div class="sub-bullet bg-purple-500"></div>
+                                            <span class="type-scale-sm text-gray-700"><strong>생활 습관 개선 제안</strong></span>
+                                        </div>
+                                        <div class="sub-item">
+                                            <div class="sub-bullet bg-purple-500"></div>
+                                            <span class="type-scale-sm text-gray-700"><strong>다음 단계 제안</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>국제 공인 평가지표</strong> 기반</span>
-                        </div>
-                        <div class="bg-blue-400 bg-opacity-30 p-3 rounded-lg mt-4">
-                            <div class="text-sm text-blue-100">
-                                <span class="font-semibold">평가 도구:</span> VAS, DN4, ODI, NDI 등
+                        
+                        <!-- Recommendations -->
+                        <div class="content-card recommendation p-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="icon-container bg-orange-100">
+                                    <i class="fas fa-user-md text-2xl text-orange-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="type-scale-md font-bold text-gray-900 mb-2">추천 치료법 및 건강 관리 권고</h3>
+                                    <p class="type-scale-sm text-orange-800 mb-2">온누리통증의학과 제공 맞춤형 치료 옵션</p>
+                                    <div class="flex items-center space-x-4">
+                                        <span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full font-medium">개인 맞춤형</span>
+                                        <span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full font-medium">근거 기반</span>
+                                        <span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full font-medium">실행 가능</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- User Experience -->
-                <div class="feature-card bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl p-8 text-white">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user-cog text-2xl"></i>
+                <!-- Right Column - Visual & AI Features -->
+                <div class="col-span-5">
+                    <!-- Report Image -->
+                    <div class="mb-6">
+                        <h3 class="type-scale-md font-bold text-gray-900 mb-4">
+                            <i class="fas fa-image accent-green mr-2"></i>
+                            리포트 샘플
+                        </h3>
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-purple-200">
+                            <img src="./images/리포트.png" alt="AI 생성 리포트 화면" class="w-full h-auto object-cover">
                         </div>
-                        <h3 class="text-2xl font-bold">사용자 경험 최적화</h3>
                     </div>
-                    <div class="text-indigo-100 text-lg leading-relaxed space-y-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-step-forward mr-3 text-yellow-300"></i>
-                            <span><strong>단계별 설문</strong> 구성</span>
+                    
+                    <!-- AI Features -->
+                    <!-- <div class="ai-features p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-magic text-white text-2xl"></i>
+                            </div>
+                            <h3 class="type-scale-md font-bold text-purple-800">AI 핵심 기능</h3>
                         </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-battery-half mr-3 text-yellow-300"></i>
-                            <span><strong>사용자 피로도</strong> 감소</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-question-circle mr-3 text-yellow-300"></i>
-                            <span><strong>항목별 도움말</strong> (Tooltip) 제공</span>
-                        </div>
-                        <div class="bg-purple-400 bg-opacity-30 p-3 rounded-lg mt-4">
-                            <div class="text-sm text-purple-100">
-                                <span class="font-semibold">체계적 정보 입력</span> 보장
+                        
+                        <div class="space-y-3">
+                            <div class="analysis-item">
+                                <div class="analysis-icon bg-blue-100">
+                                    <i class="fas fa-search text-blue-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="type-scale-xs font-bold text-gray-800">패턴 분석</p>
+                                    <p class="type-scale-xs text-gray-600">설문 데이터 심층 분석</p>
+                                </div>
+                            </div>
+                            
+                            <div class="analysis-item">
+                                <div class="analysis-icon bg-green-100">
+                                    <i class="fas fa-lightbulb text-green-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="type-scale-xs font-bold text-gray-800">인사이트 도출</p>
+                                    <p class="type-scale-xs text-gray-600">숨겨진 건강 패턴 발견</p>
+                                </div>
+                            </div>
+                            
+                            <div class="analysis-item">
+                                <div class="analysis-icon bg-purple-100">
+                                    <i class="fas fa-target text-purple-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="type-scale-xs font-bold text-gray-800">맞춤형 권고</p>
+                                    <p class="type-scale-xs text-gray-600">개인별 최적화된 조언</p>
+                                </div>
+                            </div>
+                            
+                            <div class="analysis-item">
+                                <div class="analysis-icon bg-orange-100">
+                                    <i class="fas fa-shield-alt text-orange-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="type-scale-xs font-bold text-gray-800">위험 예측</p>
+                                    <p class="type-scale-xs text-gray-600">조기 경고 시스템</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        
+                        <div class="mt-6 bg-white p-4 rounded-lg border-l-4 border-purple-500">
+                            <p class="type-scale-xs text-purple-800 italic">
+                                <i class="fas fa-quote-left mr-2"></i>
+                                "환자 개개인의 상태를 종합적으로 분석하여 최적의 치료 방향을 제시합니다"
+                            </p>
+                        </div>
+                    </div> -->
                 </div>
             </div>
-            
-            <!-- Survey Flow Steps -->
-            <div class="mb-8">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
-                    <i class="fas fa-stream mr-2"></i>
-                    설문 단계별 구성
-                </h2>
-                <div class="grid grid-cols-6 gap-4">
-                    <div class="step-flow bg-gradient-to-br from-green-400 to-green-500 rounded-xl p-4 text-white text-center" style="--arrow-color: #4ADE80;">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-user text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">기본 정보</h4>
-                        <p class="text-xs">인적사항</p>
+        </div>
+        
+        <!-- Bottom Status -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div class="flex items-center space-x-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-sm"></i>
                     </div>
-                    <div class="step-flow bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl p-4 text-white text-center" style="--arrow-color: #60A5FA;">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-heartbeat text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">통증 평가</h4>
-                        <p class="text-xs">강도/부위/특징</p>
+                    <span class="type-scale-xs text-gray-600">AI Analysis</span>
+                </div>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 via-green-500 via-purple-500 to-orange-500"></div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-orange-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-file-medical-alt text-white text-sm"></i>
                     </div>
-                    <div class="step-flow bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl p-4 text-white text-center" style="--arrow-color: #A78BFA;">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-running text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">기능 제한</h4>
-                        <p class="text-xs">일상 활동</p>
-                    </div>
-                    <div class="step-flow bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-4 text-white text-center" style="--arrow-color: #FACC15;">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-home text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">생활 습관</h4>
-                        <p class="text-xs">일상 패턴</p>
-                    </div>
-                    <div class="step-flow bg-gradient-to-br from-red-400 to-red-500 rounded-xl p-4 text-white text-center" style="--arrow-color: #F87171;">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-history text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">과거력</h4>
-                        <p class="text-xs">의료 이력</p>
-                    </div>
-                    <div class="step-flow bg-gradient-to-br from-pink-400 to-pink-500 rounded-xl p-4 text-white text-center" style="--arrow-color: #F472B6;">
-                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-flag text-lg"></i>
-                        </div>
-                        <h4 class="font-bold mb-1">Red Flags</h4>
-                        <p class="text-xs">위험 신호</p>
-                    </div>
+                    <span class="type-scale-xs text-gray-600">Personalized Report</span>
                 </div>
             </div>
-            
-            <!-- Data Utilization -->
-            <div class="bg-white rounded-xl border-2 border-blue-200 p-6">
-                <h2 class="text-2xl font-semibold text-blue-600 mb-4">
-                    <i class="fas fa-database mr-2"></i>
-                    데이터 활용
-                </h2>
-                <div class="grid grid-cols-3 gap-6">
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-server text-blue-500 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-blue-700 mb-2">Supabase DB 저장</h4>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-indigo-100 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-chart-line text-indigo-500 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-indigo-700 mb-2">AI 리포트 생성</h4>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-robot text-purple-500 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-purple-700 mb-2">챗봇 활용</h4>
-                    </div>
-                </div>
-            </div>
-            
-
         </div>
     </div>
 </body>

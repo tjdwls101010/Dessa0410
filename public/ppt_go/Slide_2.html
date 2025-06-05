@@ -3,198 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>목차</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>목차 - 환자 중심 의료 서비스</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: white;
-        }
-        .slide {
+        * { font-family: 'Roboto', sans-serif; }
+        
+        .slide-container {
             width: 1800px;
             height: 1126px;
             overflow: hidden;
             position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         }
-        .bg-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(to right, #64748b 1px, transparent 1px),
+                linear-gradient(to bottom, #64748b 1px, transparent 1px);
+            background-size: 40px 40px;
         }
-        .toc-item {
+        
+        .accent-red { color: #ef4444; }
+        .accent-blue { color: #3b82f6; }
+        .accent-green { color: #10b981; }
+        .accent-purple { color: #8b5cf6; }
+        .accent-orange { color: #f97316; }
+        
+        .type-scale-xl { font-size: 4rem; line-height: 1.1; }
+        .type-scale-lg { font-size: 2.5rem; line-height: 1.2; }
+        .type-scale-md { font-size: 1.5rem; line-height: 1.3; }
+        .type-scale-sm { font-size: 1rem; line-height: 1.4; }
+        .type-scale-xs { font-size: 0.875rem; line-height: 1.5; }
+        
+        .toc-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .toc-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6px;
+            height: 100%;
             transition: all 0.3s ease;
         }
-        .toc-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        
+        .toc-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
-        .icon-bounce {
-            animation: bounce 2s infinite;
+        
+        .overview::before { background: #3b82f6; }
+        .overview:hover { border-color: #3b82f6; box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15); }
+        
+        .features::before { background: #10b981; }
+        .features:hover { border-color: #10b981; box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15); }
+        
+        .tech::before { background: #8b5cf6; }
+        .tech:hover { border-color: #8b5cf6; box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15); }
+        
+        .conclusion::before { background: #f97316; }
+        .conclusion:hover { border-color: #f97316; box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15); }
+        
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
-        @keyframes bounce {
-            0%, 20%, 53%, 80%, 100% {
-                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-                transform: translate3d(0,0,0);
-            }
-            40%, 43% {
-                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                transform: translate3d(0, -15px, 0);
-            }
-            70% {
-                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
-                transform: translate3d(0, -7px, 0);
-            }
-            90% {
-                transform: translate3d(0, -2px, 0);
-            }
+        
+        .icon-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(8px);
+            opacity: 0.7;
+            z-index: -1;
         }
-        .number-circle {
-            animation: pulse 2s infinite;
+        
+        .floating-shapes {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatComplex 8s ease-in-out infinite;
         }
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
+        
+        @keyframes floatComplex {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-10px) rotate(90deg) scale(1.1); }
+            50% { transform: translateY(-5px) rotate(180deg) scale(0.9); }
+            75% { transform: translateY(-15px) rotate(270deg) scale(1.05); }
+        }
+        
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .sub-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+        
+        .sub-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="slide bg-white relative">
-        <!-- Background pattern -->
-        <div class="absolute inset-0 bg-pattern opacity-50"></div>
+<body class="bg-gray-50">
+    <div class="slide-container relative">
+        <div class="grid-overlay"></div>
         
-        <!-- Left side decorative element -->
-        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
+        <!-- Floating Shapes -->
+        <div class="floating-shapes" style="top: 8%; left: 5%;">
+            <i class="fas fa-clipboard-list text-5xl text-blue-500"></i>
+        </div>
+        <div class="floating-shapes" style="top: 12%; right: 8%; animation-delay: -2s;">
+            <i class="fas fa-stethoscope text-4xl text-green-500"></i>
+        </div>
+        <div class="floating-shapes" style="bottom: 12%; left: 6%; animation-delay: -4s;">
+            <i class="fas fa-brain text-4xl text-purple-500"></i>
+        </div>
+        <div class="floating-shapes" style="bottom: 8%; right: 10%; animation-delay: -6s;">
+            <i class="fas fa-heart text-5xl text-red-500"></i>
+        </div>
         
-        <div class="relative z-10 p-16 pl-36">
-            <!-- Header -->
-            <div class="flex justify-between items-center mb-12">
+        <!-- Header -->
+        <div class="px-16 pt-12 pb-0">
+            <div class="flex items-end justify-between border-b-2 border-gray-300 pb-6">
                 <div>
-                    <h1 class="text-5xl font-bold text-blue-600">목차</h1>
+                    <h1 class="type-scale-xl font-light text-gray-900 mb-2">
+                        목차
+                    </h1>
+                    <!-- <p class="type-scale-md text-gray-600">환자 중심 의료 서비스 혁신</p> -->
                 </div>
-                <div class="flex items-center">
-                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
-                        <i class="fas fa-list text-blue-500 text-3xl icon-bounce"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Table of Contents -->
-            <div class="space-y-6">
-                <!-- TOC Item 1 -->
-                <div class="toc-item bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border-l-6 border-blue-500">
-                    <div class="flex items-center">
-                        <div class="number-circle w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
-                            1
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-blue-700">프로젝트 배경 및 목표</h3>
-                            <p class="text-blue-600 text-lg mt-1">(Why & What)</p>
-                        </div>
-                        <div class="ml-auto">
-                            <i class="fas fa-bullseye text-blue-500 text-2xl"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TOC Item 2 -->
-                <div class="toc-item bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-xl p-6 border-l-6 border-indigo-500">
-                    <div class="flex items-center">
-                        <div class="number-circle w-12 h-12 bg-indigo-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
-                            2
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-indigo-700">전체 서비스 구성도</h3>
-                            <p class="text-indigo-600 text-lg mt-1">(How?)</p>
-                        </div>
-                        <div class="ml-auto">
-                            <i class="fas fa-sitemap text-indigo-500 text-2xl"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TOC Item 3 -->
-                <div class="toc-item bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-6 border-l-6 border-purple-500">
-                    <div class="flex items-center">
-                        <div class="number-circle w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
-                            3
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-purple-700">주요 기능 상세</h3>
-                            <p class="text-purple-600 text-lg mt-1">(Detailed Features)</p>
-                        </div>
-                        <div class="ml-auto">
-                            <i class="fas fa-cogs text-purple-500 text-2xl"></i>
-                        </div>
-                    </div>
-                    <!-- Sub items -->
-                    <div class="mt-4 ml-18 space-y-2">
-                        <div class="flex items-center text-purple-600">
-                            <i class="fas fa-circle text-xs mr-3"></i>
-                            <span class="text-lg">환자 정보 수집 시스템 (온라인 설문)</span>
-                        </div>
-                        <div class="flex items-center text-purple-600">
-                            <i class="fas fa-circle text-xs mr-3"></i>
-                            <span class="text-lg">AI 기반 개인 맞춤 리포트 생성</span>
-                        </div>
-                        <div class="flex items-center text-purple-600">
-                            <i class="fas fa-circle text-xs mr-3"></i>
-                            <span class="text-lg">환자 지원 AI 챗봇</span>
-                        </div>
-                        <div class="flex items-center text-purple-600">
-                            <i class="fas fa-circle text-xs mr-3"></i>
-                            <span class="text-lg">온라인 예약 시스템</span>
-                        </div>
-                        <div class="flex items-center text-purple-600">
-                            <i class="fas fa-circle text-xs mr-3"></i>
-                            <span class="text-lg">FAQ 웹페이지</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TOC Item 4 -->
-                <div class="toc-item bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-6 border-l-6 border-green-500">
-                    <div class="flex items-center">
-                        <div class="number-circle w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
-                            4
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-green-700">기술 스택 및 시스템 아키텍처</h3>
-                            <p class="text-green-600 text-lg mt-1">(Tech Inside)</p>
-                        </div>
-                        <div class="ml-auto">
-                            <i class="fas fa-code text-green-500 text-2xl"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TOC Item 5 -->
-                <div class="toc-item bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-6 border-l-6 border-pink-500">
-                    <div class="flex items-center">
-                        <div class="number-circle w-12 h-12 bg-pink-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
-                            5
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-pink-700">기대 효과 및 결론</h3>
-                            <p class="text-pink-600 text-lg mt-1">(Benefits & Conclusion)</p>
-                        </div>
-                        <div class="ml-auto">
-                            <i class="fas fa-trophy text-pink-500 text-2xl"></i>
-                        </div>
-                    </div>
+                <div class="text-right">
+                    <div class="type-scale-lg font-bold accent-blue">02</div>
+                    <div class="type-scale-sm text-gray-500">Table of Contents</div>
                 </div>
             </div>
         </div>
+        
+        <!-- Main Content -->
+        <div class="px-16 py-6">
+            <div class="flex flex-col space-y-2">
+                <!-- Section 1 -->
+                <div class="toc-card overview p-8">
+                    <div class="flex items-start space-x-6">
+                        <div class="icon-container bg-blue-100">
+                            <i class="fas fa-sitemap text-3xl text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center mb-4">
+                                <span class="section-number bg-blue-100 text-blue-800 type-scale-md">1</span>
+                                <h3 class="type-scale-lg font-bold text-gray-900">전체 서비스 구성도</h3>
+                            </div>
+                            <p class="type-scale-sm text-blue-600 font-medium mb-3">(How?)</p>
+                            <p class="type-scale-sm text-gray-600">환자 유입부터 진료까지 전체 서비스 흐름 및 각 단계별 시스템 구성</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 2 -->
+                <div class="toc-card features p-8">
+                    <div class="flex items-start space-x-6">
+                        <div class="icon-container bg-green-100">
+                            <i class="fas fa-tools text-3xl text-green-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center mb-4">
+                                <span class="section-number bg-green-100 text-green-800 type-scale-md">2</span>
+                                <h3 class="type-scale-lg font-bold text-gray-900">주요 기능 상세</h3>
+                            </div>
+                            <p class="type-scale-sm text-green-600 font-medium mb-3">(Detailed Features)</p>
+                            <div class="space-y-3">
+                                <div class="sub-item">
+                                    <div class="sub-bullet bg-green-500"></div>
+                                    <span class="type-scale-sm text-gray-600">환자 정보 수집 시스템 (온라인 설문)</span>
+                                </div>
+                                <div class="sub-item">
+                                    <div class="sub-bullet bg-green-500"></div>
+                                    <span class="type-scale-sm text-gray-600">AI 기반 개인 맞춤 리포트 생성</span>
+                                </div>
+                                <div class="sub-item">
+                                    <div class="sub-bullet bg-green-500"></div>
+                                    <span class="type-scale-sm text-gray-600">환자 지원 AI 챗봇</span>
+                                </div>
+                                <div class="sub-item">
+                                    <div class="sub-bullet bg-green-500"></div>
+                                    <span class="type-scale-sm text-gray-600">온라인 예약 시스템</span>
+                                </div>
+                                <div class="sub-item">
+                                    <div class="sub-bullet bg-green-500"></div>
+                                    <span class="type-scale-sm text-gray-600">FAQ 웹페이지</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 3 -->
+                <div class="toc-card tech p-8">
+                    <div class="flex items-start space-x-6">
+                        <div class="icon-container bg-purple-100">
+                            <i class="fas fa-code text-3xl text-purple-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center mb-4">
+                                <span class="section-number bg-purple-100 text-purple-800 type-scale-md">3</span>
+                                <h3 class="type-scale-lg font-bold text-gray-900">기술 스택 및 시스템 아키텍처</h3>
+                            </div>
+                            <p class="type-scale-sm text-purple-600 font-medium mb-3">(Tech Inside)</p>
+                            <p class="type-scale-sm text-gray-600">개발 환경, 사용 기술, 시스템 구조 및 데이터 플로우</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 4 -->
+                <div class="toc-card conclusion p-8">
+                    <div class="flex items-start space-x-6">
+                        <div class="icon-container bg-orange-100">
+                            <i class="fas fa-chart-line text-3xl text-orange-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center mb-4">
+                                <span class="section-number bg-orange-100 text-orange-800 type-scale-md">4</span>
+                                <h3 class="type-scale-lg font-bold text-gray-900">기대 효과 및 결론</h3>
+                            </div>
+                            <p class="type-scale-sm text-orange-600 font-medium mb-3">(Benefits & Conclusion)</p>
+                            <p class="type-scale-sm text-gray-600">서비스 도입으로 인한 기대 효과와 향후 발전 방향</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
     </div>
 </body>
-</html>
+</html> 

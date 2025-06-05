@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 기반 사전문진 & 리포트 & 챗봇 & 예약</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: white;
+        }
+        .slide {
+            width: 1800px;
+            height: 1126px;
+            overflow: hidden;
+            position: relative;
+        }
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .floating-card {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .pulse-icon {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="slide bg-white relative">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 bg-pattern opacity-50"></div>
+        
+        <!-- Left side decorative element -->
+        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
+        
+        <!-- Top right floating elements -->
+        <div class="absolute top-16 right-16">
+            <div class="floating-card w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
+                <i class="fas fa-stethoscope text-white text-2xl pulse-icon"></i>
+            </div>
+        </div>
+        <div class="absolute top-40 right-32">
+            <div class="floating-card w-16 h-16 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center" style="animation-delay: -1s;">
+                <i class="fas fa-robot text-white text-xl pulse-icon"></i>
+            </div>
+        </div>
+        <div class="absolute top-20 right-48">
+            <div class="floating-card w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center" style="animation-delay: -2s;">
+                <i class="fas fa-chart-bar text-white text-sm pulse-icon"></i>
+            </div>
+        </div>
+        
+        <div class="relative z-10 p-16 pl-36 flex flex-col justify-center h-full">
+            <!-- Main title section -->
+            <div class="text-center mb-16">
+                <div class="mb-8">
+                    <div class="inline-block w-28 h-28 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mb-6">
+                        <i class="fas fa-hospital-user text-white text-4xl"></i>
+                    </div>
+                </div>
+                
+                <h1 class="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-8">
+                    AI 기반 통합 의료 솔루션
+                </h1>
+                
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-2xl p-8 mb-8 max-w-5xl mx-auto">
+                    <h2 class="text-3xl font-semibold mb-4">
+                        <i class="fas fa-clipboard-check mr-3"></i>
+                        사전문진 & 리포트 & 챗봇 & 예약
+                    </h2>
+                    <p class="text-xl text-blue-100">온누리통증의학과를 위한 차세대 디지털 환자 경험 플랫폼</p>
+                </div>
+                
+                <!-- Service icons -->
+                <div class="flex justify-center space-x-8 mb-12">
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-2">
+                            <i class="fas fa-clipboard-list text-white text-xl"></i>
+                        </div>
+                        <span class="text-blue-600 font-medium">사전문진</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center mb-2">
+                            <i class="fas fa-chart-line text-white text-xl"></i>
+                        </div>
+                        <span class="text-indigo-600 font-medium">AI 리포트</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mb-2">
+                            <i class="fas fa-comments text-white text-xl"></i>
+                        </div>
+                        <span class="text-purple-600 font-medium">AI 챗봇</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-2">
+                            <i class="fas fa-calendar-alt text-white text-xl"></i>
+                        </div>
+                        <span class="text-green-600 font-medium">온라인 예약</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team and presenter info -->
+            <div class="flex justify-between items-end">
+                <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-3">
+                        <i class="fas fa-users mr-2"></i>
+                        Team 6조
+                    </h3>
+                    <div class="text-gray-700 space-y-1">
+                        <p class="font-medium">김정연 • 안성진 • 김두현</p>
+                        <p class="font-medium">정현준 • 김재훈 • 김도훈</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold mb-2">
+                        <i class="fas fa-microphone mr-2"></i>
+                        발표자
+                    </h3>
+                    <p class="text-2xl font-bold">김정연</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

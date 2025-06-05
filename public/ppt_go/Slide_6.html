@@ -3,236 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주요 기능 상세: AI 기반 개인 맞춤 리포트 생성</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>환자 지원 AI 챗봇 - 환자 중심 의료 서비스</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: white;
-        }
-        .slide {
+        * { font-family: 'Roboto', sans-serif; }
+        
+        .slide-container {
             width: 1800px;
             height: 1126px;
             overflow: hidden;
             position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         }
-        .bg-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(to right, #64748b 1px, transparent 1px),
+                linear-gradient(to bottom, #64748b 1px, transparent 1px);
+            background-size: 40px 40px;
         }
-        .tech-card {
+        
+        .accent-red { color: #ef4444; }
+        .accent-blue { color: #3b82f6; }
+        .accent-green { color: #10b981; }
+        .accent-purple { color: #8b5cf6; }
+        .accent-orange { color: #f97316; }
+        
+        .type-scale-xl { font-size: 4rem; line-height: 1.1; }
+        .type-scale-lg { font-size: 2.5rem; line-height: 1.2; }
+        .type-scale-md { font-size: 1.5rem; line-height: 1.3; }
+        .type-scale-sm { font-size: 1rem; line-height: 1.4; }
+        .type-scale-xs { font-size: 0.875rem; line-height: 1.5; }
+        
+        .strategy-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .strategy-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6px;
+            height: 100%;
             transition: all 0.3s ease;
         }
-        .tech-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        
+        .strategy-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
-        .icon-rotate {
-            animation: rotate 4s linear infinite;
-        }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .ai-glow {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-        }
-        .report-flow {
+        
+        .personalization::before { background: #3b82f6; }
+        .personalization:hover { border-color: #3b82f6; box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15); }
+        
+        .safety::before { background: #ef4444; }
+        .safety:hover { border-color: #ef4444; box-shadow: 0 20px 40px rgba(239, 68, 68, 0.15); }
+        
+        .empathy::before { background: #10b981; }
+        .empathy:hover { border-color: #10b981; box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15); }
+        
+        .guidance::before { background: #f97316; }
+        .guidance:hover { border-color: #f97316; box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15); }
+        
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            overflow: hidden;
         }
-        .report-flow::after {
+        
+        .icon-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(8px);
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatComplex 8s ease-in-out infinite;
+        }
+        
+        @keyframes floatComplex {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-10px) rotate(90deg) scale(1.1); }
+            50% { transform: translateY(-5px) rotate(180deg) scale(0.9); }
+            75% { transform: translateY(-15px) rotate(270deg) scale(1.05); }
+        }
+        
+        .chatbot-highlight {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+        
+        .image-placeholder {
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+            border: 2px dashed #6366f1;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 350px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-placeholder::before {
             content: '';
             position: absolute;
             top: 50%;
-            right: -25px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        .interaction-showcase {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #f59e0b;
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .interaction-showcase::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #f59e0b, #3b82f6, #8b5cf6);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .interaction-showcase:hover::before {
+            opacity: 1;
+        }
+        
+        .chat-message {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .chat-message.user {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            margin-left: 2rem;
+        }
+        
+        .chat-message.bot {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            margin-right: 2rem;
+        }
+        
+        .chat-message::before {
+            content: '';
+            position: absolute;
             width: 0;
             height: 0;
-            border-left: 20px solid #4F46E5;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
+            border-style: solid;
         }
-        .report-flow:last-child::after {
-            display: none;
+        
+        .chat-message.user::before {
+            bottom: -8px;
+            right: 1rem;
+            border-color: #bfdbfe transparent transparent transparent;
+            border-width: 8px 8px 0 8px;
+        }
+        
+        .chat-message.bot::before {
+            bottom: -8px;
+            left: 1rem;
+            border-color: #bbf7d0 transparent transparent transparent;
+            border-width: 8px 8px 0 8px;
+        }
+        
+        .prompt-engineering {
+            background: linear-gradient(45deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="slide bg-white relative">
-        <!-- Background pattern -->
-        <div class="absolute inset-0 bg-pattern opacity-50"></div>
+<body class="bg-gray-50">
+    <div class="slide-container relative">
+        <div class="grid-overlay"></div>
         
-        <!-- Left side decorative element -->
-        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
+        <!-- Floating Shapes -->
+        <div class="floating-shapes" style="top: 8%; left: 5%;">
+            <i class="fas fa-robot text-5xl text-blue-500"></i>
+        </div>
+        <div class="floating-shapes" style="top: 12%; right: 8%; animation-delay: -2s;">
+            <i class="fas fa-comments text-4xl text-green-500"></i>
+        </div>
+        <div class="floating-shapes" style="bottom: 12%; left: 6%; animation-delay: -4s;">
+            <i class="fas fa-brain text-4xl text-purple-500"></i>
+        </div>
+        <div class="floating-shapes" style="bottom: 8%; right: 10%; animation-delay: -6s;">
+            <i class="fas fa-user-friends text-5xl text-orange-500"></i>
+        </div>
         
-        <div class="relative z-10 p-8 pl-36">
-            <!-- Header -->
-            <div class="flex justify-between items-center mb-8">
+        <!-- Header -->
+        <div class="px-16 pt-12 pb-0">
+            <div class="flex items-end justify-between border-b-2 border-gray-300 pb-6">
                 <div>
-                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: AI 기반 개인 맞춤 리포트 생성</h1>
+                    <h1 class="type-scale-xl font-light text-gray-900 mb-2">
+                        주요 기능 상세: <span class="chatbot-highlight">환자 지원 AI 챗봇</span>
+                    </h1>
                 </div>
-                <div class="flex items-center">
-                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center ai-glow">
-                        <i class="fas fa-brain text-blue-500 text-3xl icon-rotate"></i>
-                    </div>
+                <div class="text-right">
+                    <div class="type-scale-lg font-bold accent-blue">06</div>
+                    <div class="type-scale-sm text-gray-500">AI Chatbot Support</div>
                 </div>
             </div>
-
-            
-            <!-- Technology Stack -->
-            <div class="grid grid-cols-2 gap-8 mb-4">
-                <!-- AI Technology -->
-                <div class="tech-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-8 text-white">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-microchip text-2xl"></i>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="px-16 py-6">
+            <div class="grid grid-cols-12 gap-8">
+                <!-- Left Column - Strategy -->
+                <div class="col-span-7">
+                    <h2 class="type-scale-lg font-bold text-gray-900 mb-6">
+                        <i class="fas fa-cogs accent-blue mr-3"></i>
+                        프롬프트 엔지니어링
+                    </h2>
+                    
+                    <div class="space-y-5">
+                        <!-- Personalization -->
+                        <div class="strategy-card personalization p-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="icon-container bg-blue-100">
+                                    <i class="fas fa-user-cog text-2xl text-blue-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="type-scale-md font-bold text-gray-900 mb-2">개인화된 상호작용</h3>
+                                    <p class="type-scale-sm text-blue-800 mb-3">환자 설문 결과 및 리포트 내용을 컨텍스트로 활용</p>
+                                    <div class="flex items-center space-x-4">
+                                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">맞춤형 응답</span>
+                                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">상황 인식</span>
+                                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">연속성</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-2xl font-bold">주요 기술</h3>
+                        
+                        <!-- Safety -->
+                        <div class="strategy-card safety p-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="icon-container bg-red-100">
+                                    <i class="fas fa-shield-alt text-2xl text-red-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="type-scale-md font-bold text-gray-900 mb-2">명확한 역할 정의 및 면책 조항</h3>
+                                    <p class="type-scale-sm text-red-800 mb-3">의료 전문가 아님 명시, 진단 대체 불가 안내</p>
+                                    <div class="bg-red-50 p-3 rounded-lg border-l-4 border-red-500">
+                                        <p class="type-scale-xs text-red-700 italic">
+                                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                                            "저는 의료 전문가가 아닙니다. 정확한 진단은 의료진과 상담하세요."
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Empathy -->
+                        <div class="strategy-card empathy p-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="icon-container bg-green-100">
+                                    <i class="fas fa-heart text-2xl text-green-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="type-scale-md font-bold text-gray-900 mb-2">공감 및 안심</h3>
+                                    <p class="type-scale-sm text-green-800 mb-3">환자 불편감 공감, 긍정적 전망 제시</p>
+                                    <div class="bg-green-50 p-3 rounded-lg border-l-4 border-green-500">
+                                        <p class="type-scale-xs text-green-700 italic">
+                                            <i class="fas fa-hands-helping mr-2"></i>
+                                            "힘든 상황을 겪고 계시는군요. 적절한 치료로 충분히 개선될 수 있습니다."
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Guidance -->
+                        <div class="strategy-card guidance p-5">
+                            <div class="flex items-start space-x-4">
+                                <div class="icon-container bg-orange-100">
+                                    <i class="fas fa-hospital text-2xl text-orange-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="type-scale-md font-bold text-gray-900 mb-2">병원 방문 유도</h3>
+                                    <p class="type-scale-sm text-orange-800 mb-3">모든 상호작용의 자연스러운 내원 권유</p>
+                                    <div class="bg-orange-50 p-3 rounded-lg border-l-4 border-orange-500">
+                                        <p class="type-scale-xs text-orange-700 italic">
+                                            <i class="fas fa-calendar-plus mr-2"></i>
+                                            "전문의와 상담받으시면 더 정확한 치료 계획을 세울 수 있습니다."
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-blue-100 text-lg leading-relaxed space-y-4">
-                        <div class="bg-blue-400 bg-opacity-30 p-4 rounded-lg">
-                            <div class="flex items-center mb-2">
-                                <i class="fas fa-google mr-3 text-yellow-300"></i>
-                                <span class="font-bold">Google Gemini API</span>
+                    
+                    <!-- Interaction Summary -->
+                    <div class="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-magic text-white text-lg"></i>
                             </div>
-                            <p class="text-sm">설문 분석 및 리포트 텍스트 생성</p>
+                            <h3 class="type-scale-md font-bold text-gray-900">상호작용 특징</h3>
                         </div>
-                        <div class="bg-indigo-400 bg-opacity-30 p-4 rounded-lg">
-                            <div class="flex items-center mb-2">
-                                <i class="fas fa-chart-bar mr-3 text-green-300"></i>
-                                <span class="font-bold">Chart.js</span>
-                            </div>
-                            <p class="text-sm">데이터 시각화 및 추이 분석</p>
-                        </div>
+                        <p class="type-scale-sm text-gray-700">환자의 개별 상황에 맞는 개인화된 답변 제공</p>
                     </div>
                 </div>
                 
-                <!-- Report Content -->
-                <div class="tech-card bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl p-8 text-white">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-file-medical text-2xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold">리포트 내용</h3>
-                    </div>
-                    <div class="text-indigo-100 text-lg leading-relaxed space-y-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>설문 결과 요약</strong> (점수화)</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>통증/기능 변화</strong> 추이 시각화</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>AI 분석 기반</strong> 원인 분석</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
-                            <span><strong>맞춤형 치료법</strong> 및 관리 권고</span>
+                <!-- Right Column - Visual & Chat Demo -->
+                <div class="col-span-5">
+                    <!-- Chatbot Image -->
+                    <div class="mb-6">
+                        <h3 class="type-scale-md font-bold text-gray-900 mb-4">
+                            <i class="fas fa-image accent-green mr-2"></i>
+                            챗봇 인터페이스
+                        </h3>
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-blue-200">
+                            <img src="./images/챗봇.png" alt="AI 챗봇 인터페이스 화면" class="w-full h-auto object-cover">
                         </div>
                     </div>
+                    
+                    <!-- Chat Interaction Demo -->
+                    <!-- <div class="interaction-showcase p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-robot text-white text-xl"></i>
+                            </div>
+                            <h3 class="type-scale-md font-bold text-blue-800">대화 예시</h3>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="chat-message user">
+                                <p class="type-scale-xs font-medium text-blue-800">
+                                    <i class="fas fa-user mr-2"></i>
+                                    허리 통증이 심해서 걱정돼요
+                                </p>
+                            </div>
+                            
+                            <div class="chat-message bot">
+                                <p class="type-scale-xs text-green-800">
+                                    <i class="fas fa-robot mr-2"></i>
+                                    설문 결과를 보니 VAS 7점으로 상당한 통증을 겪고 계시는군요. 
+                                    ODI 점수도 고려할 때 일상 활동에 제약이 있으실 것 같습니다. 
+                                    하지만 적절한 치료로 충분히 개선될 수 있으니 걱정하지 마세요.
+                                </p>
+                            </div>
+                            
+                            <div class="chat-message user">
+                                <p class="type-scale-xs font-medium text-blue-800">
+                                    <i class="fas fa-user mr-2"></i>
+                                    어떤 치료가 도움이 될까요?
+                                </p>
+                            </div>
+                            
+                            <div class="chat-message bot">
+                                <p class="type-scale-xs text-green-800">
+                                    <i class="fas fa-robot mr-2"></i>
+                                    귀하의 상황에는 신경차단술이나 도수치료가 효과적일 수 있습니다. 
+                                    정확한 진단과 맞춤 치료 계획을 위해 온누리통증의학과에서 
+                                    전문의와 상담받으시기를 권해드립니다.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="mt-6 bg-white p-4 rounded-lg border-l-4 border-blue-500">
+                            <p class="type-scale-xs text-blue-800 font-medium">
+                                <i class="fas fa-lightbulb mr-2"></i>
+                                AI가 설문 데이터를 기반으로 개인화된 응답을 제공합니다
+                            </p>
+                        </div> -->
+                    </div> -->
                 </div>
             </div>
-            
-            <!-- Report Generation Flow -->
-            <div class="mb-4">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
-                    <i class="fas fa-cogs mr-2"></i>
-                    리포트 생성 프로세스
-                </h2>
-                <div class="grid grid-cols-4 gap-6">
-                    <div class="report-flow bg-gradient-to-br from-green-400 to-green-500 rounded-xl p-6 text-white text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-database text-xl"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">데이터 수집</h4>
-                        <p class="text-sm">설문 결과 분석</p>
+        </div>
+        
+        <!-- Bottom Status -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div class="flex items-center space-x-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-sm"></i>
                     </div>
-                    <div class="report-flow bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl p-6 text-white text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-brain text-xl"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">AI 분석</h4>
-                        <p class="text-sm">Gemini API 처리</p>
+                    <span class="type-scale-xs text-gray-600">AI Chatbot</span>
+                </div>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 via-green-500 via-purple-500 to-orange-500"></div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-comments text-white text-sm"></i>
                     </div>
-                    <div class="report-flow bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl p-6 text-white text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-chart-line text-xl"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">시각화</h4>
-                        <p class="text-sm">Chart.js 렌더링</p>
-                    </div>
-                    <div class="report-flow bg-gradient-to-br from-pink-400 to-pink-500 rounded-xl p-6 text-white text-center">
-                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-file-alt text-xl"></i>
-                        </div>
-                        <h4 class="font-bold mb-2">리포트 완성</h4>
-                        <p class="text-sm">웹페이지 형태</p>
-                    </div>
+                    <span class="type-scale-xs text-gray-600">Patient Support</span>
                 </div>
             </div>
-            
-            <!-- Report Features -->
-            <div class="grid grid-cols-3 gap-6 mb-3">
-                <div class="bg-white rounded-xl border-2 border-green-200 p-6">
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-chart-pie text-green-500 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-green-700 mb-2">점수 시각화</h4>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl border-2 border-blue-200 p-6">
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-lightbulb text-blue-500 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-blue-700 mb-2">AI 인사이트</h4>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl border-2 border-purple-200 p-6">
-                    <div class="text-center">
-                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-stethoscope text-purple-500 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-purple-700 mb-2">맞춤형 권고</h4>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- User Experience -->
-            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 border-l-4 border-indigo-500">
-                <h2 class="text-2xl font-semibold text-indigo-700 mb-4">
-                    <i class="fas fa-user-check mr-2"></i>
-                    사용자 경험
-                </h2>
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-globe text-indigo-500"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-indigo-700">웹페이지 형태 리포트</h4>
-                            <p class="text-sm text-indigo-600">접근 용이하고 직관적인 인터페이스</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-calendar-plus text-purple-500"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-purple-700">예약 모달 연동</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </body>

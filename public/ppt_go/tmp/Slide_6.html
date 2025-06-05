@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주요 기능 상세: AI 기반 개인 맞춤 리포트 생성</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: white;
+        }
+        .slide {
+            width: 1800px;
+            height: 1126px;
+            overflow: hidden;
+            position: relative;
+        }
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .tech-card {
+            transition: all 0.3s ease;
+        }
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .icon-rotate {
+            animation: rotate 4s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        .report-flow {
+            position: relative;
+        }
+        .report-flow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -25px;
+            width: 0;
+            height: 0;
+            border-left: 20px solid #4F46E5;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+        }
+        .report-flow:last-child::after {
+            display: none;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="slide bg-white relative">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 bg-pattern opacity-50"></div>
+        
+        <!-- Left side decorative element -->
+        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
+        
+        <div class="relative z-10 p-8 pl-36">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: AI 기반 개인 맞춤 리포트 생성</h1>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center ai-glow">
+                        <i class="fas fa-brain text-blue-500 text-3xl icon-rotate"></i>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Technology Stack -->
+            <div class="grid grid-cols-2 gap-8 mb-4">
+                <!-- AI Technology -->
+                <div class="tech-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-microchip text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">주요 기술</h3>
+                    </div>
+                    <div class="text-blue-100 text-lg leading-relaxed space-y-4">
+                        <div class="bg-blue-400 bg-opacity-30 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-google mr-3 text-yellow-300"></i>
+                                <span class="font-bold">Google Gemini API</span>
+                            </div>
+                            <p class="text-sm">설문 분석 및 리포트 텍스트 생성</p>
+                        </div>
+                        <div class="bg-indigo-400 bg-opacity-30 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-chart-bar mr-3 text-green-300"></i>
+                                <span class="font-bold">Chart.js</span>
+                            </div>
+                            <p class="text-sm">데이터 시각화 및 추이 분석</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Report Content -->
+                <div class="tech-card bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-file-medical text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">리포트 내용</h3>
+                    </div>
+                    <div class="text-indigo-100 text-lg leading-relaxed space-y-3">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span><strong>설문 결과 요약</strong> (점수화)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span><strong>통증/기능 변화</strong> 추이 시각화</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span><strong>AI 분석 기반</strong> 원인 분석</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-300"></i>
+                            <span><strong>맞춤형 치료법</strong> 및 관리 권고</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Report Generation Flow -->
+            <div class="mb-4">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-cogs mr-2"></i>
+                    리포트 생성 프로세스
+                </h2>
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="report-flow bg-gradient-to-br from-green-400 to-green-500 rounded-xl p-6 text-white text-center">
+                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-database text-xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">데이터 수집</h4>
+                        <p class="text-sm">설문 결과 분석</p>
+                    </div>
+                    <div class="report-flow bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl p-6 text-white text-center">
+                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-brain text-xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">AI 분석</h4>
+                        <p class="text-sm">Gemini API 처리</p>
+                    </div>
+                    <div class="report-flow bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl p-6 text-white text-center">
+                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">시각화</h4>
+                        <p class="text-sm">Chart.js 렌더링</p>
+                    </div>
+                    <div class="report-flow bg-gradient-to-br from-pink-400 to-pink-500 rounded-xl p-6 text-white text-center">
+                        <div class="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-file-alt text-xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">리포트 완성</h4>
+                        <p class="text-sm">웹페이지 형태</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Report Features -->
+            <div class="grid grid-cols-3 gap-6 mb-3">
+                <div class="bg-white rounded-xl border-2 border-green-200 p-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-pie text-green-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-green-700 mb-2">점수 시각화</h4>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl border-2 border-blue-200 p-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-lightbulb text-blue-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-blue-700 mb-2">AI 인사이트</h4>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl border-2 border-purple-200 p-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-stethoscope text-purple-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-700 mb-2">맞춤형 권고</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User Experience -->
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 border-l-4 border-indigo-500">
+                <h2 class="text-2xl font-semibold text-indigo-700 mb-4">
+                    <i class="fas fa-user-check mr-2"></i>
+                    사용자 경험
+                </h2>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-globe text-indigo-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-indigo-700">웹페이지 형태 리포트</h4>
+                            <p class="text-sm text-indigo-600">접근 용이하고 직관적인 인터페이스</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-calendar-plus text-purple-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-purple-700">예약 모달 연동</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html> 

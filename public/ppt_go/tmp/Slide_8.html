@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주요 기능 상세: 온라인 예약 시스템</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: white;
+        }
+        .slide {
+            width: 1800px;
+            height: 1126px;
+            overflow: hidden;
+            position: relative;
+        }
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .booking-card {
+            transition: all 0.3s ease;
+        }
+        .booking-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .icon-calendar {
+            animation: calendar-flip 3s ease-in-out infinite;
+        }
+        @keyframes calendar-flip {
+            0%, 100% { transform: scale(1) rotateY(0deg); }
+            50% { transform: scale(1.1) rotateY(10deg); }
+        }
+        .booking-flow {
+            position: relative;
+        }
+        .booking-flow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            width: 0;
+            height: 0;
+            border-left: 25px solid #059669;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+        }
+        .booking-flow:last-child::after {
+            display: none;
+        }
+        .priority-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            background: #EF4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="slide bg-white relative">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 bg-pattern opacity-50"></div>
+        
+        <!-- Left side decorative element -->
+        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
+        
+        <div class="relative z-10 p-16 pl-36">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-4xl font-bold text-blue-600">주요 기능 상세: 온라인 예약 시스템</h1>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-calendar-alt text-blue-500 text-3xl icon-calendar"></i>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Main Features -->
+            <div class="grid grid-cols-2 gap-8 mb-8">
+                <!-- Patient Features -->
+                <div class="booking-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 relative">
+                            <i class="fas fa-user text-2xl"></i>
+                            <div class="priority-badge">1</div>
+                        </div>
+                        <h3 class="text-2xl font-bold">주요 기능 (환자)</h3>
+                    </div>
+                    <div class="text-blue-100 text-lg leading-relaxed space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-clock mr-3 text-green-300"></i>
+                            <span><strong>실시간 예약 현황</strong> 확인</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-sms mr-3 text-green-300"></i>
+                            <span><strong>원하는 날짜/시간</strong> 1~3순위 선택</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-sms mr-3 text-green-300"></i>
+                            <span><strong>SMS 알림</strong> (Solapi API 연동)</span>
+                        </div>
+                        <div class="bg-blue-400 bg-opacity-30 p-4 rounded-lg mt-4">
+                            <div class="text-sm text-blue-100">
+                                <span class="font-semibold">편의성:</span> 24시간 언제든 예약 신청 가능
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Admin Features -->
+                <div class="booking-card bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 relative">
+                            <i class="fas fa-user-shield text-2xl"></i>
+                            <div class="priority-badge">2</div>
+                        </div>
+                        <h3 class="text-2xl font-bold">주요 기능 (관리자)</h3>
+                    </div>
+                    <div class="text-indigo-100 text-lg leading-relaxed space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-week mr-3 text-yellow-300"></i>
+                            <span><strong>캘린더 통한</strong> 전체 현황 확인</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks mr-3 text-yellow-300"></i>
+                            <span><strong>예약 관리</strong> (접수, 확인, 생성, 수정)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-double mr-3 text-yellow-300"></i>
+                            <span><strong>취소, 확정</strong> 기능</span>
+                        </div>
+                        <div class="bg-purple-400 bg-opacity-30 p-4 rounded-lg mt-4">
+                            <div class="text-sm text-purple-100">
+                                <span class="font-semibold">효율성:</span> 직관적인 시각적 관리 인터페이스
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Booking Process Flow -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-route mr-2"></i>
+                    예약 프로세스 플로우 (환자 관점)
+                </h2>
+                <div class="grid grid-cols-5 gap-4">
+                    <div class="booking-flow bg-gradient-to-br from-green-400 to-green-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-search text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">현황 확인</h4>
+                        <p class="text-xs">실시간 예약 가능</p>
+                    </div>
+                    <div class="booking-flow bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-calendar-plus text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">날짜 선택</h4>
+                        <p class="text-xs">1~3순위 지정</p>
+                    </div>
+                    <div class="booking-flow bg-gradient-to-br from-indigo-400 to-purple-500 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-paper-plane text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">신청 제출</h4>
+                        <p class="text-xs">예약 요청 완료</p>
+                    </div>
+                    <div class="booking-flow bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-check-circle text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">SMS 알림</h4>
+                        <p class="text-xs">신청 완료 통지</p>
+                    </div>
+                    <div class="booking-flow bg-gradient-to-br from-red-400 to-pink-500 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-check-circle text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">예약 확정</h4>
+                        <p class="text-xs">관리자 승인 후</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Admin Management Features -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">
+                    <i class="fas fa-cogs mr-2"></i>
+                    관리자 예약 관리 기능
+                </h2>
+                <div class="grid grid-cols-6 gap-4">
+                    <div class="bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-inbox text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">접수</h4>
+                        <p class="text-xs">신규 예약</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-400 to-green-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-eye text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">확인</h4>
+                        <p class="text-xs">예약 검토</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-plus text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">생성</h4>
+                        <p class="text-xs">직접 예약</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-edit text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">수정</h4>
+                        <p class="text-xs">일정 변경</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-red-400 to-red-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-times text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">취소</h4>
+                        <p class="text-xs">예약 취소</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-xl p-4 text-white text-center">
+                        <div class="w-12 h-12 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-check text-lg"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">확정</h4>
+                        <p class="text-xs">예약 승인</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Management & Integration -->
+            <!-- <div class="bg-white rounded-xl border-2 border-blue-200 p-6">
+                <h2 class="text-2xl font-semibold text-blue-600 mb-4">
+                    <i class="fas fa-database mr-2"></i>
+                    데이터 관리 & 통합
+                </h2>
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-server text-blue-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-blue-700 mb-2">Supabase DB 저장</h4>
+                        <p class="text-sm text-blue-600">모든 예약 정보의 안전한 클라우드 저장 및 관리</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-sync text-purple-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-green-700 mb-2">Solapi SMS 연동</h4>
+                        <p class="text-sm text-green-600">예약 신청, 확정, 변경 시 실시간 SMS 알림</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-sync text-purple-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-700 mb-2">실시간 동기화</h4>
+                        <p class="text-sm text-purple-600">환자와 관리자 간 실시간 예약 상태 동기화</p>
+                    </div>
+                </div>
+            </div> -->
+            
+
+        </div>
+    </div>
+</body>
+</html> 

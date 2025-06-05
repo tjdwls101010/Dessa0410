@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로젝트 배경 및 필요성</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: white;
+        }
+        .slide {
+            width: 1800px;
+            height: 1126px;
+            overflow: hidden;
+            position: relative;
+        }
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233490dc' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .background-card {
+            transition: all 0.3s ease;
+        }
+        .background-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .icon-bounce {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                transform: translate3d(0,0,0);
+            }
+            40%, 43% {
+                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                transform: translate3d(0, -15px, 0);
+            }
+            70% {
+                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                transform: translate3d(0, -7px, 0);
+            }
+            90% {
+                transform: translate3d(0, -2px, 0);
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="slide bg-white relative">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 bg-pattern opacity-50"></div>
+        
+        <!-- Left side decorative element -->
+        <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
+        
+        <div class="relative z-10 p-16 pl-36">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-10">
+                <div>
+                    <h1 class="text-5xl font-bold text-blue-600">프로젝트 배경 및 필요성</h1>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-blue-500 text-3xl icon-bounce"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Introduction -->
+            <div class="mb-8 bg-blue-50 p-6 rounded-xl">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-3">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    변화하는 의료 환경과 새로운 요구사항
+                </h2>
+                <p class="text-blue-600 font-medium">디지털 전환의 물결 속에서 환자 중심의 맞춤형 의료 서비스에 대한 기대가 높아지고 있습니다.</p>
+            </div>
+            
+            <!-- Background reasons grid -->
+            <div class="grid grid-cols-2 gap-8 mb-8">
+                <!-- Reason 1 -->
+                <div class="background-card bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-digital-tachograph text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">의료 환경의 디지털 전환 가속화</h3>
+                    </div>
+                    <div class="text-blue-100 text-lg leading-relaxed">
+                        <p class="mb-4"><strong>환자 중심의 맞춤형 의료 서비스</strong> 및 <strong>비대면 소통 요구</strong>가 급속히 증대하고 있습니다.</p>
+                        <div class="flex items-center mt-4">
+                            <i class="fas fa-arrow-right mr-2 text-yellow-300"></i>
+                            <span class="font-semibold">개인화된 의료 경험의 중요성 대두</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reason 2 -->
+                <div class="background-card bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user-friends text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">환자 경험 향상의 중요성 부각</h3>
+                    </div>
+                    <div class="text-indigo-100 text-lg leading-relaxed">
+                        <p class="mb-4"><strong>정보 접근성</strong>, <strong>편의성</strong>, <strong>개인화된 케어</strong>가 병원 선택의 주요 기준으로 자리잡았습니다.</p>
+                        <div class="flex items-center mt-4">
+                            <i class="fas fa-arrow-right mr-2 text-yellow-300"></i>
+                            <span class="font-semibold">차별화된 서비스의 경쟁력 확보 필요</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reason 3 -->
+                <div class="background-card bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-clock text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">병원 운영 효율성 개선 요구</h3>
+                    </div>
+                    <div class="text-purple-100 text-lg leading-relaxed">
+                        <p class="mb-4"><strong>진료 전 정보 수집 및 분석</strong>을 통한 <strong>진료 시간의 효율적 활용</strong>이 필수가 되었습니다.</p>
+                        <div class="flex items-center mt-4">
+                            <i class="fas fa-arrow-right mr-2 text-yellow-300"></i>
+                            <span class="font-semibold">의료진과 환자 모두의 시간 절약</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reason 4 -->
+                <div class="background-card bg-gradient-to-br from-green-500 to-blue-500 rounded-xl p-8 text-white">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-trophy text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">온누리통증의학과 서비스 경쟁력 강화</h3>
+                    </div>
+                    <div class="text-green-100 text-lg leading-relaxed">
+                        <p class="mb-4"><strong>디지털 혁신</strong>을 통한 <strong>환자 만족도 제고</strong> 및 <strong>차별화된 의료 서비스</strong> 제공이 목표입니다.</p>
+                        <div class="flex items-center mt-4">
+                            <i class="fas fa-arrow-right mr-2 text-yellow-300"></i>
+                            <span class="font-semibold">미래 지향적 의료 서비스 선도</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Key insights -->
+            <div class="bg-white rounded-xl border-2 border-blue-200 p-6">
+                <h2 class="text-2xl font-semibold text-blue-600 mb-4">
+                    <i class="fas fa-key mr-2"></i>
+                    핵심 인사이트
+                </h2>
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-mobile-alt text-blue-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-blue-700 mb-2">디지털 네이티브</h4>
+                        <p class="text-sm text-blue-600">환자들의 디지털 친화적 의료 서비스 기대</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-indigo-100 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-heart text-indigo-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-indigo-700 mb-2">환자 중심</h4>
+                        <p class="text-sm text-indigo-600">개인 맞춤형 케어에 대한 요구 증가</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-rocket text-purple-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-700 mb-2">혁신 필요</h4>
+                        <p class="text-sm text-purple-600">전통적 의료 서비스의 디지털 혁신</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html> 
