@@ -113,6 +113,9 @@ export default function PresentationPage() {
     <div className="flex flex-col min-h-screen">
       <main className={`flex-grow px-4 py-8 flex flex-col items-center`}>
         <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">최종 발표</h1>
+        <p className="text-lg text-center text-gray-600 mb-8 max-w-2xl">
+          아래 PPT는 해상도에 따라 깨져보일 수 있으니, PDF를 다운받아 확인하시길 바랍니다.
+        </p>
         <div className={`w-full bg-white p-4 rounded-lg shadow-md`}>
           <div className={`relative aspect-video`}>
             <iframe
